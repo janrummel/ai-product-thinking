@@ -1,0 +1,105 @@
+---
+title: "How LLMs think"
+description: "What happens inside a Large Language Model — explained for product decisions, not research papers."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Your CEO comes back from a meeting and says: "We need to put AI in our product." Your engineering team talks about tokens, temperature, and hallucinations. Your designer asks whether the chatbot needs a personality.
+
+You're the Product Manager. You don't need to know how to train an LLM. But you need to understand *what it does* — well enough to ask the right questions and spot the wrong promises.
+
+## Concept
+
+A Large Language Model is a probability machine for text. Given an input (prompt), it calculates the most likely continuation — token by token.
+
+### What a token is
+
+A token is not a word. It's a chunk of text that the model processes as a unit. "Product management" might be 2-3 tokens. "AI" is one. Tokenization determines how the model "sees" language.
+
+**Why this matters for you:**
+- Tokens determine cost (you pay per token)
+- Tokens determine limits (context window = max tokens per request)
+- Tokens determine speed (more tokens = longer response time)
+
+### How an LLM "responds"
+
+The model sees your prompt and calculates: which token is most likely next? Then it takes that token, appends it, and calculates the next one. And so on.
+
+This means:
+- The model doesn't *plan*. It generates sequentially.
+- The model doesn't *know* things. It has learned statistical patterns.
+- The model doesn't *decide*. It samples from probability distributions.
+
+### Temperature
+
+Temperature controls how "creative" the model responds:
+
+| Temperature | Behavior | Use case |
+|-------------|----------|----------|
+| 0.0 | Always the most likely token | Fact extraction, classification |
+| 0.3–0.7 | Slight variation | Most product applications |
+| 1.0+ | High randomness | Creative writing, brainstorming |
+
+### Hallucinations
+
+When an LLM "invents" something, it's not a malfunction — it's the model doing what it always does: generating the most likely continuation. Sometimes the most likely continuation is factually wrong.
+
+> *"Hallucinations are not a bug. They are an inevitable property of systems based on probability."*
+
+## Framework
+
+The **Token-Cost-Quality Triangle** — three variables you need to balance with every AI product decision:
+
+| Variable | Lever | Tradeoff |
+|----------|-------|----------|
+| **Quality** | Larger model, more context | Higher cost, slower response |
+| **Cost** | Smaller model, fewer tokens | Lower quality |
+| **Speed** | Streaming, smaller model | Potentially lower quality |
+
+You can't maximize all three simultaneously. Your job as a PM: decide which variable matters most for your product.
+
+## Scenario
+
+You're building a customer support tool. The bot should answer common questions — returns, delivery status, product info. Your engineering team suggests GPT-4. Your CFO wants to keep costs low.
+
+**The situation:**
+- 50,000 customer inquiries per month
+- Average 200 tokens input + 300 tokens output per inquiry
+- GPT-4: $10/1M input tokens, $30/1M output tokens
+- GPT-4o-mini: $0.15/1M input tokens, $0.60/1M output tokens
+
+**GPT-4 calculation:** ~$550/month
+**GPT-4o-mini calculation:** ~$10/month
+
+The quality difference for structured support responses? Often minimal — because the context (FAQ database) does the heavy lifting, not the model.
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision in this scenario:** Start with GPT-4o-mini + a solid FAQ database (RAG). Measure response quality. Only escalate cases to a larger model where quality isn't sufficient.
+
+**Why:**
+- 55x cheaper with often comparable quality for structured responses
+- You can upgrade later — downgrading is harder
+- The FAQ database (context) has more impact on quality than model size
+- Routing (simple questions → small model, complex → large) is an established pattern
+
+**What many get wrong:** Choosing the biggest model "to be safe" and then being surprised when costs explode at scale.
+</details>
+
+## Reflect
+
+The key insight from this lesson: **LLMs are probability machines, not knowledge machines.** This distinction determines how you design AI features:
+
+- Don't expect perfect accuracy — design for inaccuracy
+- Give the model good context instead of hoping for a better model
+- Think in tokens, not in words
+
+---
+
+*Sources: Anthropic Documentation (2025), OpenAI Pricing (2025), Chip Huyen "Designing Machine Learning Systems" (O'Reilly, 2022)*
