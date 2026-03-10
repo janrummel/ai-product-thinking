@@ -1,0 +1,127 @@
+---
+title: "Interaction Patterns"
+description: "How to design the collaboration between humans and AI — from full control to full autonomy, and why the space in between is what matters."
+sidebar:
+  order: 3
+---
+
+## Context
+
+Your AI feature works technically. Accuracy is solid, the model delivers. Then user feedback rolls in: "I don't know what it's doing." "Why did it just do that?" "How do I undo this?"
+
+The problem isn't the AI. The problem is the interaction design. As a PM, you don't just decide *what* the AI does — you decide *how much control* the user has, *when* the AI acts, and *what happens when it gets it wrong*.
+
+## Concept
+
+### Human-in-the-Loop — Three Levels
+
+Not every AI interaction needs the same degree of human control. There are three levels:
+
+- **Human-in-the-Loop:** AI proposes, human must explicitly approve before anything happens. Highest safety, lowest speed. Example: doctor confirms AI diagnosis.
+- **Human-on-the-Loop:** AI acts, human monitors and can intervene. Moderate trade-off. Example: AI categorizes tickets, team reviews dashboard.
+- **Human-out-of-the-Loop:** AI acts fully autonomously. Only for low-risk, validated tasks. Example: spam filter.
+
+### AI Suggestions vs. AI Actions
+
+The interaction between user and AI lives on a spectrum:
+
+| Pattern | AI does | User does | Example |
+|---------|---------|-----------|---------|
+| **Suggestion** | Proposes | Decides | GitHub Copilot ghost text |
+| **Auto-complete** | Fills in | Can override | Gmail Smart Compose |
+| **Action with preview** | Acts, shows preview | Confirms or rejects | Notion AI diff (gray/blue) |
+| **Autonomous action** | Acts without approval | Gets informed | Linear auto-apply |
+| **Autonomous with undo** | Acts without approval | Can reverse | Email categorization |
+
+**PM implication:** The further right on the spectrum, the more you invest in undo, audit, and explainability.
+
+### Pre / In / Post — Three Phases of Every AI Action
+
+Every AI interaction has three phases you need to design deliberately:
+
+- **Pre-action:** Intent preview (what will the AI do?), Autonomy dial (how much control does the user have?)
+- **In-action:** Explainable rationale (why is it doing this?), Confidence signal (how certain is it?)
+- **Post-action:** Action audit and undo (what did it do, how do I reverse it?), Escalation pathway (what happens when things go wrong?)
+
+### Escalation Patterns
+
+When the AI hits its limits, it needs clear escalation paths:
+
+- **Confidence-based:** Below a threshold, automatically hand off to humans
+- **Risk-based:** High-stakes decisions always require humans
+- **Expertise routing:** AI learns which humans are best for which questions
+- **Channel-based:** Slack/email/dashboard based on urgency
+
+### Feedback Loops
+
+Users need to give the AI feedback — but the mechanism matters:
+
+- **Blocking feedback:** AI pauses and waits for input. Good for critical decisions.
+- **Parallel feedback:** AI continues working, feedback arrives async. Good for volume tasks.
+
+Apple distinguishes three feedback types: *Implicit* (behavior), *Explicit* (thumbs up/down), *Corrections* (fixing mistakes). Key principle: corrections are no substitute for poor results. Guided corrections (choosing from options) beat freeform corrections (open text field).
+
+### Service Recovery Paradox
+
+Successful recovery after failure creates *more* loyalty than flawless performance. This means: invest more UX budget in error states and undo than in the happy path.
+
+## Framework
+
+**Interaction Pattern Decision Matrix** — choose the right pattern based on risk and frequency:
+
+| | Low frequency | High frequency |
+|---|---|---|
+| **High risk** | Human-in-the-loop + action with preview | Human-on-the-loop + confidence escalation |
+| **Low risk** | Suggestion or auto-complete | Autonomous action with undo |
+
+**Checklist for every AI interaction:**
+
+| Phase | Must have | Example |
+|-------|-----------|---------|
+| Pre | Intent preview | "I will summarize 3 paragraphs" |
+| Pre | Autonomy dial | User can adjust autonomy level |
+| In | Confidence signal | Color coding, percentage display |
+| In | Explanation | "Based on the last 5 tickets" |
+| Post | Undo | One-click reversal |
+| Post | Escalation pathway | "Hand off to human" button |
+
+## Scenario
+
+You're a PM at a B2B contract management tool. Your AI will automatically review contracts and flag risks. 3,000 contracts per month: 40% standard NDAs, 35% service agreements, 25% complex custom contracts.
+
+**Your options:**
+1. **Suggestion-only:** AI flags risks, lawyer reviews every contract manually
+2. **Tiered autonomy:** Standard NDAs autonomous with undo, service agreements with preview, complex contracts suggestion-only
+3. **Fully autonomous:** AI reviews all contracts, lawyers only review escalations
+
+**The numbers:**
+- AI accuracy: 96% on NDAs, 88% on service agreements, 74% on complex contracts
+- Average cost of missed clause: NDA $800, service $4,200, complex $18,000
+- Current manual review: 45 min per contract, 8 lawyers
+
+## Decide
+
+<details>
+<summary>How would you design the interaction model?</summary>
+
+**The best decision:** Option 2 — tiered autonomy.
+
+**Why:**
+- NDAs at 96% accuracy and $800 error cost: autonomous action with undo is justified. This saves ~45 min x 1,200 contracts = 900 hours/month.
+- Service agreements at 88% and $4,200 error cost: action with preview — AI flags risks, shows diff, lawyer confirms. Human-on-the-loop.
+- Complex contracts at 74% and $18,000 error cost: suggestion-only. AI provides analysis, lawyer decides. Human-in-the-loop.
+- Invest in post-action: undo for NDAs, audit trail for everything, escalation pathway when confidence drops below 85%.
+
+**Service recovery:** Build excellent error states. When the AI misses a clause and the lawyer catches it — show what happened, learn from it, report it transparently. This builds more trust than flawless demos.
+</details>
+
+## Reflect
+
+- **Autonomy is a dial, not a switch.** Different tasks in the same product need different interaction patterns. Risk and error cost determine the level.
+- **Design all three phases.** Pre-action (what will happen?), in-action (why?), post-action (how to reverse?). Most products only invest in the middle.
+- **Undo beats approval.** For low-risk, high-frequency tasks, undo is more efficient than approval flows — and users trust the system more because they retain control.
+- **Invest in failures, not just successes.** The service recovery paradox shows: good error handling creates more loyalty than perfect performance.
+
+---
+
+*Sources: Apple Human Interface Guidelines — Machine Learning (2024), Smashing Magazine "Designing AI-Powered Interfaces" (2026), GitHub Copilot Interaction Design, Linear Product Updates, Notion AI UX Patterns, Gmail Smart Compose Research (Google, 2023)*

@@ -1,0 +1,123 @@
+---
+title: "Team-Strukturen im Wandel"
+description: "Wie AI bestehende Rollen veraendert, welche neuen Rollen entstehen, und warum die PM-Rolle wichtiger wird statt zu verschwinden."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Dein Head of Engineering kommt zu Dir und sagt: "Wir brauchen einen Prompt Engineer." Dein Designer fragt, ob er jetzt auch AI Interaction Design lernen muss. Ein PM-Kollege schickt Dir einen Artikel mit der Headline "AI Will Replace Product Managers by 2028".
+
+Gleichzeitig hat Shopify verkuendet, dass keine neuen Stellen mehr genehmigt werden, ohne vorher zu zeigen, dass AI die Aufgabe nicht erledigen kann. Duolingo hat seine Contractor-Workforce fuer Content-Erstellung reduziert und durch AI-Pipelines ersetzt.
+
+Die Frage ist nicht ob sich Team-Strukturen aendern. Die Frage ist: Wie navigierst Du diesen Wandel als PM?
+
+## Concept
+
+### Wie AI bestehende Rollen veraendert
+
+**Product Managers:**
+- Klassisch: Features definieren, Specs schreiben, Backlog priorisieren
+- AI-Aera: Eval Criteria definieren, Quality Thresholds setzen, probabilistische Outcomes managen, mit AI-Tools prototypen, Prompts als Produktspezifikationen schreiben
+- **Kern-Shift:** Von "spezifiziere exakt was gebaut wird" zu "definiere wie 'gut genug' aussieht und wie man es misst"
+
+**Engineers:**
+- Klassisch: Deterministischen Code schreiben, klare Cause-Effect-Bugs debuggen
+- AI-Aera: AI APIs integrieren, Eval Pipelines bauen, Prompts optimieren, Model Versioning, non-deterministisches Testing
+- **Kern-Shift:** Von "schreibe die Logik" zu "orchestriere AI-Capabilities und baue Guardrails"
+
+**Designer:**
+- Klassisch: Pixel-perfekte Interfaces mit vorhersagbaren States
+- AI-Aera: Design fuer Unsicherheit (Confidence Indicators, Graceful Degradation), Feedback-Mechanismen (Thumbs Up/Down, Korrekturen), Trust-Building Patterns
+- **Kern-Shift:** Von "designe den Output" zu "designe die Experience um unvorhersagbaren Output"
+
+### Neue Rollen in AI-Teams
+
+| Rolle | Fokus | Warum wichtig |
+|-------|-------|---------------|
+| Prompt Engineer | Prompts fuer Production optimieren, A/B-Tests | Direkte Auswirkung auf Qualitaet und Kosten |
+| Eval Specialist | Eval Datasets bauen, Quality Pipelines | Oft unterbesetzt, aber kritisch |
+| AI Trainer / RLHF | Human Feedback, Labeling-Qualitaet | Wird oft outgesourced, braucht aber Oversight |
+| Agent Ops | AI Agents monitoren, trainieren, steuern | 2026 als eigenstaendige Disziplin etabliert |
+
+### Die "Wird AI PMs ersetzen?"-Frage
+
+Die evidenzbasierte Antwort (Stand 2026): **Nein, aber die Rolle veraendert sich erheblich.**
+
+**Was AI fuer PMs automatisiert:** Datenanalyse und Reporting, erste Entwuerfe von PRDs und Specs, Competitive Research, Meeting Notes, einfaches Prioritization Scoring.
+
+**Was AI nicht ersetzen kann:** Stakeholder Alignment und organisationale Navigation, Judgment Calls bei Tradeoffs, User Empathy und qualitative Insight Synthesis, Vision und Strategie, Cross-funktionale Fuehrung.
+
+**Das Polarisierungsmuster (2025-2026):** Rollen spalten sich in AI-augmented Generalists (PMs, die mit AI mehr schaffen) und AI-focused Specialists (PMs, die AI-Produkte bauen). Die traditionelle Mittelposition steht unter dem groessten Druck.
+
+### Team-Evolution nach AI Maturity
+
+| Stage | Zeitraum | Team-Setup | Fokus |
+|-------|----------|------------|-------|
+| Exploring | 0-6 Monate | Bestehendes Team + 1 ML/Integration Engineer | Erstes AI-Feature, Proof of Concept |
+| Building | 6-18 Monate | Dedizierter AI Pod (PM + 2-3 Engineers + Designer) | Production Features, Eval Infrastructure |
+| Scaling | 18-36 Monate | Mehrere AI Pods + Shared Platform Team | Mehrere Features, Shared Infra, Cost Optimization |
+| AI-Native | 36+ Monate | AI in jedem Team, zentrale Governance | AI als Core Capability, Org Transformation |
+
+## Framework
+
+**Hire vs. Upskill Entscheidungsmatrix:**
+
+| Situation | Hire | Upskill |
+|-----------|------|---------|
+| Eigene Modelle trainieren | Ja | - |
+| AI ist das Kernprodukt | Ja | - |
+| Eval-Infrastruktur von Null | Ja | - |
+| Scale erfordert dedizierte Ops | Ja | - |
+| Foundation Model APIs nutzen | - | Ja |
+| AI ist Feature im Produkt | - | Ja |
+| Starke Engineering-Basis vorhanden | - | Ja |
+| Budget begrenzt | - | Ja |
+
+**Immer sicherstellen:** Mindestens eine Person im Team versteht Model Behavior und Limitations tiefgehend.
+
+## Scenario
+
+Du bist Head of Product bei einem Series-B-Startup (80 Mitarbeiter). Euer Produkt ist eine Recruiting-Plattform. Ihr wollt drei AI-Features launchen: automatische CV-Zusammenfassung, Job-Candidate-Matching, Interview-Fragen-Generator. Aktuelles Team: 4 PMs, 12 Engineers, 3 Designer. Kein dediziertes AI-Talent.
+
+**Budget:** Ihr koennt entweder 2 AI-Spezialisten einstellen (je $180k/Jahr) oder $100k in Upskilling plus $60k fuer AI-Tooling investieren.
+
+**Kontext:** Alle drei Features basieren auf Foundation Model APIs (kein eigenes Modell noetig). Euer Senior Engineer hat bereits einen Prototyp mit der OpenAI API gebaut.
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Upskilling + Tooling ($160k) statt zwei Neueinstellungen ($360k/Jahr).
+
+**Warum:**
+- Alle Features nutzen Foundation Model APIs — kein Custom-Model-Training noetig
+- Der Senior Engineer hat bereits einen Prototyp — die Basis ist da
+- Upskilling bringt breiteres AI-Verstaendnis ins gesamte Team, nicht nur bei 2 Personen
+- $200k/Jahr gespart, die in besseres Tooling und Eval-Infrastruktur fliessen koennen
+
+**Konkret:**
+- 1 PM wird AI PM (fokussiert auf Eval Criteria und Quality Thresholds)
+- 2-3 Engineers lernen Prompt Engineering, RAG Patterns, Eval Frameworks
+- 1 Designer lernt AI Interaction Design
+- $60k fuer Tooling: Eval Framework, Model Serving, Monitoring
+
+**Wann doch einstellen:** Wenn nach 6 Monaten die Eval-Qualitaet nicht stimmt oder ihr auf Custom Models wechseln muesst.
+
+**Was viele falsch machen:** "AI Specialists" einstellen fuer Arbeit, die eigentlich Integration und Evaluation ist — nicht Forschung oder Model Training.
+
+</details>
+
+## Reflect
+
+**Die wichtigste Erkenntnis: AI automatisiert PM-Tasks, nicht die PM-Rolle.** Judgment, Strategie und Fuehrung werden wichtiger, nicht weniger wichtig.
+
+- Die meiste AI-Produktarbeit 2026 ist Integration und Evaluation, nicht Model Training — Upskilling schlaegt oft Neueinstellung
+- Prompt Engineering fuer Production-Systeme ist komplex und wirkungsvoll — keine Junior-Aufgabe
+- Plane fuer Evolution: Starte bei Stage 1, aber designe die Struktur so, dass Stage 2 moeglich ist
+
+---
+
+*Quellen: Shopify CEO AI-First Memo (2025), Duolingo AI Restructuring (2025), HBR "To Drive AI Adoption, Build Your Team's Product Management Skills" (2026), Agents Today "The Great Reshuffling" (2026), 8Allocate "AI Team Structure" (2026)*

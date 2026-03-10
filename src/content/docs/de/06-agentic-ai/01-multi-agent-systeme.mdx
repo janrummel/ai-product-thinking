@@ -1,0 +1,99 @@
+---
+title: "Multi-Agent Systeme"
+description: "Wann mehrere AI Agents besser sind als einer — und wann sie nur mehr Probleme schaffen."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Dein Team hat einen AI Coding Agent gebaut, der gut funktioniert: Er liest Code, schlaegt Aenderungen vor, schreibt Tests. Aber jetzt will das Management mehr — der Agent soll auch Deployment machen, Dokumentation schreiben und Code Reviews durchfuehren. Das Engineering-Team schlaegt vor: "Wir brauchen mehrere spezialisierte Agents."
+
+Klingt logisch. Aber Multi-Agent Systeme sind kein Upgrade, das man einfach drauflegt. Sie sind eine Architekturentscheidung mit echten Tradeoffs. Eine 5-Agent-Pipeline, bei der jeder Agent 95% Zuverlaessigkeit hat, liefert nur noch ~77% End-to-End-Zuverlaessigkeit (0.95^5). Mehr Agents bedeuten nicht automatisch bessere Ergebnisse.
+
+## Concept
+
+Ein Multi-Agent System (MAS) besteht aus mehreren AI Agents — jeder mit einer definierten Rolle, eigenen Tools und einem begrenzten Aufgabenbereich. Statt einem Generalisten setzt Du ein Team von Spezialisten ein.
+
+### Orchestrierungs-Patterns
+
+Drei Hauptmuster bestimmen, wie Agents zusammenarbeiten:
+
+| Pattern | Wie es funktioniert | Gut fuer | Risiko |
+|---------|-------------------|----------|--------|
+| **Sequential (Pipeline)** | Agent A gibt Output an Agent B, dann an Agent C | Lineare Workflows (Research, Draft, Review) | Bottleneck: Ein Fehler blockiert alles |
+| **Parallel (Fan-out/Fan-in)** | Mehrere Agents arbeiten gleichzeitig, Ergebnisse werden zusammengefuehrt | Unabhaengige Teilaufgaben (5 Wettbewerber gleichzeitig analysieren) | Inkonsistente Outputs beim Mergen |
+| **Hierarchisch (Manager-Worker)** | Orchestrator-Agent delegiert an Spezialisten | Komplexe Aufgaben mit dynamischer Planung | Single Point of Failure beim Orchestrator |
+
+Ein viertes Pattern — **Graph-basierte Orchestrierung** (z.B. via LangGraph) — gewinnt an Bedeutung: Agents bilden einen gerichteten Graphen mit Bedingungen, Schleifen und dynamischem Routing.
+
+### Framework-Landschaft (2025-2026)
+
+| Framework | Ansatz | Staerke | Best Fit |
+|-----------|--------|---------|----------|
+| **LangGraph** | Graph-basierte State Machines | Maximale Kontrolle, Compliance | Enterprise, mission-critical |
+| **CrewAI** | Rollenbasierte Crews | Einfaches Mental Model, schnelles Prototyping | Content Pipelines, Team-Simulationen |
+| **AutoGen** (Microsoft) | Konversationelle Multi-Agent | Async Execution, Human-in-the-Loop | Research, komplexes Reasoning |
+| **OpenAI Agents SDK** | Leichtgewichtige Handoffs | Einfache Agent-zu-Agent-Uebergabe | OpenAI-Oekosystem-Produkte |
+| **Claude Agent SDK** | Tool-Use mit Agentic Loops | Tiefe Tool-Integration, MCP-nativ | Komplexe agentic Applications |
+
+### Wann Multi-Agent Sinn macht
+
+Multi-Agent lohnt sich wenn: Teilaufgaben natuerlich trennbar sind, unterschiedliche Tools/Permissions brauchen, Parallelisierung Zeitvorteile bringt, oder verschiedene Trust Boundaries existieren.
+
+Single-Agent ist besser wenn: die Aufgabe linear ist, Context-Sharing zwischen Schritten kritisch ist, Latenz wichtiger ist als Gruendlichkeit, oder Debugging-Einfachheit Prioritaet hat.
+
+## Framework
+
+Die **Multi-Agent Entscheidungsleiter** — von oben nach unten durchgehen:
+
+| Schritt | Frage | Ergebnis |
+|---------|-------|----------|
+| 1 | Kann ein einzelner Agent mit guten Tools das loesen? | Ja: Single Agent nutzen |
+| 2 | Sind Teilaufgaben natuerlich unabhaengig? | Ja: Parallel Multi-Agent erwaegen |
+| 3 | Brauchen Teilaufgaben unterschiedliche Tools/Permissions? | Ja: Spezialisierte Agents erwaegen |
+| 4 | Ist der Workflow linear mit klaren Phasen? | Ja: Sequential Pipeline |
+| 5 | Braucht die Aufgabe dynamische Planung? | Ja: Hierarchisch mit Orchestrator |
+| 6 | Immer: Mit 2-3 Agents starten | Komplexitaet nur mit Evidenz erhoehen |
+
+## Scenario
+
+Du bist PM bei einem B2B-SaaS-Unternehmen. Euer Produkt ist eine Content-Marketing-Plattform. Das Team will einen AI Content Workflow bauen:
+
+1. **Research Agent** — analysiert Trends und Wettbewerber-Content (braucht Web-Zugang)
+2. **Writer Agent** — erstellt Artikel basierend auf Research (braucht Brand Guidelines)
+3. **SEO Agent** — optimiert fuer Suchmaschinen (braucht SEO-Tools)
+4. **Editor Agent** — prueft Qualitaet und Fakten (braucht Fact-Checking-Tools)
+5. **Publisher Agent** — formatiert und veroeffentlicht (braucht CMS-Zugang)
+
+Das Engineering-Team schaetzt 8 Wochen Entwicklung fuer die 5-Agent-Pipeline. Ein einzelner Agent mit allen Tools wuerde 3 Wochen dauern. Eure aktuelle manuelle Pipeline braucht 4 Stunden pro Artikel mit 3 Personen.
+
+**Die Frage:** 5 Agents, 1 Agent, oder ein Kompromiss?
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Starte mit 2-3 Agents, nicht mit 5. Konkret: Ein Research+Writer Agent (teilen viel Context) und ein Review+Publish Agent (teilen Quality Gates). SEO-Optimierung als Tool, nicht als eigener Agent.
+
+**Warum:**
+- Research und Writing brauchen maximalen Context-Transfer — ein Agent-Boundary dazwischen verliert Nuancen
+- SEO ist ein Tool-Call (Keyword-Dichte pruefen, Meta-Tags generieren), kein eigener Reasoning-Loop
+- 3 Wochen fuer 1 Agent vs. 8 fuer 5 — starte mit 2-3 in ~5 Wochen und validiere
+- End-to-End-Zuverlaessigkeit bei 2 Agents (95% je): 90%. Bei 5 Agents: 77%
+
+**Was viele falsch machen:** Fuer jeden Schritt im manuellen Prozess einen eigenen Agent erstellen. Menschliche Arbeitsteilung mappt nicht 1:1 auf Agent-Architektur — Agents koennen mehrere Rollen uebernehmen, brauchen aber geteilten Context.
+</details>
+
+## Reflect
+
+**Multi-Agent Systeme loesen echte Probleme — aber die erste Frage muss immer sein: Scheitert ein einzelner Agent wirklich an dieser Aufgabe?**
+
+- Jede Agent-Boundary ist ein Ort, an dem Context verloren geht und Fehler sich multiplizieren
+- Die Framework-Wahl (LangGraph, CrewAI, etc.) ist selten der Differenziator — Prompts, Tools und Daten sind es
+- Start small: 2-3 Agents maximal, Komplexitaet nur mit Evidenz erhoehen
+
+---
+
+*Quellen: Adopt AI — Multi-Agent Frameworks (2025), Turing — AI Agent Frameworks (2026), DEV Community — LangGraph vs CrewAI vs AutoGen (2026)*

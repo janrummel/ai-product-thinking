@@ -1,0 +1,140 @@
+---
+title: "Cost/Quality Tradeoffs"
+description: "How to run AI features economically — token economics, unit economics, and the six levers for cost optimization."
+sidebar:
+  order: 5
+---
+
+## Context
+
+Your AI feature has been live for two months. Usage is growing — but so is the API bill. Last month: $14,000. Forecast for next month: $21,000. Your CFO asks: "Every other software feature costs us practically nothing per user interaction. Why is AI so expensive?"
+
+The answer: AI features have marginal cost per use. Every API call costs money. This is fundamentally different from traditional SaaS, where marginal cost per user interaction is near zero. This "AI tax" changes unit economics, pricing, and margin calculations — and PMs need to understand it from day one.
+
+## Concept
+
+### Token Economics
+
+**The fundamental cost driver:** Everything in LLMs is measured in tokens. Pricing, budgeting, and optimization all revolve around token consumption.
+
+**Key pricing dynamics (2026):**
+- Output tokens cost 2-5x more than input tokens across all major providers (generation requires more compute than input processing)
+- Cached input tokens cost 0.1x the base rate (Anthropic) or are free (some providers)
+- Reasoning tokens (internal chain-of-thought in o-series models) are billed as output tokens but invisible to the user — a hidden cost multiplier
+
+**LLMflation — the price trend:**
+Per a16z research, LLM inference costs have declined approximately 10x annually:
+- GPT-4-equivalent performance: $20/1M tokens (late 2022) to $0.40/1M tokens (2025)
+- PM implication: features that are uneconomical today may be viable in 6-12 months
+
+### Real Cost Calculations
+
+**Example 1: AI customer support bot**
+- 100,000 conversations/month, averaging 2,000 input tokens + 500 output tokens
+- With Claude Sonnet 4.6: input $600 + output $750 = **$1,350/month**
+- With Gemini 2.5 Flash: input $30 + output $30 = **$60/month**
+- **22.5x cost factor** for the premium model
+
+**Example 2: AI-powered search (RAG)**
+- 500,000 queries/month, each with 500-token query + 2,000-token context + 300-token response
+- With Gemini 2.5 Flash: input $187 + output $90 + embedding $5 + vector DB $200 = **~$483/month**
+
+### The Six Optimization Levers
+
+**1. Model routing (biggest lever):** Route requests to the cheapest model capable of handling them. 70-80% to the fast/cheap tier, the rest to frontier. Savings: 5-10x.
+
+**2. Prompt caching:** Cache static prompt portions (system prompts, few-shot examples). Anthropic: cached reads cost 0.1x. Up to 73% cost reduction for repetitive workloads (Redis LangCache benchmark).
+
+**3. Output length control:** Set max_tokens to the minimum needed. Use structured output (JSON) instead of verbose prose. Output tokens cost 2-5x more than input — every unnecessary output token is expensive.
+
+**4. Batching:** Group multiple requests into batch API calls (OpenAI and Anthropic). Typically 50% cost reduction for non-real-time workloads. Trade-off: higher latency.
+
+**5. Token reduction:** Compress prompts, summarize conversation history instead of sending full transcripts, use embeddings for retrieval instead of stuffing everything into context.
+
+**6. Self-hosting open models:** Break-even vs. API typically at 40+ GPU-hours/week sustained usage. Midjourney case study: migrated from NVIDIA A100/H100 to TPU v6e, reducing monthly inference from $2.1M to under $700K. Only viable at significant scale with dedicated MLOps capability.
+
+### Unit Economics for AI Features
+
+| Line item | Calculation | Example |
+|-----------|------------|---------|
+| Revenue per user/month | Subscription or usage fee | $20/user/month |
+| AI cost per user/month | (Avg queries x tokens per query x price per token) | $0.50-$5.00/user/month |
+| AI cost as % of revenue | AI cost / Revenue | 2.5-25% |
+
+**Healthy benchmarks:** AI inference cost should be less than 10% of the feature's revenue contribution. Above 20%: optimize (routing, caching) or adjust pricing. For freemium products: free-tier AI costs must be covered by paid conversion.
+
+### The Quality-Cost Frontier
+
+| Quality level | Typical approach | Use case |
+|---------------|-----------------|----------|
+| "Good enough" (80%) | Small model, zero-shot | Autocomplete, classification, simple extraction |
+| "High quality" (90%) | Mid-tier model, few-shot + RAG | Customer support, document analysis |
+| "Near-perfect" (95%+) | Frontier model, CoT + RAG + human review | Medical, legal, financial — high stakes |
+
+**The diminishing returns curve:** Going from 80% to 90% quality costs roughly 3x. From 90% to 95% costs roughly 10x. From 95% to 99% costs roughly 50x. PMs must define "good enough" *before* engineering starts optimizing.
+
+## Framework
+
+**Cost optimization — in this order (highest ROI first):**
+
+| Priority | Lever | Expected savings | Effort |
+|----------|-------|-----------------|--------|
+| 1 | Model routing | 5-10x | Medium (routing logic + testing) |
+| 2 | Prompt caching | 50-90% on cached portions | Low (configuration) |
+| 3 | Output length control | 20-50% | Low (max_tokens + structured output) |
+| 4 | Batching | 50% for non-real-time | Low (API switch) |
+| 5 | Prompt compression | 10-30% | Low (prompt optimization) |
+| 6 | Self-hosting | Variable, only at scale | High (infrastructure + MLOps) |
+
+**AI feature P&L check:**
+- AI cost below 10% of feature revenue: Healthy
+- AI cost 10-20%: Needs optimization, still viable
+- AI cost above 20%: Optimize immediately or adjust pricing
+
+## Scenario
+
+You're a PM at a content marketing SaaS (B2B, 3,000 customers). Your AI feature: automatic blog post generation. Currently you use Claude Sonnet 4.6 for all requests.
+
+**The situation:**
+- 60,000 blog posts/month generated
+- Average 1,500 input tokens (briefing) + 3,000 output tokens (post)
+- Current monthly cost: input (90M tokens x $3/1M) = $270 + output (180M tokens x $15/1M) = $2,700 = **$2,970/month**
+- Subscription price: $49/user/month, average 20 posts per user
+- 45% of generated posts are "Quick Drafts" (bullet-point summaries, 200 words)
+- 40% are "Standard Posts" (800 words, SEO-optimized)
+- 15% are "Deep Dives" (2,000+ words, research-intensive)
+
+**Options:**
+1. **Keep the status quo:** $2,970/month, same model for everything
+2. **Model routing:** Quick Drafts on Gemini 2.5 Flash, Standard on Claude Sonnet, Deep Dives on Claude Sonnet with Extended Thinking
+3. **Model routing + caching:** Like Option 2, plus prompt caching for system prompts and recurring briefing templates
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 3 — Model routing + caching.
+
+**Why:**
+- **Quick Drafts on Flash (45% of volume):** 27,000 posts x (1,500 x $0.15/1M + 800 x $0.60/1M) = ~$19/month. Vs. currently ~$1,335 for the same share on Sonnet. Quality for bullet points is sufficient on Flash
+- **Standard on Sonnet (40%):** 24,000 posts stay on Sonnet = ~$1,188/month. Sonnet quality is justified here
+- **Deep Dives with Extended Thinking (15%):** 9,000 posts x higher cost = ~$670/month. Better quality for premium content
+- **Total cost Option 2:** ~$1,877/month — **37% savings**
+- **Prompt caching on top:** System prompts (SEO rules, style guide, brand voice) are sent with every request. Caching reduces these costs by 90%. With 60,000 requests with 800-token system prompts, that saves another ~$200/month
+- **Total cost Option 3:** ~$1,650/month — **44% savings** vs. status quo
+- **Unit economics check:** $1,650 / 3,000 customers = $0.55/customer/month. At $49 subscription = 1.1% of revenue. Healthy
+
+**Common mistake:** Waiting for LLMflation without actively optimizing. Costs do decline ~10x annually, but usage volume typically grows faster. Without active optimization, costs rise despite falling prices.
+</details>
+
+## Reflect
+
+- **AI features have marginal cost per use — that's what fundamentally differentiates them from traditional software.** This "AI tax" must be factored into unit economics from day 1, not after the bill arrives.
+- Model routing is the single biggest lever. 70-80% of requests don't need a frontier model. 5-10x savings are realistic without users noticing any quality drop.
+- Define "good enough" *before* you optimize. Going from 80% to 90% quality costs 3x, from 90% to 95% costs 10x. The PM's job is to define the threshold — not to demand maximum quality.
+- LLMflation (10x annual price decline) is real, but it's no reason to skip optimization. Usage typically grows faster than prices fall.
+
+---
+
+*Sources: a16z LLMflation — LLM Inference Cost Is Going Down Fast, Introl Cost Per Token Analysis, Introl Inference Unit Economics, Redis LLM Token Optimization (2026), Silicon Data LLM Cost Per Token Guide (2026)*

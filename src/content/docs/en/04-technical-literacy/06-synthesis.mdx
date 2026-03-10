@@ -1,0 +1,73 @@
+---
+title: "Synthesis: Technical Literacy"
+description: "How the five technical lessons form an optimization hierarchy — and why the PM's job isn't maximum quality, but the right balance."
+sidebar:
+  order: 6
+---
+
+## The Big Picture
+
+You've worked through five lessons: how prompt engineering steers AI behavior, how RAG gives models access to proprietary data, when fine-tuning is justified, how to choose the right model, and how to run AI features economically.
+
+Individually, these are technical tools. Together, they form an **optimization hierarchy**: Lesson 1 is the fastest, cheapest lever. Lesson 2 extends the model's knowledge. Lesson 3 changes its behavior. Lesson 4 sets the quality ceiling and cost floor. Lesson 5 runs across all layers — caching, routing, batching, and monitoring apply regardless of which techniques you use.
+
+The PM who reaches for fine-tuning before exhausting prompting wastes weeks and thousands of dollars. The PM who uses a frontier model for every request wastes money on quality users don't need.
+
+## Connections
+
+### 1. The Optimization Hierarchy
+
+Prompt engineering (L1) is always the first step. If output quality isn't right, improve the prompt first. If the model needs current data, add RAG (L2). If consistent behavior is needed and prompting can't achieve it, consider fine-tuning (L3). Model choice (L4) determines how high quality can go and how low costs can fall. Cost optimization (L5) runs in parallel with everything.
+
+**For you as a PM:** This path isn't a suggestion — it's cost protection. Each step is an order of magnitude more expensive and less flexible than the previous one.
+
+### 2. The Build-vs-Configure Spectrum
+
+Each lesson represents a different point on the spectrum between configuration and development. Prompt engineering (hours, changeable anytime, no lock-in) sits at one end. Fine-tuning (months, retraining to change, high lock-in) at the other. RAG and model selection fall in between.
+
+**For you as a PM:** Prefer configuration over building. The more deeply baked a decision is, the harder it is to change. Start flexible, lock down only when measurements justify the investment.
+
+### 3. Quality Is Not a Single Number
+
+"Quality" means something different in every lesson: prompt quality measures format, tone, and accuracy. RAG quality measures retrieval precision and answer faithfulness. Fine-tuning quality measures behavioral consistency. Model selection quality measures task-specific performance. Cost/quality measures the minimum users value.
+
+**For you as a PM:** Define "good enough" concretely and measurably before optimization work begins. "Make it better" is not a product requirement.
+
+### 4. Connections to Earlier Chapters
+
+Prompt engineering (L1) directly applies the token, context window, and temperature concepts from Chapter 01. RAG (L2) is the primary hallucination mitigation strategy from the Foundations. Model selection (L4) builds on the ML landscape understanding from Chapter 01. Cost/quality tradeoffs (L5) are central to AI product strategy from Chapter 02. And prompt quality determines what the UX design from Chapter 03 can show the user.
+
+### 5. The Technical Decision Map
+
+When facing a technical AI decision, use this routing:
+
+| Problem | Relevant lesson | First action |
+|---------|----------------|-------------|
+| AI output quality isn't good enough | Prompt Engineering (L1) | Improve the prompt |
+| Model doesn't know about our data | RAG (L2) | Build a retrieval pipeline |
+| Model's tone/style isn't right | Fine-Tuning (L3) | Try system prompt first; fine-tune only if prompt fails |
+| Which model should we use? | Model Selection (L4) | Run blind evaluation on 50+ representative queries |
+| AI costs are too high | Cost/Quality (L5) | Implement model routing as the highest-leverage fix |
+
+## The Meta-Insight
+
+> Technical literacy for PMs doesn't mean writing code. It means asking the right questions: **"Did we optimize the prompt before discussing fine-tuning?"** and **"What's the minimum quality users value — and what does it cost?"** Whoever asks these questions makes better decisions than the person who memorizes every benchmark.
+
+## Your Technical Literacy Checklist
+
+What you should now be able to do:
+
+- [ ] Choose the right prompting technique for the task complexity (zero-shot through self-consistency) — Lesson 1
+- [ ] Assess whether a feature needs RAG, fine-tuning, or better prompts — Lessons 1, 2, 3
+- [ ] Understand a RAG pipeline architecturally and identify chunking quality as the main lever — Lesson 2
+- [ ] Make fine-tuning decisions using the 6-question matrix — Lesson 3
+- [ ] Select models based on task, cost, and latency rather than leaderboard ranking — Lesson 4
+- [ ] Apply multi-model routing as an architectural pattern — Lessons 4, 5
+- [ ] Calculate AI feature costs and prioritize the six optimization levers — Lesson 5
+- [ ] Define "good enough" before optimization begins — Lesson 5
+
+If any of these feel uncertain, go back to the relevant lesson. These technical foundations determine whether your AI feature is production-ready — or remains an expensive experiment.
+
+---
+
+*Sources: Building on Lessons 1-5. IBM RAG vs Fine-Tuning vs Prompt Engineering, a16z LLMflation, DAIR.AI Prompt Engineering Guide, Artificial Analysis LLM Leaderboard, Pinecone RAG Architecture Guide*

@@ -1,0 +1,112 @@
+---
+title: "AI Org Building"
+description: "Wie Du eine Organisation strukturierst, die AI-Produkte nicht nur baut, sondern nachhaltig betreibt."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Dein Unternehmen hat ein erstes AI-Feature erfolgreich gelauncht. Der CEO will jetzt "AI ueberall". Drei Business Units bitten gleichzeitig um AI-Ressourcen. Dein kleines ML-Team von vier Leuten ist ueberfordert, und jedes Projekt hat andere Anforderungen.
+
+Du stehst vor der Frage, die jede Organisation frueher oder spaeter beantworten muss: Wie strukturieren wir unsere AI-Teams? Zentralisiert, verteilt, oder irgendwas dazwischen? Die Antwort bestimmt, wie schnell ihr liefert, wie konsistent die Qualitaet ist, und ob AI ein strategischer Vorteil wird oder ein Flickenteppich.
+
+## Concept
+
+### Drei Modelle fuer AI-Teams
+
+**1. Centralized (Center of Excellence)**
+Ein dediziertes AI-Team bedient die gesamte Organisation. Alle AI-Expertise sitzt an einer Stelle.
+
+- **Vorteile:** Konsistente Standards, geteiltes Tooling, effiziente Nutzung knapper AI-Talente
+- **Nachteile:** Kann zum Bottleneck werden, mangelnder Domain-Kontext, Priorisierungskonflikte zwischen Business Units
+- **Passt fuer:** Fruehe AI-Adoption (Maturity Level 1-2), Unternehmen mit wenig AI-Talent
+
+**2. Distributed / Embedded**
+AI Engineers sitzen direkt in den Produktteams. Jedes Squad hat eigene AI-Kapazitaet.
+
+- **Vorteile:** Tiefes Domain-Wissen, schnellere Iteration, direkte Accountability
+- **Nachteile:** Duplizierter Aufwand, inkonsistente Practices, schwieriger fuer Platform-Infrastruktur
+- **Passt fuer:** AI-reife Organisationen (Maturity Level 3+) mit ausreichend AI-Talent
+
+**3. Hub-and-Spoke (Hybrid)**
+Ein zentrales AI Platform Team pflegt geteilte Infrastruktur (Model Serving, Eval Pipelines, Feature Stores), waehrend Embedded Engineers in den Produktteams sitzen.
+
+- **Vorteile:** Balance zwischen Konsistenz und Domain-Fokus, skaliert besser als pure Zentralisierung
+- **Nachteile:** Matrix-Reporting-Komplexitaet, erfordert starke Koordination
+- **Passt fuer:** Mittlere bis grosse Organisationen, die von initialem AI-Erfolg zu breiter Nutzung skalieren
+
+### Die AI PM Rolle
+
+Die Rolle des AI Product Managers hat sich veraendert — von "PM, der mit ML Engineers arbeitet" zu einer eigenen Spezialisierung. McKinsey fand, dass die Nachfrage nach AI Fluency in Stellenanzeigen sich zwischen 2023 und 2025 fast versiebenfacht hat, mit dem staerksten Wachstum in Management- und Business-Rollen.
+
+Ein AI PM muss nicht Modelle trainieren koennen. Aber er muss:
+- Model Capabilities und Limitations verstehen
+- Evaluation Criteria und Quality Thresholds definieren
+- Mit probabilistischen Outputs umgehen koennen
+- User-Erwartungen fuer non-deterministische Produkte managen
+
+### Upskilling statt Komplettersatz
+
+Der effektivste Ansatz ist nicht Teams ersetzen, sondern bestehendes Wissen erweitern:
+- **PMs:** Evals schreiben lernen, Model-Tradeoffs verstehen (Cost vs. Quality vs. Latency)
+- **Engineers:** Prompt Engineering, RAG Patterns, Evaluation Frameworks
+- **Designer:** Interaction Patterns fuer non-deterministische Outputs, Progressive Disclosure
+
+## Framework
+
+**Entscheidungsmatrix: Welches Org-Modell passt?**
+
+| Faktor | Centralized | Hub-and-Spoke | Distributed |
+|--------|-------------|---------------|-------------|
+| AI-Talent | Weniger als 5 Personen | 5–20 Personen | Mehr als 20 Personen |
+| AI Maturity | Level 1-2 | Level 2-3 | Level 3+ |
+| Produkte mit AI | 1-2 | 3-5 | 5+ |
+| AI Literacy | Niedrig | Wachsend | Weit verbreitet |
+
+**Immer beibehalten**, unabhaengig vom Modell: Shared Eval Infrastructure, Model Governance, Cost Monitoring.
+
+**Evolutionspfad:** Start centralized, dann Hub-and-Spoke bei wachsender Reife, Distributed nur wenn AI Literacy organisationsweit ist.
+
+## Scenario
+
+Du bist VP Product bei einem B2B-SaaS mit 400 Mitarbeitern. Ihr habt 6 AI Engineers, 3 Produktteams die AI-Features brauchen, und ein erfolgreiches AI-Feature in Produktion. Der CEO will AI in allen Produktlinien innerhalb von 12 Monaten.
+
+**Aktuelle Situation:**
+- 6 AI Engineers sitzen in einem zentralen Team
+- Team braucht durchschnittlich 6 Wochen pro AI-Feature
+- 3 Produktteams warten jeweils auf AI-Ressourcen
+- Produktteams haben wenig AI-Verstaendnis
+- Kein geteiltes Eval-Framework, jedes Projekt baut eigenes
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Wechsle zum Hub-and-Spoke-Modell. Behalte 2-3 Engineers als zentrales Platform-Team (Eval Infrastructure, Model Serving, Cost Monitoring). Bette die anderen 3-4 als Embedded Engineers in die Produktteams ein.
+
+**Warum:**
+- 6 AI Engineers und 3 Produkte liegen genau im Hub-and-Spoke-Sweetspot
+- Das zentrale Team baut die geteilte Infrastruktur, die aktuell fehlt (vor allem Eval-Framework)
+- Embedded Engineers bringen Domain-Kontext und eliminieren die 6-Wochen-Wartezeit
+- Parallel: Upskilling-Programm fuer bestehende Product Engineers
+
+**Was viele falsch machen:**
+- Alle 6 Engineers verteilen, ohne zentrales Platform-Team — fuehrt zu inkonsistenter Qualitaet und dupliziertem Aufwand
+- Rein zentralisiert bleiben — das Bottleneck wird mit 3 wartenden Teams nur schlimmer
+- Sofort einstellen statt umstrukturieren — loest das Organisationsproblem nicht
+
+</details>
+
+## Reflect
+
+**Die wichtigste Erkenntnis: AI Org Building ist keine einmalige Entscheidung, sondern ein Evolutionspfad.** Starte einfach, skaliere die Struktur mit der Reife.
+
+- Dein Org-Modell muss zu Deinem AI Maturity Level passen — nicht zu Deinen Ambitionen
+- Upskilling bestehender Teams ist schneller und guenstiger als Neueinstellung
+- Geteilte Infrastruktur (Eval, Monitoring, Governance) ist das Rueckgrat jedes Modells
+
+---
+
+*Quellen: HBR "To Drive AI Adoption, Build Your Team's Product Management Skills" (2026), Shopify CEO AI-First Memo (2025), Duolingo AI-First Restructuring (2025), Product School "AI Product Manager: Real Role or Buzzword?"*

@@ -1,0 +1,108 @@
+---
+title: "Probabilistisches Denken"
+description: "Warum AI-Produkte nicht wie traditionelle Software funktionieren — und wie Du als PM mit Unsicherheit designst statt gegen sie."
+sidebar:
+  order: 3
+---
+
+## Context
+
+Dein QA-Team meldet einen Bug: "Der AI-Chatbot gibt auf dieselbe Frage unterschiedliche Antworten." Du schreibst ein Ticket. Dein Engineering-Team schaut Dich an und sagt: "Das ist kein Bug. Das ist by design."
+
+Willkommen im Paradigmenwechsel. Traditionelle Software ist deterministisch — gleicher Input, gleicher Output. AI-Software ist probabilistisch — gleicher Input, potenziell unterschiedlicher Output. Als PM musst Du diesen Unterschied nicht nur verstehen, sondern Dein gesamtes Produktdenken darauf ausrichten.
+
+## Concept
+
+### Der Paradigmenwechsel
+
+| | Traditionelle Software | AI-Software |
+|---|---|---|
+| Verhalten | Gleicher Input = gleicher Output | Gleicher Input = potenziell anderer Output |
+| Bugs | Reproduzierbar, binaer | Probabilistisch, verteilt |
+| Testing | Pass/Fail | Verteilungen und Schwellenwerte |
+| Kosten | Deterministisch | Deterministisch — aber Outputs stochastisch |
+
+Das ist der fundamentale Mismatch: **Du zahlst deterministische Kosten fuer stochastische Ergebnisse.** Jeder API-Call kostet Geld. Ob das Ergebnis brauchbar ist, weisst Du vorher nicht.
+
+### Zwei Arten von Unsicherheit
+
+- **Epistemisch** (Wissensluecke): Kann mit mehr Daten reduziert werden. Beispiel: Dein Modell kennt Dein Produktsortiment nicht → Loesung: RAG mit Produktdatenbank.
+- **Aleatorisch** (inhaerent): Kann *nicht* reduziert werden, egal wie viele Daten Du hast. Beispiel: Natuerliche Sprachvarianz — Menschen formulieren dieselbe Frage auf hundert Arten.
+
+**PM-Implikation:** Verschwende kein Budget darauf, irreduzible Unsicherheit zu eliminieren. Investiere stattdessen in Systeme, die damit umgehen koennen.
+
+### Compound Uncertainty
+
+Wenn Du mehrere AI-Agenten in Reihe schaltest, multipliziert sich die Unsicherheit. Drei Agenten mit je 90% Accuracy ergeben nicht 90% Gesamtgenauigkeit — sondern ~73% (0.9 x 0.9 x 0.9). Das ist der Grund, warum Multi-Agent-Architekturen sorgfaeltige Validierung zwischen den Schritten brauchen.
+
+## Framework
+
+**Uncertainty Tolerance Assessment** — Bevor Du ein AI-Feature baust, bewerte diese vier Dimensionen:
+
+| Dimension | Niedrige Toleranz (High Stakes) | Hohe Toleranz (Low Stakes) |
+|-----------|---|---|
+| **Fehlerkosten** | Finanzieller Schaden, Sicherheitsrisiko | Kleine Unannehmlichkeit |
+| **Reversibilitaet** | Irreversible Aktion (Ueberweisung, Diagnose) | Reversibler Vorschlag (Textvorschlag) |
+| **User-Kompetenz** | Einsteiger vertrauen blind | Experten validieren selbst |
+| **Volumen** | Wenige Faelle, jeder zaehlt | Hohes Volumen, Statistik reicht |
+
+**Entscheidungsregeln:**
+- Niedrig bei *einer* Dimension → Human Review, hoher Confidence-Schwellenwert
+- Hoch bei *allen* Dimensionen → Automatisierung mit Monitoring
+- Gemischt → Hybridansatz mit gestaffelten Schwellenwerten
+
+**Confidence-Schwellenwerte nach Domain:**
+
+| Domain | Schwellenwert | Eskalationsrate (Ziel) |
+|--------|---------------|----------------------|
+| Healthcare | 95%+ | 15-20% |
+| Financial Services | 90-95% | 10-15% |
+| Content Moderation | 85-90% | 10-15% |
+| Customer Service | 80-85% | 10-15% |
+
+Eine Eskalationsrate von ~60% ist ein klares Signal fuer Fehlkalibrierung.
+
+## Scenario
+
+Du baust ein AI-gestuetztes Triage-System fuer eine Versicherung. Eingehende Schadensmeldungen sollen automatisch kategorisiert und priorisiert werden.
+
+**Die Situation:**
+- 8.000 Schadensmeldungen pro Monat
+- Drei Kategorien: Einfach (Glasbruch), Mittel (Wasserschaden), Komplex (Personenschaden)
+- Aktuelle manuelle Bearbeitung: 12 Minuten pro Fall, 4 Sachbearbeiter
+- AI-Modell erreicht im Eval: 92% Accuracy bei Einfach, 85% bei Mittel, 71% bei Komplex
+- Fehlklassifizierung "Komplex als Einfach": durchschnittlich 2.400 EUR Folgekosten
+
+**Deine Optionen:**
+1. **Vollautomatisierung:** Alle Kategorien automatisch routen
+2. **Konservativ:** Nur "Einfach" automatisieren (92%), Rest manuell
+3. **Hybrid:** Einfach + Mittel automatisieren, Komplex immer manuell, plus Confidence-Schwellenwert bei 88% — alles darunter eskaliert
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Option 3 — Hybrid mit Confidence-Schwellenwert.
+
+**Warum:**
+- 71% bei "Komplex" ist zu niedrig fuer irreversible Entscheidungen mit 2.400 EUR Fehlerkosten
+- "Einfach" bei 92% ist vertretbar — Glasbruch falsch kategorisiert verursacht Verzoegerung, keinen Schaden
+- Der 88%-Schwellenwert fuer "Mittel" funkt als Sicherheitsnetz: unsichere Faelle gehen an Menschen
+- Du sparst ~60% der manuellen Arbeit, statt alles oder nichts zu automatisieren
+
+**Evals als PM-Skill:** Baue 50-100 Golden Examples pro Kategorie — Schadensmeldungen mit verifizierten idealen Klassifizierungen. Miss nicht nur Accuracy, sondern auch die Verteilung der Confidence-Scores. Tools wie Promptfoo oder DeepEval machen das operationalisierbar.
+
+**Was viele falsch machen:** Die Gesamt-Accuracy (87%) als eine Zahl reporten und damit die Freigabe holen — ohne zu zeigen, dass sie pro Kategorie stark variiert.
+</details>
+
+## Reflect
+
+- **Probabilistisch denken heisst nicht "ungenau akzeptieren"** — es heisst, Unsicherheit bewusst managen statt sie zu ignorieren oder zu leugnen.
+- **Nicht jede Unsicherheit ist gleich.** Epistemisch kannst Du reduzieren (mehr Daten, besserer Context). Aleatorisch musst Du designen (Confidence-Anzeigen, Escalation Paths).
+- **Compound Uncertainty ist der stille Killer** bei Multi-Agent-Systemen. Drei mal 90% ist nicht 90%.
+- **Evals sind Dein neues Testing.** Nicht pass/fail, sondern Verteilungen, Schwellenwerte und Golden Examples.
+
+---
+
+*Quellen: Gian Segato "Building AI Products in the Probabilistic Era" (2025), Google Maps UX Patterns, GitHub Copilot Product Design, PathAI Clinical Documentation*

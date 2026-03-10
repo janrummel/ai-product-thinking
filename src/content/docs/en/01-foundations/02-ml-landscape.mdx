@@ -1,0 +1,103 @@
+---
+title: "The ML Landscape"
+description: "What types of Machine Learning exist — and when to use which as a PM."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Your engineering team proposes building a recommendation feature with "unsupervised learning." In the next sentence, someone drops "reinforcement learning." The Slack thread now mentions "self-supervised pre-training."
+
+You don't need to train a model. But you need to understand *which type of ML solves which problem* — otherwise you can't evaluate the proposal or ask the right question.
+
+## Concept
+
+### Three Programming Paradigms
+
+Andrej Karpathy distinguishes Software 1.0 from 2.0. For PMs, this is the most important foundational distinction:
+
+- **Traditional programming (Software 1.0):** A human writes rules. `if order_status == "shipped": show_tracking()`
+- **Machine Learning:** The machine learns rules from labeled examples. You provide 10,000 categorized support tickets, the model learns the mapping.
+- **Deep Learning:** The machine learns directly from raw data — no manual feature engineering. Tesla Autopilot processes camera images; no human defines "what a traffic light looks like."
+
+### Neural Networks — PM Level
+
+A neural network has input layers, hidden layers, and output layers. "Deep" means many hidden layers. Each connection has a weight learned during training. GPT-4 is rumored to have ~1.8 trillion such parameters.
+
+You don't need to know the math. But you need to know: **more parameters = more capacity, but also more cost and more data required to train.**
+
+### Five Types of Machine Learning
+
+| Type | How it learns | PM example |
+|------|--------------|------------|
+| **Supervised** | Labeled data (input → known output) | Spam detection, churn prediction |
+| **Unsupervised** | Patterns in unlabeled data | Customer segmentation, anomaly detection |
+| **Semi-Supervised** | Small labeled + large unlabeled set | When labeling is expensive but raw data is abundant |
+| **Self-Supervised** | Model generates its own labels from data | LLM pre-training (predict the next token) |
+| **Reinforcement Learning** | Trial-and-error with rewards | RLHF for chatbots, process optimization |
+
+### Classification vs. Generation
+
+- **Discriminative models** learn boundaries: *Is this email spam or not?* They compute P(label|data).
+- **Generative models** learn the data distribution: *What does a typical email look like?* They compute P(data).
+
+**Your PM rule of thumb:** Sort/label → discriminative. Create/produce → generative. Both → hybrid pipeline. Gmail Smart Reply does exactly this: classify intent (discriminative), then generate a reply (generative).
+
+### How LLMs Develop "Taste"
+
+> *"Pre-training = reading every cookbook. Fine-tuning = watching a chef. RLHF = developing taste."*
+
+- **RLHF** (Reinforcement Learning from Human Feedback): Pre-train → build a reward model from human feedback → fine-tune with PPO.
+- **Constitutional AI** (Anthropic): The model critiques itself against defined principles — scalable without thousands of human raters.
+
+## Framework
+
+The **Data-Task Matrix** — your decision grid for ML approaches:
+
+| | Labeled data available | Unlabeled data only |
+|---|---|---|
+| **Classify/Predict** | Supervised Learning | Unsupervised or Semi-Supervised |
+| **Generate/Create** | Fine-tuned Generative Model | Foundation Model + Prompting/RAG |
+| **Optimize a process** | Reinforcement Learning | Reinforcement Learning |
+
+**How to use the matrix:** First determine your task (row), then your data situation (column). The cell tells you where to start.
+
+## Scenario
+
+You're a PM at a streaming service. The goal: better recommendations. Your data team presents three proposals:
+
+- **Option A:** Supervised model trained on historical ratings (4.2M ratings available)
+- **Option B:** Unsupervised clustering of users by viewing behavior, then rule-based recommendations
+- **Option C:** Foundation model (LLM) with prompting: "Based on these movies, recommend similar ones"
+
+**Context:**
+- Netflix uses a hybrid: collaborative filtering (unsupervised) + supervised prediction
+- Your budget doesn't allow fine-tuning a foundation model
+- You have 4.2M labeled ratings + viewing histories from 800,000 users
+
+## Decide
+
+<details>
+<summary>Which approach would you choose?</summary>
+
+**The best decision:** Combine Option A + B — a hybrid approach, following the Netflix playbook.
+
+**Why:**
+- You have labeled data (ratings) → supervised works. The Data-Task Matrix is clear: classify + labeled data = supervised.
+- Unsupervised clustering surfaces additional signals (users with similar viewing behavior) that improve the supervised model.
+- Option C (LLM with prompting) sounds modern, but it has no personalization based on your user data — and costs significantly more per request than a specialized recommendation model.
+
+**What many get wrong:** Reaching for an LLM for everything, when a specialized ML model is cheaper, faster, and better suited for the use case.
+</details>
+
+## Reflect
+
+- **ML is not a monolith.** Supervised, unsupervised, self-supervised, and RL solve fundamentally different problems. The wrong choice costs months.
+- **Your data dictates the approach.** Don't pick the technology and then look for data — let your available data determine what's possible.
+- **Generative is not always better.** Discriminative models are often cheaper, faster, and more reliable for classification tasks. Not every problem needs an LLM.
+- **Hybrid is often the answer.** The best production systems combine multiple ML types in a single pipeline.
+
+---
+
+*Sources: Andrej Karpathy "Software 2.0" (2017), Chip Huyen "Designing Machine Learning Systems" (O'Reilly, 2022), Anthropic "Constitutional AI" (2023), OpenAI "Training language models to follow instructions with human feedback" (2022)*

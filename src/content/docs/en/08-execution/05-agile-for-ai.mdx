@@ -1,0 +1,135 @@
+---
+title: "Agile for AI"
+description: "Why traditional Agile hits its limits with AI development — and how to adapt sprints, estimation, and rituals."
+sidebar:
+  order: 5
+---
+
+## Context
+
+Sprint planning, Monday morning. Your team is estimating stories for the next sprint. "Optimize AI summarization" is in the backlog. The ML engineer says: "I can't estimate this. Maybe it takes a day, maybe two weeks. Depends on whether the new prompt approach works." The Scrum Master wants story points. The engineer refuses.
+
+Traditional Agile assumes work is estimable and progress is roughly linear. AI development breaks both assumptions. Experiments have unpredictable outcomes. Quality can suddenly plateau or regress. "Definition of done" is not binary for probabilistic systems.
+
+This doesn't mean Agile is useless for AI — it means it must be adapted.
+
+## Concept
+
+### Why traditional Agile doesn't work directly
+
+| Agile assumption | AI reality |
+|-----------------|------------|
+| Stories can be estimated | AI experiments have unpredictable outcomes |
+| Progress is incremental | AI quality can plateau or regress suddenly |
+| Definition of done is clear | "Good enough" is subjective and shifting |
+| Sprints produce shippable increments | AI prototypes may prove an approach is infeasible |
+| Velocity stabilizes over time | AI development velocity is inherently variable |
+
+### The dual-track approach
+
+**Track 1: Exploration (research/experimentation)**
+- Timeboxed experiments: "Can we achieve quality X with approach Y in Z weeks?"
+- Outcome: feasibility assessment, not shippable feature
+- Not estimable in story points — use timebox budgets instead
+- Kill criteria: define upfront when to abandon an approach
+
+**Track 2: Production (building/shipping)**
+- Traditional Agile works here: integration, UI, infrastructure, deployment
+- Estimable, incremental, sprintable
+- Standard velocity tracking
+
+**Running both tracks in parallel** is the key. While Track 1 explores whether a new model can improve summarization quality, Track 2 builds production infrastructure for the current approach.
+
+### Sprint ceremonies adapted
+
+**Sprint planning:**
+- Separate AI experiments from production work in the backlog
+- Experiments get timeboxes, not story points: "2 days for Approach A, 3 days for Approach B"
+- Rule: no more than 30% of sprint capacity on experiments (unless in early exploration phase)
+
+**Daily standup:**
+- Add "experiment status" to the standup format
+- Experiments that show no results after their timebox should be escalated — not silently extended
+
+**Sprint review:**
+- Demo experiments with data, not opinions: "Approach A achieved 82% accuracy on the eval set, Approach B achieved 71%. Approach A adds 200ms latency. Recommendation: Approach A with optimization."
+
+**Retrospective:**
+- Add: "What did we learn that we didn't expect?"
+- Review kill decisions: did we abandon approaches too early or too late?
+
+### Estimation strategies
+
+**For exploration/experiment work:**
+- Do NOT estimate in story points — this creates false precision
+- Use timeboxes: "We'll invest 3 days in Approach X"
+- Define clear success/failure criteria upfront: "If accuracy is below 75% after 3 days, we pivot"
+- Budget: 20-30% of team capacity for experiments
+
+**For production/integration work:**
+- Standard story point estimation works
+- Add "eval infrastructure" stories explicitly — teams chronically underestimate eval work
+- Add "prompt engineering" stories explicitly — it's real work, not "just tweaking text"
+
+### The experiment spike pattern
+
+1. **Define the question:** "Can Model X achieve more than 85% accuracy on our summarization task?"
+2. **Set the timebox:** 2-5 days
+3. **Define the eval:** use existing eval dataset or create a minimal one
+4. **Run the experiment:** prototype, evaluate, document
+5. **Report back:** metrics, learnings, recommendation (continue/pivot/abandon)
+6. **Decision gate:** PM + tech lead decide next step
+
+## Framework
+
+**How to structure AI development — by maturity:**
+
+| Maturity | Exploration | Production | Timebox rule |
+|----------|-------------|------------|--------------|
+| Early (first AI feature) | 60% | 40% (infrastructure) | Experiment max 1 week |
+| Mid (AI feature validated) | 30% | 70% | Experiment max 5 days |
+| Mature (AI feature in production) | 20% | 80% (optimization) | Experiment max 3 days |
+
+**Always:** separate experiment work from production work in planning. Define kill criteria before starting. Timebox experiments, never open-ended exploration.
+
+## Scenario
+
+You're PM of an AI product team. Your AI feature (document summarization) has been in production for 3 months. Accuracy is at 79% — your target is 85%.
+
+**Sprint situation:**
+- 2-week sprint, team of 4 engineers + 1 ML engineer
+- Backlog: 3 bug fixes (production), 1 new feature (user feedback UI), 2 improvement ideas (new prompt approach, alternative chunking)
+- The ML engineer wants to try both improvement ideas in the next sprint
+- The engineering lead says: "We need to fix the bugs and build the feedback UI. No room for experiments."
+- The Scrum Master asks: "How many story points are the improvements?"
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Apply dual-track. Bugs and feedback UI on Track 2 (Production). One experiment on Track 1 (Exploration) — not both.
+
+**Concrete sprint plan:**
+- **70% Production:** 3 bug fixes + user feedback UI (4 engineers)
+- **30% Exploration:** 1 experiment, timeboxed to 3 days (ML engineer)
+- **Which experiment first?** New prompt approach — lower effort, faster feedback. Alternative chunking is more involved and goes into the next sprint
+- **Kill criterion:** If the new prompt doesn't reach at least 82% accuracy after 3 days (halfway to target), pivot
+
+**To the Scrum Master:**
+"Experiments don't get story points. The ML engineer has a 3-day timebox budget. The outcome can be 'it works,' 'it doesn't work,' or 'needs more data.' All of these are valid results."
+
+**What many get wrong:** Either starting all experiments at once (capacity overload) or deferring experiments until "we have time" (never happens).
+</details>
+
+## Reflect
+
+**Agile isn't broken for AI — it needs the dual-track: exploration timeboxed, production as usual.**
+
+- Estimating AI experiments in story points creates false precision and frustration
+- The two-week rule: if two weeks of experimentation can't reach 70% of target quality, the approach must be reconsidered
+- "We proved it doesn't work" is a valid and valuable sprint outcome
+
+---
+
+*Sources: Spotify Engineering Blog — ML Delivery Framework, Google AI Development Stage-Gate Process (Engineering Talks), Practitioner Pattern "Two-Week Rule"*

@@ -1,0 +1,112 @@
+---
+title: "Ship/No-Ship Decisions"
+description: "How to decide whether an AI feature is good enough — with quality gates, staged rollouts, and clear thresholds."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Your AI feature is "done." The engineering team says: "It works." The design team says: "Looks good." But as a PM, you know: with AI, "works" does not mean the same as with traditional software. The chatbot delivers brilliant answers sometimes and embarrassing ones other times — and nobody can predict which case will occur when.
+
+Traditional software ships when it works correctly. AI features ship when they work *well enough*. This is a fundamentally different decision because AI output quality exists on a spectrum, not a binary. Different users experience different quality levels for the same feature. Edge cases are infinite. And quality may degrade over time as data distributions shift.
+
+The PM must define "good enough" before building, not after. Without a predefined quality bar, teams either ship too early (harming users) or never ship (harming the business).
+
+## Concept
+
+### Quality Gates for AI Features
+
+A quality gate is a predefined threshold that must be met before an AI feature progresses to the next deployment stage. Gates should be defined during planning, not discovered during launch review.
+
+**Recommended quality gates:**
+1. **Golden dataset performance:** Model clears the eval suite, no regression on critical tasks
+2. **Safety checks:** No sensitive data in prompts or logs; red team findings addressed
+3. **Latency budget:** P50 and P95 latency within acceptable bounds, with fallbacks for tool errors
+4. **Cost ceiling:** Cost per successful interaction under target
+5. **Fairness audit:** Performance consistent across demographic groups (see Lesson 5)
+6. **Fallback behavior:** Graceful degradation when the model fails, times out, or returns low-confidence results
+
+### Staged Rollout Strategies
+
+AI features demand more cautious rollouts than deterministic software because failure modes are harder to predict.
+
+**Shadow Mode (Dark Launch):** The AI feature runs in production processing real inputs, but outputs are not shown to users. Only the team sees and evaluates. Tests performance on real, current examples without user impact. Duration: 1-2 weeks minimum.
+
+**Canary Release:** Route 1-5% of production traffic to the new AI feature. Monitor key metrics: error rate, latency, user satisfaction, escalation rate. If metrics remain within predefined bounds, gradually ramp up. Each expansion phase has clear exit criteria.
+
+**A/B Testing:** Split users between AI feature variants to measure causal impact. Critical for measuring whether AI actually improves user outcomes. Run until statistical significance is reached (typically 2-4 weeks).
+
+**Feature Flags:** Combine canary + A/B. Control exposure by user segment, geography, or account tier. Enable instant rollback if issues emerge.
+
+### Setting Thresholds
+
+1. **Baseline first:** Measure the current experience (human performance, existing rule-based system)
+2. **Non-inferiority:** The AI must be at least as good as the current process
+3. **User-acceptable minimum:** Through user research, determine the quality level below which users reject the feature
+4. **Business-viable minimum:** Below what quality level does the feature cost more than it saves?
+5. **Set the bar at the highest of these three**
+
+## Framework
+
+**Ship/No-Ship Checklist:**
+
+| Gate | Question | Ship if... | Block if... |
+|------|----------|-----------|-------------|
+| Eval suite | Does it pass the golden dataset? | Scores meet or exceed baseline | Regression on any critical category |
+| Safety | Did it pass red team review? | All critical findings addressed | Open critical vulnerabilities |
+| Latency | Is it fast enough? | P95 within budget | P95 exceeds 2x target |
+| Cost | Is it economically viable? | Cost per success under target | Cost per success exceeds value delivered |
+| Fairness | Is performance equitable? | Variance across groups within bounds | Significant disparity on protected groups |
+| Fallback | What happens when it fails? | Graceful degradation defined and tested | No fallback — failure = broken experience |
+| Rollback | Can we undo this? | Instant rollback via feature flag | No rollback mechanism |
+
+## Scenario
+
+You are a PM at an HR-tech company. Your AI feature generates summaries of job applications for recruiters. The feature has passed the eval suite and is ready for rollout.
+
+**The situation:**
+- 15,000 applications/month through the platform
+- Eval suite: 92% faithfulness (summaries are fact-based), 4% hallucination rate
+- Latency: P95 at 2.8 seconds (budget: 3 seconds)
+- Cost: $0.09 per summary (budget: $0.13)
+- Fairness audit: Summaries for male applicants contain terms like "strong leader" and "decisive" 23% more frequently than for female applicants with comparable experience
+- No shadow mode conducted
+- Feature flag is implemented
+
+**Options:**
+1. **Ship:** All gates passed except fairness — but the bias fix is estimated at 3 weeks
+2. **Ship with disclaimer:** Launch the feature with a note "AI-generated, please review independently"
+3. **Block:** Fix the fairness issue first, then shadow mode, then canary release
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 3 — Block and fix the fairness issue first.
+
+**Why:**
+- **Fairness is not a "nice-to-have" in recruiting:** An AI tool that systematically describes female applicants differently from male applicants is a discrimination risk. This is a high-stakes context — flawed summaries influence hiring decisions.
+- **Option 2 is false security:** A disclaimer offers no legal protection and changes nothing about the behavior. Recruiters under time pressure will use the AI summary as their basis — with built-in gender bias.
+- **4% hallucination rate in recruiting is high:** At 15,000 applications/month, that is 600 summaries with fabricated facts. In a recruiting context, a single hallucinated qualification can distort a hiring decision.
+- **Shadow mode is missing:** Without shadow mode, you don't know how the feature performs on real, current traffic. The eval suite is a proxy — not proof.
+- **Timeline:** 3 weeks fairness fix + 2 weeks shadow mode + 2 weeks canary = 7 weeks. That is a justifiable price for a feature that affects careers.
+
+**Common mistakes:**
+- "We'll ship when it's perfect" — AI is never perfect. But for recruiting, the tolerance for bias is extremely low.
+- "Shadow mode is wasted effort" — a few days of shadow mode would have revealed the fairness gap before the pressure of a launch decision.
+- "Our thresholds should be fixed" — quality bars should evolve. Start conservative, relax as you gain confidence.
+</details>
+
+## Reflect
+
+**The ship/no-ship decision for AI is never "Does it work?" but "Is it better than the alternative — with acceptable failure modes?"**
+
+- Define quality gates before building, not during launch review. Six gates: eval suite, safety, latency, cost, fairness, fallback.
+- Shadow mode is not wasted effort — it catches catastrophic failures at zero user risk. The few days invested prevent incidents that can damage trust irreversibly.
+- Staged rollouts are not optional for AI. Shadow mode, then canary (1-5%), then gradual expansion — each phase with clear exit criteria.
+
+---
+
+*Sources: Flagsmith — 10 Best Practices to Ship AI Features (2025), Clarifai — AI Model Deployment Strategies (2025), JFrog ML — Shadow Deployment vs. Canary Release (2025), Neptune.ai — Model Deployment Strategies (2025)*

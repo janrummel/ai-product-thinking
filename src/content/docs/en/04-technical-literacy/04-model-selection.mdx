@@ -1,0 +1,129 @@
+---
+title: "Model Selection"
+description: "How to choose the right model for your AI feature — beyond leaderboards, based on task, cost, and latency."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Your head of engineering created a spreadsheet with 15 LLMs, sorted by MMLU score. "We'll use the best model" is their recommendation. The problem: the #1 model costs 10x as much as #5 — and for your use case (ticket classification), the quality difference is marginal. Your CFO will see the API bill in month two and ask why you're using the most expensive model for a task that a cheaper one handles just as well.
+
+Model selection is not a one-time technical decision. It's a product decision that balances quality, cost, latency, and compliance requirements — and it may change quarterly because the model landscape moves so fast.
+
+## Concept
+
+### The 2026 Model Landscape
+
+The market has consolidated around a few major providers:
+
+| Provider | Frontier model | Strength | Input $/1M tokens | Output $/1M tokens |
+|----------|---------------|----------|-------------------|-------------------|
+| OpenAI | GPT-5.2 / GPT-5.4 | General-purpose, strong tooling ecosystem | $1.75-$3.00 | $7.00-$14.00 |
+| Anthropic | Claude Opus 4.6 | Writing, safety, agentic coding, 200K context | $5.00 | $25.00 |
+| Anthropic | Claude Sonnet 4.6 | Best performance-to-cost ratio | $3.00 | $15.00 |
+| Google | Gemini 3 Pro | Multimodal, 1M context, caching | $1.25 | $10.00 |
+| Google | Gemini 2.5 Flash | Speed-optimized, cost-efficient | $0.15 | $0.60 |
+| Meta | Llama 4 Scout (open) | Open source, 10M context, fast | $0.11 | $0.34 |
+| DeepSeek | DeepSeek-V3 / R1 | Aggressive price-performance | $0.07-$0.55 | $0.28-$2.19 |
+
+**Reasoning models (separate tier):** OpenAI o3/o4-mini, Claude Extended Thinking, Gemini Thinking Mode. Deep reasoning, higher cost, higher latency.
+
+### Benchmarks — and Their Limits
+
+**What PMs need to know:**
+- **MMLU/MMLU-Pro:** General knowledge across 57+ domains. The most widely cited benchmark, but increasingly saturated at the top
+- **SWE-bench:** Real-world software engineering tasks (fixing GitHub issues). More meaningful than HumanEval for production coding assessment
+- **ARC-AGI:** Abstract reasoning. Tests pattern recognition that humans find easy but LLMs find hard
+
+**PM caveat:** Benchmarks measure model capabilities under controlled conditions. They do not measure performance on YOUR specific task. A model ranked #1 on MMLU may underperform on your customer support use case. Always evaluate on your own data.
+
+### Multi-Model Routing
+
+The emerging production pattern: use different models for different tasks rather than one model for everything.
+
+**Tiered routing architecture:**
+- **Fast/cheap tier** (Gemini Flash, GPT-4o-mini, Llama): Simple classification, extraction, formatting — 70-80% of requests
+- **Strong tier** (Claude Sonnet, GPT-4o, Gemini Pro): Complex reasoning, generation, analysis — 15-25% of requests
+- **Reasoning tier** (o3, Claude Extended Thinking): Multi-step reasoning, research — 1-5% of requests
+
+**Cost impact:** Multi-model routing can reduce costs 5-10x compared to sending everything to the frontier model.
+
+### Practical Selection Criteria Beyond Benchmarks
+
+| Criterion | Why it matters | How to evaluate |
+|-----------|---------------|----------------|
+| Task-specific quality | Benchmarks don't predict your use case | Run 50-100 representative queries, blind-evaluate outputs |
+| Latency (TTFT + TPS) | User experience for real-time features | Measure time-to-first-token and tokens-per-second |
+| Cost at YOUR volume | 10x price difference between models | Calculate monthly cost at projected volume |
+| Data privacy/compliance | Regulatory requirements | Review data processing terms; consider self-hosted open models |
+| Ecosystem/tooling | Developer productivity | Function calling, JSON mode, streaming, SDK quality |
+
+## Framework
+
+**Model selection in 3 steps:**
+
+**Step 1 — Define requirements:**
+
+| Dimension | Questions |
+|-----------|----------|
+| Quality | What's "good enough" for this feature? |
+| Latency | Real-time (under 2s)? Background processing OK? |
+| Cost | Monthly budget at projected volume? |
+| Compliance | Data residency? Privacy? Industry regulation? |
+
+**Step 2 — Evaluate candidates:**
+- Run 50-100 representative queries on 3-4 candidate models
+- Blind-evaluate (remove model names, rate quality 1-5)
+- Measure latency and calculate cost at projected volume
+
+**Step 3 — Design for switching:**
+- Use model-agnostic abstractions (LiteLLM, OpenRouter, or provider SDKs with adapters)
+- Version prompts per model (different models respond differently to the same prompt)
+- Monitor quality metrics continuously
+
+## Scenario
+
+You're a PM at an e-commerce SaaS (B2B, 1,200 shops). Your next feature: AI-generated product descriptions. The feature should offer 3 quality tiers: Basic (bullet points), Standard (SEO-optimized), and Premium (storytelling + SEO).
+
+**The situation:**
+- Volume: 400,000 product descriptions/month
+- Basic: 70% of volume (simple products)
+- Standard: 25% (main catalog)
+- Premium: 5% (flagship products)
+- Budget: $8,000/month for AI costs
+- Requirement: latency under 5 seconds for all tiers
+- Languages: English, German, French
+
+**Options:**
+1. **Single model:** Claude Sonnet 4.6 for all tiers. Estimated cost: $22,000/month
+2. **Two tiers:** Gemini 2.5 Flash for Basic + Standard, Claude Sonnet 4.6 for Premium. Estimated cost: $5,800/month
+3. **Three tiers:** Llama 4 Scout (via API) for Basic, Gemini 2.5 Flash for Standard, Claude Opus 4.6 for Premium. Estimated cost: $4,200/month
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 2 — Two tiers.
+
+**Why:**
+- **Option 1 is 2.75x over budget:** $22,000 vs. $8,000 budget. Using Claude Sonnet for bullet points is like parking a Ferrari in the garage
+- **Option 2 hits the sweet spot:** $5,800 is within budget. Gemini 2.5 Flash is sufficient for simple generation and massively cheaper at 70-95% of volume. Claude Sonnet delivers premium quality only where it counts (5% of volume)
+- **Option 3 saves more, but:** Llama 4 Scout requires either self-hosting (infrastructure overhead) or a third-party API provider. The added complexity of a third model saves only $1,600/month — that doesn't justify the engineering overhead for routing, testing, and monitoring
+- **Blind evaluation is critical:** Before launch, generate 100 product descriptions per model, have them blind-evaluated. If Flash scores 4/5 for standard products, the two-tier architecture is validated
+- **Design for switching:** Build with LiteLLM or similar abstraction. If Gemini Flash gets 2x better in 6 months (or a new model appears), model switching should be a config change, not a rewrite
+
+**Common mistake:** Choosing the most expensive model because it leads the leaderboard. The quality difference between tier-1 and tier-2 models is marginal for many tasks, but the cost difference is dramatic.
+</details>
+
+## Reflect
+
+- **Benchmarks are orientation, not a decision basis.** Always evaluate on your own data — 50-100 representative queries, blind-evaluated. The leaderboard winner isn't automatically the best choice for your task.
+- Multi-model routing is the production standard. 70-80% of requests go to the cheap model, only complex tasks to the expensive one. 5-10x cost savings are realistic.
+- Design for model switching. The model landscape changes quarterly. Lock-in to one model costs you later.
+- Data privacy and compliance can constrain model choice. Self-hosted open models (Llama, Mistral) are the answer when no data may leave the organization.
+
+---
+
+*Sources: Artificial Analysis LLM Leaderboard, Klu 2026 LLM Leaderboard, DEV Community "Choosing an LLM in 2026", Claude5.ai LLM API Pricing (2026), Shakudo Top 9 LLMs (March 2026)*

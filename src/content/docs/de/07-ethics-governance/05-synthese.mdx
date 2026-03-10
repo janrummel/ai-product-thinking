@@ -1,0 +1,58 @@
+---
+title: "Synthese: Ethics & Governance"
+description: "Wie Responsible AI, Guardrails, Privacy und Hallucination Management zusammenhaengen — und warum sie keine separaten Themen sind."
+sidebar:
+  order: 5
+---
+
+## The Big Picture
+
+Du hast vier Lektionen durchgearbeitet: was Responsible AI in der Praxis bedeutet, wie Guardrails AI-Verhalten begrenzen, warum Privacy in AI-Produkten mehrere Oberflaechen hat, und wie Du mit der strukturellen Realitaet von Hallucinations umgehst.
+
+Diese Themen werden oft als separate Compliance-Aufgaben behandelt. Das ist ein Fehler. Sie bilden zusammen den **ethischen Stack** Deines AI-Produkts — und jede Schicht haengt von den anderen ab.
+
+## Connections
+
+### 1. Responsible AI ist der Rahmen — der Rest ist Operationalisierung
+
+Responsible AI (Lektion 1) definiert das "Was" und "Warum". Guardrails (Lektion 2) sind das "Wie" auf technischer Ebene. Privacy (Lektion 3) schuetzt die User. Hallucination Management (Lektion 4) erhaelt das Vertrauen. Ohne den Rahmen fehlt den Massnahmen die Richtung; ohne die Massnahmen bleibt der Rahmen ein PDF.
+
+**Fuer Dich als PM:** Fang beim Rahmen an (EU AI Act Risiko-Klassifizierung) und arbeite Dich zu den konkreten Massnahmen vor.
+
+### 2. Guardrails und Hallucination Management ueberlappen
+
+RAG ist gleichzeitig eine Hallucination-Mitigation (Lektion 4) UND ein Guardrail (Lektion 2) — es verankert Outputs in verifizierten Quellen. Output-Filter sind Guardrails, die auch halluzinierte schaedliche Inhalte abfangen. Dieselbe Infrastruktur dient beiden Zwecken.
+
+**Fuer Dich als PM:** Plane Guardrails und Hallucination-Mitigation nicht als separate Workstreams. Sie teilen sich Architektur und Tools.
+
+### 3. Privacy und Guardrails erzeugen Spannung
+
+Effektive Guardrails erfordern die Inspektion von User-Inputs (Jailbreak-Detection, PII-Erkennung). Aber Input-Inspektion hat Privacy-Implikationen (Lektion 3). Die Loesung: Input-Filtering muss VOR dem Logging und Speichern passieren.
+
+**Fuer Dich als PM:** Balance Safety-Monitoring mit Datenminimierung. Die Reihenfolge der Processing-Pipeline bestimmt, ob Du beides erreichst.
+
+### 4. Regulierung verbindet alles
+
+Der EU AI Act verlangt all diese Themen gleichzeitig: Risikomanagement (Lektion 1), technische Robustheit (Lektion 2), Daten-Governance (Lektion 3) und Genauigkeit/Transparenz (Lektion 4). Ab August 2026 ist das keine Best Practice mehr — es ist Pflicht fuer Hochrisiko-Systeme.
+
+**Fuer Dich als PM:** Der EU AI Act ist Dein natuerlicher Rahmen, auch wenn Du nicht in der EU bist — er setzt den globalen Standard.
+
+## The Meta-Insight
+
+> Ethics und Governance in AI sind keine abstrakten Unternehmenswerte — sie sind konkrete Produktanforderungen, die Architektur, UX, Go-to-Market und Business Model beeinflussen. Der PM, der sie als Checkbox behandelt, erlebt Vorfaelle, Strafen und User-Verlust. Der PM, der sie von Tag eins integriert, baut haltbarere und letztlich erfolgreichere Produkte.
+
+## Your Ethics & Governance Checklist
+
+Was Du jetzt koennen solltest:
+
+- [ ] Ein AI-Feature in EU AI Act Risiko-Stufen einordnen und daraus Anforderungen ableiten — Lektion 1
+- [ ] Guardrails designen, die Safety und Utility balancieren (Block Rate UND User Satisfaction messen) — Lektion 2
+- [ ] Die Privacy-Architektur Deines AI-Produkts bewerten und das richtige Tier waehlen — Lektion 3
+- [ ] Eine Hallucination-Mitigation-Strategie fuer Deine Domain definieren (Technik + UX) — Lektion 4
+- [ ] Den Zusammenhang zwischen allen vier Themen erklaeren und sie als integrierten Stack umsetzen — Synthese
+
+Wenn ein Punkt unsicher ist, geh zurueck zur entsprechenden Lektion. Diese Themen sind nicht optional — sie bestimmen, ob Dein AI-Produkt Vertrauen aufbaut oder zerstoert.
+
+---
+
+*Quellen: Aufbauend auf Lektionen 1–4. Anthropic RSP 3.0 (2026), EU AI Act (artificialintelligenceact.eu), Stanford Legal RAG Study (2025), NVIDIA NeMo Guardrails, Stanford AI Index Report 2025*

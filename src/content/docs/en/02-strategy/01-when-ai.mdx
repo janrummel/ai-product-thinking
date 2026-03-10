@@ -1,0 +1,107 @@
+---
+title: "When AI"
+description: "When AI is the right solution, when a simple rule suffices — and how to avoid the most expensive PM mistakes."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Your stakeholder wants an "AI-powered" workflow. Your engineering team can build it. The question nobody asks: Does this problem even need AI?
+
+As a PM, your most important skill isn't deploying AI — it's recognizing when you *shouldn't*. Because the most expensive AI projects aren't the ones that fail. They're the ones that solve a problem that didn't exist.
+
+## Concept
+
+### Deterministic vs. Probabilistic
+
+Not every problem is an AI problem. The decisive question: Is the problem deterministic or probabilistic?
+
+| | Deterministic | Probabilistic |
+|---|---|---|
+| Logic | Clear, stable, documentable | Ambiguous, context-dependent |
+| Rules | Finite if-then chains | Too many exceptions for rules |
+| Output | One "correct" answer | No single "correct" answer |
+| Example | Tax calculation, validation | Sentiment analysis, recommendations |
+
+**When rule-based is enough:** Logic is clear and stable, decisions must be auditable, processes are repeatable.
+
+**When AI/ML makes sense:** No single "correct" answer, system improves with more data, rules have too many exceptions.
+
+**Reality check:** Most enterprise problems are hybrids. Your login flow is deterministic. Your fraud detection is probabilistic. Both in the same product.
+
+### The "AI for AI's Sake" Trap
+
+The numbers are sobering:
+
+- **64% of users** would disable features or leave products when AI features are forced on them (ZDNET/Aberdeen)
+- **Only 5%** of AI implementations delivered measurable P&L impact (MIT, 2025)
+- **Only 1 in 4** AI projects delivers promised ROI, only 16% scale enterprise-wide (IBM, 2025)
+
+The problem is rarely the technology. The problem is that no clear user problem existed before someone put "AI" on the roadmap.
+
+### When AI Fails Spectacularly
+
+- **Humane AI Pin & Rabbit R1:** "A solution looking for a problem" (Logitech CEO). Hardware products without a clear use case.
+- **McDonald's AI Drive-Thru (IBM):** Shut down after 3 years. Viral TikTok video: 260 McNuggets ordered because the system interpreted background noise as orders.
+- **United Healthcare:** 90% error rate on automated patient appeal denials.
+- **Google AI Overviews:** "Put glue on pizza" recommendations. Deployment without adequate error tolerance definition.
+
+## Framework
+
+**5 check questions before putting AI on your roadmap:**
+
+| # | Question | No = Warning Sign |
+|---|----------|-------------------|
+| 1 | Is the problem probabilistic? | A rule-based engine probably suffices |
+| 2 | Does the system improve with more data? | A static solution is more efficient |
+| 3 | Is there enough quality training data? | Cold-start problem, high upfront investment |
+| 4 | Is the error tolerance acceptable? | High-stakes domain without human review = risk |
+| 5 | Does expected value exceed AI-specific costs? | Variable LLM costs in fixed subscriptions = unit economics problem |
+
+**All 5 yes?** AI is a valid approach. **One or more no?** Evaluate alternatives before committing to AI.
+
+## Scenario
+
+You're a PM at a B2B SaaS for invoice processing. The VP Product wants "AI-powered Invoice Processing" on the roadmap. Currently you use template-based OCR with fixed rules.
+
+**The situation:**
+- 120,000 invoices/month, 85% follow 4 standard formats
+- Current rule-based accuracy: 94% for standard formats, 45% for non-standard
+- AI model in eval: 96% for standard, 82% for non-standard
+- AI cost: $0.03 per invoice (LLM-based) vs. $0.001 per invoice (rule-based)
+- 15% of invoices (non-standard) cause 60% of manual effort
+
+**Options:**
+1. **Switch everything to AI:** 96%/82% accuracy, $3,600/month
+2. **Keep everything rule-based:** 94%/45% accuracy, $120/month
+3. **Hybrid:** Rule-based for standard formats, AI only for non-standard
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 3 — Hybrid.
+
+**Why:**
+- Standard formats: Rule-based delivers 94% at 30x lower cost. The 2% improvement from AI doesn't justify a 30x price increase
+- Non-standard formats: AI improves from 45% to 82% — that's the real lever. These 15% of invoices cause 60% of manual work
+- Hybrid cost: ~$660/month (rule-based for 102k standard + AI for 18k non-standard) instead of $3,600
+
+**The PM mistakes in this scenario:**
+- **"Bolt-on AI":** Slapping AI on top without rethinking the workflow. Rule-based works for 85% of cases — why replace it?
+- **Models as strategy:** The model is a commodity. Your competitive advantage lies in the data pipeline and validation rules.
+- **Ignoring unit economics:** $0.03 per invoice sounds cheap — until you multiply by 120k invoices per month.
+</details>
+
+## Reflect
+
+- **AI is a solution, not a feature.** Start with the problem, not the technology. If you can't articulate which user problem AI solves, you don't have one.
+- **Most problems are hybrids.** Deterministic where possible, probabilistic where necessary. This saves cost and reduces errors.
+- **Define error tolerance before deployment.** McDonald's, United Healthcare, and Google showed what happens when you don't.
+- **Do the unit economics math.** Variable LLM costs inside fixed-price subscriptions are a business model risk, not a technical detail.
+
+---
+
+*Sources: ZDNET/Aberdeen Consumer AI Survey (2024), MIT AI Implementation Study (2025), IBM Global AI Adoption Index (2025), Logitech CEO Bracken Darrell on Humane/Rabbit (2024), McDonald's/IBM Drive-Thru Pilot Post-Mortem (2024)*

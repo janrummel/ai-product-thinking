@@ -1,0 +1,112 @@
+---
+title: "RAG (Retrieval-Augmented Generation)"
+description: "How to build AI features that access current and proprietary data — without retraining the model."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Your customer support bot is hallucinating. It invents features that don't exist and quotes prices from two years ago. The model isn't stupid — it simply doesn't have access to your current product data. Your CTO says: "We need RAG."
+
+RAG (Retrieval-Augmented Generation) is the primary pattern for giving AI features access to external, up-to-date data. Instead of retraining the model, relevant documents are injected into the prompt at runtime. For PMs, this is the most important architectural decision after model selection — and the most common source of avoidable quality problems.
+
+## Concept
+
+### The RAG Pipeline: Embed, Store, Retrieve, Generate
+
+**Step 1 — Embed (Indexing):**
+Documents are split into chunks and converted into vectors — high-dimensional numerical representations of meaning. "Car" and "automobile" have similar vectors because they mean similar things. Common embedding models: OpenAI text-embedding-3-large, Cohere embed-v4, open-source alternatives (BGE, E5).
+
+**Step 2 — Store:**
+Embeddings are stored alongside the original text in a vector database. Major options (2026): Pinecone, Weaviate, Qdrant, Milvus, Chroma, pgvector (PostgreSQL extension). PM tip: pgvector is the simplest starting point for teams already using PostgreSQL.
+
+**Step 3 — Retrieve:**
+The user query is embedded using the same model. Vector similarity search finds the most relevant chunks (typically top 3-10). Best practice 2026: hybrid search — vector similarity combined with keyword/BM25 search. Catches cases where semantic search misses exact terms (product names, error codes).
+
+**Step 4 — Generate:**
+Retrieved chunks are injected as context into the LLM prompt. The model generates a response grounded in the retrieved information. Well-designed RAG systems cite which chunks informed the answer.
+
+### Chunking — the Underestimated Quality Lever
+
+Chunking quality is the single biggest determinant of RAG quality. Bad chunks mean bad retrieval, and bad retrieval means bad answers.
+
+| Strategy | How it works | Best for | Complexity |
+|----------|-------------|----------|------------|
+| **Fixed-size** | Split every N tokens (e.g., 512) with overlap | Simple documents, getting started | Low |
+| **Recursive** | Split by paragraphs, then sentences, then tokens | General-purpose default | Low |
+| **Semantic** | Split at topic/meaning boundaries | Long documents with topic shifts | Medium |
+| **Heading-aware** | Split by document structure (H1, H2, sections) | Structured docs, manuals | Medium |
+| **Contextual** | LLM-generated context prepended to each chunk | Highest retrieval quality | High |
+
+**Best practice:** Start with recursive chunking at 512 tokens and 10-20% overlap. Measure retrieval quality. Only move to semantic or contextual chunking after establishing a baseline.
+
+### What PMs Get Wrong
+
+1. **"RAG eliminates hallucinations."** False. RAG reduces them, but the model can still hallucinate beyond retrieved content or misinterpret irrelevant chunks.
+2. **"More data = better RAG."** False. Indexing irrelevant or low-quality documents increases noise and reduces retrieval precision. Curation matters more than expansion.
+3. **"Vector search is all you need."** False. Hybrid search (vector + keyword) is the 2026 default because pure vector search misses exact matches.
+
+## Framework
+
+**RAG architecture decision tree:**
+
+| Step | Action | When to escalate |
+|------|--------|-----------------|
+| 1. Baseline | Recursive chunking (512 tokens, 10% overlap) + single vector store | When retrieval precision falls below 80% |
+| 2. Hybrid | Combine vector + keyword/BM25 search | When exact-term queries fail |
+| 3. Reranking | Cross-encoder re-scores initial 20-50 candidates | When precision matters more than latency |
+| 4. GraphRAG | Build knowledge graph from corpus | Only when cross-document reasoning is a core requirement |
+
+**RAG quality metrics PMs must track:**
+
+| Metric | What it measures | Why it matters |
+|--------|-----------------|---------------|
+| Retrieval Precision | Are retrieved chunks relevant? | Irrelevant chunks degrade answers |
+| Retrieval Recall | Are all relevant chunks found? | Missing chunks lead to incomplete answers |
+| Answer Faithfulness | Does the answer stick to retrieved content? | Detect hallucination despite RAG |
+| Answer Relevance | Does the answer address the question? | Quality from the user's perspective |
+
+## Scenario
+
+You're a PM at an HR tech SaaS (B2B, 500 enterprise customers). Your next feature: AI-powered access to each customer's company-specific knowledge base — policies, handbooks, onboarding docs.
+
+**The situation:**
+- Each customer has 200-5,000 documents (PDF, Word, Confluence)
+- 80% of queries are about specific policy details ("How many vacation days do I get after 3 years?")
+- Requirement: source citation with every answer (compliance)
+- Budget: $3,000/month for AI infrastructure
+- Data privacy: tenant separation is mandatory — Customer A must never see Customer B's data
+
+**Options:**
+1. **Long context:** Pack all documents into the context window with every query. No vector store needed
+2. **Basic RAG:** pgvector + recursive chunking + simple vector search
+3. **Production RAG:** Pinecone + hybrid search + reranking + tenant-separated namespaces + source attribution
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 3 — Production RAG, but start with Option 2 as MVP.
+
+**Why:**
+- **Long context is not a solution:** 5,000 documents don't fit in a context window. Even with 200 documents, the cost per query would be astronomical — and quality degrades with context length
+- **Source citation is a hard requirement:** RAG with source attribution is the only pattern that delivers compliance-grade citations. Long context cannot reliably identify *which* part of the input informed the answer
+- **Tenant separation:** Pinecone namespaces (or pgvector with row-level security) solve the tenant separation problem architecturally
+- **Hybrid search for policy documents:** Policy queries often contain exact terms ("Section 4.2", "vacation policy 2025"). Pure vector search misses these; hybrid search catches them
+- **MVP path:** Start with pgvector + recursive chunking (Option 2) in weeks 1-2. Measure retrieval quality. Migrate to Pinecone + hybrid + reranking (Option 3) once the baseline is established
+
+**Common mistake:** Starting with the most complex RAG architecture without having a quality baseline. You don't know whether reranking adds 5% or 30% until you've measured basic RAG.
+</details>
+
+## Reflect
+
+- **RAG is the primary pattern for AI features that need proprietary or current data.** It doesn't replace fine-tuning (RAG provides knowledge, fine-tuning changes behavior), but it solves the most common problem: "The model doesn't know our data."
+- Chunking quality determines RAG quality. Start with recursive chunking, measure results, and escalate to more complex strategies only then.
+- Hybrid search (vector + keyword) is the 2026 standard — not optional when exact terms matter.
+- RAG reduces hallucinations but doesn't eliminate them. Actively measuring answer faithfulness is mandatory.
+
+---
+
+*Sources: Pinecone RAG Architecture Guide, PMC Comparative Evaluation of Advanced Chunking for RAG (2025), Neo4j Advanced RAG Techniques, Eden AI 2025 Guide to RAG, Morphik RAG Strategies at Scale*

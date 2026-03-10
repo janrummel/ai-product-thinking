@@ -1,0 +1,114 @@
+---
+title: "Writing AI PRDs"
+description: "Why traditional PRDs fall short for AI products — and how an AI PRD makes quality measurable."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Your team wants to build an AI feature: automatic summaries for support tickets. The engineering lead asks for the PRD. You open your usual template — problem statement, user stories, acceptance criteria, launch timeline — and realize something is missing.
+
+What does "acceptance criteria" mean for a feature that gives a different answer every time? When is a summary "good enough"? And who decides — a QA engineer with a checklist or an eval dataset with 500 examples?
+
+Traditional PRDs define deterministic behavior: given input X, the system produces output Y. AI PRDs must define a quality range for probabilistic outputs: given input X, the system produces outputs that meet quality threshold Z at least P% of the time.
+
+## Concept
+
+### What makes an AI PRD different
+
+The biggest difference: an AI PRD contains an **evaluation section** that restructures the entire document.
+
+| Element | Traditional PRD | AI PRD |
+|---------|----------------|--------|
+| Requirements | Exact behavior specification | Quality thresholds + eval criteria |
+| Success criteria | Feature works yes/no | Accuracy, latency, cost targets per use case |
+| Edge cases | Enumerate and handle each | Failure modes and graceful degradation |
+| Testing | Pass/fail test cases | Eval datasets, benchmarks, human judgment |
+| Acceptance | QA sign-off | Eval metrics above threshold + human review |
+
+### The 7 sections of an AI PRD
+
+**1. Problem Statement & User Context** — Same as a traditional PRD, but quantify the manual effort the AI will replace.
+
+**2. AI Approach & Rationale** — Why AI is the right solution (vs. rules or traditional code). Which approach: LLM API, RAG, fine-tuning, agent workflow.
+
+**3. Evaluation Criteria** — The most important new section. Golden dataset, metrics (accuracy, hallucination rate, latency, cost-per-query), minimum thresholds for launch.
+
+**4. Model & Infrastructure** — Model selection rationale, expected volume, cost projection.
+
+**5. User Experience** — How AI output is presented. Confidence indicators, fallback behavior, feedback mechanism (thumbs up/down, regenerate).
+
+**6. Risk & Mitigation** — Failure modes, guardrails, bias considerations, privacy.
+
+**7. Success Metrics & Iteration Plan** — Launch metrics, post-launch monitoring, improvement cadence.
+
+### Prompts as product specifications
+
+In LLM-based features, the system prompt is effectively the product specification. This is a paradigm shift:
+
+- Prompt changes are product changes — they need review, testing, and versioning
+- A/B testing prompts is equivalent to A/B testing features
+- Prompt regression testing (running evals after prompt changes) replaces traditional regression testing
+
+Google treats prompts as code artifacts: version control, mandatory review, eval suites on changes. Anthropic recommends clearly defining the assistant's role, constraints, and output format in the system prompt.
+
+## Framework
+
+**When to use which PRD format:**
+
+| Feature type | PRD format | Rationale |
+|-------------|-----------|-----------|
+| Deterministic output | Traditional PRD | No probabilistic behavior |
+| AI with binary classification | Hybrid PRD (traditional + eval section) | Output is yes/no, but accuracy varies |
+| Text/image generation | Full AI PRD | Probabilistic, complex outputs |
+| Agent workflow | Full AI PRD + agent architecture | Multiple AI components, complex failure modes |
+
+**Golden rule:** As soon as an AI component is involved, the PRD needs evaluation criteria — even if the rest stays traditional.
+
+## Scenario
+
+You're a PM at a SaaS company. Your product is a helpdesk tool. Feature request: AI should automatically summarize incoming tickets and suggest a priority level.
+
+**Facts:**
+- 8,000 tickets per month
+- Support team of 15 agents
+- Currently each agent reads every ticket fully (average 3 minutes per ticket)
+- Goal: reduce reading time to 30 seconds
+- Budget: $500/month for AI costs
+- Your engineering lead suggests: "We'll use an LLM, write a prompt, done in two sprints"
+
+The engineering lead has already built a prototype. The summaries "look good." But there's no eval dataset, no defined quality thresholds, and no plan for failure cases.
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Create an AI PRD with clear eval criteria before going to production. The prototype is a good start, but without measurable quality you don't know when the feature is "done."
+
+**Specifically, you need:**
+- A golden dataset: 200 manually summarized tickets as reference
+- Quality thresholds: e.g., 90% of summaries preserve all critical information, priority suggestion correct in 80% of cases
+- Failure definition: What happens when a summary omits important details?
+- Cost check: At 8,000 tickets and ~500 tokens per ticket, verify the budget is sufficient
+
+**Why not "just ship it":**
+- Without a baseline, you won't know if later changes improve or degrade quality
+- "Looks good" is not a quality criterion — it's an anecdote
+- If the AI mispriorizes a critical ticket, it costs customer trust
+
+**What many get wrong:** Pushing the prototype straight to production because it "looks good enough." Without eval criteria, you only notice quality problems when customers complain.
+</details>
+
+## Reflect
+
+**An AI PRD is not a traditional PRD with "AI" in the title — the evaluation section changes the entire document.**
+
+- Prompts are product specifications: changes to the prompt are product changes and need testing
+- Without predefined quality thresholds, there is no baseline for improvement
+- Defining eval criteria is the most important PM work on AI features — not prompt optimization
+
+---
+
+*Sources: Anthropic Documentation (2025), Google Cloud Engineering Blog, Linear Engineering Blog, GitHub Blog — Copilot Acceptance Rate Metrics*

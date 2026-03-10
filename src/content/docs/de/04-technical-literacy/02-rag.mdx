@@ -1,0 +1,112 @@
+---
+title: "RAG (Retrieval-Augmented Generation)"
+description: "Wie Du AI-Features baust, die auf aktuelle und firmeneigene Daten zugreifen — ohne das Modell neu zu trainieren."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Euer Kundensupport-Bot halluziniert. Er erfindet Funktionen, die es nicht gibt, und zitiert Preise von vor zwei Jahren. Das Modell ist nicht dumm — es hat einfach keinen Zugriff auf Eure aktuellen Produktdaten. Dein CTO sagt: "Wir brauchen RAG."
+
+RAG (Retrieval-Augmented Generation) ist das primaere Muster, um AI-Features mit externen, aktuellen Daten zu versorgen. Statt das Modell neu zu trainieren, werden relevante Dokumente zur Laufzeit in den Prompt injiziert. Fuer PMs ist das die wichtigste Architekturentscheidung nach der Modellwahl — und die haeufigste Quelle vermeidbarer Qualitaetsprobleme.
+
+## Concept
+
+### Die RAG-Pipeline: Embed, Store, Retrieve, Generate
+
+**Schritt 1 — Embed (Indexierung):**
+Dokumente werden in Chunks aufgeteilt und in Vektoren umgewandelt — hochdimensionale Zahlenrepraesentationen von Bedeutung. "Auto" und "Fahrzeug" haben aehnliche Vektoren, weil sie Aehnliches bedeuten. Gaengige Embedding-Modelle: OpenAI text-embedding-3-large, Cohere embed-v4, Open-Source-Alternativen (BGE, E5).
+
+**Schritt 2 — Store:**
+Embeddings werden zusammen mit dem Originaltext in einer Vector Database gespeichert. Wichtige Optionen (2026): Pinecone, Weaviate, Qdrant, Milvus, Chroma, pgvector (PostgreSQL-Extension). PM-Tipp: pgvector ist der einfachste Einstieg fuer Teams, die bereits PostgreSQL nutzen.
+
+**Schritt 3 — Retrieve:**
+Die User-Anfrage wird mit demselben Modell embedded. Vector Similarity Search findet die relevantesten Chunks (typisch: Top 3-10). Best Practice 2026: Hybrid Search — Vektor-Aehnlichkeit kombiniert mit Keyword/BM25-Suche. Faengt Faelle ab, in denen semantische Suche exakte Begriffe verpasst (Produktnamen, Fehlercodes).
+
+**Schritt 4 — Generate:**
+Gefundene Chunks werden als Kontext in den LLM-Prompt injiziert. Das Modell generiert eine Antwort basierend auf den gefundenen Informationen. Gut designte RAG-Systeme zitieren, welche Chunks die Antwort informiert haben.
+
+### Chunking — der unterschaetzte Qualitaetshebel
+
+Chunking-Qualitaet ist der wichtigste Einzelfaktor fuer RAG-Qualitaet. Schlechte Chunks bedeuten schlechte Retrieval-Ergebnisse, und schlechtes Retrieval bedeutet schlechte Antworten.
+
+| Strategie | Wie es funktioniert | Am besten fuer | Komplexitaet |
+|-----------|-------------------|----------------|-------------|
+| **Fixed-Size** | Alle N Tokens aufteilen (z.B. 512) mit Overlap | Einfache Dokumente, Einstieg | Niedrig |
+| **Recursive** | Nach Absaetzen, dann Saetzen, dann Tokens teilen | Allzweck-Standard | Niedrig |
+| **Semantic** | An Themen-/Bedeutungsgrenzen teilen | Lange Dokumente mit Themenwechseln | Mittel |
+| **Heading-aware** | Nach Dokumentstruktur teilen (H1, H2, Abschnitte) | Strukturierte Docs, Handbuecher | Mittel |
+| **Contextual** | LLM-generierter Kontext wird jedem Chunk vorangestellt | Hoechste Retrieval-Qualitaet | Hoch |
+
+**Best Practice:** Starte mit Recursive Chunking bei 512 Tokens und 10-20% Overlap. Miss Retrieval-Qualitaet. Wechsle erst zu Semantic oder Contextual Chunking, wenn Du eine Baseline hast.
+
+### Was PMs falsch verstehen
+
+1. **"RAG eliminiert Halluzinationen."** Falsch. RAG reduziert sie, aber das Modell kann immer noch ueber die gefundenen Inhalte hinaus halluzinieren oder irrelevante Chunks falsch interpretieren.
+2. **"Mehr Daten = besseres RAG."** Falsch. Irrelevante oder minderwertige Dokumente erhoehen Rauschen und senken Retrieval-Praezision. Kuratierung ist wichtiger als Expansion.
+3. **"Vector Search ist alles, was Du brauchst."** Falsch. Hybrid Search (Vektor + Keyword) ist der Standard 2026, weil reine Vektorsuche exakte Treffer verpasst.
+
+## Framework
+
+**RAG-Architektur-Entscheidungsbaum:**
+
+| Schritt | Aktion | Wann eskalieren |
+|---------|--------|-----------------|
+| 1. Basis | Recursive Chunking (512 Tokens, 10% Overlap) + einzelner Vector Store | Wenn Retrieval-Praezision unter 80% |
+| 2. Hybrid | Vector + Keyword/BM25-Suche kombinieren | Wenn exakte Begriffe nicht gefunden werden |
+| 3. Reranking | Cross-Encoder re-scored initiale 20-50 Kandidaten | Wenn Praezision wichtiger als Latenz |
+| 4. GraphRAG | Knowledge Graph aus Korpus aufbauen | Nur wenn Cross-Document Reasoning Kernfunktion ist |
+
+**RAG-Qualitaetsmetriken, die PMs tracken muessen:**
+
+| Metrik | Was sie misst | Warum wichtig |
+|--------|-------------|---------------|
+| Retrieval Precision | Sind gefundene Chunks relevant? | Irrelevante Chunks verschlechtern Antworten |
+| Retrieval Recall | Werden alle relevanten Chunks gefunden? | Fehlende Chunks fuehren zu unvollstaendigen Antworten |
+| Answer Faithfulness | Bleibt die Antwort bei den gefundenen Inhalten? | Halluzination trotz RAG erkennen |
+| Answer Relevance | Beantwortet die Antwort die Frage? | Qualitaet aus Nutzersicht |
+
+## Scenario
+
+Du bist PM bei einem HR-Tech SaaS (B2B, 500 Unternehmenskunden). Euer naechstes Feature: AI-gestuetzter Zugriff auf die firmenspezifische Wissensdatenbank jedes Kunden — Policies, Handbuecher, Onboarding-Docs.
+
+**Die Situation:**
+- Jeder Kunde hat 200-5.000 Dokumente (PDF, Word, Confluence)
+- 80% der Anfragen betreffen spezifische Policy-Details ("Wie viele Urlaubstage habe ich nach 3 Jahren?")
+- Anforderung: Quellenangabe bei jeder Antwort (Compliance)
+- Budget: 3.000 Euro/Monat fuer AI-Infrastruktur
+- Datenschutz: Mandantentrennung ist Pflicht — Kunde A darf nie Daten von Kunde B sehen
+
+**Optionen:**
+1. **Long Context:** Alle Dokumente bei jeder Anfrage in den Context Window packen. Kein Vector Store noetig
+2. **Basis-RAG:** pgvector + Recursive Chunking + einfache Vektorsuche
+3. **Production-RAG:** Pinecone + Hybrid Search + Reranking + mandantengetrennte Namespaces + Quellenattribution
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Option 3 — Production-RAG, aber starte mit Option 2 als MVP.
+
+**Warum:**
+- **Long Context ist keine Loesung:** 5.000 Dokumente passen nicht in ein Context Window. Selbst bei 200 Dokumenten waeren die Kosten pro Anfrage astronomisch — und die Qualitaet sinkt mit Context-Laenge
+- **Quellenangabe ist eine harte Anforderung:** RAG mit Source Attribution ist das einzige Muster, das Compliance-gerechte Quellenangaben liefert. Long Context kann nicht zuverlaessig sagen, *welcher* Teil der Eingabe die Antwort informiert hat
+- **Mandantentrennung:** Pinecone Namespaces (oder pgvector mit Row-Level Security) loesen das Mandantentrennungs-Problem architektonisch sauber
+- **Hybrid Search fuer Policy-Dokumente:** Policiy-Anfragen enthalten oft exakte Begriffe ("Paragraph 4.2", "Urlaubsregelung 2025"). Reine Vektorsuche verpasst diese; Hybrid Search faengt sie auf
+- **MVP-Pfad:** Starte mit pgvector + Recursive Chunking (Option 2) in Woche 1-2. Messe Retrieval-Qualitaet. Migriere zu Pinecone + Hybrid + Reranking (Option 3), wenn die Baseline steht
+
+**Haeufiger Fehler:** Direkt mit der komplexesten RAG-Architektur starten, ohne eine Qualitaets-Baseline zu haben. Du weisst nicht, ob Reranking 5% oder 30% bringt, bis Du einfaches RAG gemessen hast.
+</details>
+
+## Reflect
+
+- **RAG ist das primaere Muster fuer AI-Features, die firmeneigene oder aktuelle Daten brauchen.** Es ersetzt kein Fine-Tuning (RAG liefert Wissen, Fine-Tuning aendert Verhalten), aber es loest das haeufigste Problem: "Das Modell kennt unsere Daten nicht."
+- Chunking-Qualitaet entscheidet ueber RAG-Qualitaet. Starte mit Recursive Chunking, miss die Ergebnisse, und eskaliere erst dann zu komplexeren Strategien.
+- Hybrid Search (Vektor + Keyword) ist der Standard 2026 — nicht optional, wenn exakte Begriffe wichtig sind.
+- RAG reduziert Halluzinationen, eliminiert sie aber nicht. Answer Faithfulness aktiv messen ist Pflicht.
+
+---
+
+*Quellen: Pinecone RAG Architecture Guide, PMC Comparative Evaluation of Advanced Chunking for RAG (2025), Neo4j Advanced RAG Techniques, Eden AI 2025 Guide to RAG, Morphik RAG Strategies at Scale*

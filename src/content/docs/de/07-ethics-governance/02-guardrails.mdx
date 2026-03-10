@@ -1,0 +1,103 @@
+---
+title: "Guardrails"
+description: "Wie Du AI-Systeme innerhalb akzeptabler Grenzen haeltst — ohne die Nuetzlichkeit zu zerstoeren."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Euer AI-Assistent fuer Kundenberater ist seit drei Wochen live. Dann passiert es: Ein Kunde fragt nach Informationen zu einem sensiblen medizinischen Thema, und der Assistent gibt detaillierte medizinische Ratschlaege — ohne Verweis auf einen Arzt.
+
+Am naechsten Tag eskaliert ein anderer Fall: Ein Berater wollte eine voellig legitime Frage zu Versicherungsleistungen bei Schwangerschaft beantworten lassen, aber der Content-Filter blockiert alles, was "Schwangerschaft" enthaelt. Der Berater tippt die Antwort manuell — und nutzt den AI-Assistenten fuer dieses Thema nie wieder.
+
+Zwei Failure Modes. Ein System. Willkommen im Guardrails-Dilemma.
+
+## Concept
+
+### Was Guardrails sind (und was nicht)
+
+Guardrails sind technische und produktseitige Mechanismen, die AI-Verhalten innerhalb akzeptabler Grenzen halten. Sie sind keine Zensur — sie sind Produktanforderungen als Constraints. Ein Taschenrechner laesst keine Division durch Null zu. Eine Banking-App laesst keine negativen Ueberweisungen zu. AI-Guardrails sind dasselbe Prinzip fuer probabilistische Systeme.
+
+### Drei Kategorien
+
+**Technische Guardrails** — Input/Output-Filter, Content-Klassifizierer, Safety-Modelle:
+- Input-Rails: Content-Klassifizierung, PII-Erkennung, Jailbreak-Detection, Topic Control
+- Output-Rails: Fakten-Check gegen Quellen, Content-Safety-Filtering, Format-Validierung, Confidence Thresholds
+
+**Produkt-Guardrails** — Usage Limits, Feature-Einschraenkungen, User-facing Policies
+
+**Operationale Guardrails** — Monitoring, Alerting, Human-in-the-Loop-Eskalation
+
+### Tools und Frameworks
+
+| Tool | Ansatz | Besonderheit |
+|------|--------|-------------|
+| **NVIDIA NeMo Guardrails** | Open-Source Toolkit | Colang DSL fuer Rails-Definition; "Adopt"-Status im ThoughtWorks Radar |
+| **Guardrails AI** | Open-Source Framework | Validator-basiert; 100+ fertige Validatoren |
+| **Llama Guard** | Safety Classifier | Metas Content-Safety-Modell; offene Weights |
+| **Azure AI Content Safety** | Cloud Service | Enterprise-Grade; integriert mit Azure OpenAI |
+
+### Das Over-Blocking-Problem
+
+Der haeufigste Failure Mode ist nicht zu wenig Filterung — sondern zu viel. Over-Blocking:
+- Frustriert User, die dann auf unueberwachte Alternativen ausweichen (Shadow AI)
+- Blockiert legitime Use Cases (akademische Forschung, medizinische Fachbegriffe, Security Research)
+- Erodiert Vertrauen ("Dieses Tool ist nutzlos fuer meine echte Arbeit")
+- Trainiert User, unehrlich zu formulieren, um an Filtern vorbeizukommen
+
+## Framework
+
+Der **Guardrails Calibration Guide** — Safety und Utility in Balance bringen:
+
+| Prinzip | Umsetzung | Messung |
+|---------|-----------|---------|
+| **Abstimmbare Schwellenwerte** | Verschiedene Kontexte brauchen verschiedene Strenge | Block Rate pro Kontext |
+| **Layered Approach** | Mehrere leichte Checks statt eines aggressiven Filters | False-Positive-Rate pro Layer |
+| **Kontextbezogene Filterung** | Gleiches Wort, verschiedene Bedeutung je nach Kontext | Kontextabhaengige Accuracy |
+| **User-Feedback-Loops** | User melden Over-Blocking und Under-Blocking | Feedback-Volume und -Trends |
+| **Graceful Degradation** | Bei Unsicherheit: Output mit Warnung statt Blockade | Warnungs-zu-Block-Verhaeltnis |
+
+**Die goldene Regel:** Miss sowohl Block Rate ALS AUCH User Satisfaction. Keine der beiden Metriken allein erzaehlt die ganze Geschichte.
+
+## Scenario
+
+Du bist PM eines AI-Schreibassistenten fuer Versicherungsberater. Der Assistent hilft beim Verfassen von Kundenbriefen. Nach dem Launch kommen folgende Daten rein:
+
+**Woche 1-4 Metriken:**
+- 12.000 generierte Briefe pro Woche
+- Block Rate: 23% aller Anfragen werden gefiltert
+- Support-Tickets "AI blockiert meine Anfrage": 340 pro Woche
+- Davon nach manueller Pruefung: 89% waren legitime Anfragen (False Positives)
+- User Satisfaction Score: 3.1/5 (vor AI-Integration: kein Vergleichswert, Ziel war 4.0+)
+- Tatsaechliche problematische Outputs (gefunden durch QA-Stichproben): 0.3% der nicht-geblockten Anfragen
+
+Der Head of Compliance sagt: "Die Block Rate muss hoch bleiben — lieber zu viel filtern als zu wenig." Der Head of Sales sagt: "Die Berater nutzen das Tool nicht mehr."
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Die Guardrails rekalibrieren — nicht lockern, sondern praeziser machen. Konkret: Kontextbezogene Filterung einfuehren, die Versicherungsfachbegriffe als legitimen Kontext erkennt.
+
+**Warum:**
+- 89% False Positives bedeuten: Der Filter ist kaputt, nicht zu streng. Er trifft die Falschen
+- Eine 23% Block Rate bei 0.3% tatsaechlichen Problemen ist ein Verhaeltnis von ~77:1 (False Positives zu True Positives) — das ist kein Safety-Feature, das ist ein kaputter Filter
+- Frustrierte User weichen auf unueberwachte Tools aus, was das Risiko ERHOEHT statt senkt
+- Die Loesung ist ein Layered Approach: Grober Filter fuer klar problematische Inhalte + kontextbezogener Filter fuer Fachbegriffe + User-Feedback-Loop fuer Edge Cases
+
+**Was viele falsch machen:** Dem Compliance-Team nachgeben und die hohe Block Rate beibehalten — ohne zu verstehen, dass Over-Blocking selbst ein Sicherheitsrisiko ist (Shadow AI).
+</details>
+
+## Reflect
+
+**Das sicherste AI-Produkt ist eines, das Menschen tatsaechlich innerhalb seiner Guardrails nutzen — nicht eines, das sie zu unueberwachten Alternativen treibt.**
+
+- Guardrails sind keine einmalige Implementierung — adversarische User finden staendig neue Bypass-Techniken
+- Provider-Guardrails sind generisch; Dein Produkt hat domainspezifische Risiken, die produktspezifische Guardrails brauchen
+- Mehr Guardrails bedeutet nicht automatisch mehr Sicherheit — Praezision schlaegt Aggressivitaet
+
+---
+
+*Quellen: NVIDIA NeMo Guardrails Documentation, Guardrails AI, ThoughtWorks Technology Radar, Obsidian Security — AI Guardrails Analysis*

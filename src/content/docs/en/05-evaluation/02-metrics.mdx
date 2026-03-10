@@ -1,0 +1,129 @@
+---
+title: "Metrics"
+description: "Which AI metrics you need to know as a PM — and how to translate them into language stakeholders understand."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Your data science team presents results: "The new model has an F1 score of 0.88, ROUGE-L is at 0.45, and AUC is 0.94." The VP Product looks at you and asks: "Is that good?" Your answer determines whether the feature ships.
+
+As a PM, you don't need to understand every formula. But you need to know which metric matters for which product type, what the numbers mean for users and the business, and when a number looks deceptively good. Metric selection is a product decision — not a technical one.
+
+## Concept
+
+### Classification Metrics
+
+Most AI products include classification components — spam detection, intent routing, content moderation. Three metrics you must understand:
+
+**Precision:** Of all items the model predicted as positive — how many were actually positive? High precision means few false alarms. Prioritize precision when false positives are costly (e.g., flagging legitimate transactions as fraud).
+
+**Recall:** Of all actually positive items — how many did the model find? High recall means few missed cases. Prioritize recall when false negatives are dangerous (e.g., missing a cancer diagnosis).
+
+**F1 Score:** Harmonic mean of precision and recall. Use F1 when neither false positives nor false negatives clearly dominate.
+
+**Typical production F1 targets:**
+
+| Application | F1 target |
+|-------------|-----------|
+| Fraud detection | 0.80-0.85 |
+| Document classification | 0.75+ |
+| Content moderation | 0.85+ |
+| Medical diagnosis support | 0.90+ |
+
+**The accuracy trap:** Accuracy is misleading for imbalanced datasets. A spam filter with 99% accuracy sounds great — until you realize 99% of emails are not spam. The model could just label everything "not spam" and hit 99%.
+
+### Generation Metrics
+
+For products that generate text (summarization, translation, content creation):
+
+| Metric | Strength | Limitation |
+|--------|----------|-----------|
+| BLEU | Translation quality with reference | Surface-level word overlap only |
+| ROUGE | Summarization quality with reference | Surface-level word overlap only |
+| BERTScore | Semantic similarity (catches paraphrases) | Requires embedding model |
+| LLM-as-Judge | Open-ended quality, tone, helpfulness | Cost, latency, judge bias |
+
+**2025-2026 consensus:** LLM-as-Judge has replaced BLEU/ROUGE as the primary quality metric for generative AI. BLEU and ROUGE remain useful as fast, cheap regression checks in CI pipelines.
+
+### Task-Specific Metrics
+
+The most valuable evaluations are task-specific:
+
+**RAG-specific (RAGAS framework):** Context Relevance (are retrieved documents relevant?), Faithfulness (is the answer grounded in sources or hallucinated?), Answer Relevance (does the answer address the question?).
+
+**Agent-specific:** Task Completion Rate, Tool Call Accuracy, Step Efficiency, Recovery Rate.
+
+**Product-level (what stakeholders care about):** User Satisfaction (CSAT, thumbs up/down), Task Completion Time (with AI vs. without), Adoption Rate, Escalation Rate, Cost per Successful Interaction.
+
+### Translating Metrics for Stakeholders
+
+| Technical metric | Stakeholder translation |
+|------------------|------------------------|
+| Precision = 0.92 | "Out of every 100 items the AI flags, 92 are correct" |
+| Recall = 0.85 | "The AI catches 85 out of every 100 real cases" |
+| F1 = 0.88 | "Balances finding things (85%) with being right when it does (92%)" |
+| AUC = 0.94 | "The model correctly ranks a positive above a negative 94% of the time" |
+
+## Framework
+
+**Metric selection by product type:**
+
+| Product type | Primary metrics | Secondary metrics |
+|-------------|----------------|-------------------|
+| Content moderation | Precision, Recall (per category) | Latency, false positive rate by content type |
+| Search / retrieval | NDCG, MRR, Context Relevance | Retrieval latency, zero-result rate |
+| Summarization | LLM-as-Judge (faithfulness, coverage) | User satisfaction, time saved |
+| Chatbot / assistant | Task completion rate, user satisfaction | Escalation rate, response time |
+| Classification | F1, AUC, per-class precision/recall | Threshold sensitivity analysis |
+| Code generation | Functional correctness (tests pass) | User acceptance rate |
+
+**Rules for stakeholder communication:**
+1. Always translate to business impact: "92% precision means 8 false alerts per 100 flags — roughly 2 hours of analyst time daily"
+2. Show tradeoffs, not single numbers: "We can increase catch rate from 85% to 95%, but false alerts will triple"
+3. Benchmark against the current process, not against perfection
+
+## Scenario
+
+You are a PM at an e-commerce company. Your AI feature classifies product reviews as genuine or fake. The data science team presents two model variants:
+
+**The situation:**
+- 50,000 reviews/month, estimated 8% fake reviews
+- Currently manual review by 3 moderators (cost: $13,000/month)
+- Each undetected fake review costs an average of $50 (trust loss, returns)
+- Each falsely deleted genuine review costs an average of $16 (annoyed customer, support)
+
+**Model A:** Precision 0.95, Recall 0.70 — few false alarms, but misses 30% of fakes
+**Model B:** Precision 0.78, Recall 0.92 — catches almost all fakes, but falsely deletes 22% of genuine reviews
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Model A with human review for uncaught cases.
+
+**Why (the math):**
+- **Model B — cost of false positives:** Out of 46,000 genuine reviews, 22% are falsely deleted = 10,120 reviews. At $16 per case = $161,920/month. Unacceptable.
+- **Model A — cost of false negatives:** Out of 4,000 fake reviews, 30% are missed = 1,200 reviews. At $50 per case = $60,000/month.
+- **Model A + human review:** Route the 1,200 missed fakes plus borderline cases to one moderator. Cost: roughly $4,500/month for a part-time moderator.
+- **Total cost Model A + human review:** well below the $13,000 fully manual process — and massively below Model B's $161,920.
+
+**Common mistakes:**
+- "Higher recall is always better" — not when false positives hit real users. The cost asymmetry decides.
+- "Optimize for one metric" — real products need balance. The PM defines the acceptable tradeoff.
+- "Accuracy is enough" — at 8% fake rate, a model labeling everything "genuine" would hit 92% accuracy.
+</details>
+
+## Reflect
+
+**Metric selection is a product decision, not a technical one. Because every metric encodes a tradeoff — and the PM must decide which tradeoff users can tolerate.**
+
+- Precision vs. recall is not a technical detail — it is the question of whether false positives or false negatives are more harmful for your product.
+- Accuracy is misleading for imbalanced datasets. Use F1, precision, and recall — broken down by category.
+- Translate every metric into business impact. "F1 = 0.88" means nothing to stakeholders. "8 false alerts per 100 flags" does.
+
+---
+
+*Sources: Google ML Crash Course — Classification Metrics (2024), Evidently AI — Classification Metrics Guide (2025), RAGAS Framework Documentation (2025), Galileo — Accuracy Metrics for ML Engineers (2025), Deepchecks — F1 Score, Accuracy, ROC-AUC (2025)*

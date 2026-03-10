@@ -1,0 +1,126 @@
+---
+title: "Cross-Functional Collaboration"
+description: "How PM, engineering, design, and data science work together on AI products — and which communication traps to avoid."
+sidebar:
+  order: 3
+---
+
+## Context
+
+Your AI feature is in development. The ML engineer says: "The F1 score is 0.87." The designer asks: "What does that mean for the user experience?" You, the PM, stand in the middle and need to translate.
+
+Traditional product development has clear handoffs: PM defines, designer designs, engineer builds, QA tests. In AI products, these boundaries blur. The PM must co-define eval criteria. The designer must design for uncertainty. The engineer must build eval pipelines. And the data scientist, who previously sat in a separate team, is now part of the squad.
+
+The biggest challenge isn't the technology — it's communication between roles with fundamentally different mental models.
+
+## Concept
+
+### The AI product squad
+
+| Role | Traditional responsibility | AI-specific addition |
+|------|--------------------------|---------------------|
+| Product Manager | Defines what to build | Defines eval criteria, quality thresholds, co-owns prompts |
+| Engineer | Builds the feature | Integrates AI APIs, builds eval pipelines, implements guardrails |
+| Designer | Designs the interface | Designs for uncertainty, feedback mechanisms, trust indicators |
+| Data Scientist / ML Engineer | (often not in squad) | Model selection, fine-tuning, evaluation methodology |
+| QA / Test Engineer | Tests for correctness | Builds eval datasets, adversarial testing |
+
+### The three communication traps
+
+**Trap 1: "Make it better"**
+PM says: "The AI responses need to be better."
+ML engineer hears: meaningless feedback.
+**Fix:** Provide specific, measurable criteria. Not "better," but: "The summary should preserve all named entities from the source text. Currently it drops 23% of entity mentions."
+
+**Trap 2: "Why can't the AI just get this right?"**
+PM asks: "Why doesn't this work every time?"
+ML engineer thinks: that's not how probabilistic systems work.
+**Fix:** AI systems have error distributions, not bugs. The question is "what error rate is acceptable?" — not "why does it make errors?"
+
+**Trap 3: The eval gap**
+PM writes vague quality expectations. Engineering builds without clear eval criteria. At review, the PM is unhappy with quality but can't articulate why.
+**Fix:** Build eval datasets together. PMs provide the "golden answers." Engineers build the scoring pipeline. Review eval results as a team.
+
+### The eval review ritual
+
+The most effective cross-functional practice for AI teams:
+
+**Cadence:** Weekly during active development, biweekly post-launch
+**Participants:** PM, engineering lead, ML/AI engineer, designer (optional), QA
+**Agenda (30 min):**
+1. Review current eval metrics vs. thresholds (5 min)
+2. Review a sample of failures — what went wrong and why (15 min)
+3. Discuss user feedback signals — regeneration rate, thumbs-down patterns (5 min)
+4. Prioritize improvement actions for next sprint (5 min)
+
+**Why this works:** It creates shared understanding of quality. PMs see technical constraints. Engineers see user impact. The team aligns on what "good enough" means.
+
+### Researcher mindset vs. product mindset
+
+| Researcher (Data Scientist) | Product Builder (PM/Engineer) |
+|-----------------------------|-------------------------------|
+| Optimizes for accuracy on benchmarks | Optimizes for user experience |
+| Values novelty and state-of-the-art | Values reliability and ship speed |
+| Measures in F1 scores and perplexity | Measures in adoption and revenue |
+| Wants to explore more approaches | Wants to ship what works |
+
+Neither mindset is wrong. The PM's job is to translate:
+- Show data scientists user impact: "A 2% accuracy improvement prevents 500 complaints per week"
+- Show engineers exploration value: "Testing three approaches now saves us from rebuilding later"
+- Create shared metrics: task completion rate bridges the gap between technical metrics and user outcomes
+
+## Framework
+
+**When to involve which role:**
+
+| Phase | Lead | Contributes | Advises |
+|-------|------|-------------|---------|
+| Problem Definition | PM | Designer (user context) | — |
+| Feasibility Check | ML Engineer | PM (quality targets) | — |
+| Eval Dataset Creation | PM (golden answers) | ML (pipeline), QA (validation) | — |
+| UX Design | Designer | PM (AI constraints) | Engineer (feasibility) |
+| Prompt Development | PM + Engineer (co-own) | ML (model behavior) | — |
+| Production Monitoring | Engineer (infra) | PM (quality metrics) | ML (model health) |
+
+## Scenario
+
+You're PM of an AI feature for automatic email reply suggestions. Week 3 of development. The situation:
+
+- **ML engineer:** "I compared three models. Model A has F1 0.89, Model B has F1 0.84 but 3x faster latency. I recommend Model A."
+- **Designer:** "Users need to see the suggestion immediately. We need 1.5 seconds response time max, otherwise they'll abandon the flow."
+- **Engineering lead:** "Model A has P95 latency of 4.2 seconds. Model B is at 1.1 seconds."
+- Your eval dataset has 300 examples. On both models, user-perceived quality is similar — the F1 difference comes from subtle distinctions end users barely notice.
+
+The ML engineer insists on Model A for better metrics. The designer insists on Model B for latency. Both have good arguments.
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Choose Model B. User-perceived quality is similar, but latency is the decisive UX factor.
+
+**Reasoning:**
+- 4.2 seconds of wait time for an email reply is too long — users will abandon the flow
+- The F1 difference (0.89 vs. 0.84) is barely perceptible to end users
+- The designer has the right user context: for email replies, speed matters most
+- Task completion rate (user adopts suggestion) will likely be higher with Model B despite lower F1
+
+**How to communicate it:**
+- To the ML engineer: "The F1 difference is real, but user-perceived quality is similar. Let's track task completion rate as the primary metric."
+- To the designer: "Model B meets the latency requirement. Let's prioritize the feedback UI to collect quality signals."
+
+**What many get wrong:** Letting the loudest voice in the room make the decision, instead of focusing on the metric that matters most to users.
+</details>
+
+## Reflect
+
+**The PM's job in AI products is not to decide who's right — it's to translate between different mental models.**
+
+- Cross-functional conflicts are often translation problems — researchers and product builders optimize for different metrics
+- The eval review ritual replaces ad-hoc check-ins with structured exchange
+- Shared metrics (task completion rate, adoption) bridge the technical and product perspectives
+
+---
+
+*Sources: Spotify Engineering Blog — Squad Model for ML Features, Microsoft Copilot Team Structure (Build/Ignite Talks), Anthropic Documentation (2025)*

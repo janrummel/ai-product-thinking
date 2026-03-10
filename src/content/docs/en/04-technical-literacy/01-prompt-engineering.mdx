@@ -1,0 +1,103 @@
+---
+title: "Prompt Engineering"
+description: "Why the prompt is the product specification for your AI feature — and how to steer quality with the right technique, without writing code."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Your AI feature delivers inconsistent results. Sometimes the summary is perfect, sometimes completely off. The engineering team proposes fine-tuning — three weeks of work, $15,000 budget. Your tech lead asks: "Have you optimized the prompt yet?"
+
+Prompt engineering is the fastest, cheapest lever for improving AI output quality. For PMs, it's more than a technical detail: the prompt *is* the product specification. It defines behavior, tone, format, and boundaries of your AI feature. If you understand the prompt, you understand the product.
+
+## Concept
+
+### The Prompting Hierarchy
+
+Not every task needs the same technique. The skill is starting with the simplest method and escalating only when needed.
+
+**Zero-Shot:** Describe only the task, no examples. Works for well-understood tasks like summarization or translation. Always start here — minimal tokens, fastest iteration.
+
+**Few-Shot:** Provide 1-5 examples of desired input-output pairs. Research shows strong accuracy gains from 1-2 examples, with diminishing returns beyond 4-5. PM trap: adding 10+ examples "just to be safe" wastes tokens and can confuse the model.
+
+**Chain-of-Thought (CoT):** Instruct the model to reason step by step. Delivers up to a 19-point improvement on complex reasoning tasks (MMLU-Pro benchmark). But caution: for reasoning models (o-series, Claude Extended Thinking), explicit CoT is redundant — they already do it internally.
+
+**System Prompts:** The invisible frame that defines role, constraints, and behavior. System prompts are typically cached (Anthropic charges 0.1x base rate for cached reads) — cost-efficient for repeated use.
+
+### Advanced Techniques
+
+**Structured Output:** Force JSON, XML, or YAML as the response format. All major providers support this natively. Essential when AI output feeds into downstream systems (APIs, databases, UI rendering).
+
+**Self-Consistency:** Run the same prompt multiple times, take the majority answer. Increases accuracy at 3-5x cost — only for high-stakes decisions.
+
+**Blended Prompting (2025-2026 best practice):** Combine few-shot + role instruction + format constraints + CoT in a single prompt. Most production prompts use this approach.
+
+### What PMs Get Wrong
+
+1. **"Longer prompts = better results."** False. Overly verbose prompts dilute the signal. Concise, specific instructions outperform lengthy ones.
+2. **"Prompt engineering is an engineering task."** Partially false. The prompt defines product behavior — PMs should own prompt design (behavior, constraints, tone), engineers handle integration.
+3. **"One perfect prompt works forever."** False. Model updates change behavior. Prompts need versioning and monitoring like any feature.
+
+## Framework
+
+**The Complexity-Stakes Matrix:**
+
+| | Simple task (classification, extraction) | Complex task (reasoning, generation) |
+|---|---|---|
+| **Low stakes** | Zero-shot, temperature 0-0.2 | CoT, temperature 0.3-0.7 |
+| **High stakes** | Few-shot + validation layer | CoT + self-consistency + human review |
+
+**Escalation path:** Zero-shot, then few-shot, then CoT, then prompt chaining, then self-consistency. Stop at the first level that meets your quality requirements.
+
+| Technique | Token overhead | Latency impact | When to use |
+|-----------|---------------|----------------|-------------|
+| Zero-shot | Minimal | Lowest | Always first |
+| Few-shot (3 examples) | +200-500 tokens | Low | For specific zero-shot failures |
+| Chain-of-thought | +100-2000 tokens output | Medium | Complex reasoning tasks |
+| System prompt (cached) | First call: full cost; then: 0.1x | None after first | Always for product features |
+| Self-consistency (5 runs) | 5x total cost | 5x latency | High-stakes decisions only |
+
+## Scenario
+
+You're a PM at a legal tech SaaS (B2B, 2,000 law firms). Your next feature: automated contract clause analysis. The first prototype uses zero-shot and correctly identifies risk levels for 60% of clauses.
+
+**The situation:**
+- Target accuracy: 90%+ (legal use requires high precision)
+- Budget: $8,000 for the first iteration
+- Volume: 25,000 clauses/month
+- Time pressure: feature launch in 4 weeks
+- Engineering team proposes fine-tuning (3 weeks, $15,000)
+
+**Options:**
+1. **Fine-tuning:** 3 weeks development, $15,000, requires 500+ labeled examples
+2. **Few-shot + CoT:** 3-5 expert analysis examples as templates, force step-by-step reasoning. 2-3 days of work, under $500 in prompt costs
+3. **Blended prompt:** System prompt (role: senior lawyer) + 3 few-shot examples + CoT + structured output (JSON with risk level and reasoning). 1 week including testing
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 3 — Blended prompt.
+
+**Why:**
+- **Follow the escalation path:** Zero-shot delivers 60%. Before you start fine-tuning, you must exhaust prompt options. This isn't optional — it's best practice
+- **Cost risk:** Fine-tuning for $15,000 on a feature that might reach 90%+ with better prompting is premature. Studies show: fine-tuning a weaker model often loses to good prompting on a stronger model
+- **Structured output is critical:** JSON with risk level + reasoning makes output downstream-ready (UI rendering, database) and enforces consistent formatting
+- **Timeline:** 1 week instead of 3. If the blended prompt hits 85%, you can add more few-shot examples. If it hits 90%+, fine-tuning is unnecessary
+- **Expected impact:** Experience shows that few-shot + CoT together can deliver 15-25 percentage point improvement over zero-shot
+
+**Common mistake:** Jumping straight to fine-tuning without exhausting prompting. This costs weeks and thousands of dollars — and fine-tuned output is less flexible than a well-designed prompt.
+</details>
+
+## Reflect
+
+- **The prompt is the product specification.** If you don't understand the prompt, you don't understand what the AI feature does. PMs must own prompt design — not delegate it.
+- Always start with zero-shot and escalate only for measurable failures. Each level costs more tokens and complexity.
+- Blended prompting (few-shot + role + CoT + structured output) is the 2025-2026 production standard — not any single technique in isolation.
+- Prompts need versioning and monitoring. A prompt that works on GPT-4 may fail on GPT-5.
+
+---
+
+*Sources: DAIR.AI Prompt Engineering Guide, Lakera Prompt Engineering Guide (2026), IBM RAG vs Fine-Tuning vs Prompt Engineering, CodeSignal Prompt Engineering Best Practices (2025), K2View Prompt Engineering Techniques (2026)*

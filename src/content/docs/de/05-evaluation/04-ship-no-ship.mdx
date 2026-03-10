@@ -1,0 +1,112 @@
+---
+title: "Ship/No-Ship Decisions"
+description: "Wie Du entscheidest, ob ein AI-Feature gut genug ist — mit Quality Gates, Staged Rollouts und klaren Schwellenwerten."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Dein AI-Feature ist "fertig". Das Engineering-Team sagt: "Es funktioniert." Das Design-Team sagt: "Sieht gut aus." Aber als PM weisst Du: Bei AI bedeutet "funktioniert" nicht dasselbe wie bei traditioneller Software. Der Chatbot liefert mal brillante, mal peinliche Antworten — und niemand kann vorhersagen, wann welcher Fall eintritt.
+
+Traditionelle Software shipped, wenn sie korrekt funktioniert. AI-Features shippen, wenn sie *gut genug* funktionieren. Das ist eine fundamental andere Entscheidung, weil AI-Output-Qualitaet auf einem Spektrum existiert — nicht binaer. Verschiedene User erleben verschiedene Qualitaetslevel fuer dasselbe Feature. Edge Cases sind unendlich. Und Qualitaet kann ueber Zeit degradieren, wenn sich Datenverteilungen verschieben.
+
+Der PM muss "gut genug" *vor* dem Bau definieren, nicht danach. Ohne vordefinierten Qualitaetsstandard shippen Teams entweder zu frueh (User-Schaden) oder nie (Business-Schaden).
+
+## Concept
+
+### Quality Gates fuer AI Features
+
+Ein Quality Gate ist ein vordefinierter Schwellenwert, der erfuellt sein muss, bevor ein AI-Feature in die naechste Deployment-Stufe kommt. Gates werden waehrend der Planung definiert, nicht beim Launch Review entdeckt.
+
+**Empfohlene Quality Gates:**
+1. **Golden Dataset Performance:** Modell besteht die Eval Suite, keine Regression bei kritischen Tasks
+2. **Safety Checks:** Keine sensitiven Daten in Prompts oder Logs; Red-Team-Findings adressiert
+3. **Latency Budget:** P50 und P95 Latenz innerhalb akzeptabler Grenzen, Fallbacks fuer Tool-Fehler
+4. **Cost Ceiling:** Kosten pro erfolgreicher Interaktion unter Zielwert
+5. **Fairness Audit:** Performance konsistent ueber demografische Gruppen (siehe Lektion 5)
+6. **Fallback Behavior:** Graceful Degradation wenn das Modell versagt, timeoutet oder Low-Confidence-Ergebnisse liefert
+
+### Staged Rollout Strategien
+
+AI-Features brauchen vorsichtigere Rollouts als deterministische Software, weil Failure Modes schwerer vorherzusagen sind.
+
+**Shadow Mode (Dark Launch):** Das AI-Feature laeuft in Production mit echten Inputs, aber Outputs werden Usern nicht gezeigt. Nur das Team sieht und evaluiert. Testet Performance auf echten, aktuellen Beispielen ohne User-Impact. Dauer: mindestens 1-2 Wochen.
+
+**Canary Release:** 1-5% des Production Traffic auf das neue AI-Feature routen. Key Metrics monitoren: Error Rate, Latenz, User Satisfaction, Escalation Rate. Bei guten Metriken schrittweise hochfahren. Jede Expansionsphase hat klare Exit-Kriterien.
+
+**A/B Testing:** User zwischen AI-Feature-Varianten aufteilen, um kausalen Impact zu messen. Kritisch fuer die Frage: Verbessert AI tatsaechlich User Outcomes? Laufen lassen bis statistische Signifikanz erreicht ist (typisch 2-4 Wochen).
+
+**Feature Flags:** Canary + A/B kombinieren. Exposure nach User Segment, Geografie oder Account Tier steuern. Sofortiger Rollback wenn Probleme auftauchen.
+
+### Schwellenwerte setzen
+
+1. **Baseline zuerst:** Aktuelle Experience messen (menschliche Performance, bestehendes regelbasiertes System)
+2. **Non-Inferiority:** AI muss mindestens so gut sein wie der aktuelle Prozess
+3. **User-akzeptables Minimum:** Durch User Research bestimmen, unter welchem Qualitaetslevel User das Feature ablehnen
+4. **Business-viables Minimum:** Unter welcher Qualitaet kostet das Feature mehr als es spart?
+5. **Die hoechste dieser drei Grenzen ist Dein Schwellenwert**
+
+## Framework
+
+**Ship/No-Ship Checklist:**
+
+| Gate | Frage | Ship wenn... | Block wenn... |
+|------|-------|-------------|---------------|
+| Eval Suite | Besteht es das Golden Dataset? | Scores erreichen oder uebertreffen Baseline | Regression in kritischer Kategorie |
+| Safety | Hat es Red Team Review bestanden? | Alle kritischen Findings adressiert | Offene kritische Schwachstellen |
+| Latency | Ist es schnell genug? | P95 innerhalb Budget | P95 ueberschreitet 2x Zielwert |
+| Cost | Ist es wirtschaftlich tragbar? | Kosten pro Erfolg unter Zielwert | Kosten pro Erfolg uebersteigen gelieferten Wert |
+| Fairness | Ist Performance equitable? | Varianz zwischen Gruppen innerhalb Grenzen | Signifikante Disparitaet bei geschuetzten Gruppen |
+| Fallback | Was passiert bei Versagen? | Graceful Degradation definiert und getestet | Kein Fallback — Fehler = kaputte Experience |
+| Rollback | Koennen wir zurueck? | Sofortiger Rollback via Feature Flag | Kein Rollback-Mechanismus |
+
+## Scenario
+
+Du bist PM bei einem HR-Tech-Unternehmen. Euer AI-Feature generiert Zusammenfassungen von Bewerbungsunterlagen fuer Recruiter. Das Feature hat die Eval Suite bestanden und ist bereit fuer den Rollout.
+
+**Die Situation:**
+- 15.000 Bewerbungen/Monat ueber die Plattform
+- Eval Suite: 92% Faithfulness (Zusammenfassungen sind faktenbasiert), 4% Hallucination Rate
+- Latenz: P95 bei 2,8 Sekunden (Budget: 3 Sekunden)
+- Kosten: 0,08 EUR pro Summary (Budget: 0,12 EUR)
+- Fairness-Audit: Zusammenfassungen fuer maennliche Bewerber enthalten 23% haeufiger Begriffe wie "fuehrungsstark" und "entscheidungsfreudig" als fuer weibliche Bewerberinnen mit vergleichbarer Erfahrung
+- Kein Shadow Mode durchgefuehrt
+- Feature Flag ist implementiert
+
+**Optionen:**
+1. **Ship:** Alle Gates bestanden ausser Fairness — aber die Bias-Korrektur dauert geschaetzt 3 Wochen
+2. **Ship mit Disclaimer:** Feature launchen mit Hinweis "AI-generiert, bitte eigenstaendig pruefen"
+3. **Block:** Fairness-Problem zuerst loesen, dann Shadow Mode, dann Canary Release
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Option 3 — Block und Fairness-Problem zuerst loesen.
+
+**Warum:**
+- **Fairness ist kein "Nice-to-have" im Recruiting:** Ein AI-Tool, das Bewerberinnen systematisch anders beschreibt als Bewerber, ist ein Diskriminierungsrisiko. Dies ist ein High-Stakes-Kontext — fehlerhafte Zusammenfassungen beeinflussen Einstellungsentscheidungen.
+- **Option 2 ist Scheinsicherheit:** Ein Disclaimer schuetzt rechtlich nicht und aendert nichts am Verhalten. Recruiter unter Zeitdruck werden die AI-Zusammenfassung als Basis nehmen — mit eingebautem Gender Bias.
+- **4% Hallucination Rate im Recruiting ist hoch:** Bei 15.000 Bewerbungen/Monat sind das 600 Zusammenfassungen mit erfundenen Fakten. Im Recruiting-Kontext kann eine einzelne halluzinierte Qualifikation eine Einstellungsentscheidung verfaelschen.
+- **Shadow Mode fehlt:** Ohne Shadow Mode weisst Du nicht, wie das Feature auf echtem, aktuellem Traffic performt. Die Eval Suite ist ein Proxy — kein Beweis.
+- **Timeline:** 3 Wochen Fairness-Fix + 2 Wochen Shadow Mode + 2 Wochen Canary = 7 Wochen. Das ist ein vertretbarer Preis fuer ein Feature, das Karrieren beeinflusst.
+
+**Haeufige Fehler:**
+- "Wir shippen wenn es perfekt ist" — AI ist nie perfekt. Aber bei Recruiting ist die Toleranzgrenze fuer Bias extrem niedrig.
+- "Shadow Mode ist verschwendete Zeit" — Shadow Mode fuer einige Tage haette die Fairness-Luecke vor dem Druck einer Launch-Entscheidung aufgedeckt.
+- "Unsere Schwellenwerte sind fix" — Quality Bars sollten sich weiterentwickeln. Starte konservativ, lockere mit wachsendem Vertrauen.
+</details>
+
+## Reflect
+
+**Die Ship/No-Ship-Entscheidung bei AI ist nie "Funktioniert es?" sondern "Ist es besser als die Alternative — mit akzeptablen Failure Modes?"**
+
+- Quality Gates vor dem Bau definieren, nicht beim Launch Review entdecken. Sechs Gates: Eval Suite, Safety, Latency, Cost, Fairness, Fallback.
+- Shadow Mode ist kein verschwendeter Aufwand — er fängt katastrophale Fehler bei null User-Risiko ab. Die investierten Tage verhindern Vorfaelle, die Vertrauen irreversibel beschaedigen.
+- Staged Rollouts sind bei AI nicht optional. Shadow Mode, dann Canary (1-5%), dann schrittweise Expansion — jede Phase mit klaren Exit-Kriterien.
+
+---
+
+*Quellen: Flagsmith — 10 Best Practices to Ship AI Features (2025), Clarifai — AI Model Deployment Strategies (2025), JFrog ML — Shadow Deployment vs. Canary Release (2025), Neptune.ai — Model Deployment Strategies (2025)*

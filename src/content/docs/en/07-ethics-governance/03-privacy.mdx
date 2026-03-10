@@ -1,0 +1,100 @@
+---
+title: "Privacy"
+description: "The three privacy surfaces of AI products — and why anonymization alone is not enough."
+sidebar:
+  order: 3
+---
+
+## Context
+
+A Samsung engineer pastes confidential source code into ChatGPT to debug an issue. Within hours, the case is escalated internally. Within days, Samsung bans external AI tools for all employees.
+
+Months later, Italy blocks ChatGPT over GDPR concerns about training data collection. Microsoft's Recall feature — capturing screenshots every few seconds — is torn apart by security researchers: the data was stored in plaintext.
+
+According to the Stanford AI Index Report 2025, AI-related privacy and security incidents jumped **56.4% in one year** to 233 documented cases. This isn't a trend — it's a wave.
+
+## Concept
+
+### The three privacy surfaces
+
+AI products have privacy implications that traditional software does not:
+
+**1. Training data privacy** — What data was used for training? Was it collected with consent? Can the model reproduce training data? This is the model provider's responsibility, but as a PM you inherit the risk.
+
+**2. Inference data privacy** — What happens to user inputs and AI outputs? Are conversations logged? Who has access? Are they used for further training? This is where most PM decisions live.
+
+**3. Emergent privacy risks** — AI can infer sensitive information from non-sensitive inputs. A model can deduce health conditions from shopping patterns or identify individuals from "anonymous" data. This is the hardest category.
+
+### GDPR requirements for AI products
+
+| Requirement | Meaning for AI | PM implication |
+|-------------|---------------|----------------|
+| **Lawful basis** | AI training needs consent or legitimate interest | Clarify your legal basis early |
+| **Right to explanation** | Art. 22: No purely automated decisions with significant impact | Human-in-the-loop for decisions affecting people |
+| **Right to erasure** | Users can request data deletion — but models don't "forget" | Technical solution for machine unlearning needed |
+| **Data minimization** | Collect only what's necessary | AI systems that hoover up all data violate this principle |
+| **DPIA** | Data Protection Impact Assessment for high-risk processing | Most AI applications qualify |
+
+### Privacy-preserving techniques
+
+| Technique | How it works | Trade-off | Maturity |
+|-----------|-------------|-----------|----------|
+| **Differential Privacy** | Controlled statistical noise; protects individual contributions | 2-10% accuracy loss | Production-ready (Apple, Google) |
+| **Federated Learning** | Training on decentralized data; only model updates leave the device | Slower convergence | Production-ready for some use cases |
+| **Secure Multi-Party Computation** | Multiple parties compute jointly without revealing their data | Computationally expensive | Early production |
+| **Homomorphic Encryption** | Computation on encrypted data without decryption | Extreme overhead (1000x+ slower) | Research stage for ML |
+
+## Framework
+
+The **Privacy Tier Decision Guide** — choose the right privacy level for your product:
+
+| Tier | Architecture | When to use | Example |
+|------|-------------|-------------|---------|
+| **Tier 1** | On-device processing | Highest sensitivity; health, finance | Apple Intelligence |
+| **Tier 2** | Private cloud with cryptographic verification | High sensitivity; enterprise | Apple Private Cloud Compute |
+| **Tier 3** | API with data isolation | Medium sensitivity; business data | ChatGPT Enterprise, Claude Teams |
+| **Tier 4** | Shared API | Low sensitivity; public data | Standard API access |
+
+**Rule of thumb:** Start with the highest tier your use case requires, and only go lower when technical or economic reasons are compelling.
+
+## Scenario
+
+You're a PM at a health tech startup. Your product: an AI assistant that helps doctors dictate and automatically structure clinical letters. The feature recognizes patient data in dictation, structures it, and enters it into the medical record.
+
+**The facts:**
+- 200 doctors in the beta, 500 dictations per day
+- Each dictation contains patient names, diagnoses, medications — all protected health information (PHI)
+- Current setup: audio is sent to a cloud API, transcribed, then sent to an LLM for structuring
+- The API provider retains data for 30 days "for quality assurance"
+- A hospital customer requires a DPIA before rollout
+- Your CTO says: "On-device is too slow and quality isn't good enough"
+
+The cost of a private cloud solution (Tier 2) would be roughly 3x the current cloud API (Tier 4).
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Migrate to Tier 2 or at minimum Tier 3. Specifically: choose an API provider with a zero-retention policy or build a private cloud solution. Conduct the DPIA — it's mandatory for health data anyway.
+
+**Why:**
+- Sending PHI through a shared API that retains data for 30 days is a GDPR violation waiting to happen
+- Health data is the most sensitive data category — Tier 4 is unacceptable here
+- The 3x higher cost is irrelevant compared to a GDPR fine (up to EUR 20M or 4% of turnover) or losing hospital customers
+- The DPIA isn't a blocker — it's an opportunity to build the system properly before it scales
+
+**What many get wrong:** Keeping the cheap cloud API and hoping nobody asks where patient data ends up — until a data protection incident blows everything wide open.
+</details>
+
+## Reflect
+
+**Privacy is not a compliance issue — it's a product issue.** Users make adoption decisions based on privacy trust, and enterprise buyers require data isolation as a purchase prerequisite.
+
+- Anonymization alone is not enough — AI models can re-identify individuals from "anonymous" data
+- "We just use the API" doesn't mean no data leaves your system — read the provider's retention policies
+- The Samsung incident changed enterprise AI policies overnight; privacy is a latent concern that becomes acute during incidents
+
+---
+
+*Sources: Stanford AI Index Report 2025, GDPR Local — AI Privacy Risks, TensorBlue — AI Data Privacy 2025, Frontiers — Federated Learning (2025), Frontiers — AI Privacy Review (2026)*

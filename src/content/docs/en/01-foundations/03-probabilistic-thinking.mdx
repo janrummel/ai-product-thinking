@@ -1,0 +1,108 @@
+---
+title: "Probabilistic Thinking"
+description: "Why AI products don't work like traditional software — and how to design with uncertainty instead of against it."
+sidebar:
+  order: 3
+---
+
+## Context
+
+Your QA team files a bug: "The AI chatbot gives different answers to the same question." You create a ticket. Your engineering team looks at you and says: "That's not a bug. That's by design."
+
+Welcome to the paradigm shift. Traditional software is deterministic — same input, same output. AI software is probabilistic — same input, potentially different output. As a PM, you need to not just understand this difference but rewire how you think about your entire product.
+
+## Concept
+
+### The Paradigm Shift
+
+| | Traditional Software | AI Software |
+|---|---|---|
+| Behavior | Same input = same output | Same input = potentially different output |
+| Bugs | Reproducible, binary | Probabilistic, distributed |
+| Testing | Pass/fail | Distributions and thresholds |
+| Costs | Deterministic | Deterministic — but outputs are stochastic |
+
+This is the fundamental mismatch: **You pay deterministic costs for stochastic outcomes.** Every API call costs money. Whether the result is useful — you don't know upfront.
+
+### Two Types of Uncertainty
+
+- **Epistemic** (knowledge gap): Can be reduced with more data. Example: Your model doesn't know your product catalog — fix it with RAG and a product database.
+- **Aleatoric** (inherent): *Cannot* be reduced, no matter how much data you add. Example: Natural language variance — people phrase the same question a hundred different ways.
+
+**PM implication:** Don't burn budget trying to eliminate irreducible uncertainty. Invest in systems that handle it gracefully.
+
+### Compound Uncertainty
+
+When you chain multiple AI agents, uncertainty multiplies. Three agents at 90% accuracy each don't give you 90% overall — they give you ~73% (0.9 x 0.9 x 0.9). This is why multi-agent architectures need careful validation between steps.
+
+## Framework
+
+**Uncertainty Tolerance Assessment** — Before you build an AI feature, score these four dimensions:
+
+| Dimension | Low Tolerance (High Stakes) | High Tolerance (Low Stakes) |
+|-----------|---|---|
+| **Error cost** | Financial loss, safety risk | Minor inconvenience |
+| **Reversibility** | Irreversible action (payment, diagnosis) | Reversible suggestion (text edit) |
+| **User sophistication** | Novices trust blindly | Experts validate themselves |
+| **Volume** | Low volume, each case matters | High volume, statistics sufficient |
+
+**Decision rules:**
+- Low on *any* dimension — require human review, high confidence threshold
+- High on *all* dimensions — automate with monitoring
+- Mixed — hybrid approach with tiered thresholds
+
+**Confidence thresholds by domain:**
+
+| Domain | Threshold | Target escalation rate |
+|--------|-----------|----------------------|
+| Healthcare | 95%+ | 15-20% |
+| Financial services | 90-95% | 10-15% |
+| Content moderation | 85-90% | 10-15% |
+| Customer service | 80-85% | 10-15% |
+
+An escalation rate around ~60% is a clear signal of miscalibration.
+
+## Scenario
+
+You're building an AI-powered triage system for an insurance company. Incoming claims should be automatically categorized and prioritized.
+
+**The situation:**
+- 8,000 claims per month
+- Three categories: Simple (broken window), Medium (water damage), Complex (personal injury)
+- Current manual processing: 12 minutes per case, 4 adjusters
+- AI model eval results: 92% accuracy on Simple, 85% on Medium, 71% on Complex
+- Misclassifying "Complex as Simple": average $2,600 in downstream costs
+
+**Your options:**
+1. **Full automation:** Auto-route all categories
+2. **Conservative:** Only automate Simple (92%), everything else stays manual
+3. **Hybrid:** Automate Simple + Medium, always route Complex to humans, plus a confidence threshold at 88% — anything below gets escalated
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 3 — Hybrid with confidence threshold.
+
+**Why:**
+- 71% on Complex is too low for irreversible decisions with $2,600 error costs
+- Simple at 92% is acceptable — a misclassified broken window causes delay, not harm
+- The 88% threshold on Medium acts as a safety net: uncertain cases go to humans
+- You save ~60% of manual work instead of taking an all-or-nothing approach
+
+**Evals as a PM skill:** Build 50-100 golden examples per category — claims with verified ideal classifications. Don't just measure accuracy — track the distribution of confidence scores. Tools like Promptfoo or DeepEval make this operationally feasible.
+
+**What many get wrong:** Reporting overall accuracy (87%) as a single number to get sign-off — without showing that it varies significantly across categories.
+</details>
+
+## Reflect
+
+- **Probabilistic thinking doesn't mean accepting inaccuracy** — it means managing uncertainty deliberately instead of ignoring or denying it.
+- **Not all uncertainty is equal.** Epistemic uncertainty you can reduce (more data, better context). Aleatoric uncertainty you must design for (confidence displays, escalation paths).
+- **Compound uncertainty is the silent killer** in multi-agent systems. Three times 90% is not 90%.
+- **Evals are your new testing.** Not pass/fail, but distributions, thresholds, and golden examples.
+
+---
+
+*Sources: Gian Segato "Building AI Products in the Probabilistic Era" (2025), Google Maps UX Patterns, GitHub Copilot Product Design, PathAI Clinical Documentation*

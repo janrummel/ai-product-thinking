@@ -1,0 +1,121 @@
+---
+title: "Bias & Fairness"
+description: "What forms of bias occur in AI products, how to measure them — and why choosing a fairness definition is a product decision."
+sidebar:
+  order: 5
+---
+
+## Context
+
+In 2018, Amazon scrapped an AI recruiting tool that showed bias against women. The model was trained on historical resumes, which were predominantly male. It learned to penalize resumes containing the word "women's" — as in "women's chess club." The data was technically correct. The learned pattern was not.
+
+In 2019, Goldman Sachs' credit algorithm for Apple Card was investigated after reports that it offered significantly lower credit limits to women than men with similar financial profiles. Even though gender was not an explicit input, proxy features created disparate outcomes.
+
+Bias in AI is not a single problem — it is a family of related issues that can enter at every stage of the product lifecycle. And the choice of which definition of "fairness" you apply is a product and values decision — not a technical one.
+
+## Concept
+
+### Bias Types PMs Must Know
+
+**Training Data Bias:**
+- **Representation bias:** Training data does not reflect the true population. Buolamwini & Gebru ("Gender Shades," 2018): facial recognition trained predominantly on light-skinned faces performed worse on darker-skinned faces.
+- **Historical bias:** Training data faithfully reflects historical inequities. A hiring model learns discrimination because historical hiring was discriminatory.
+- **Labeling bias:** Human annotators introduce their own biases into labels.
+
+**Measurement Bias:** Features or proxies systematically disadvantage certain groups. Zip code as a feature is a proxy for race in many contexts. "Years of experience" as a quality signal disadvantages career changers and people who took caregiving breaks.
+
+**Selection Bias:** The data collection process systematically excludes certain populations. AI trained on app usage data misses users without smartphones. Feedback loops: the model only sees outcomes for people it previously approved.
+
+**Evaluation Bias:** Aggregate metrics hide disparities. A model with high overall accuracy may perform poorly on a specific minority group. Disaggregated evaluation is essential.
+
+### Fairness Metrics — and Why They Are Incompatible
+
+**Demographic Parity:** The model's positive prediction rate should be the same across all demographic groups. Limitation: does not account for legitimate differences in base rates.
+
+**Equalized Odds:** True positive rate and false positive rate should be equal across groups. Stricter than demographic parity — accounts for actual qualification.
+
+**Equal Opportunity:** Only the true positive rate must be equal across groups. Ensures qualified members of all groups have an equal chance of being correctly identified.
+
+**Predictive Parity:** Precision should be equal across groups. Ensures the model's positive predictions are equally trustworthy regardless of group.
+
+**The Impossibility Theorem:** Multiple fairness definitions are mathematically incompatible when base rates differ across groups (Chouldechova 2017, Kleinberg et al. 2016). Satisfying one may require violating another. **The PM must choose and justify the choice.**
+
+### Bias Auditing in Practice
+
+1. **Identify protected attributes** — relevant to your product and jurisdiction
+2. **Disaggregate metrics** — run your eval suite broken down by protected groups
+3. **Test for proxy discrimination** — do non-protected features (zip code, name) correlate with protected attributes?
+4. **Calculate fairness metrics** — demographic parity, equalized odds, or your chosen definition
+5. **Red team for bias** — test with inputs designed to trigger biased outputs (stereotypical prompts, underrepresented groups)
+6. **Document findings and decisions** — which disparities were found, which were accepted (with reasoning), which were mitigated
+
+## Framework
+
+**Bias & Fairness Audit:**
+
+| Step | Action | Owner |
+|------|--------|-------|
+| 1 | Identify protected attributes for your product and jurisdiction | PM + Legal |
+| 2 | Choose fairness metrics with explicit reasoning | PM + Ethics/Legal |
+| 3 | Disaggregate eval metrics by protected groups | Engineering |
+| 4 | Test for proxy discrimination (feature correlation analysis) | Data Science |
+| 5 | Red team specifically for biased outputs | PM + Diverse testers |
+| 6 | Define acceptable disparity thresholds | PM + Leadership |
+| 7 | Implement mitigations (data, model, product level) | Engineering |
+| 8 | Document decisions, findings, and rationale | PM |
+| 9 | Schedule periodic re-audits (at least quarterly) | PM |
+| 10 | Build recourse mechanisms for affected users | PM + Design |
+
+**Mitigation strategies:**
+- **Pre-processing:** Fix the data — re-sampling, re-weighting, augmenting underrepresented groups
+- **In-processing:** Add fairness constraints during training (adversarial debiasing)
+- **Post-processing:** Adjust model outputs (threshold adjustment per group)
+- **Product-level:** Add human review for high-stakes decisions, provide appeal mechanisms, be transparent about limitations
+
+## Scenario
+
+You are a PM at a real estate platform. Your AI feature evaluates rental applications and generates a score for landlords. The model was trained on 10 years of historical rental data.
+
+**The situation:**
+- 30,000 rental applications/month
+- Overall accuracy: 89% (correct prediction of whether a tenant will pay reliably)
+- Disaggregated analysis: Accuracy for applicants with German-sounding names: 91%. Accuracy for applicants with Turkish or Arabic-sounding names: 79%.
+- Feature analysis: "First name" is not a direct input, but "neighborhood" and "previous landlords" correlate strongly with ethnic background
+- The VP Product says: "Overall accuracy is good. We can launch."
+- EU AI Act compliance required by August 2026
+
+**Options:**
+1. **Launch:** 89% overall accuracy is high enough, individual fairness differences are acceptable
+2. **Remove proxy features:** Drop "neighborhood" and "previous landlords" from the model, retrain
+3. **Optimize with disaggregation:** Choose a fairness metric (e.g., equalized odds), retrain with fairness constraints, accept accuracy loss for the majority group
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 3 — Optimize with disaggregation using equalized odds.
+
+**Why:**
+- **Option 1 is legally and ethically untenable:** A 12-percentage-point accuracy gap along ethnic lines is not a footnote — it is systematic discrimination. The EU AI Act explicitly requires bias detection and mitigation (Article 10(2)(f)). Penalties: up to 35 million EUR or 7% of annual turnover.
+- **Option 2 is necessary but insufficient:** Removing proxy features reduces direct correlation, but other features may encode the same bias. And "neighborhood" carries real predictive value — removing it blindly lowers accuracy for everyone.
+- **Option 3 addresses the root cause:** Equalized odds ensures reliable tenants from all groups have equal chances of correct evaluation. Yes, overall accuracy likely drops from 89% to 85-87%. But a fair model at 86% is preferable to a discriminatory one at 89%.
+- **Additionally:** Build an appeal mechanism for applicants. Create transparency about the score. Schedule regular re-audits.
+
+**Common mistakes:**
+- "We don't use protected attributes, so we can't be biased" — proxy discrimination is real. Zip code, name, and many other features correlate with protected attributes.
+- "Bias is an engineering problem" — choosing which fairness definition to optimize is a values and product decision. Engineering implements the chosen definition.
+- "One fairness metric covers everything" — mathematically incompatible (Impossibility Theorem). The PM must choose and defend.
+</details>
+
+## Reflect
+
+**Fairness is not a bonus requirement — it is a dimension of every evaluation. And choosing the fairness definition is perhaps the most important product decision in AI.**
+
+- Aggregate metrics hide disparities. Disaggregated evaluation by protected groups is mandatory — not optional.
+- Multiple fairness definitions are mathematically incompatible (Impossibility Theorem). The PM must choose one and document the reasoning.
+- The EU AI Act makes bias testing mandatory for high-risk systems (deadline: August 2026). But even without regulation: biased AI damages user trust and causes real harm.
+
+---
+
+*Sources: Buolamwini & Gebru — "Gender Shades" (2018), Chouldechova — "Fair prediction with disparate impact" (2017), Kleinberg et al. — "Inherent Trade-Offs in Algorithmic Fairness" (2016), EU AI Act (Regulation 2024/1689), NIST AI RMF 1.0, Reuters — Amazon Hiring Tool (2018), Apple Card Investigation (2019)*

@@ -1,0 +1,124 @@
+---
+title: "Trust & Explainability"
+description: "How to design AI outputs that users actually trust — through confidence indicators, source attribution, and the right level of transparency."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Your AI feature delivers good results — but users don't trust them. They manually double-check everything, bypass the feature, or file support tickets. The problem isn't accuracy. The problem is that your product doesn't explain *why* it's confident.
+
+As a PM, you don't decide how the model works — but you decide how much of that reasoning the user sees. And that decision determines whether your feature gets adopted or ignored.
+
+## Concept
+
+### The Four Pillars of AI Trust
+
+Trust in AI follows the same psychological patterns as trust between people — built on four pillars:
+
+| Pillar | Meaning | Product Example |
+|--------|---------|-----------------|
+| **Ability** | "Can it do this?" | Accuracy, relevant results |
+| **Integrity** | "Is it honest?" | Admits uncertainty, doesn't fabricate |
+| **Predictability** | "Does it behave consistently?" | Same input, similar output |
+| **Benevolence** | "Does it act in my interest?" | Prioritizes user goals, not engagement |
+
+**The numbers:** 72% of users say AI *language* impacts perceived trustworthiness. 63% are more likely to rely on AI that shows confidence and reasoning (NNG, 2024).
+
+### Confidence Indicators — Choosing the Right Format
+
+How you surface uncertainty depends on your audience:
+
+| Format | Example | Best for |
+|--------|---------|----------|
+| Percentage/score | "85% confident" | Technical users, data teams |
+| Color coding | Green >=85%, Yellow 60–84%, Red below 60% | Dashboards, monitoring |
+| Plain-language label | "Confident", "Unsure", "Needs review" | Non-technical users |
+| Inline hedging | "This likely means..." | Conversational AI |
+
+**Accessibility rule:** Always combine color + text. Color coding alone excludes users.
+
+### Source Attribution — How AI Shows Its Sources
+
+| Pattern | Example | Strength | Weakness |
+|---------|---------|----------|----------|
+| Numbered footnotes | Perplexity: "according to study [1]" | Academically precise | Interrupts reading flow |
+| In-text hyperlinks | ChatGPT: linked terms | Natural feel | Unclear which claim is supported |
+| Expandable source panels | Claude, Perplexity: hover preview | Non-invasive, detail on demand | Sources easily ignored |
+| Inline next to response | Google PAIR: source beside claim | Maximum transparency | Visually complex |
+
+### "Show Your Work" — Progressive Disclosure
+
+The pattern for transparency without overwhelm:
+
+- **What:** The result — always visible
+- **How:** The reasoning path — on click/expand
+- **Why:** The evidence/sources — on request
+
+Examples: ChatGPT shows "Thought for X seconds" as an entry point, Perplexity builds its entire UX around citation, Notion AI displays gray deletions and blue additions as a visual diff.
+
+## Framework
+
+**When to surface uncertainty — and when not to:**
+
+| Show when... | Don't show when... |
+|--------------|---------------------|
+| Confidence below threshold | Trivial outputs (formatting, sorting) |
+| Health, finance, legal domains | Consistently high confidence |
+| Conflicting sources | It would cause decision paralysis |
+| Irreversible decisions | |
+
+**The goal is calibrated trust, NOT maximized trust.** You don't want users to blindly trust everything. You want them to know *when* to verify.
+
+### Anti-Patterns
+
+| Anti-Pattern | Problem |
+|-------------|---------|
+| Black-box output | No explanation = no trust |
+| Hiding the AI | Users feel deceived when they find out |
+| False precision | "92.7% confident" suggests accuracy that doesn't exist |
+| Source theater | Listing sources without clear link to claims |
+| Overclaiming | "AI-powered" label on rule-based features |
+| Uncertainty overload | Every output flagged with warnings = everything ignored |
+
+## Scenario
+
+You're a PM at a B2B SaaS for contract analysis. Your AI feature extracts risk clauses and rates their severity. 800 customers, 30,000 contracts/month. Users: legal teams.
+
+**The situation:**
+- Accuracy: 91% correct clause detection, but only 74% correct severity rating
+- User feedback: "I trust the detection, but not the rating"
+- Support tickets: 40% involve cases where users can't understand the AI's rating
+- Churn analysis: Teams that stop using the feature within 2 weeks cite "can't follow the reasoning" as the top reason
+
+**Three options:**
+1. **Confidence score:** Each rating shows a percentage confidence + color coding. No further explanation
+2. **Full transparency:** Confidence + reasoning ("Clause X resembles 3 known risk patterns") + source links to comparable contracts
+3. **Progressive disclosure:** Confidence label (Confident/Unsure/Needs review) + expandable reasoning + sources on request
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 3 — Progressive Disclosure.
+
+**Why:**
+- Option 1 fails at the core problem: A percentage score alone explains *nothing*. Legal teams don't want to know *how confident* — they want to know *why*. Plus, false precision at 74% accuracy actively undermines trust
+- Option 2 is the right idea but the wrong execution. Showing everything all the time creates cognitive overload — especially at 30,000 contracts per month
+- Option 3 hits the sweet spot: Plain-language labels ("Needs review") for fast triage, reasoning on demand for the cases that need attention, sources for those who want to go deep
+
+**The PM lever:** You don't fix the 40% support tickets with better accuracy — you fix them with better explainability. "Needs review — clause resembles 3 known liability patterns" is immediately actionable. "74% confident" is not.
+</details>
+
+## Reflect
+
+- **Trust comes from honesty, not accuracy alone.** An AI that says "I'm unsure" is more trustworthy than one that's confidently wrong. Integrity beats ability.
+- **The format determines the impact.** "74% confident" means nothing to a legal team. "Needs review — resembles known liability pattern" is actionable. Choose the format for your audience.
+- **Calibrated trust > maximized trust.** You don't want users to trust everything. You want them to know when to verify. That's a design problem, not a model problem.
+- **Progressive disclosure is your best tool.** Result always visible, reasoning on demand, sources on request. Not everyone needs everything — but everyone must be *able* to go deeper.
+
+---
+
+*Sources: Smashing Magazine "Psychology of Trust in AI" (2025), Nielsen Norman Group "AI Trust & Language" (2024), Google PAIR "People + AI Guidebook" (2024), Perplexity/ChatGPT/Claude Product Analysis (2024/2025)*
