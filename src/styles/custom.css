@@ -1,0 +1,297 @@
+/* AI Product Thinking — "The Publication" Design System
+   Inspired by Dieter Rams & Jony Ive: Less, but better.
+   ================================================== */
+
+/* --- Color Tokens --- */
+:root {
+	--apt-bg: #F5F3EE;
+	--apt-text: #2C2C2C;
+	--apt-text-secondary: #8A8680;
+	--apt-accent: #B85C38;
+	--apt-accent-hover: #A04E2F;
+	--apt-border: #E0DDD7;
+	--apt-code-bg: #EDEBE6;
+	--apt-surface: #ECEAE4;
+}
+
+/* --- Light Mode (Default) --- */
+:root {
+	color-scheme: light;
+}
+
+:root[data-theme='light'],
+:root:not([data-theme]) {
+	--sl-color-bg-nav: var(--apt-bg);
+	--sl-color-bg-sidebar: var(--apt-bg);
+	--sl-color-bg: var(--apt-bg);
+	--sl-color-text: var(--apt-text);
+	--sl-color-text-accent: var(--apt-accent);
+	--sl-color-text-invert: var(--apt-bg);
+	--sl-color-hairline: var(--apt-border);
+	--sl-color-hairline-light: var(--apt-border);
+	--sl-color-accent-low: #F0E8E2;
+	--sl-color-accent: var(--apt-accent);
+	--sl-color-accent-high: var(--apt-accent-hover);
+	--sl-color-white: var(--apt-text);
+	--sl-color-gray-1: #444440;
+	--sl-color-gray-2: #6B6965;
+	--sl-color-gray-3: var(--apt-text-secondary);
+	--sl-color-gray-4: #C4C0BA;
+	--sl-color-gray-5: var(--apt-border);
+	--sl-color-gray-6: var(--apt-surface);
+	--sl-color-gray-7: var(--apt-bg);
+	--sl-color-black: var(--apt-bg);
+}
+
+/* --- Dark Mode --- */
+:root[data-theme='dark'] {
+	--sl-color-bg-nav: #1A1A18;
+	--sl-color-bg-sidebar: #1A1A18;
+	--sl-color-bg: #1E1E1C;
+	--sl-color-text: #E8E6E1;
+	--sl-color-text-accent: var(--apt-accent);
+	--sl-color-hairline: #333330;
+	--sl-color-hairline-light: #2A2A28;
+	--sl-color-accent-low: #2C2218;
+	--sl-color-accent: var(--apt-accent);
+	--sl-color-accent-high: #D4734A;
+	--sl-color-white: #E8E6E1;
+	--sl-color-gray-1: #D0CEC9;
+	--sl-color-gray-2: #A8A5A0;
+	--sl-color-gray-3: #7A7772;
+	--sl-color-gray-4: #4A4844;
+	--sl-color-gray-5: #333330;
+	--sl-color-gray-6: #252523;
+	--sl-color-gray-7: #1A1A18;
+	--sl-color-black: #1E1E1C;
+}
+
+/* --- Typography --- */
+:root {
+	--sl-text-h1: clamp(1.8rem, 3vw, 2.4rem);
+	--sl-text-h2: clamp(1.3rem, 2vw, 1.6rem);
+	--sl-text-h3: clamp(1.05rem, 1.5vw, 1.2rem);
+	--sl-text-body: clamp(0.95rem, 1.2vw, 1.05rem);
+	--sl-line-height-headings: 1.3;
+}
+
+/* --- Content Width — Readable Measure --- */
+.sl-markdown-content {
+	max-width: 42rem;
+	font-size: var(--sl-text-body);
+	line-height: 1.75;
+}
+
+/* --- Headings --- */
+.sl-markdown-content h1 {
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	margin-top: 0;
+	margin-bottom: 1.5rem;
+}
+
+.sl-markdown-content h2 {
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--sl-color-hairline);
+}
+
+.sl-markdown-content h3 {
+	font-weight: 600;
+	margin-top: 2rem;
+	margin-bottom: 0.75rem;
+}
+
+/* --- Paragraphs --- */
+.sl-markdown-content p {
+	margin-bottom: 1.25rem;
+}
+
+/* --- Links --- */
+.sl-markdown-content a {
+	color: var(--apt-accent);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	transition: border-color 0.2s ease;
+}
+
+.sl-markdown-content a:hover {
+	border-bottom-color: var(--apt-accent);
+}
+
+/* --- Blockquotes — Case Studies --- */
+.sl-markdown-content blockquote {
+	border-left: 1px solid var(--apt-accent);
+	margin: 2rem 0;
+	padding: 0.75rem 1.5rem;
+	background: none;
+	font-style: italic;
+	color: var(--sl-color-gray-2);
+}
+
+.sl-markdown-content blockquote p {
+	margin-bottom: 0.5rem;
+}
+
+/* --- Code --- */
+.sl-markdown-content :not(pre) > code {
+	background: var(--apt-code-bg);
+	padding: 0.15em 0.35em;
+	border-radius: 3px;
+	font-size: 0.9em;
+}
+
+:root[data-theme='dark'] .sl-markdown-content :not(pre) > code {
+	background: #2A2A28;
+}
+
+/* --- Details / Decide Sections --- */
+.sl-markdown-content details {
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 4px;
+	padding: 0;
+	margin: 2rem 0;
+	background: none;
+}
+
+.sl-markdown-content details summary {
+	cursor: pointer;
+	padding: 0.75rem 1rem;
+	font-weight: 600;
+	color: var(--apt-accent);
+	font-size: 0.95em;
+	letter-spacing: 0.01em;
+}
+
+.sl-markdown-content details[open] summary {
+	border-bottom: 1px solid var(--sl-color-hairline);
+	margin-bottom: 0;
+}
+
+.sl-markdown-content details > :not(summary) {
+	padding: 0 1rem;
+}
+
+/* --- Tables --- */
+.sl-markdown-content table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
+	font-size: 0.9em;
+}
+
+.sl-markdown-content th {
+	text-align: left;
+	font-weight: 600;
+	padding: 0.5rem 0.75rem;
+	border-bottom: 2px solid var(--sl-color-hairline);
+}
+
+.sl-markdown-content td {
+	padding: 0.5rem 0.75rem;
+	border-bottom: 1px solid var(--sl-color-hairline);
+}
+
+/* --- Horizontal Rule --- */
+.sl-markdown-content hr {
+	border: none;
+	border-top: 1px solid var(--sl-color-hairline);
+	margin: 3rem 0;
+}
+
+/* --- Lists --- */
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+	margin-bottom: 1.25rem;
+	padding-left: 1.25rem;
+}
+
+.sl-markdown-content li {
+	margin-bottom: 0.4rem;
+}
+
+/* --- Sidebar — Clean, Numerical --- */
+starlight-menu-button {
+	--sl-color-text-accent: var(--apt-accent);
+}
+
+nav.sidebar .top-level > li {
+	margin-top: 0.75rem;
+}
+
+nav.sidebar a {
+	font-size: 0.9rem;
+}
+
+nav.sidebar a[aria-current='page'] {
+	font-weight: 600;
+	color: var(--apt-accent);
+}
+
+/* Remove group icons/decorations */
+nav.sidebar .group-label {
+	font-size: 0.8rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: none;
+	color: var(--sl-color-gray-2);
+}
+
+/* --- Site Title --- */
+.site-title {
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+/* --- Splash / Hero Page --- */
+.hero {
+	padding-block: 4rem;
+}
+
+.hero h1 {
+	font-size: clamp(2rem, 4vw, 3rem);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	line-height: 1.15;
+}
+
+.hero .tagline {
+	font-size: clamp(1rem, 1.5vw, 1.2rem);
+	color: var(--sl-color-gray-2);
+	max-width: 32rem;
+	line-height: 1.6;
+}
+
+/* --- Starlight Overrides — Remove Decorative Elements --- */
+
+/* Remove card borders/shadows for cleaner look */
+.card {
+	border: 1px solid var(--sl-color-hairline);
+	box-shadow: none;
+}
+
+/* Pagination links at bottom */
+.pagination-links a {
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 4px;
+}
+
+.pagination-links a:hover {
+	border-color: var(--apt-accent);
+}
+
+/* --- Print-Friendly --- */
+@media print {
+	nav.sidebar,
+	header,
+	.pagination-links {
+		display: none;
+	}
+
+	.sl-markdown-content {
+		max-width: 100%;
+	}
+}
