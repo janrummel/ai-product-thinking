@@ -3,6 +3,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
+	redirects: {
+		'/': '/de/start/',
+		'/de/': '/de/start/',
+		'/en/': '/en/start/',
+	},
 	integrations: [
 		starlight({
 			title: 'AI Product Thinking',
@@ -18,7 +23,7 @@ export default defineConfig({
 					label: 'Start',
 					translations: { en: 'Start' },
 					items: [
-						{ slug: 'de/start' },
+						{ slug: 'start' },
 					],
 				},
 				{
