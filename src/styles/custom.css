@@ -228,7 +228,14 @@ nav.sidebar a {
 
 nav.sidebar a[aria-current='page'] {
 	font-weight: 600;
-	color: var(--apt-accent);
+	color: var(--apt-text);
+	border-left: 2px solid var(--apt-accent);
+	padding-left: 0.5rem;
+	margin-left: -0.5rem;
+}
+
+:root[data-theme='dark'] nav.sidebar a[aria-current='page'] {
+	color: #E8E6E1;
 }
 
 /* Remove group icons/decorations */
