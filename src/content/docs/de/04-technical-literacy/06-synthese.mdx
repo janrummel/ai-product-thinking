@@ -1,0 +1,73 @@
+---
+title: "Synthese: Technical Literacy"
+description: "Wie die fuenf technischen Lektionen eine Optimierungshierarchie bilden — und warum die PM-Aufgabe nicht maximale Qualitaet ist, sondern die richtige Balance."
+sidebar:
+  order: 6
+---
+
+## The Big Picture
+
+Du hast fuenf Lektionen durchgearbeitet: wie Prompt Engineering AI-Verhalten steuert, wie RAG dem Modell Zugang zu firmeneigenen Daten gibt, wann Fine-Tuning gerechtfertigt ist, wie Du das richtige Modell waehlst und wie Du AI-Features wirtschaftlich betreibst.
+
+Einzeln sind das technische Werkzeuge. Zusammen bilden sie eine **Optimierungshierarchie**: Lektion 1 ist der schnellste, guenstigste Hebel. Lektion 2 erweitert das Wissen des Modells. Lektion 3 aendert sein Verhalten. Lektion 4 bestimmt das Qualitaets-Ceiling und den Kosten-Floor. Lektion 5 laeuft quer ueber alle Ebenen — Caching, Routing, Batching und Monitoring gelten unabhaengig davon, welche Techniken Du nutzt.
+
+Der PM, der zu Fine-Tuning greift, bevor er Prompting ausgereizt hat, verschwendet Wochen und Tausende Euro. Der PM, der ein Frontier-Modell fuer jede Anfrage nutzt, verschwendet Geld fuer Qualitaet, die Nutzer nicht brauchen.
+
+## Connections
+
+### 1. Die Optimierungshierarchie
+
+Prompt Engineering (L1) ist immer der erste Schritt. Wenn die Output-Qualitaet nicht stimmt, verbessere zuerst den Prompt. Wenn das Modell aktuelle Daten braucht, fuege RAG hinzu (L2). Wenn konsistentes Verhalten noetig ist und Prompting es nicht schafft, erwaege Fine-Tuning (L3). Die Modellwahl (L4) bestimmt, wie hoch die Qualitaet maximal steigen kann und wie tief die Kosten fallen koennen. Cost Optimization (L5) laeuft parallel zu allem.
+
+**Fuer Dich als PM:** Dieser Pfad ist kein Vorschlag — er ist ein Kostenschutz. Jede Stufe ist eine Groessenordnung teurer und weniger flexibel als die vorherige.
+
+### 2. Das Build-vs-Configure-Spektrum
+
+Jede Lektion steht fuer einen anderen Punkt auf dem Spektrum zwischen Konfiguration und Entwicklung. Prompt Engineering (Stunden, jederzeit aenderbar, kein Lock-in) steht am einen Ende. Fine-Tuning (Monate, Re-Training zum Aendern, hoher Lock-in) am anderen. RAG und Model Selection liegen dazwischen.
+
+**Fuer Dich als PM:** Bevorzuge Konfiguration ueber Entwicklung. Je tiefer eine Entscheidung eingebaut ist, desto schwerer ist sie zu aendern. Starte flexibel, fixiere erst, wenn Messungen die Investition rechtfertigen.
+
+### 3. Qualitaet ist keine einzelne Zahl
+
+"Qualitaet" bedeutet in jeder Lektion etwas anderes: Prompt-Qualitaet misst Format, Ton und Genauigkeit. RAG-Qualitaet misst Retrieval-Praezision und Answer Faithfulness. Fine-Tuning-Qualitaet misst Verhaltenskonsistenz. Model-Selection-Qualitaet misst Task-spezifische Performance. Cost/Quality misst das Minimum, das Nutzer wertschaetzen.
+
+**Fuer Dich als PM:** Definiere "gut genug" konkret und messbar, bevor Optimierungsarbeit beginnt. "Mach es besser" ist keine Produktanforderung.
+
+### 4. Verbindungen zu frueheren Kapiteln
+
+Prompt Engineering (L1) wendet die Token-, Context-Window- und Temperature-Konzepte aus Kapitel 01 direkt an. RAG (L2) ist die primaere Halluzinations-Mitigationsstrategie aus den Foundations. Model Selection (L4) baut auf dem ML-Landscape-Verstaendnis aus Kapitel 01 auf. Cost/Quality Tradeoffs (L5) sind zentral fuer die AI-Produktstrategie aus Kapitel 02. Und die Prompt-Qualitaet bestimmt, was das UX-Design aus Kapitel 03 dem Nutzer zeigen kann.
+
+### 5. Die technische Entscheidungs-Landkarte
+
+Wenn Du vor einer technischen AI-Entscheidung stehst, nutze dieses Routing:
+
+| Problem | Relevante Lektion | Erster Schritt |
+|---------|-------------------|----------------|
+| AI-Output-Qualitaet stimmt nicht | Prompt Engineering (L1) | Prompt verbessern |
+| Modell kennt unsere Daten nicht | RAG (L2) | Retrieval-Pipeline bauen |
+| Ton/Stil des Modells passt nicht | Fine-Tuning (L3) | System Prompt zuerst, Fine-Tune nur wenn Prompt versagt |
+| Welches Modell sollen wir nutzen? | Model Selection (L4) | Blind-Evaluation auf 50+ Anfragen |
+| AI-Kosten sind zu hoch | Cost/Quality (L5) | Model Routing implementieren |
+
+## The Meta-Insight
+
+> Technische Literacy fuer PMs heisst nicht, selbst Code zu schreiben. Es heisst, die richtigen Fragen zu stellen: **"Haben wir den Prompt optimiert, bevor wir Fine-Tuning diskutieren?"** und **"Was ist die minimale Qualitaet, die Nutzer wertschaetzen — und was kostet sie?"** Wer diese Fragen stellt, trifft bessere Entscheidungen als derjenige, der jeden Benchmark auswendig kennt.
+
+## Your Technical Literacy Checklist
+
+Was Du jetzt koennen solltest:
+
+- [ ] Die richtige Prompting-Technik fuer die Aufgabenkomplexitaet waehlen (Zero-Shot bis Self-Consistency) — Lektion 1
+- [ ] Beurteilen, ob ein Feature RAG, Fine-Tuning oder bessere Prompts braucht — Lektion 1, 2, 3
+- [ ] Eine RAG-Pipeline architektonisch verstehen und Chunking-Qualitaet als Haupthebel identifizieren — Lektion 2
+- [ ] Fine-Tuning-Entscheidungen anhand der 6-Fragen-Matrix treffen — Lektion 3
+- [ ] Modellauswahl basierend auf Task, Kosten und Latenz statt Leaderboard-Ranking treffen — Lektion 4
+- [ ] Multi-Model Routing als Architekturmuster anwenden — Lektion 4, 5
+- [ ] AI-Feature-Kosten berechnen und die sechs Optimierungshebel priorisieren — Lektion 5
+- [ ] "Gut genug" definieren, bevor Optimierung beginnt — Lektion 5
+
+Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. Diese technischen Grundlagen bestimmen, ob Dein AI-Feature Production-ready ist — oder ein teures Experiment bleibt.
+
+---
+
+*Quellen: Aufbauend auf Lektionen 1-5. IBM RAG vs Fine-Tuning vs Prompt Engineering, a16z LLMflation, DAIR.AI Prompt Engineering Guide, Artificial Analysis LLM Leaderboard, Pinecone RAG Architecture Guide*

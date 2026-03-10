@@ -1,0 +1,134 @@
+---
+title: "Human-in-the-Loop"
+description: "Menschliche Kontrolle als Architektur-Komponente — nicht als Notloesung, sondern als Produktfeature."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Dein AI-Support-Agent beantwortet 85% der Kundenanfragen korrekt. Das klingt gut — bis Du rechnest: Bei 10.000 Anfragen pro Tag sind das 1.500 falsche Antworten. Taeglich. An echte Kunden.
+
+Human-in-the-Loop (HITL) ist keine Kruecke fuer schlechte Modelle. Es ist ein bewusstes Architektur-Pattern, das menschliches Urteilsvermoegen in den Agent-Workflow integriert. Die Frage ist nicht ob Du HITL brauchst, sondern wo, wie oft und mit welchem Pattern.
+
+## Concept
+
+### Vier HITL-Patterns
+
+Vier Hauptmuster haben sich fuer die Integration menschlicher Kontrolle etabliert:
+
+| Pattern | Mechanismus | Gut fuer | Latenz-Impact |
+|---------|------------|----------|---------------|
+| **Approval Gate** | Agent arbeitet, pausiert bis Mensch freigibt | Finanztransaktionen, Content Publishing, Deployments | Hoch (blockiert auf menschliche Antwort) |
+| **Escalation Trigger** | Agent monitort Confidence; eskaliert wenn unter Schwellenwert | Kundensupport, medizinische Triage, Legal Review | Mittel (nur bei Unsicherheit) |
+| **Parallel Review** | Agent fuehrt aus, Mensch reviewed asynchron; kann ueberschreiben | Code Review (AI generiert PR, Mensch reviewed), Content Moderation | Niedrig (non-blocking) |
+| **Checkpoint Audit** | Agent laeuft autonom; Mensch prueft Logs in Intervallen | Batch Processing, Data Pipelines, Nacht-Jobs | Keiner (post-hoc) |
+
+### Escalation Design
+
+Gute Eskalation braucht vier Elemente:
+1. **Klare Trigger-Kriterien** — nicht vage ("wenn unsicher"), sondern spezifisch (Confidence unter 0.85, beruehrt PII, Betrag ueber X Euro, Error Count ueber 3)
+2. **Context-Preservation** — bei Eskalation muss der Agent den vollen Kontext mitgeben: Was wurde versucht, warum ist er unsicher, welche Optionen sieht er
+3. **Zeitgebundene Eskalation** — wenn kein Mensch innerhalb von X Minuten antwortet: Retry, Safe Default oder graceful Failure
+4. **Escalation Routing** — verschiedene Issues gehen an verschiedene Teams (Billing an Finance, Security an Security)
+
+### Wann HITL verpflichtend ist
+
+In regulierten Industrien ist HITL gesetzlich vorgeschrieben:
+
+| Domain | Anforderung | Grund |
+|--------|------------|-------|
+| **Healthcare** | Kliniker-Review bei AI-Diagnosevorschlaegen | Patientensicherheit, FDA/MDR-Regulierung |
+| **Finanz** | Menschliche Freigabe ab Schwellenwerten | AML/KYC-Compliance, Treuhander-Pflicht |
+| **Legal** | Anwalts-Review bei AI-generierten Dokumenten | Unerlaubte Rechtsberatung, Haftung |
+| **HR/Hiring** | Menschliche Pruefung bei AI-Screening | Antidiskriminierungsgesetze, EU AI Act (Hochrisiko) |
+
+Der EU AI Act (wirksam 2025-2026) verlangt explizit Human Oversight fuer hochriskante AI-Systeme.
+
+### HITL ueber Zeit reduzieren
+
+Das Ziel ist nicht, Menschen zu eliminieren, sondern sie von repetitiven Approvals zu High-Value Judgments zu verschieben:
+
+1. **Approval Rates messen** — bei 98% Approval fuer einen Aktionstyp: Auto-Approval-Kandidat
+2. **Scope graduell erweitern** — Auto-Approve bis 100 Euro, dann 500, dann 1.000
+3. **Audit Trails beibehalten** — auch nach HITL-Reduktion alles loggen
+4. **Override-Mechanismen behalten** — User muessen HITL jederzeit wieder aktivieren koennen
+
+### Die Kosten von HITL
+
+HITL ist teuer. Kernkostentreiber: Latenz (jede Approval-Runde addiert Minuten bis Stunden), Arbeitskraft (menschliche Reviewer sind die teuerste Komponente), Context-Switching (Reviewer muessen sich in die Situation einlesen) und Skalierung (HITL skaliert nicht linear).
+
+Eine Analyse von Anfang 2026 argumentiert, dass "HITL an die Wand gefahren ist" bei Enterprise-Scale — was den Aufstieg von AI-ueberwacht-AI-Architekturen antreibt, bei denen eine Supervisor-AI Routine-Approvals handelt.
+
+## Framework
+
+Die **HITL-Pattern-Auswahl** — die richtige Frage fuehrt zum richtigen Pattern:
+
+| Frage | Antwort | Pattern |
+|-------|---------|---------|
+| Ist menschliches Review gesetzlich vorgeschrieben? | Ja | Approval Gate (nicht verhandelbar) |
+| Was kostet ein nicht erkannter Fehler? | Hoch | Approval Gate |
+| Ist die Aufgabe hochvolumig und zeitsensitiv? | Ja | Escalation Trigger (nur Ausnahmen reviewen) |
+| Kann Review asynchron stattfinden? | Ja | Parallel Review |
+| Ist Echtzeit-Verfuegbarkeit von Reviewern garantiert? | Nein | Zeitgebundene Eskalation mit Safe Defaults |
+
+**Kern-Metriken fuer HITL:**
+
+| Metrik | Was sie zeigt | Zielwert |
+|--------|--------------|----------|
+| Approval Rate | Wie oft stimmen Menschen dem Agent zu | Ueber 95%: HITL reduzierbar fuer diese Action-Klasse |
+| Override Rate | Wie oft aendern Menschen den Agent-Output | Steigende Rate signalisiert Modell-Degradation |
+| Time-to-Review | Wie lange Menschen fuer Review brauchen | Steigende Zeiten zeigen Reviewer Fatigue |
+| Escalation Rate | Wie oft der Agent eskaliert | Ueber 20%: Agent-Scope ist zu breit |
+
+## Scenario
+
+Du bist PM fuer eine Legal-Tech-Plattform. Euer AI-Agent erstellt Vertragsentwuerfe basierend auf Templates und Kundeninput. Monatliche Zahlen:
+
+- **3.000 Vertragsentwuerfe/Monat** generiert
+- **12 Juristen** im Review-Team
+- **Durchschnittliche Review-Zeit:** 25 Minuten pro Vertrag
+- **Aktuelle Approval Rate:** 82% (18% brauchen Aenderungen)
+- **Kosten pro Jurist:** 95 Euro/Stunde
+- **Monatliche Review-Kosten:** 3.000 x 25 Min x 95 Euro/60 = ~118.750 Euro
+
+Das Management will die Review-Kosten um 50% senken. Der CTO schlaegt vor, einfache Vertraege (NDAs, Standard-Dienstleistungsvertraege) ohne Review durchzulassen — das sind 60% des Volumens.
+
+**Die Frage:** Wie reduzierst Du die Review-Kosten, ohne unakzeptables Risiko einzugehen?
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** NICHT das menschliche Review eliminieren, sondern das Pattern wechseln — von Approval Gate zu Escalation Trigger fuer einfache Vertraege.
+
+**Konkreter Plan:**
+- **Standard-NDAs und einfache Vertraege (60%):** Parallel Review statt Approval Gate. Agent generiert, Vertrag geht raus mit 24h-Ueberpruefungsfenster. Jurist reviewed asynchron, kann innerhalb von 24h zurueckziehen.
+- **Komplexe Vertraege (40%):** Approval Gate bleibt. Jurist muss vor Versand freigeben.
+- **Zusaetzlich:** AI-basiertes Pre-Screening markiert Vertraege mit unueblichen Klauseln automatisch als "komplex" (Escalation Trigger).
+
+**Erwartete Ergebnisse:**
+- Review-Last sinkt um ~40% (1.800 Vertraege brauchen nur Spot-Check statt volles Review)
+- Review-Kosten sinken auf ~75.000 Euro (37% Ersparnis)
+- Risiko bleibt kontrolliert: Alle Vertraege werden reviewed, aber mit unterschiedlicher Intensitaet
+
+**Warum nicht die CTO-Loesung:**
+- 82% Approval Rate bedeutet 18% der "einfachen" Vertraege haben Fehler
+- Juristische Dokumente ohne Review versenden ist ein Haftungsrisiko
+- "Einfach" ist keine sichere Kategorie — auch NDAs koennen nicht-standardmaessige Klauseln enthalten
+
+**Was viele falsch machen:** HITL als binaer betrachten (an/aus) statt als Spektrum von Patterns mit unterschiedlicher Intensitaet.
+</details>
+
+## Reflect
+
+**Human-in-the-Loop ist kein temporaerer Workaround bis AI gut genug ist — es ist ein permanentes Architektur-Pattern, das sich im Lauf der Zeit in Intensitaet und Form veraendert.**
+
+- Das richtige HITL-Pattern haengt von Risiko, Volumen und Latenz-Anforderungen ab — nicht von einem generellen "Mensch muss draufschauen"
+- Rubber-Stamp-Review (Mensch nickt 200 Entscheidungen/Stunde ab) ist Security Theater — designe UIs, die echtes Review foerdern
+- Miss Approval Rate, Override Rate und Time-to-Review — die Daten zeigen Dir, wo HITL reduzierbar ist und wo nicht
+
+---
+
+*Quellen: Martin Fowler — Humans and Agents in SE Loops (2025), Permit.io — HITL for AI Agents (2025), SiliconANGLE — HITL Has Hit the Wall (2026), EU AI Act (2025)*

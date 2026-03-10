@@ -1,0 +1,65 @@
+---
+title: "Synthese: Execution"
+description: "Wie die fuenf Execution-Lektionen zusammenhaengen — und was sie gemeinsam ueber AI-Produktentwicklung verraten."
+sidebar:
+  order: 6
+---
+
+## The Big Picture
+
+Du hast fuenf Lektionen durchgearbeitet: wie man AI PRDs mit Eval-Kriterien schreibt, warum AI-Produkte einen kontinuierlichen Lifecycle haben, wie cross-funktionale Teams bei AI zusammenarbeiten, warum Datenqualitaet Produktqualitaet ist, und wie Agile fuer AI-Entwicklung angepasst werden muss.
+
+Einzeln sind das Werkzeuge fuer verschiedene Aspekte der Execution. Zusammen ergeben sie ein Execution-Modell, das auf einer zentralen Erkenntnis basiert: **AI Product Execution ist Uncertainty Management.** Traditionelle Produktentwicklung minimiert Unsicherheit durch Upfront-Spezifikation. AI-Produktentwicklung akzeptiert Unsicherheit und managt sie durch kontinuierliche Evaluation und schnelle Iteration.
+
+## Connections
+
+### 1. Von PRDs zu Lifecycle — Evaluation als roter Faden
+
+AI PRDs definieren Eval-Kriterien (Lektion 1). Der Lifecycle nutzt diese Kriterien als Baseline fuer Monitoring und Verbesserung (Lektion 2). Ohne definierte Schwellenwerte weisst Du beim Launch nicht, ob die Qualitaet reicht — und nach dem Launch nicht, ob sie sinkt.
+
+**Fuer Dich als PM:** Die Eval-Kriterien aus dem PRD sind nicht nur ein Launch-Gate. Sie sind das Fundament fuer den gesamten Lifecycle.
+
+### 2. Von Cross-Functional zu Agile — Rituale verbinden Rollen und Prozesse
+
+Das Eval Review Ritual (Lektion 3) ist die Bruecke zwischen cross-funktionaler Zusammenarbeit und dem Agile-Prozess (Lektion 5). Es gibt dem Dual-Track-Ansatz seinen Rhythmus: Experiment-Ergebnisse reviewen, Improvement Actions priorisieren, naechste Timeboxes definieren.
+
+**Fuer Dich als PM:** Ein einziges strukturiertes Meeting pro Woche kann Ad-hoc-Alignment ersetzen und haelt beide Tracks synchron.
+
+### 3. Von Data Quality zu PRDs — Daten als Spezifikation
+
+Die Data Quality-Anforderungen (Lektion 4) gehoeren ins AI PRD (Lektion 1). Welche Knowledge-Base-Qualitaet wird erwartet? Wie oft werden Dokumente aktualisiert? Welche Data Governance Policies gelten? Diese Fragen gehoeren in die Spezifikation — nicht erst in die Retro nach dem Launch.
+
+**Fuer Dich als PM:** Wenn Dein AI PRD keinen Abschnitt zur Datenqualitaet hat, ist es unvollstaendig.
+
+### 4. Von Lifecycle zu Data Quality — Degradation hat zwei Ursachen
+
+AI-Produkte degradieren (Lektion 2) entweder durch Model Drift oder durch Data Drift (Lektion 4). In der Praxis ist Data Drift die haeufigere Ursache — veraltete Wissensdatenbanken, neue Nutzeranfragen ausserhalb der Coverage, akkumulierte Widersprueche.
+
+**Fuer Dich als PM:** Wenn Qualitaet sinkt, pruefe zuerst die Daten, dann das Modell.
+
+### 5. Von Agile zu Cross-Functional — Experimente brauchen alle Perspektiven
+
+Experiment-Spikes (Lektion 5) produzieren nur dann verwertbare Ergebnisse, wenn alle Perspektiven eingebunden sind (Lektion 3). Ein ML-Engineer der alleine experimentiert, optimiert fuer technische Metriken. Ein PM der alleine evaluiert, uebersieht technische Constraints.
+
+**Fuer Dich als PM:** Decision Gates nach Experiment-Spikes sollten PM, Tech Lead und (bei UX-relevanten Experimenten) Designer einbeziehen.
+
+## The Meta-Insight
+
+> AI Product Execution folgt einem Kreislauf: Spezifizieren (PRD) → Managen (Lifecycle) → Zusammenarbeiten (Cross-Functional) → Daten pflegen (Quality) → Prozess anpassen (Agile) → Wiederholen. Teams, die die beste Eval-Infrastruktur bauen, bauen die besten AI-Produkte.
+
+## Your Execution Checklist
+
+Was Du jetzt koennen solltest:
+
+- [ ] Ein AI PRD mit Eval-Kriterien, Quality Thresholds und Failure Modes schreiben — Lektion 1
+- [ ] Den AI Product Lifecycle von Exploration bis Continuous Improvement managen — Lektion 2
+- [ ] Zwischen Researcher- und Product-Mindset uebersetzen und Eval Review Rituale etablieren — Lektion 3
+- [ ] Data Quality als Produktanforderung definieren und Data Governance Fragen beantworten — Lektion 4
+- [ ] Dual-Track-Entwicklung mit timeboxed Experimenten und Kill-Kriterien umsetzen — Lektion 5
+- [ ] Qualitaetsdrift diagnostizieren: Ist es das Modell oder sind es die Daten? — Lektionen 2 + 4
+
+Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. Execution ist die Bruecke zwischen Strategie und Ergebnis.
+
+---
+
+*Quellen: Aufbauend auf Lektionen 1–5. Anthropic Documentation (2025), Google Cloud Engineering Blog, Spotify Engineering Blog, LangChain Community Reports*

@@ -1,0 +1,127 @@
+---
+title: "Interaction Patterns"
+description: "Wie Du die Zusammenarbeit zwischen Mensch und AI gestaltest — von voller Kontrolle bis voller Autonomie, und warum der Weg dazwischen entscheidet."
+sidebar:
+  order: 3
+---
+
+## Context
+
+Dein AI-Feature funktioniert technisch. Die Accuracy ist gut, das Modell liefert. Dann kommt das Nutzer-Feedback: "Ich weiss nicht, was es gerade tut." "Warum hat es das einfach gemacht?" "Wie mache ich das rueckgaengig?"
+
+Das Problem ist nicht die AI. Das Problem ist das Interaktionsdesign. Als PM entscheidest Du nicht nur *was* die AI tut — sondern *wie viel Kontrolle* der Nutzer hat, *wann* die AI handelt, und *was passiert wenn sie falsch liegt*.
+
+## Concept
+
+### Human-in-the-Loop — drei Stufen
+
+Nicht jede AI-Interaktion braucht dieselbe menschliche Kontrolle. Es gibt drei Stufen:
+
+- **Human-in-the-Loop:** AI schlaegt vor, Mensch muss explizit genehmigen bevor etwas passiert. Hoechste Sicherheit, niedrigste Geschwindigkeit. Beispiel: Arzt bestaetigt AI-Diagnose.
+- **Human-on-the-Loop:** AI handelt, Mensch ueberwacht und kann eingreifen. Moderater Trade-off. Beispiel: AI kategorisiert Tickets, Team prueft Dashboard.
+- **Human-out-of-the-Loop:** AI handelt vollstaendig autonom. Nur fuer niedrig-riskante, validierte Tasks. Beispiel: Spam-Filter.
+
+### AI Suggestions vs. AI Actions
+
+Die Interaktion zwischen Nutzer und AI liegt auf einem Spektrum:
+
+| Pattern | AI tut | Nutzer tut | Beispiel |
+|---------|--------|------------|----------|
+| **Suggestion** | Schlaegt vor | Entscheidet | GitHub Copilot Ghost Text |
+| **Auto-complete** | Fuellt aus | Kann ueberschreiben | Gmail Smart Compose |
+| **Action mit Preview** | Handelt, zeigt Vorschau | Bestaetigt oder verwirft | Notion AI Diff (grau/blau) |
+| **Autonome Action** | Handelt ohne Genehmigung | Wird informiert | Linear Auto-apply |
+| **Autonom mit Undo** | Handelt ohne Genehmigung | Kann rueckgaengig machen | E-Mail-Kategorisierung |
+
+**PM-Implikation:** Je weiter rechts auf dem Spektrum, desto mehr investierst Du in Undo, Audit und Erklaerbarkeit.
+
+### Pre / In / Post — drei Phasen jeder AI-Aktion
+
+Jede AI-Interaktion hat drei Phasen, die Du bewusst gestalten musst:
+
+- **Pre-Action:** Intent Preview (was wird die AI tun?), Autonomy Dial (wie viel Kontrolle hat der Nutzer?)
+- **In-Action:** Explainable Rationale (warum tut sie das?), Confidence Signal (wie sicher ist sie?)
+- **Post-Action:** Action Audit und Undo (was hat sie getan, wie mache ich es rueckgaengig?), Escalation Pathway (was passiert bei Problemen?)
+
+### Escalation Patterns
+
+Wenn die AI an ihre Grenzen stoesst, braucht sie klare Eskalationswege:
+
+- **Confidence-basiert:** Unter einem Schwellenwert → automatisch an Menschen uebergeben
+- **Risiko-basiert:** High-Stakes-Entscheidungen immer menschlich
+- **Expertise-Routing:** AI lernt, welche Menschen fuer welche Fragen am besten sind
+- **Channel-basiert:** Slack/E-Mail/Dashboard je nach Dringlichkeit
+
+### Feedback Loops
+
+Nutzer muessen der AI Feedback geben koennen — aber richtig:
+
+- **Blocking Feedback:** AI pausiert und wartet auf Input. Gut fuer kritische Entscheidungen.
+- **Parallel Feedback:** AI arbeitet weiter, Feedback kommt asynchron. Gut fuer Volumen-Tasks.
+
+Apple unterscheidet drei Feedback-Typen: *Implizit* (Verhalten), *Explizit* (Daumen hoch/runter), *Korrekturen* (Fehler beheben). Wichtig: Korrekturen sind kein Ersatz fuer schlechte Ergebnisse. Gefuehrte Korrekturen (Auswahl aus Optionen) schlagen freie Korrekturen (Freitextfeld).
+
+### Service Recovery Paradox
+
+Erfolgreiche Fehlerbehebung erzeugt *mehr* Loyalitaet als fehlerfreie Performance. Das bedeutet: Investiere mehr UX-Budget in Error States und Undo als in den Happy Path.
+
+## Framework
+
+**Interaction Pattern Decision Matrix** — waehle das richtige Pattern basierend auf Risiko und Frequenz:
+
+| | Niedrige Frequenz | Hohe Frequenz |
+|---|---|---|
+| **Hohes Risiko** | Human-in-the-Loop + Action mit Preview | Human-on-the-Loop + Confidence-Eskalation |
+| **Niedriges Risiko** | Suggestion oder Auto-complete | Autonome Action mit Undo |
+
+**Checkliste fuer jede AI-Interaktion:**
+
+| Phase | Muss vorhanden sein | Beispiel |
+|-------|---------------------|----------|
+| Pre | Intent Preview | "Ich werde 3 Absaetze zusammenfassen" |
+| Pre | Autonomy Dial | Nutzer kann Autonomie-Level einstellen |
+| In | Confidence Signal | Farbcodierung, Prozentanzeige |
+| In | Erklaerung | "Basierend auf den letzten 5 Tickets" |
+| Post | Undo | Ein-Klick-Rueckgaengig |
+| Post | Escalation Pathway | "An Mensch uebergeben"-Button |
+
+## Scenario
+
+Du bist PM bei einem B2B-Tool fuer Vertragsmanagement. Eure AI soll Vertraege automatisch pruefen und Risiken markieren. 3.000 Vertraege pro Monat, 40% Standard-NDAs, 35% Dienstleistungsvertraege, 25% komplexe individuelle Vertraege.
+
+**Eure Optionen:**
+1. **Suggestion-only:** AI markiert Risiken, Jurist prueft jeden Vertrag manuell
+2. **Gestaffelt:** Standard-NDAs autonom mit Undo, Dienstleistungsvertraege mit Preview, komplexe Vertraege Suggestion-only
+3. **Voll autonom:** AI prueft alle Vertraege, Juristen pruefen nur Eskalationen
+
+**Die Zahlen:**
+- AI Accuracy: 96% bei NDAs, 88% bei Dienstleistungsvertraegen, 74% bei komplexen Vertraegen
+- Durchschnittlicher Schaden bei uebersehener Klausel: NDA €800, Dienstleistung €4.200, komplex €18.000
+- Aktuelle manuelle Pruefung: 45 Min pro Vertrag, 8 Juristen
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du das Interaktionsdesign aufsetzen?</summary>
+
+**Die beste Entscheidung:** Option 2 — gestaffelte Autonomie.
+
+**Warum:**
+- NDAs bei 96% Accuracy und €800 Fehlerkosten: Autonome Action mit Undo ist vertretbar. Das spart ~45 Min x 1.200 Vertraege = 900 Stunden/Monat.
+- Dienstleistungsvertraege bei 88% und €4.200 Fehlerkosten: Action mit Preview — AI markiert Risiken, zeigt Diff, Jurist bestaetigt. Human-on-the-Loop.
+- Komplexe Vertraege bei 74% und €18.000 Fehlerkosten: Suggestion-only. AI liefert Analyse, Jurist entscheidet. Human-in-the-Loop.
+- Investiere in Post-Action: Undo fuer NDAs, Audit Trail fuer alles, Escalation Pathway wenn Confidence unter 85%.
+
+**Service Recovery:** Baue exzellente Error States. Wenn die AI eine Klausel uebersieht und der Jurist es korrigiert — zeige was passiert ist, lerne daraus, melde es transparent. Das baut mehr Vertrauen auf als fehlerfreie Demos.
+</details>
+
+## Reflect
+
+- **Autonomie ist kein Schalter, sondern ein Regler.** Verschiedene Tasks im selben Produkt brauchen verschiedene Interaktionsmuster. Risiko und Fehlerkosten bestimmen die Stufe.
+- **Gestalte alle drei Phasen.** Pre-Action (was wird passieren?), In-Action (warum?), Post-Action (wie rueckgaengig?). Die meisten Produkte investieren nur in die Mitte.
+- **Undo schlaegt Genehmigung.** Fuer niedrig-riskante, hoch-frequente Tasks ist Undo effizienter als Approval Flows — und Nutzer vertrauen dem System mehr, weil sie die Kontrolle behalten.
+- **Investiere in Fehler, nicht nur in Erfolge.** Der Service Recovery Paradox zeigt: Gute Fehlerbehandlung erzeugt mehr Loyalitaet als perfekte Performance.
+
+---
+
+*Quellen: Apple Human Interface Guidelines — Machine Learning (2024), Smashing Magazine "Designing AI-Powered Interfaces" (2026), GitHub Copilot Interaction Design, Linear Product Updates, Notion AI UX Patterns, Gmail Smart Compose Research (Google, 2023)*

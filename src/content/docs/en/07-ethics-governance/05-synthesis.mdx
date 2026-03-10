@@ -1,0 +1,58 @@
+---
+title: "Synthesis: Ethics & Governance"
+description: "How Responsible AI, Guardrails, Privacy, and Hallucination Management connect — and why they are not separate topics."
+sidebar:
+  order: 5
+---
+
+## The Big Picture
+
+You've worked through four lessons: what Responsible AI means in practice, how guardrails constrain AI behavior, why privacy in AI products has multiple surfaces, and how to deal with the structural reality of hallucinations.
+
+These topics are often treated as separate compliance tasks. That's a mistake. Together, they form the **ethical stack** of your AI product — and each layer depends on the others.
+
+## Connections
+
+### 1. Responsible AI is the frame — the rest is operationalization
+
+Responsible AI (Lesson 1) defines the "what" and "why." Guardrails (Lesson 2) are the "how" at the technical level. Privacy (Lesson 3) protects users. Hallucination management (Lesson 4) maintains trust. Without the frame, the measures lack direction; without the measures, the frame remains a PDF.
+
+**For you as a PM:** Start with the frame (EU AI Act risk classification) and work your way to the concrete measures.
+
+### 2. Guardrails and hallucination management overlap
+
+RAG is simultaneously a hallucination mitigation (Lesson 4) AND a guardrail (Lesson 2) — it grounds outputs in verified sources. Output filters are guardrails that also catch hallucinated harmful content. The same infrastructure serves both purposes.
+
+**For you as a PM:** Don't plan guardrails and hallucination mitigation as separate workstreams. They share architecture and tooling.
+
+### 3. Privacy and guardrails create tension
+
+Effective guardrails require inspecting user inputs (jailbreak detection, PII detection). But input inspection has privacy implications (Lesson 3). The solution: input filtering must happen BEFORE logging and storage.
+
+**For you as a PM:** Balance safety monitoring with data minimization. The order of your processing pipeline determines whether you achieve both.
+
+### 4. Regulation connects everything
+
+The EU AI Act demands all these topics simultaneously: risk management (Lesson 1), technical robustness (Lesson 2), data governance (Lesson 3), and accuracy/transparency (Lesson 4). Starting August 2026, this isn't best practice — it's mandatory for high-risk systems.
+
+**For you as a PM:** The EU AI Act is your natural framework, even if you're not in the EU — it sets the global standard.
+
+## The Meta-Insight
+
+> Ethics and governance in AI are not abstract corporate values — they are concrete product requirements that affect architecture, UX, go-to-market, and business model decisions. The PM who treats them as a checkbox exercise will face incidents, fines, and user churn. The PM who integrates them from day one builds more durable and ultimately more successful products.
+
+## Your Ethics & Governance Checklist
+
+What you should now be able to do:
+
+- [ ] Classify an AI feature into EU AI Act risk tiers and derive requirements from it — Lesson 1
+- [ ] Design guardrails that balance safety and utility (measuring both block rate AND user satisfaction) — Lesson 2
+- [ ] Evaluate the privacy architecture of your AI product and choose the right tier — Lesson 3
+- [ ] Define a hallucination mitigation strategy for your domain (technical + UX) — Lesson 4
+- [ ] Explain how all four topics connect and implement them as an integrated stack — Synthesis
+
+If any point feels uncertain, go back to the relevant lesson. These topics are not optional — they determine whether your AI product builds trust or destroys it.
+
+---
+
+*Sources: Building on Lessons 1–4. Anthropic RSP 3.0 (2026), EU AI Act (artificialintelligenceact.eu), Stanford Legal RAG Study (2025), NVIDIA NeMo Guardrails, Stanford AI Index Report 2025*

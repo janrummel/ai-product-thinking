@@ -1,0 +1,109 @@
+---
+title: "Build vs. Buy"
+description: "Use an API, build RAG, or train your own model — how to find the right point on the AI implementation spectrum."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Your CTO wants to fine-tune a custom LLM. Your CEO heard that Cursor is worth $29 billion with an "API wrapper." Your ML lead says RAG is "the future." Everyone is talking about different things, and everyone is somehow right.
+
+You're the Product Manager. You don't need to decide *how* to build — but *where on the spectrum* to start. And that decision shapes budget, timeline, and vendor dependency for years to come.
+
+## Concept
+
+Build vs. Buy is not a binary choice. It's a spectrum with five levels — and most teams start too high.
+
+### The AI Implementation Spectrum
+
+| Level | Approach | Cost | Time-to-Value | Control |
+|-------|----------|------|---------------|---------|
+| 1 | Prompt Engineering | $0–100/month | Hours/Days | Low |
+| 2 | API Integration | $100–10K/month | Days/Weeks | Medium |
+| 3 | RAG (Retrieval-Augmented Generation) | $70–1K/month infra | Weeks | Medium-High |
+| 4 | Fine-Tuning | $600–50K+ | Weeks/Months | High |
+| 5 | Training from Scratch | $100K–$100M+ | Months/Years | Maximum |
+
+**The golden rule:** Start at Level 1 and only escalate when the current level demonstrably falls short. Prompt Engineering → RAG → Fine-Tuning → Custom Model.
+
+### RAG vs. Fine-Tuning
+
+Almost every AI product team faces this decision at some point:
+
+| Criterion | RAG | Fine-Tuning |
+|-----------|-----|-------------|
+| Real-time data | Yes (live updates) | No (snapshot at training time) |
+| TCO | 10–50x cheaper | High (training + hosting) |
+| Source transparency | Yes (citable sources) | No (implicit knowledge) |
+| Output consistency | Variable | High (learned format) |
+| Domain specialization | Medium | High |
+| Offline deployment | No | Yes |
+| Team skills needed | Data Engineering | ML Engineering |
+
+### Vendor Lock-in — the underestimated risk
+
+67% of organizations want to avoid dependency on a single AI provider. Yet most teams build directly on one API — without an abstraction layer.
+
+The consequences: 57% of IT leaders spent over $1M on platform migrations last year. When OpenAI had a global outage in June 2025, Zendesk features were down for hours.
+
+**Protection strategies:**
+- AI Gateway as an abstraction layer (Gartner: by 2028, 70% of multi-LLM apps will use a gateway, vs. under 5% in 2024)
+- Multi-provider strategy for critical features
+- Modular architecture with swappable LLM modules
+- Contractual exit clauses and data portability
+
+## Framework
+
+The **Escalation Matrix** — start at the bottom, move up only when necessary:
+
+| Question | Yes → | No → |
+|----------|-------|------|
+| Does a well-crafted prompt suffice? | Stay at Level 1 | Continue |
+| Does it need proprietary data in context? | RAG (Level 3) | API suffices (Level 2) |
+| Must the output format be exactly consistent? | Evaluate Fine-Tuning (Level 4) | RAG suffices |
+| Are there regulatory reasons requiring full control? | Evaluate Custom Model (Level 5) | Fine-Tuning suffices |
+
+**Before every level-up, ask:** Have I truly exhausted the current level — or am I hoping that more complexity will solve my actual problem?
+
+## Scenario
+
+You're a PM at a B2B SaaS for contract management. Feature request: AI should summarize contracts and flag risk clauses. 2,000 customers, 50,000 contracts/month.
+
+**Three options on the table:**
+
+- **Option A — API (Level 2):** Claude API + prompting. $3K/month API costs. Live in 2 weeks.
+- **Option B — RAG (Level 3):** API + proprietary contract database as context. $5K/month total. Live in 6 weeks.
+- **Option C — Fine-Tuning (Level 4):** Custom model on 100,000 annotated contracts. $80K setup + $8K/month. Live in 4 months.
+
+**Additional context:**
+- 42% of companies scrapped AI initiatives in 2024 — most common reason: building too complex too soon
+- Klarna automated 2/3 of chats via API, achieved $40M in profit — then had to reverse course ("focused too much on efficiency") and shifted to a hybrid model
+- GitHub Copilot (API-based): 15M users, 55% faster tasks, but 41% higher code churn rate
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Start with Option B (RAG) — but build Option A first to learn quickly.
+
+**Why:**
+- Option A first: live in 2 weeks, real user feedback. Prompt engineering on contracts is surprisingly capable
+- Then Option B: your own contract database as RAG context significantly improves detection of customer-specific clause patterns
+- Option C is premature: without 6+ months of usage data, you don't know *what* to fine-tune for. The 42% of failed AI initiatives made exactly this mistake
+- Build an abstraction layer — if Claude goes down tomorrow or gets more expensive, you need to be able to switch providers
+
+**What many get wrong:** Planning fine-tuning as step one before exhausting prompt engineering and RAG. Or baking variable LLM costs into a fixed pricing model without modeling usage volume scenarios.
+</details>
+
+## Reflect
+
+- **Build vs. Buy is a spectrum, not a binary choice.** The five levels require radically different budgets, timelines, and team skills. Start low, escalate with data.
+- **RAG before Fine-Tuning.** RAG is 10–50x cheaper, provides transparent sources, and doesn't require an ML team. Fine-tuning only pays off when RAG demonstrably falls short.
+- **Vendor lock-in is a product risk, not an infrastructure detail.** An AI Gateway and multi-provider capability belong in the architecture from day one — not as a "later optimization."
+- **Cursor shows the sweet spot:** API wrapper + proprietary UX innovation = $29B valuation, $2B ARR. You don't need your own model to create enormous value.
+
+---
+
+*Sources: Gartner "AI Gateway Forecast" (2024), Klarna AI Report (2024/2025), GitHub Copilot Research (2024), Cursor Financials (2025), OpenAI Outage Report (June 2025), IDC "AI Platform Migration Survey" (2024)*

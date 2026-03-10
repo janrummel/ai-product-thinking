@@ -1,0 +1,58 @@
+---
+title: "Synthesis: Agentic AI"
+description: "How the four Agentic AI lessons connect — and why trust is the central product variable."
+sidebar:
+  order: 5
+---
+
+## The Big Picture
+
+You've worked through four lessons: how multi-agent systems distribute tasks to specialists (Lesson 1), how tool use and MCP make agents capable of action (Lesson 2), which autonomy levels exist and how to choose them (Lesson 3), and how human-in-the-loop integrates human oversight as an architecture pattern (Lesson 4).
+
+Individually, these are technical concepts and design patterns. Together, they form a model for the central question in agentic AI product management: **How much should our AI do before checking with a human — and how do we earn the right to do more?**
+
+## Connections
+
+### 1. From Tools to Multi-Agent Architecture
+
+Tool use (Lesson 2) makes individual agents capable of action. Multi-agent systems (Lesson 1) emerge when a single agent hits the limits of its tools. The decision "add a new tool vs. create a new agent" is one of the most critical architecture choices — too many tools overwhelm a single agent, too many agents create coordination overhead.
+
+**For you as a PM:** Start with one agent and good tools. Only split when the agent demonstrably fails with a tool set exceeding 15 tools, or when tasks clearly require different trust boundaries.
+
+### 2. From Autonomy Levels to HITL Patterns
+
+Autonomy levels (Lesson 3) define HOW MUCH the agent may do. HITL patterns (Lesson 4) define HOW human oversight is implemented. L3 (Consultant) typically maps to Approval Gates, L4 (Approver) to Escalation Triggers, L5 (Observer) to Checkpoint Audits.
+
+**For you as a PM:** Determine the autonomy level first — the HITL pattern follows from it. Not the other way around.
+
+### 3. From Multi-Agent to Human-in-the-Loop
+
+Multi-agent systems (Lesson 1) multiply HITL complexity (Lesson 4). With a single agent, the question "when does it ask a human?" is straightforward. With 4 agents working in parallel, each needs its own escalation criteria, and the orchestrator must decide whether an escalation pauses the entire pipeline or just one branch.
+
+**For you as a PM:** More agents mean exponentially more HITL design decisions. This is a hidden cost driver of multi-agent architectures.
+
+### 4. From MCP Standards to Autonomy Scaling
+
+MCP (Lesson 2) standardizes WHICH tools are available. Autonomy levels (Lesson 3) determine HOW FREELY the agent uses those tools. An agent with MCP access to a database at L2 shows query results. The same agent at L4 executes writes and notifies the user afterward.
+
+**For you as a PM:** Tool access and autonomy level are two independent dimensions that together define an agent's capabilities and risks.
+
+## The Meta-Insight
+
+> Trust is the central product variable in agentic AI. Every step up the trust gradient — from tool calls to multi-agent coordination to full autonomy — requires evidence, reversibility, transparency, and control. Products that start at the right trust level for their domain and provide mechanisms to move up and down will win.
+
+## Your Agentic AI Checklist
+
+What you should now be able to do:
+
+- [ ] Decide when multi-agent architecture is justified and choose the right orchestration pattern — Lesson 1
+- [ ] Curate a tool set for an AI agent and use MCP as the integration standard — Lesson 2
+- [ ] Determine the right autonomy level per user segment and task type — Lesson 3
+- [ ] Choose the right HITL pattern and optimize it with metrics over time — Lesson 4
+- [ ] Answer the trust gradient question: "How much may the AI do before it asks?" — All lessons
+
+If any of these feel uncertain, go back to the relevant lesson. These concepts form the foundation for any AI product that goes beyond pure text generation.
+
+---
+
+*Sources: Building on Lessons 1-4. Anthropic MCP Docs (2024-2025), Feng et al. — Levels of Autonomy (2025), MIT AI Agent Index (2025), Martin Fowler — Humans and Agents (2025)*

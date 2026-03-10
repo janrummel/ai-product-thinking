@@ -1,0 +1,124 @@
+---
+title: "AI-native UX"
+description: "Warum AI-Interfaces fundamental anders funktionieren — und welche UX-Patterns wirklich funktionieren statt 'Chatbot draufschrauben'."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Dein Design-Team hat einen Prototyp gebaut: Ein Chat-Interface fuer Euer neues AI-Feature. Der CEO findet es "sehr ChatGPT". Das Problem: 80% Eurer User wollen gar nicht chatten. Sie wollen Ergebnisse.
+
+Als PM musst Du verstehen, dass AI-Interfaces nicht einfach "normale UI plus Chat" sind. AI-Output ist nicht-deterministisch — und das veraendert alles: Wie Du Ergebnisse anzeigst, wie Du Vertrauen aufbaust und welche Interaktionsmuster funktionieren.
+
+## Concept
+
+### Non-Deterministic Interfaces
+
+Traditionelle UX ist deterministisch: Input X ergibt immer Output Y. Ein Button tut immer dasselbe. AI-UX ist probabilistisch: Input X ergibt eine *Verteilung* moeglicher Outputs.
+
+Das hat direkte Konsequenzen fuer Dein Interface:
+- Jeder AI-Output muss als **Vorschlag kommuniziert werden**, nicht als Fakt
+- Interfaces muessen **Variabilitaet zeigen**, nicht verstecken
+- User brauchen Moeglichkeiten zur **Regeneration** ("Generate Again"-Buttons)
+- **Confidence Indicators** gehoeren zum Output, nicht in eine Debug-Ansicht
+
+### Chat vs. Structured Output
+
+Nicht jede AI-Interaktion braucht ein Chat-Fenster. Die Unterscheidung ist entscheidend:
+
+| | Chat-Interface | Structured Output |
+|---|---|---|
+| Staerke | Explorativ, mehrdeutig, Reasoning | Bekannte Inputs, Validierung, Volumen |
+| Schwaeche | Ineffizient fuer repetitive Tasks | Unflexibel bei offenen Fragen |
+| Beispiel | "Analysiere diesen Vertrag" | Rechnungsklassifikation mit Dropdown |
+
+**Die Regel:** "If it's a form, it should stay a form" (UX Planet). Ein Formular in ein Chat-Interface zu zwingen macht es schlechter, nicht besser.
+
+**Best Practice:** Jedes Formular sollte conversational triggerbar sein, jeder Agent sollte an ein Formular uebergeben koennen. Das reine Chat-Paradigma ist fuer komplexe Workflows bereits ueberholt.
+
+### Progressive Disclosure fuer AI
+
+AI-Outputs enthalten viel Information. Nicht alles gehoert auf den ersten Blick:
+
+- **Level 1:** Kernergebnis — die Antwort, die der User braucht
+- **Level 2:** Confidence Scores, Quellen, Reasoning-Zusammenfassung
+- **Level 3:** Vollstaendige Chain of Thought, Rohdaten, Alternativen
+
+Microsofts Copilot nutzt Dynamic Adaptive Behavior (DAB): Das Interface formt sich basierend auf Nutzerverhalten um. Power-User sehen mehr, Gelegenheitsnutzer weniger.
+
+### Loading und Streaming UX
+
+AI-Operationen sind inhaerent langsamer als CRUD. Streaming ist nicht optional:
+
+- User nehmen Streaming-Responses als **40-60% schneller** wahr als identische Non-Streaming-Responses
+- Streaming zeigt: "AI arbeitet" — nicht einfach nur "laedt"
+- **Accessibility-Problem:** Streaming ist fuer Screen Reader problematisch. Barrierefreie Alternativen einplanen.
+
+## Framework
+
+**AI-UX Pattern-Entscheidungsmatrix:**
+
+| Aufgabe | Pattern | Beispiel-Produkt |
+|---------|---------|-----------------|
+| Exploration, offene Fragen | Chat + Streaming | ChatGPT, Claude |
+| Content-Erstellung | Chat + Side-by-Side-Editor | ChatGPT Canvas, Claude Artifacts |
+| Code-Assistenz inline | Ghost Text / Autocomplete | GitHub Copilot |
+| Bestehendes Tool erweitern | Slash-Commands, Inline-AI | Notion AI (lila markiert) |
+| Hintergrund-Intelligenz | Kein sichtbares AI-UI | Linear (Triage-Intelligence) |
+| Visuelle Generierung | Grid + Variations | Midjourney (4-Bild-Grid) |
+| Code-Generierung + Preview | Chat-to-Output + Live-Vorschau | v0 by Vercel |
+
+**Design-Prinzipien fuer die Auswahl:**
+
+1. **Modalitaet an Aufgabe matchen** — nicht jede AI braucht Chat
+2. **Zeigen dass AI arbeitet** — Streaming, Skeleton Screens, Progress
+3. **Information schichten** — Progressive Disclosure statt Information Overload
+4. **Variabilitaet einbauen** — "Generate Again", Varianten, Slider
+5. **Bestehende Workflows respektieren** — Linear-Ansatz: AI verstaerkt, statt Chatbot hinzuzufuegen
+
+## Scenario
+
+Du bist PM bei einem Projektmanagement-Tool (B2B SaaS, 8.000 Teams). Euer naechstes Feature: AI-gestuetzte Sprint-Planung. Das Design-Team praesentiertdrei Optionen:
+
+**Die Situation:**
+- 65% der User nutzen Board-View, 25% List-View, 10% Calendar
+- Durchschnittliche Sprint-Planung: 45 Minuten pro Team pro Sprint
+- User-Feedback: "Wir wollen schnellere Planung, nicht ein neues Tool lernen"
+- Konkurrent hat Chat-basierte Sprint-Planung gelauncht, NPS bei -12
+
+**Optionen:**
+1. **Chat-Interface:** Dedizierter AI-Chat fuer Sprint-Planung. "Plane meinen naechsten Sprint" → AI schlaegt Tickets vor
+2. **Inline-AI:** AI-Vorschlaege direkt im Board. Lila markierte Suggestions, Ein-Klick-Accept. Kein neues Interface
+3. **Hybrid:** Chat fuer explorative Fragen ("Welche Tickets sind blocked?"), Structured Output fuer die eigentliche Planung (Drag-and-Drop mit AI-Ranking)
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Option 3 — Hybrid, mit Schwerpunkt auf Inline.
+
+**Warum:**
+- **User-Feedback ist eindeutig:** "Schnellere Planung, nicht neues Tool." Das schliesst ein reines Chat-Interface aus
+- **Konkurrent-Signal:** Chat-only Sprint-Planung hat NPS -12. Der Markt hat schon geantwortet
+- **Board-View dominiert (65%):** Die AI muss *im Board* erscheinen, nicht daneben. Lila markierte Vorschlaege mit Confidence Score (Progressive Disclosure Level 1), Reasoning per Hover (Level 2)
+- **Chat fuer den richtigen Moment:** "Zeig mir alle Tickets die seit 3 Sprints verschoben werden" ist eine valide Chat-Anfrage. Die Antwort sollte aber als strukturierte Liste erscheinen, nicht als Fliesstext
+- **Erwarteter Impact:** 45 Min → ~25 Min Sprint-Planung durch AI-Ranking + Ein-Klick-Accept. Chat-only wuerde die Zeit vermutlich *erhoehen* (Prompt-Formulierung statt Klicken)
+
+**Anti-Patterns die Du vermeidest:**
+- **Chat-for-everything:** Euer Konkurrent hat es versucht. NPS -12
+- **Non-Determinism verstecken:** AI-Vorschlaege muessen als Vorschlaege erkennbar sein, mit "Shuffle"-Button fuer Alternativen
+- **Workflow-Bruch:** User sollen im Board bleiben, nicht in ein Chat-Fenster wechseln
+</details>
+
+## Reflect
+
+- **Das Interface muss zur Aufgabe passen, nicht zur Technologie.** Chat ist ein Interaktionsmuster, kein Default. Bekannte Workflows verdienen Inline-Integration.
+- **Non-Determinism ist ein Feature, kein Bug.** Zeige Variabilitaet durch Regeneration, Confidence Scores und Alternativen — verstecke sie nicht hinter einem deterministischen Interface.
+- **Progressive Disclosure ist Pflicht bei AI.** Level 1 fuer alle, Level 2 bei Interesse, Level 3 fuer Power-User. Microsofts DAB-Ansatz zeigt die Richtung.
+- **Streaming ist Wahrnehmungsdesign.** 40-60% schneller wahrgenommen bei gleicher Latenz. Aber Accessibility nicht vergessen.
+
+---
+
+*Quellen: UX Planet "Chat vs. Forms" (2024), Microsoft Copilot DAB Documentation (2025), GitHub Copilot UX Research (2024), Nielsen Norman Group AI UX Patterns (2024), Linear Product Philosophy (2024)*

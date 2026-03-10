@@ -1,0 +1,114 @@
+---
+title: "AI PRDs schreiben"
+description: "Warum traditionelle PRDs fuer AI-Produkte nicht reichen — und wie ein AI PRD Qualitaet messbar macht."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Dein Team will ein AI-Feature bauen: automatische Zusammenfassungen fuer Support-Tickets. Der Engineering Lead fragt nach dem PRD. Du oeffnest Dein gewohntes Template — Problem Statement, User Stories, Acceptance Criteria, Launch Timeline — und merkst: Irgendetwas fehlt.
+
+Was bedeutet "Acceptance Criteria" bei einem Feature, das jedes Mal eine andere Antwort gibt? Wann ist eine Zusammenfassung "gut genug"? Und wer entscheidet das — ein QA-Engineer mit einer Checkliste oder ein Eval-Dataset mit 500 Beispielen?
+
+Traditionelle PRDs definieren deterministisches Verhalten: Input X ergibt Output Y. AI PRDs muessen einen Qualitaetsbereich fuer probabilistische Outputs definieren: Input X ergibt Outputs, die Qualitaetsschwelle Z in mindestens P% der Faelle erfuellen.
+
+## Concept
+
+### Was ein AI PRD anders macht
+
+Der groesste Unterschied: Ein AI PRD enthaelt eine **Evaluation Section**, die das gesamte Dokument strukturiert.
+
+| Element | Traditionelles PRD | AI PRD |
+|---------|-------------------|--------|
+| Anforderungen | Exaktes Verhalten | Qualitaetsschwellen + Eval-Kriterien |
+| Erfolgskriterien | Feature funktioniert ja/nein | Accuracy, Latency, Cost Targets pro Use Case |
+| Edge Cases | Jeden einzeln behandeln | Failure Modes und Graceful Degradation |
+| Testing | Pass/Fail Testcases | Eval Datasets, Benchmarks, Human Judgment |
+| Abnahme | QA Sign-off | Eval Metrics ueber Schwellenwert + Human Review |
+
+### Die 7 Sektionen eines AI PRDs
+
+**1. Problem Statement & User Context** — Wie beim klassischen PRD, aber mit Quantifizierung des manuellen Aufwands.
+
+**2. AI Approach & Rationale** — Warum AI die richtige Loesung ist (vs. Regeln oder klassischer Code). Welcher Ansatz: LLM API, RAG, Fine-Tuning, Agent Workflow.
+
+**3. Evaluation Criteria** — Die wichtigste neue Sektion. Golden Dataset, Metriken (Accuracy, Hallucination Rate, Latency, Cost-per-Query), Minimum-Schwellenwerte fuer Launch.
+
+**4. Model & Infrastructure** — Modellauswahl-Begruendung, erwartetes Volumen, Kostenprojektion.
+
+**5. User Experience** — Wie AI-Output praesentiert wird. Confidence Indicators, Fallback-Verhalten, Feedback-Mechanismus (Thumbs up/down, Regenerate).
+
+**6. Risk & Mitigation** — Failure Modes, Guardrails, Bias-Betrachtung, Privacy.
+
+**7. Success Metrics & Iteration Plan** — Launch-Metriken, Post-Launch Monitoring, Verbesserungskadenz.
+
+### Prompts als Produktspezifikation
+
+Bei LLM-basierten Features ist der System Prompt effektiv die Produktspezifikation. Das ist ein Paradigmenwechsel:
+
+- Prompt-Aenderungen sind Produktaenderungen — sie brauchen Review, Testing und Versionierung
+- A/B-Testing von Prompts entspricht A/B-Testing von Features
+- Prompt Regression Testing (Evals nach Prompt-Aenderungen) ersetzt klassisches Regression Testing
+
+Google behandelt Prompts als Code Artifacts: Version Control, Review-Pflicht, Eval Suites bei Aenderungen. Anthropic empfiehlt klare Definition von Rolle, Constraints und Output-Format im System Prompt.
+
+## Framework
+
+**Wann welches PRD-Format nutzen:**
+
+| Feature-Typ | PRD-Format | Begruendung |
+|-------------|-----------|-------------|
+| Deterministischer Output | Traditionelles PRD | Kein probabilistisches Verhalten |
+| AI mit binaerer Klassifikation | Hybrid-PRD (traditionell + Eval Section) | Output ist ja/nein, aber Accuracy variiert |
+| Text-/Bild-Generierung | Volles AI PRD | Probabilistische, komplexe Outputs |
+| Agent Workflow | Volles AI PRD + Agent Architecture | Mehrere AI-Komponenten, komplexe Failure Modes |
+
+**Goldene Regel:** Sobald eine AI-Komponente beteiligt ist, braucht das PRD Evaluation Criteria — auch wenn der Rest traditionell bleibt.
+
+## Scenario
+
+Du bist PM bei einem SaaS-Unternehmen. Euer Produkt ist ein Helpdesk-Tool. Feature-Anfrage: AI soll eingehende Tickets automatisch zusammenfassen und eine Prioritaet vorschlagen.
+
+**Fakten:**
+- 8.000 Tickets pro Monat
+- Support-Team von 15 Agents
+- Aktuell liest jeder Agent jedes Ticket komplett (durchschnittlich 3 Minuten pro Ticket)
+- Ziel: Lesezeit auf 30 Sekunden reduzieren
+- Budget: $500/Monat fuer AI-Kosten
+- Euer Engineering Lead schlaegt vor: "Wir nehmen ein LLM, schreiben einen Prompt, fertig in zwei Sprints"
+
+Der Engineering Lead hat bereits einen Prototyp gebaut. Die Zusammenfassungen "sehen gut aus". Aber es gibt kein Eval-Dataset, keine definierten Qualitaetsschwellen und keinen Plan fuer Failure Cases.
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Erstelle ein AI PRD mit klaren Eval-Kriterien, bevor Du in die Produktion gehst. Der Prototyp ist ein guter Start, aber ohne messbare Qualitaet weisst Du nicht, wann das Feature "fertig" ist.
+
+**Konkret brauchst Du:**
+- Ein Golden Dataset: 200 manuell zusammengefasste Tickets als Referenz
+- Qualitaetsschwellen: z.B. 90% der Zusammenfassungen bewahren alle kritischen Informationen, Prioritaetsvorschlag in 80% der Faelle korrekt
+- Failure-Definition: Was passiert, wenn die Zusammenfassung wichtige Details auslaesst?
+- Cost Check: Bei 8.000 Tickets und ~500 Tokens pro Ticket pruefen, ob das Budget reicht
+
+**Warum nicht "einfach shippen":**
+- Ohne Baseline weisst Du nicht, ob spaetere Aenderungen die Qualitaet verbessern oder verschlechtern
+- "Sieht gut aus" ist kein Qualitaetskriterium — es ist eine Anekdote
+- Wenn die AI ein kritisches Ticket falsch priorisiert, kostet das Kundenvertrauen
+
+**Was viele falsch machen:** Den Prototyp direkt in Produktion nehmen, weil er "gut genug aussieht". Ohne Eval-Kriterien merkst Du Qualitaetsprobleme erst, wenn Kunden sich beschweren.
+</details>
+
+## Reflect
+
+**Ein AI PRD ist kein traditionelles PRD mit "AI" im Titel — die Evaluation Section veraendert das gesamte Dokument.**
+
+- Prompts sind Produktspezifikationen: Aenderungen am Prompt sind Produktaenderungen und brauchen Testing
+- Ohne vordefinierte Qualitaetsschwellen gibt es keine Baseline fuer Verbesserung
+- Die Eval-Kriterien zu definieren ist die wichtigste PM-Arbeit bei AI-Features — nicht die Prompt-Optimierung
+
+---
+
+*Quellen: Anthropic Documentation (2025), Google Cloud Engineering Blog, Linear Engineering Blog, GitHub Blog — Copilot Acceptance Rate Metrics*

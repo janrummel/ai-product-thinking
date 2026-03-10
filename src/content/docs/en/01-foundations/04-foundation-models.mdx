@@ -1,0 +1,112 @@
+---
+title: "Foundation Models"
+description: "What foundation models are, why they changed everything — and how to pick the right one for your product."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Your CTO says: "We're going with GPT-5.2." Your ML engineer pushes back: "Llama 4 is good enough and costs a tenth." A consultant recommends training a custom model. Everyone has solid arguments.
+
+You're the Product Manager. You don't need to know which architecture is better. But you need to understand what foundation models are, what options exist, and how to make the right call for your product.
+
+## Concept
+
+Foundation models are "models trained on broad data at scale and adaptable to a wide range of downstream tasks" (Stanford HAI, 2021). Before foundation models, you needed a separate model for every task. Now you take one base model and adapt it.
+
+### Why they changed everything
+
+**Emergent capabilities:** Beyond a certain scale, foundation models develop abilities they were never explicitly trained for. A language model suddenly writes code or reasons through logic problems. Caveat: recent research (arXiv:2503.05788, 2025) suggests some of these "sudden" abilities may be measurement artifacts rather than true phase transitions.
+
+**Homogenization:** The same model powers many different applications. That's efficient — but also a concentration risk. If the base model has a systematic bias, every downstream app inherits it.
+
+**Democratization:** Building an AI product used to require an ML team and months of training. Today: write a prompt, add RAG, optionally fine-tune. The barrier to entry for AI products has dropped dramatically.
+
+### The current landscape (March 2026)
+
+**Closed-source:** OpenAI (GPT-5.2, o3), Anthropic (Claude Opus 4.6, Sonnet 4.6), Google (Gemini 3 Pro/Flash). Highest quality, easiest integration, but vendor lock-in.
+
+**Open-source:** Meta (Llama 4), DeepSeek (V3.2), Alibaba (Qwen 3), Mistral. Full control, no dependency, but you need your own infrastructure. DeepSeek proved that open-source can match frontier quality — with an MIT license and gold medals at IMO and IOI.
+
+All models are increasingly multimodal: text, image, audio, and video in a single model.
+
+### Adaptation techniques — cheapest to deepest
+
+| Technique | What happens | Cost | When to use |
+|-----------|-------------|------|-------------|
+| **Prompt engineering** | Zero-shot, few-shot, chain-of-thought | Cheapest | Quick start, prototypes |
+| **RAG** | Retrieve relevant data + inject into prompt | Medium | Current data, fewer hallucinations |
+| **Fine-tuning** | Adapt model weights for a domain | High | Specialized domain, consistent style |
+| **Train from scratch** | Build your own model | Very high | Unique data, strategic advantage |
+
+The rule of thumb: go as deep as necessary, stay as shallow as possible.
+
+## Framework
+
+**Foundation Model Selection** — three steps to the right model choice:
+
+**Step 1 — Define requirements:** task type, latency, volume, data sensitivity, accuracy, budget.
+
+**Step 2 — Map to model category:**
+
+| Requirement | Approach |
+|-------------|----------|
+| Fast, cheap, good enough | Open-source or Gemini Flash |
+| Maximum quality | Claude Opus, GPT-5.2, Gemini Pro |
+| Data must stay local | Open-source, self-hosted |
+| Multimodal | Gemini (native), GPT-5 (vision), Claude (vision) |
+| Long context | Gemini (1M+), Llama 4 Scout (10M), Claude (200K) |
+
+**Step 3 — Validate with evals.** Never choose based on benchmarks alone. Test with your real data, your real use cases.
+
+**Build vs Buy vs Blend:**
+
+| Strategy | When | Example |
+|----------|------|---------|
+| **Buy** | Commoditized use case, speed, compliance | Duolingo: GPT-4 API for language exercises |
+| **Build** | Competitive advantage, sensitive data | Bloomberg: custom BloombergGPT |
+| **Blend** | The default in 2026 | Shopify Sidekick: API + proprietary commerce data |
+
+The dominant pattern in 2026: Blend. Buy the platform, build the last mile. Hybrid routing — 80% cheap open-source, 20% frontier closed for the hard cases.
+
+## Scenario
+
+You're building an internal knowledge assistant for a company with 2,000 employees. It should search internal documents and answer questions. The documents contain confidential HR and financial data.
+
+**The options:**
+
+| Option | Setup cost | Running cost/month | Data privacy | Time-to-market |
+|--------|-----------|-------------------|-------------|----------------|
+| **A: Claude API + RAG** | $15,000 | $3,200 | Data leaves the company | 6 weeks |
+| **B: Llama 4 self-hosted + RAG** | $80,000 | $1,800 | Full control | 14 weeks |
+| **C: Blend — Llama 4 for standard, Claude for complex** | $55,000 | $2,100 | Only non-sensitive data external | 10 weeks |
+
+Closed-source models cost roughly 87% more to run than open-source alternatives (MIT Sloan), yet they're chosen 80% of the time — because of easier integration and faster time-to-market.
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision in this scenario:** Option C — Blend with hybrid routing.
+
+**Why:**
+- Confidential HR and financial data stays on your own Llama 4 server. Only non-sensitive queries go to the Claude API for higher quality on complex reasoning tasks.
+- Running costs are 34% lower than the pure API solution.
+- 10 weeks time-to-market is a fair compromise — not as fast as pure API, but with significantly better data privacy.
+- You avoid full vendor lock-in and can replace the closed-source component at any time.
+
+**What many get wrong:** Either going all-in on an API ("fast and simple") without considering the data privacy implications, or insisting on self-hosting everything and failing under the complexity.
+</details>
+
+## Reflect
+
+- **Foundation models are the platform layer of AI.** Treat them as an infrastructure decision, not a feature decision — they determine what you can build and what you can't.
+- **Open vs closed is not either/or.** The dominant pattern in 2026 is hybrid routing: cheap open-source for the bulk, frontier closed for the hard cases.
+- **The adaptation technique matters more than the model.** RAG with a good model beats fine-tuning with the best model — when the use case fits.
+- **Evals beat benchmarks.** No benchmark replaces testing with your real data and your real users.
+
+---
+
+*Sources: Bommasani et al. "On the Opportunities and Risks of Foundation Models" (Stanford HAI, 2021), MIT Sloan "Open vs Closed AI Models" (2025), arXiv:2503.05788 (2025), DeepSeek Technical Reports (2025-2026)*

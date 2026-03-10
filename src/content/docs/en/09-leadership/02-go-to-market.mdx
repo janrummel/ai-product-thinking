@@ -1,0 +1,114 @@
+---
+title: "Go-to-Market for AI"
+description: "Why AI products need different GTM strategies — from pricing and launch to unit economics."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Your team has finished building an AI feature. The head of sales wants a big-bang launch with a press release. Marketing has produced a demo video that looks impressive. The CFO asks: "What does each user who uses this cost us?"
+
+You realize: the GTM playbooks that worked for traditional SaaS features don't apply here. Every AI request costs real money. The demo shows the best case, not the average case. And "works most of the time" is a product reality you need to communicate.
+
+## Concept
+
+### Four Fundamental Differences From Traditional SaaS
+
+**1. Expectation management is the biggest GTM challenge.**
+Users expect magic; AI delivers probabilistic outputs. The gap between demo and daily use is larger than for traditional software.
+
+**2. "Works most of the time" is a new product reality.**
+Traditional software either works or has a bug. AI products have accuracy rates, hallucination rates, and failure modes that are features of the system, not bugs.
+
+**3. Value is harder to demonstrate.**
+An AI product's value often depends on the customer's data. Generic demos are less convincing.
+
+**4. COGS scale with usage.**
+Every API call costs money. This fundamentally changes unit economics compared to traditional SaaS.
+
+### Launch Strategies
+
+**Beta-First (dominant pattern 2024-2026):**
+Launch AI features as "beta" or "experimental." Set realistic expectations, gather real usage data, tune quality thresholds. Nearly every major AI launch (GitHub Copilot, Notion AI, Google Gemini) used beta or waitlist periods.
+
+**Progressive Rollout:**
+Start with power users or internal teams. Expand based on quality metrics, not just demand. Gate expansion on eval benchmarks being met.
+
+### Four Pricing Models for AI
+
+| Model | Mechanics | Risk | Example |
+|-------|-----------|------|---------|
+| **Per-Seat** | Fixed monthly fee per user | Heavy users cost more than they pay | GitHub Copilot: $10-39/user/month |
+| **Usage-Based** | Per API call, token, or query | Unpredictable bills scare customers | OpenAI API (per token) |
+| **Hybrid** | Subscription + usage caps | More complex to communicate | Cursor Pro: $20/mo incl. 500 premium requests |
+| **Outcome-Based** | Pay per measurable result | Attribution is difficult, requires measurement | AI support tools (per resolved ticket) |
+
+### The Margin Problem
+
+AI-first SaaS gross margins run 20-60%, compared to 70-90% for traditional SaaS. This is the defining economic challenge. Every query has real compute costs.
+
+As a PM, you need to understand:
+- **Cost per query** at your current model and volume
+- **How cost scales** with usage growth
+- **Where to optimize:** caching, smaller models for simple tasks, model routing
+- **When to raise prices vs. optimize costs**
+
+## Framework
+
+**Pricing Decision Tree:**
+
+| Product type | Recommended model | Rationale |
+|--------------|-------------------|-----------|
+| Copilot (augments humans) | Per-seat or hybrid | Predictable costs, clear value-add |
+| API / Platform | Usage-based | Revenue scales with usage |
+| Replaces a measurable task | Consider outcome-based | Highest value alignment |
+| Feature within larger product | Bundle into existing tier | Avoids separate purchase decision |
+
+**Always before launch:** Model your unit economics (cost per query x expected usage). A "successful" product that loses money on every query will not survive.
+
+## Scenario
+
+You're a PM at an HR SaaS company. Your new AI feature generates job descriptions from bullet points. You currently have 2,000 paying companies with an average of 5 HR users each.
+
+**The numbers:**
+- Cost per AI generation: $0.03 (GPT-4o with prompt + formatting)
+- Expected usage: average 40 generations per user per month
+- Current subscription: $49/user/month
+- Your SaaS currently has 82% gross margin
+
+**Three options:**
+1. Free feature for all users — estimated additional cost: $12,000/month
+2. Premium tier at $10/user/month extra — only AI users pay
+3. Hybrid: 10 generations free, then $0.10 each
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 2 — premium tier at $10/user/month extra. But with a 30-day free trial for everyone.
+
+**Why:**
+- $0.03 x 40 uses = $1.20 cost per user per month. At $10 extra, AI costs are well covered (88% margin on the AI feature)
+- Free (Option 1) reduces overall margin from 82% to ~79% — sounds small, but at 10,000 users that's $12,000/month without offsetting revenue
+- Hybrid (Option 3) is too complex for an HR team — they don't want to count tokens
+- The free trial shows value before requiring payment
+
+**What many get wrong:**
+- "Let's make it free first, we'll figure out pricing later" — with AI features, later is too late because costs run from day one
+- Pricing based on competitors instead of your own unit economics
+
+</details>
+
+## Reflect
+
+**The key insight: AI products have variable costs per use — this changes everything about the GTM playbook.** Pricing isn't an afterthought; it's a survival question.
+
+- Launch AI features as beta, not as big bang — expectation management is everything
+- Model unit economics before launch, not after
+- The dominant pricing model in 2025-2026 is hybrid (subscription + usage caps)
+
+---
+
+*Sources: GitHub Copilot Pricing (2026), Cursor Pricing (2026), Aakash Gupta "How to Price AI Products" (2026), GetDX AI Coding Assistant Pricing Comparison (2026)*

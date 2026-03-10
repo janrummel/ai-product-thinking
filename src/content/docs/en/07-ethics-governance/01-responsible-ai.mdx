@@ -1,0 +1,97 @@
+---
+title: "Responsible AI"
+description: "What Responsible AI means in practice — beyond principle PDFs and marketing badges."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Your company is about to launch an AI feature that pre-screens job applications. The CEO gave the green light, the engineering team is ready. Then someone asks: "Have we actually checked whether this discriminates?"
+
+Silence in the room. Someone points to the "AI Principles" on the company website. But nobody knows whether there's an actual process that could stop the launch if the feature turns out to be unfair.
+
+This is the moment where it becomes clear whether Responsible AI at your company is real — or just a PDF.
+
+## Concept
+
+### What Responsible AI actually means
+
+Responsible AI is not a badge or a checklist. It is the operationalized commitment to developing, deploying, and maintaining AI systems that are safe, fair, transparent, and accountable — across the entire product lifecycle.
+
+The difference between real and performative Responsible AI: **Has your company ever delayed or stopped a launch because of safety concerns?** If not, your AI principles are decoration.
+
+### How the major providers approach it
+
+**Anthropic** uses two pillars: Constitutional AI (the model evaluates its own outputs against an inspectable set of principles) and the Responsible Scaling Policy (RSP 3.0). RSP defines AI Safety Levels (ASL-1 through ASL-4+), where higher capabilities automatically trigger stricter safety requirements. ASL-3 standards were activated for Claude Opus 4 — as a precautionary measure.
+
+**OpenAI** uses the Preparedness Framework (v2). Two thresholds — *High* and *Critical* — determine when safeguards kick in. Controversy: OpenAI stated in 2025 that safety requirements could be "adjusted" if a competitor releases a risky system without similar protections.
+
+**Google** combines AI Principles (since 2018) with the Secure AI Framework (SAIF) and the Frontier Safety Framework. Critics noted that the "bold and responsible" framing makes it difficult to determine when safety actually constrains product decisions.
+
+### The EU AI Act — the regulatory reality
+
+The EU AI Act is the world's first comprehensive AI law, using a risk-based classification system:
+
+| Risk Tier | Examples | Requirements |
+|-----------|----------|--------------|
+| **Unacceptable** | Social scoring, real-time biometric identification | Banned |
+| **High-Risk** | AI in hiring, credit scoring, medical devices | Conformity assessments, CE marking, human oversight |
+| **Limited Risk** | Chatbots, deepfakes, emotion recognition | Transparency obligations |
+| **Minimal Risk** | Spam filters, AI in games | No specific obligations |
+
+Key deadline: **August 2, 2026** — comprehensive requirements for high-risk systems take effect. Penalties: up to EUR 35M or 7% of global turnover.
+
+## Framework
+
+The **Responsible AI Reality Check** — six steps for every AI feature launch:
+
+| Step | Action | Outcome |
+|------|--------|---------|
+| 1. CLASSIFY | Map your feature to EU AI Act risk tiers | Regulatory baseline |
+| 2. IDENTIFY | Name concrete harm scenarios (not abstract "bias") | Specific risks |
+| 3. DEFINE | Set safety mechanisms BEFORE launch | Guardrails, kill switches |
+| 4. ESTABLISH | Create escalation paths (who decides when things go wrong?) | Clear accountability |
+| 5. DOCUMENT | Record decisions and rationale | Audit trail |
+| 6. MONITOR | Continuous oversight post-launch | Ongoing safety |
+
+## Scenario
+
+You're a PM at an HR tech startup. Your AI feature automatically ranks applications for initial interviews. Sales pressure is high — three enterprise customers are waiting for the feature.
+
+**The facts:**
+- Training data: 50,000 historical hiring decisions from one client
+- Early tests show: the system systematically favors applicants from certain universities
+- Your "AI Ethics Board" exists on paper but has never met
+- Go-live is planned in 4 weeks
+- The CTO says: "We can fix this after launch"
+
+Under the EU AI Act, AI in hiring falls under **High-Risk**. Starting August 2026, conformity assessments, technical documentation, and human oversight will be mandatory.
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Delay the launch. Document the bias, activate the Ethics Board, audit the training data, and build in a human-in-the-loop component before the feature goes live.
+
+**Why:**
+- AI in hiring is high-risk under the EU AI Act — a bias incident wouldn't just be embarrassing, it could be illegal
+- Historical hiring data reproduces historical discrimination — this is a well-known pattern (Amazon shut down a similar system in 2018)
+- "Fix it after launch" doesn't work with bias — every discriminatory decision in the meantime is real harm to real people
+- Enterprise customers in regulated industries will reject an AI hiring tool without demonstrable fairness testing
+
+**What many get wrong:** Pushing the launch through with plans to fix it later — then being surprised when a discrimination case goes public and all three enterprise customers walk away.
+</details>
+
+## Reflect
+
+**Responsible AI is not a gate before launch — it's a property of the entire product development process.**
+
+- Principles without enforcement mechanisms are worthless — the test is whether they can stop a launch
+- The EU AI Act turns Responsible AI from an optional virtue into a regulatory obligation
+- As a PM, you own the decision about what ships — the ethics team is a resource, not a shield
+
+---
+
+*Sources: Anthropic RSP 3.0 (2026), OpenAI Preparedness Framework v2 (2025), Google AI Principles, EU AI Act Implementation Timeline (artificialintelligenceact.eu), DLA Piper Analysis (2025)*

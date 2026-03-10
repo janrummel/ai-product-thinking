@@ -1,0 +1,127 @@
+---
+title: "AI Product Lifecycle"
+description: "Why AI products are never done — and how to manage the continuous lifecycle from exploration to improvement."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Your AI feature is live. The summarization function works, the metrics look good, the team celebrates the launch. Three months later: quality is declining. Users complain about poor summaries. What happened?
+
+Nobody changed anything — and that's exactly the problem. The model provider rolled out an update. Customer inquiries shifted (new product release). The knowledge base became outdated. In traditional software development, "changing nothing" means stability. In AI products, "changing nothing" means quality degradation.
+
+## Concept
+
+### The AI product lifecycle is not linear
+
+**Traditional:** Discovery, Design, Build, Launch, Maintain
+**AI:** Discovery, Prototype, Evaluate, Build, Launch, Monitor, Re-evaluate, Improve, (Repeat)
+
+The critical difference: **AI products never reach a stable maintenance phase.** Models drift, user behavior changes, the world changes, and competitors improve. An AI product that isn't actively being improved is actively degrading.
+
+### The four phases
+
+**Phase 1: Exploration & Prototyping (weeks)**
+- Goal: validate that AI can solve the problem at acceptable quality
+- Activities: prompt experimentation, model comparison, quick prototypes
+- PM role: define the problem clearly enough that a prototype can be evaluated
+- Common mistake: skipping this phase and committing to a full build after a demo
+
+**Phase 2: Evaluation & Hardening (weeks to months)**
+- Goal: build robust evaluation infrastructure and set quality baselines
+- Activities: create eval datasets, build automated eval pipelines, run human evaluations
+- PM role: define what "good enough" looks like for users
+- Common mistake: launching without eval infrastructure — "we'll measure quality later"
+
+**Phase 3: Production & Scaling (months)**
+- Goal: ship to users and handle real-world traffic
+- PM role: monitor quality metrics, manage user feedback, prioritize improvements
+- Common mistake: treating launch as the finish line instead of the starting line
+
+**Phase 4: Continuous Improvement (ongoing)**
+- Goal: maintain and improve quality as the world changes
+- Activities: model updates, prompt refinement, eval dataset expansion
+- PM role: prioritize improvement work against new features
+- Common mistake: stopping investment after launch, letting quality degrade
+
+### Model versioning & migration
+
+When Anthropic updates Claude, when OpenAI releases a new GPT — your product's behavior changes. Sometimes dramatically.
+
+**Best practices:**
+1. Never auto-upgrade production models — always pin to specific versions
+2. Run your eval suite on the new model before migration
+3. Plan for prompt adjustments — prompts optimized for Model A may perform differently on Model B
+4. Enable rollback — keep the old configuration deployable for at least 2 weeks after migration
+
+**The upgrade trap:** A new model may score higher on general benchmarks but perform worse on your specific use case. Always evaluate on YOUR eval dataset, not the model provider's benchmarks.
+
+### Three layers of monitoring
+
+| Layer | What is measured | Examples |
+|-------|-----------------|----------|
+| Infrastructure | Standard operations | Uptime, error rates, latency, throughput |
+| Quality (AI-specific) | Output quality | Sample evaluations, thumbs up/down rate, edit distance, drift detection |
+| Business Impact | Outcome-level | Adoption trends, task completion, cost-per-query, revenue attribution |
+
+A model can be online and within SLA while producing terrible outputs. Quality monitoring is not optional.
+
+## Framework
+
+**Priorities for post-launch work:**
+
+| Priority | Trigger | Action |
+|----------|---------|--------|
+| URGENT | Quality regression (metrics below launch thresholds) | Fix immediately |
+| HIGH | Model provider deprecation notice | Plan migration with eval cycle |
+| MEDIUM | Gradual quality drift (metrics declining slowly) | Schedule improvement sprint |
+| LOW | New model available with better benchmarks | Evaluate when current performance is insufficient |
+
+**Always:** treat eval infrastructure as a first-class product concern.
+
+## Scenario
+
+You're PM of an AI writing assistant. You launched 4 months ago. The situation today:
+
+- **Acceptance rate** (users adopt AI suggestion): dropped from 68% at launch to 54%
+- **Regeneration rate** (users click "regenerate"): increased from 12% to 23%
+- **Latency:** unchanged at P95 of 2.1 seconds
+- **Cost:** $2,800/month, within budget
+- **Model:** you're still on the same version
+- **Knowledge update:** the internal style guide database hasn't been updated since launch
+- Your CEO asks: "Should we upgrade to the latest model? It must be better."
+
+Infrastructure metrics are all green. But quality is clearly degrading.
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Don't immediately upgrade to a new model. First diagnose the root cause of quality drift.
+
+**Concrete steps:**
+1. **Update the style guide database.** The most likely cause: outdated context leads to outputs that no longer match current style expectations
+2. **Sample analysis of regenerations:** Analyze the 23% regeneration cases — are there patterns? Specific text types? Specific user groups?
+3. **Only then evaluate a model upgrade** — on your own eval dataset, not on general benchmarks
+
+**Why not upgrade immediately:**
+- A model upgrade changes behavior everywhere — including where it works well
+- If the cause is outdated context, a new model won't help
+- Upgrading without diagnosis is symptom treatment
+
+**What many get wrong:** Reflexively upgrading to the latest model when quality drops, without understanding the actual cause. Often it's the context, not the model.
+</details>
+
+## Reflect
+
+**AI products have no stable end state — launch is the starting line, not the finish line.**
+
+- Model drift, data drift, and changing user expectations require continuous work
+- Quality monitoring is separate from infrastructure monitoring — a system can be online and still deliver poor outputs
+- Model upgrades are not free improvements — every upgrade needs evaluation on your own dataset
+
+---
+
+*Sources: Anthropic Documentation — Model Cards & Migration Guides (2025), Stripe Engineering Blog — ML System Lifecycle, Chip Huyen "Designing Machine Learning Systems" (O'Reilly, 2022)*

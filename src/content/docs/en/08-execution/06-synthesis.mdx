@@ -1,0 +1,65 @@
+---
+title: "Synthesis: Execution"
+description: "How the five Execution lessons connect — and what they reveal together about AI product development."
+sidebar:
+  order: 6
+---
+
+## The Big Picture
+
+You've worked through five lessons: how to write AI PRDs with eval criteria, why AI products have a continuous lifecycle, how cross-functional teams collaborate on AI, why data quality is product quality, and how to adapt Agile for AI development.
+
+Individually, these are tools for different aspects of execution. Together, they form an execution model built on one central insight: **AI product execution is uncertainty management.** Traditional product development minimizes uncertainty through upfront specification. AI product development embraces uncertainty and manages it through continuous evaluation and rapid iteration.
+
+## Connections
+
+### 1. From PRDs to lifecycle — evaluation as the common thread
+
+AI PRDs define eval criteria (Lesson 1). The lifecycle uses these criteria as a baseline for monitoring and improvement (Lesson 2). Without defined thresholds, you don't know at launch whether quality is sufficient — and after launch, you don't know if it's declining.
+
+**For you as a PM:** The eval criteria from the PRD aren't just a launch gate. They're the foundation for the entire lifecycle.
+
+### 2. From cross-functional to Agile — rituals connect roles and processes
+
+The eval review ritual (Lesson 3) is the bridge between cross-functional collaboration and the Agile process (Lesson 5). It gives the dual-track approach its rhythm: review experiment results, prioritize improvement actions, define next timeboxes.
+
+**For you as a PM:** A single structured meeting per week can replace ad-hoc alignment and keep both tracks synchronized.
+
+### 3. From data quality to PRDs — data as specification
+
+Data quality requirements (Lesson 4) belong in the AI PRD (Lesson 1). What knowledge base quality is expected? How often are documents updated? What data governance policies apply? These questions belong in the specification — not in the retrospective after launch.
+
+**For you as a PM:** If your AI PRD has no section on data quality, it's incomplete.
+
+### 4. From lifecycle to data quality — degradation has two causes
+
+AI products degrade (Lesson 2) either through model drift or data drift (Lesson 4). In practice, data drift is the more common cause — outdated knowledge bases, new user queries outside the coverage, accumulated contradictions.
+
+**For you as a PM:** When quality drops, check the data first, then the model.
+
+### 5. From Agile to cross-functional — experiments need all perspectives
+
+Experiment spikes (Lesson 5) only produce actionable results when all perspectives are involved (Lesson 3). An ML engineer experimenting alone optimizes for technical metrics. A PM evaluating alone misses technical constraints.
+
+**For you as a PM:** Decision gates after experiment spikes should involve PM, tech lead, and (for UX-relevant experiments) designer.
+
+## The Meta-Insight
+
+> AI product execution follows a cycle: Specify (PRD), Manage (Lifecycle), Collaborate (Cross-Functional), Maintain Data (Quality), Adapt Process (Agile), Repeat. The teams that build the best eval infrastructure build the best AI products.
+
+## Your Execution Checklist
+
+What you should now be able to do:
+
+- [ ] Write an AI PRD with eval criteria, quality thresholds, and failure modes — Lesson 1
+- [ ] Manage the AI product lifecycle from exploration to continuous improvement — Lesson 2
+- [ ] Translate between researcher and product mindsets and establish eval review rituals — Lesson 3
+- [ ] Define data quality as a product requirement and answer data governance questions — Lesson 4
+- [ ] Implement dual-track development with timeboxed experiments and kill criteria — Lesson 5
+- [ ] Diagnose quality drift: is it the model or the data? — Lessons 2 + 4
+
+If any of these feel uncertain, go back to the relevant lesson. Execution is the bridge between strategy and results.
+
+---
+
+*Sources: Building on Lessons 1–5. Anthropic Documentation (2025), Google Cloud Engineering Blog, Spotify Engineering Blog, LangChain Community Reports*

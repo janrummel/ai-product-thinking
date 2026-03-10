@@ -1,0 +1,112 @@
+---
+title: "Hallucination Management"
+description: "Warum Hallucinations kein Bug sind, den man fixt — und wie Du als PM trotzdem verlaessliche Produkte baust."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Ein Anwalt reicht einen Schriftsatz bei Gericht ein. Die darin zitierten Praezedenzfaelle klingen ueberzeugend — Fallnummern, Gerichtsentscheidungen, Begruendungen. Nur: Keiner dieser Faelle existiert. ChatGPT hat sie erfunden. Der Anwalt wird vom Gericht sanktioniert.
+
+Ein anderer Fall: Air Canadas AI-Chatbot erfindet eine Erstattungsrichtlinie fuer Trauerfaelle, die es nie gab. Ein Tribunal entscheidet: Die Airline haftet fuer die halluzinierte Policy.
+
+Google Bards Launch-Demo 2023 enthaelt einen Faktenfehler ueber das James Webb Telescope. Die Folge: 100 Milliarden Dollar Marktwertverlust an einem Tag.
+
+Hallucinations sind kein theoretisches Problem. Sie haben reale, messbare Konsequenzen — finanziell, rechtlich und fuer das Vertrauen Deiner User.
+
+## Concept
+
+### Warum Hallucinations strukturell sind
+
+LLM-Hallucinations sind keine Software-Bugs, die man fixt. Sie sind eine strukturelle Eigenschaft der Architektur. LLMs generieren Text, indem sie das wahrscheinlichste naechste Token vorhersagen — basierend auf statistischen Mustern. Das bedeutet:
+
+- Plausibel klingender Text wird auch ohne relevante Trainingsdaten produziert
+- Die Confidence des Outputs korreliert nicht mit seiner Korrektheit
+- Dieselbe Architektur, die kreative Generierung ermoeglicht, ermoeglicht auch ueberzeugende Fabrikation
+
+### Typen von Hallucinations
+
+| Typ | Beschreibung | Beispiel |
+|-----|-------------|---------|
+| **Faktenfabrikation** | Erfundene Fakten, Zitate, Statistiken | Nicht-existierende Gerichtsfaelle |
+| **Entity Confusion** | Verwechslung von Attributen realer Entitaeten | Person A wird Werk von Person B zugeschrieben |
+| **Temporale Fehler** | Veraltetes als aktuell darstellen | "Der aktuelle CEO ist..." (laengst abgeloest) |
+| **Logische Hallucination** | Korrekt klingende, aber fehlerhafte Argumentationsketten | Scheinbar valide Schlussfolgerungen aus falschen Praemissen |
+| **Source Hallucination** | Echt wirkende, aber erfundene Quellen | URLs, Paper-Titel, DOIs, die nicht existieren |
+
+### Mitigation-Strategien (keine loest das Problem allein)
+
+**RAG (Retrieval-Augmented Generation)** reduziert Hallucinations um 40-71%, indem Antworten in externen Dokumenten verankert werden. Aber: Eine Stanford-Studie zu Legal RAG zeigt, dass Hallucinations "substanziell, vielfaeltig und potenziell heimtueckisch bleiben" — auch mit RAG.
+
+**Span-Level Verification** prueft jede einzelne Behauptung gegen Evidenz aus abgerufenen Quellen. Geht ueber dokument-basiertes RAG hinaus zu satzbasiertem Grounding.
+
+**Multi-Candidate Evaluation** generiert mehrere Antworten, bewertet sie mit einer Faktizitaetsmetrik und waehlt die verlaesslichste — ohne Modell-Retraining.
+
+**Human-in-the-Loop** ist fuer Hochrisiko-Domaenen (Gesundheit, Recht, Finanzen) unverzichtbar. Skaliert schlecht, ist aber in manchen Kontexten die einzige verantwortbare Option.
+
+### UX-Patterns fuer halluzinationsanfaellige Outputs
+
+| Pattern | Wann einsetzen |
+|---------|---------------|
+| **Source Attribution** (Inline-Zitate mit Links) | Immer bei faktischen Behauptungen |
+| **Confidence Indicators** (visuelle Signale) | Wenn Confidence variiert |
+| **"Verify this" Nudges** | Hochrisiko-Domaenen |
+| **Regenerate-Option** | Wenn Variabilitaet erwartet wird |
+| **Edit-in-Place** | Professionelle / Experten-User |
+| **Structured Output** (Tabellen statt Fliesstext) | Wenn Genauigkeit wichtiger ist als Lesbarkeit |
+
+## Framework
+
+Der **Hallucination Risk Assessment** — Risiko und Mitigation nach Domain:
+
+| Domain | Risiko | Pflicht-Mitigation | Nice-to-Have |
+|--------|--------|--------------------|--------------|
+| **Gesundheit / Recht / Finanzen** | Kritisch | Human-in-the-Loop + RAG gegen verifizierte Quellen | Span-Level Verification |
+| **Bildung / Forschung** | Hoch | Source Attribution + Verification Nudges | Multi-Candidate Evaluation |
+| **Internes Tooling / Produktivitaet** | Mittel | Disclaimers + Regenerate-Option + Feedback-Loop | Confidence Indicators |
+| **Kreativ / Marketing** | Niedriger | Human Review vor Veroeffentlichung | Brand Guidelines als Guardrails |
+
+**Messung:** Tracke Hallucination Rates nach Kategorie, nicht nur insgesamt. Tools: RAGAS, TruLens, DeepEval.
+
+## Scenario
+
+Du bist PM eines AI-Rechtsassistenten fuer eine mittelgrosse Kanzlei. Der Assistent soll Anwaelte bei der Recherche unterstuetzen — relevante Urteile finden, Zusammenfassungen erstellen, Argumentationslinien vorschlagen.
+
+**Die Fakten:**
+- 80 Anwaelte nutzen das Tool taeglich
+- RAG-System mit Zugriff auf eine Rechtsdatenbank mit 2 Millionen Dokumenten
+- Interne Evaluation: 94% der zitierten Quellen sind korrekt (6% Hallucination Rate bei Quellenangaben)
+- 12% der Zusammenfassungen enthalten mindestens eine inhaltliche Ungenauigkeit
+- Ein Partner der Kanzlei will das Tool sofort fuer Client-facing Schriftsaetze freigeben
+- Ein anderer Partner will es komplett abschalten, weil "6% inakzeptabel ist"
+
+Bei 80 Anwaelten mit durchschnittlich 5 Recherchen pro Tag sind das ca. 400 Recherchen taeglich — bei 6% Hallucination Rate also ~24 Recherchen pro Tag mit erfundenen Quellen.
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Weder sofort freigeben noch abschalten. Das Tool als Recherche-Unterstuetzung behalten, aber mit striktem Human-in-the-Loop: Jede Quelle muss vom Anwalt verifiziert werden, bevor sie in einen Schriftsatz einfliesst. Parallel die Hallucination Rate durch Span-Level Verification und bessere Retrieval-Qualitaet senken.
+
+**Warum:**
+- 6% Hallucination Rate bei Quellenangaben ist fuer ein Legal-Tool zu hoch fuer unueberwachte Nutzung — der Anwalt-Sanktionierungs-Fall zeigt die Konsequenzen
+- Aber 94% korrekte Quellen PLUS menschliche Verifikation ist deutlich besser als manuelle Recherche allein (die auch Fehler hat)
+- Das Air-Canada-Urteil zeigt: Dein Unternehmen haftet fuer halluzinierte Outputs — nicht das Modell, nicht der Anbieter
+- Der richtige Framing: AI als Recherche-Beschleuniger mit menschlicher Qualitaetskontrolle, nicht als autonomer Rechtsberater
+
+**Was viele falsch machen:** Entweder auf die Hallucination Rate starren und das Tool killen (und damit echten Produktivitaetsgewinn verschenken) — oder die 6% ignorieren und auf den ersten Gerichts-Vorfall warten.
+</details>
+
+## Reflect
+
+**Hallucinations sind kein Bug, den Du fixst — sie sind ein Risiko, das Du managst.** Deine Aufgabe als PM ist nicht, sie zu eliminieren (das geht nicht), sondern Produkte zu bauen, die trotz Hallucinations verlaesslich sind.
+
+- RAG reduziert Hallucinations um 40-71% — das bedeutet, 29-60% bleiben. Es ist eine Mitigation, keine Loesung
+- Disclaimer sind rechtlich nuetzlich, aber verhaltensmaessig unwirksam — User gewoehnen sich innerhalb von Minuten daran. Aktive UX-Patterns (Inline-Zitate, Confidence-Signale) wirken besser
+- Die Verbesserung von Hallucination Rates ist logarithmisch — jede marginale Verbesserung wird schwieriger. Fuer Hochrisiko-Domaenen ist die aktuelle Rate unakzeptabel, unabhaengig vom Trend
+
+---
+
+*Quellen: Stanford Legal RAG Study (2025), Lakera — LLM Hallucinations Guide, MDPI Hallucination Mitigation Survey, Air Canada Chatbot Tribunal Ruling (2024), arxiv Hallucination Survey (2510.24476)*

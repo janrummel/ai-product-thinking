@@ -1,0 +1,114 @@
+---
+title: "Generative Features"
+description: "How to design generative AI features that manage expectations, enable edit workflows, and ensure quality — instead of leaving users alone with unpredictable outputs."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Your team shipped an AI text generator into the product. The demo was impressive. Now the support tickets roll in: "The output is wrong", "This doesn't sound like me", "Why can't I just tweak this part?"
+
+The problem isn't the model. The problem is that generative features require a fundamentally different UX approach than deterministic features. A button always delivers the same result. A generative feature delivers something different every time — and your user has to decide whether it's good enough.
+
+## Concept
+
+### The Core Challenge: Non-Deterministic Output
+
+Generative features have a unique challenge: quality varies. Every output is a draft, not a final result. This creates three tension points:
+
+- **Evaluation burden:** The user must assess every output themselves — that costs cognitive energy
+- **Expectation gap:** AI is probabilistic, stakeholders expect deterministic. Figma 2025: 78% say AI boosts efficiency, but under 50% say it makes them *better*
+- **Draft-to-final gap:** Between "first draft" and "finished output" lies a workflow you need to design
+
+### UX Patterns by Modality
+
+**Text Generation:**
+- **Inline generation** (Notion AI): Slash command, output appears directly in the document. Lowest friction, but limited control
+- **Side panel** (ChatGPT Canvas, Claude Artifacts): Separate panel with direct editing. More context, more control
+- **Highlight-and-instruct** (Canvas): Select text, request targeted changes. Most precise method
+- **Visual diff** (Notion): Deletions in gray, additions in blue. User sees immediately what changed
+
+**Image Generation** (Midjourney paradigm):
+- 4-image grid, select, variations (subtle/strong), upscale, refine, export
+- Never force commitment to a single generation
+- Vary Region for partial regeneration — change only the part that doesn't work
+
+**Code Generation:**
+- **Inline completion** (Copilot): Ghost text, Tab to accept. Minimal interruption
+- **Prompt-to-code** (v0): Chat to complete components, live preview, iterate
+
+### Edit/Refine Workflows
+
+The output is rarely perfect on the first try. Your product needs at least two of these mechanisms:
+
+- **Conversational refinement:** "Make it shorter" — natural language iteration
+- **Direct editing:** User types directly in the AI output panel
+- **Variation branching:** Generate multiple alternatives from a single base
+- **Behavioral contracts:** Define what the AI can do, can't do, and should ask about before acting
+
+### Quality Guardrails
+
+- **Input guardrails:** Filter before the model sees the prompt
+- **Output guardrails:** Check results before the user sees them
+- **Fallback UX:** When output gets blocked — don't just show an error, offer an alternative
+- **False positive tension:** Legitimate prompts get blocked. Too strict = frustrating, too loose = risky
+- **Latency impact:** Every guardrail costs time. Communicate wait time, not just the result
+
+## Framework
+
+**Generative Feature Design Matrix:**
+
+| Dimension | Question | Low Maturity | High Maturity |
+|-----------|----------|-------------|---------------|
+| Output control | Can the user modify the output? | Regenerate button only | Edit, refine, variations |
+| Expectation mgmt | Does the user know what to expect? | No guidance | Onboarding, examples, limitations |
+| Guardrails | How is quality ensured? | Output filter only | Input + output + fallback UX |
+| Iteration | How does the user refine? | Copy-paste into new prompt | Conversational refinement + direct edit |
+| Feedback loop | Does the system learn from the user? | No feedback | Thumbs, edits as signal, behavioral contracts |
+
+**Minimum Viable Generative Feature:** Output control + expectation management + at least one refine mechanism. Without these three, you're sending users into a dead end.
+
+## Scenario
+
+You're a PM at a content marketing SaaS. Your new feature: AI-generated blog drafts from briefings. Beta data after 4 weeks:
+
+- 2,400 drafts generated, 68% get further edited (good)
+- Average 4.2 regenerations per draft before users are satisfied (bad)
+- 31% of users give up after 2+ regenerations and write from scratch
+- Feature NPS: +12 (core product: +38)
+- Top complaints: "Sounds generic", "Can't adjust tone", "Changes always affect the entire text"
+
+**Options:**
+1. **Model upgrade:** Better base model, hope for better first-draft quality. Cost: $40k/year more in API costs
+2. **Refine workflow:** Highlight-and-instruct + tone settings + visual diff. Cost: 6 weeks engineering
+3. **Variation-first:** 3 variants per generation + mix-and-match function. Cost: 4 weeks engineering, 2x API costs
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 2 — Refine workflow.
+
+**Why:**
+- The problem isn't first-draft quality (68% edit rate is solid) — the problem is users can't make targeted adjustments to the output
+- 4.2 regenerations per draft shows: users know what they want, but lack the tools to communicate it to the system
+- Highlight-and-instruct directly solves the top complaint "changes always affect the entire text"
+- Tone settings as a behavioral contract: users define *upfront* what the AI should do
+
+**Why not the others:**
+- **Option 1:** A better model might reduce regenerations from 4.2 to 3 — but without an edit workflow, users stay stuck in the regeneration loop
+- **Option 3:** Variations help with selection, not refinement. The core pain is "I can't change anything specifically"
+</details>
+
+## Reflect
+
+- **Generative features are workflows, not outputs.** The generate button is the beginning, not the end. Without edit/refine mechanisms, you're delivering a slot machine instead of a tool.
+- **Expectation management is product design.** If you don't communicate that AI works probabilistically, you create disappointment. Onboarding honesty ("I'm still learning") isn't admitting weakness — it's UX.
+- **Guardrails cost latency, no guardrails cost trust.** Find the balance and communicate wait times transparently.
+- **User segments differ radically.** Embracers want power features, skeptics need safety nets. Segment by AI attitude, not just by role.
+
+---
+
+*Sources: Figma AI UX Research (2025), Notion AI UX Patterns (2024), Midjourney UX Documentation (2024), Lenny's Newsletter — User Segmentation for AI (2024), OpenAI Canvas Design Blog (2024)*

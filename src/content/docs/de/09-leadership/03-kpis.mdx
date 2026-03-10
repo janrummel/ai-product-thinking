@@ -1,0 +1,124 @@
+---
+title: "KPIs fuer AI-Produkte"
+description: "Welche Metriken AI-Produkte wirklich brauchen — jenseits von DAU/MAU und Conversion."
+sidebar:
+  order: 3
+---
+
+## Context
+
+Dein AI-Feature ist seit drei Monaten live. Die DAU/MAU-Zahlen sehen gut aus. Dein CEO ist zufrieden. Dann zeigt ein Tweet eines verargerten Kunden: Der AI-Output hat falsche Informationen enthalten und wurde ungeprueft weitergeleitet.
+
+Du schaust in Dein Dashboard und merkst: Du misst Nutzung, aber nicht Qualitaet. Du weisst wie viele User das Feature nutzen, aber nicht ob die Outputs korrekt sind. Hohe Nutzung eines halluzinierenden Produkts ist schlimmer als niedrige Nutzung eines akkuraten.
+
+## Concept
+
+### Das Drei-Schichten AI Metrics Framework
+
+Traditionelle Produktmetriken (DAU/MAU, Conversion, Retention, NPS) reichen fuer AI-Produkte nicht aus. Du brauchst drei zusaetzliche Schichten.
+
+### Layer 1: Model Quality Metrics
+
+| Metrik | Was sie misst | Zielbereich |
+|--------|---------------|-------------|
+| Accuracy / Correctness | Anteil faktisch korrekter Outputs | Domain-abhaengig |
+| Hallucination Rate | Anteil erfundener Informationen | Unter 5% fuer kundenseitige Features |
+| Groundedness | Sind Antworten durch Quellmaterial belegt? | Ueber 90% bei RAG-Anwendungen |
+| Task Completion Rate | Anteil erfolgreich erledigter Aufgaben | Use-Case-abhaengig |
+
+### Layer 2: System Performance Metrics
+
+| Metrik | Was sie misst | Zielbereich |
+|--------|---------------|-------------|
+| Latency (P50) | Mediane Antwortzeit | Unter 2s fuer Chat, unter 500ms fuer Inline |
+| Latency (P95) | 95. Perzentil Antwortzeit | Unter 5s fuer Chat |
+| Cost per Query | Durchschnittliche Inferenz-Kosten pro Anfrage | Trend beobachten |
+| Error Rate | Anteil komplett fehlgeschlagener Requests | Unter 0,1% |
+
+### Layer 3: Business Impact Metrics
+
+| Metrik | Was sie misst | Warum wichtig |
+|--------|---------------|---------------|
+| AI Feature Adoption Rate | Anteil der User, die AI-Features nutzen | Misst Product-Market Fit |
+| Escalation Rate | Anteil der AI-Interaktionen mit Human Handoff | Misst AI-Zuverlaessigkeit in der Praxis |
+| Regeneration Rate | Wie oft User "Nochmal generieren" klicken | Fruehwarnsystem fuer Qualitaetsprobleme |
+| Cost per Resolution | Gesamtkosten pro geloestem User-Need | Wahre Unit Economics |
+| Revenue Attribution | Umsatz direkt durch AI-Features | Business Case Validation |
+
+### Leading vs. Lagging Indicators
+
+**Leading (sagen Zukunft voraus):** Hallucination Rate Trend, User Trust Score, Eval Benchmark Improvements, Cost-per-Query Trend, Regeneration Rate
+
+**Lagging (bestaetigen Vergangenheit):** Revenue aus AI-Features, Churn Rate der AI-User, NPS, Total AI Compute Spend
+
+**Key Insight:** Die Regeneration Rate — wie oft User "Nochmal" klicken — ist eine der wertvollsten, aber am wenigsten genutzten AI-Metriken. Hohe Regeneration-Raten signalisieren Qualitaetsprobleme, bevor User churnen.
+
+## Framework
+
+**Welche Metriken wann priorisieren:**
+
+| Phase | Primaere Metriken | Sekundaere Metriken |
+|-------|-------------------|---------------------|
+| Pre-Launch | Eval Accuracy, Hallucination Rate, Latency, Cost per Query | - |
+| Beta | + Adoption Rate, Task Completion, Regeneration Rate | Escalation Rate |
+| General Availability | + Revenue Attribution, Retention, NPS | ROI |
+| Scale | + Cost Optimization Trends, Model Efficiency | Competitive Benchmarks |
+
+**In jeder Phase:** Cost per Query tracken. Unit Economics lassen sich in keiner Phase ignorieren.
+
+### AI Dashboard: Vier Sektionen
+
+1. **Real-time Operations:** Latency, Error Rates, Throughput, Cost Burn Rate
+2. **Quality Monitoring:** Hallucination Rate (gesamplet), Groundedness, Task Completion (taeglich/woechentlich)
+3. **User Experience:** Adoption, Engagement Depth, Regeneration Rate, Thumbs Up/Down
+4. **Business Impact:** Revenue Attribution, Cost Trends, ROI (woechentlich/monatlich)
+
+## Scenario
+
+Du bist AI PM bei einem Legal-Tech-Startup. Euer AI-Feature fasst Vertraege zusammen und markiert Risikoklauseln. Seit dem Launch vor 8 Wochen:
+
+**Die Zahlen:**
+- 1.200 aktive User (von 3.000 mit Zugang) = 40% Adoption
+- Durchschnittlich 15 Zusammenfassungen pro User pro Woche
+- Latency P50: 3,2 Sekunden, P95: 8,1 Sekunden
+- Cost per Query: $0.08
+- Regeneration Rate: 28% (User klickt "Nochmal generieren")
+- Thumbs Down Rate: 12%
+- Escalation Rate (User kontaktiert Support wegen AI-Fehler): 5%
+- Keine Hallucination-Rate gemessen
+
+Du sollst dem Board eine Einschaetzung geben: Ist das Feature auf dem richtigen Weg?
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Einschaetzung:** Das Feature hat Product-Market Fit (40% Adoption ist gut), aber ein ernstes Qualitaetsproblem, das vor dem Scaling geloest werden muss.
+
+**Die Warnsignale:**
+- 28% Regeneration Rate ist zu hoch — fast ein Drittel der Outputs ist beim ersten Versuch nicht brauchbar
+- Keine Hallucination-Rate gemessen bei einem Legal-Produkt ist ein kritisches Risiko — falsche Vertrags-Zusammenfassungen koennten Kunden erheblich schaden
+- P95 Latency von 8,1s ist zu langsam — Anwaelte, die Vertraege pruefen, erwarten schnelle Ergebnisse
+
+**Empfehlung ans Board:**
+1. Sofort Hallucination-Messung aufsetzen (Eval Dataset mit Anwaelten bauen)
+2. Regeneration Rate als primaeren Quality-KPI definieren — Ziel: unter 15%
+3. Latency-Optimierung (Modell-Routing: einfache Zusammenfassungen an schnelleres Modell)
+4. Scaling erst bei Regeneration Rate unter 15% und Hallucination Rate unter 3%
+
+**Was viele falsch machen:** 40% Adoption feiern und sofort skalieren, ohne die Qualitaetsmetriken zu pruefen. Hohe Nutzung bei niedriger Qualitaet ist ein Churn-Problem, das noch nicht sichtbar ist.
+
+</details>
+
+## Reflect
+
+**Die wichtigste Erkenntnis: Bei AI-Produkten sind Qualitaetsmetriken wichtiger als Nutzungsmetriken.** Hohe Adoption ohne Qualitaetsmessung ist ein blindes Risiko.
+
+- Miss Model Quality VOR dem Launch, nicht danach — Du brauchst Baselines
+- Die Regeneration Rate ist Dein bester Fruehindikator fuer Qualitaetsprobleme
+- Verschiedene Stakeholder brauchen verschiedene Dashboards: Engineering (Latency/Errors), Product (Quality/Adoption), Leadership (Cost/ROI)
+
+---
+
+*Quellen: Google Cloud "KPIs That Actually Matter for Production AI Agents" (2026), Google Cloud "KPIs for Gen AI" (2026), Product School "Evaluation Metrics for AI Products" (2026), Splunk "LLM Observability Explained" (2026)*

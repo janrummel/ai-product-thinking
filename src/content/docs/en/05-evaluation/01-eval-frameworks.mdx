@@ -1,0 +1,116 @@
+---
+title: "Eval Frameworks"
+description: "Why evals are the most important skill for AI Product Managers — and how to build your first eval system."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Your team launched an AI feature: a chatbot answering customer questions about your products. Two weeks later, users complain about wrong answers. The CTO asks: "How bad is it exactly?" Nobody can answer because there is no systematic evaluation in place.
+
+Traditional software testing checks deterministic behavior: input X must produce output Y. AI systems are probabilistic — the same input may yield different outputs across runs. This makes classical unit testing insufficient. Evaluation ("evals") is the discipline of systematically measuring AI output quality so that teams can iterate with confidence.
+
+Hamel Husain and Shreya Shankar, creators of the top-rated AI evals course, put it bluntly: "Your AI product needs evals" is not optional advice — it is the foundation of every improvement cycle.
+
+## Concept
+
+### The Eval Ownership Chain
+
+The PM owns the eval strategy because the PM defines what "good" means for the user. Responsibilities break down as follows:
+
+- **PM** defines quality criteria (what matters to users and the business)
+- **Domain expert** labels golden datasets and validates edge cases
+- **Engineer** implements automated eval pipelines and CI integration
+- **PM + domain expert** review results and make ship/no-ship calls
+
+### Golden Datasets
+
+A golden dataset is a curated set of input-output pairs where the expected output has been verified by a domain expert. It functions like a test suite — the AI system is evaluated against it.
+
+**How to build a golden dataset:**
+1. **Collect real inputs** — from production logs, support tickets, user sessions. Never rely solely on synthetic data.
+2. **Sample for diversity** — cover topics, intents, difficulty levels, edge cases, and adversarial inputs.
+3. **Label with domain experts** — use PASS/FAIL judgments rather than 1-5 scales. One expert who deeply understands user needs outperforms ten casual annotators.
+4. **Include reasoning** — for each label, the expert writes a short critique explaining why the output passes or fails.
+5. **Start small, grow continuously** — begin with 50-100 examples. Add production failures as regression tests.
+
+### LLM-as-Judge
+
+LLM-as-Judge uses a language model to evaluate the outputs of another model — approximating human judgment at scale. It is the most important evaluation technique for generative AI products with subjective outputs.
+
+**Best practices (2025 consensus):**
+- Use PASS/FAIL over numeric scales — cleaner signal
+- Always include chain-of-thought reasoning in the judge prompt
+- Use a stronger model as judge (e.g., Claude Opus judging Sonnet outputs)
+- Validate judge accuracy against human labels — target 80%+ agreement
+- LLM-as-Judge offers cost savings of roughly 500-5000x compared to human review
+
+### Human Eval Remains Essential
+
+Automation does not replace the human eye:
+- Building the initial golden dataset (there is no shortcut)
+- Validating LLM-as-Judge accuracy against ground truth
+- Assessing tone, brand voice, cultural sensitivity
+- Husain's recommendation: spend 30 minutes manually reviewing 20-50 outputs whenever making significant changes
+
+## Framework
+
+**Your path to a first eval system:**
+
+| Step | Action | Timeline |
+|------|--------|----------|
+| 1 | Manually review 50 production outputs with a domain expert | Day 1-2 |
+| 2 | Categorize failure modes (wrong answer, hallucination, tone, format) | Day 2-3 |
+| 3 | Build a golden dataset of 100 labeled examples covering each failure mode | Week 1-2 |
+| 4 | Write a simple eval script (no fancy tools) | Week 2 |
+| 5 | Add LLM-as-Judge for subjective dimensions; validate against human labels | Week 3 |
+| 6 | Integrate into CI/CD with pass/fail thresholds | Week 4 |
+| 7 | Add production sampling: score a % of live traffic asynchronously | Month 2 |
+| 8 | Adopt a platform tool if scale demands it | Month 3+ |
+
+## Scenario
+
+You are a PM at a legal-tech startup. Your AI feature summarizes contracts (5,000 summaries/month). The VP Product wants to know if you can switch from GPT-4o to Claude Sonnet to reduce costs.
+
+**The situation:**
+- No existing eval system — quality is currently assessed by "team vibes"
+- 3 lawyers on the team with domain expertise
+- Budget for eval setup: 2 weeks of engineering time
+- Stakeholder wants the model decision in 4 weeks
+
+**Options:**
+1. **Quick comparison:** Run 20 contracts through both models, have the team vote
+2. **Golden dataset first:** Invest 2 weeks to label 100 contracts with lawyers, then compare systematically
+3. **Tool-first:** License Braintrust or DeepEval, then evaluate
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Option 2 — Golden dataset first.
+
+**Why:**
+- **Option 1 is too thin:** 20 examples without structured criteria is a gut-check, not an evaluation. At 5,000 summaries/month, you risk systematic errors that won't surface in 20 samples.
+- **Option 2 creates a lasting asset:** The golden dataset serves not just this model comparison — it becomes the foundation for every future change (prompt updates, new models, feature expansions).
+- **Option 3 is the wrong order:** Tools amplify a good eval strategy; they cannot substitute for one. Without a golden dataset and clear criteria, even the best tool measures the wrong thing.
+- **Timeline fits:** 2 weeks golden dataset + 1 week eval runs + 1 week analysis = 4 weeks.
+
+**Common mistakes:**
+- "We need a tool first" — wrong order. First understand what "good" means.
+- "Generic benchmarks are enough" — MMLU measures model capability, not your product quality.
+- "Evals are an engineering concern" — without PM ownership of criteria, engineering builds technically correct but product-irrelevant test suites.
+</details>
+
+## Reflect
+
+**Evals are the most important skill for AI PMs — because they define what "good" means before it's too late.**
+
+- Golden datasets are living artifacts: start small (50-100 examples), add production failures as regression tests, grow continuously.
+- LLM-as-Judge scales human judgment by a factor of 500-5000x — but only when the judge is validated against real human labels.
+- The biggest PM trap: "We need a tool first." Start with manual error analysis. 30 minutes, 20-50 outputs. That reveals more than any dashboard.
+
+---
+
+*Sources: Hamel Husain — "Your AI Product Needs Evals" (2024), Husain & Shankar — AI Evals for Engineers & PMs (Maven, 2025), Lenny's Newsletter — Building Eval Systems (2024), Pragmatic Engineer — A Pragmatic Guide to LLM Evals (2025), Evidently AI — LLM-as-a-Judge Guide (2025)*

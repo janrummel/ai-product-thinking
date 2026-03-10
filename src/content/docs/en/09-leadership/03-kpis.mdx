@@ -1,0 +1,124 @@
+---
+title: "KPIs for AI Products"
+description: "Which metrics AI products truly need — beyond DAU/MAU and conversion."
+sidebar:
+  order: 3
+---
+
+## Context
+
+Your AI feature has been live for three months. The DAU/MAU numbers look good. Your CEO is happy. Then a tweet from an angry customer surfaces: the AI output contained false information that was forwarded without review.
+
+You look at your dashboard and realize: you're measuring usage, not quality. You know how many users use the feature, but not whether the outputs are correct. High usage of a hallucinating product is worse than low usage of an accurate one.
+
+## Concept
+
+### The Three-Layer AI Metrics Framework
+
+Traditional product metrics (DAU/MAU, conversion, retention, NPS) are necessary but insufficient for AI products. You need three additional layers.
+
+### Layer 1: Model Quality Metrics
+
+| Metric | What it measures | Target range |
+|--------|------------------|--------------|
+| Accuracy / Correctness | Share of factually correct outputs | Domain-dependent |
+| Hallucination Rate | Share of outputs with fabricated information | Less than 5% for customer-facing features |
+| Groundedness | Are responses supported by source material? | Greater than 90% for RAG applications |
+| Task Completion Rate | Share of tasks successfully completed by AI | Use-case dependent |
+
+### Layer 2: System Performance Metrics
+
+| Metric | What it measures | Target range |
+|--------|------------------|--------------|
+| Latency (P50) | Median response time | Less than 2s for chat, less than 500ms for inline |
+| Latency (P95) | 95th percentile response time | Less than 5s for chat |
+| Cost per Query | Average inference cost per request | Track the trend |
+| Error Rate | Share of completely failed requests | Less than 0.1% |
+
+### Layer 3: Business Impact Metrics
+
+| Metric | What it measures | Why it matters |
+|--------|------------------|----------------|
+| AI Feature Adoption Rate | Share of users engaging with AI features | Measures product-market fit |
+| Escalation Rate | Share of AI interactions needing human handoff | Measures AI reliability in practice |
+| Regeneration Rate | How often users click "regenerate" | Early warning system for quality problems |
+| Cost per Resolution | Total cost to resolve a user need | True unit economics |
+| Revenue Attribution | Revenue directly tied to AI features | Business case validation |
+
+### Leading vs. Lagging Indicators
+
+**Leading (predict the future):** Hallucination rate trend, user trust score, eval benchmark improvements, cost-per-query trajectory, regeneration rate.
+
+**Lagging (confirm the past):** Revenue from AI features, churn rate of AI users, NPS, total AI compute spend.
+
+**Key insight:** The regeneration rate — how often users click "try again" — is one of the most valuable yet underused AI product metrics. High regeneration rates signal quality problems before users churn.
+
+## Framework
+
+**Which Metrics to Prioritize When:**
+
+| Phase | Primary metrics | Secondary metrics |
+|-------|-----------------|-------------------|
+| Pre-Launch | Eval accuracy, hallucination rate, latency, cost per query | - |
+| Beta | + Adoption rate, task completion, regeneration rate | Escalation rate |
+| General Availability | + Revenue attribution, retention, NPS | ROI |
+| Scale | + Cost optimization trends, model efficiency | Competitive benchmarks |
+
+**In every phase:** Track cost per query. Unit economics cannot be ignored at any stage.
+
+### AI Dashboard: Four Sections
+
+1. **Real-time Operations:** Latency, error rates, throughput, cost burn rate
+2. **Quality Monitoring:** Hallucination rate (sampled), groundedness, task completion (daily/weekly)
+3. **User Experience:** Adoption, engagement depth, regeneration rate, thumbs up/down
+4. **Business Impact:** Revenue attribution, cost trends, ROI (weekly/monthly)
+
+## Scenario
+
+You're an AI PM at a legal tech startup. Your AI feature summarizes contracts and flags risk clauses. Since launch 8 weeks ago:
+
+**The numbers:**
+- 1,200 active users (out of 3,000 with access) = 40% adoption
+- Average 15 summaries per user per week
+- Latency P50: 3.2 seconds, P95: 8.1 seconds
+- Cost per query: $0.08
+- Regeneration rate: 28% (user clicks "regenerate")
+- Thumbs down rate: 12%
+- Escalation rate (user contacts support about AI error): 5%
+- No hallucination rate measured
+
+You need to give the board an assessment: Is this feature on track?
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best assessment:** The feature has product-market fit (40% adoption is solid), but there's a serious quality problem that must be solved before scaling.
+
+**The warning signs:**
+- 28% regeneration rate is too high — nearly a third of outputs aren't usable on first attempt
+- No hallucination rate measured for a legal product is a critical risk — incorrect contract summaries could cause significant harm to customers
+- P95 latency of 8.1s is too slow — lawyers reviewing contracts expect fast results
+
+**Recommendation to the board:**
+1. Immediately set up hallucination measurement (build eval dataset with lawyers)
+2. Define regeneration rate as the primary quality KPI — target: below 15%
+3. Latency optimization (model routing: simple summaries to a faster model)
+4. Scale only when regeneration rate is below 15% and hallucination rate is below 3%
+
+**What many get wrong:** Celebrating 40% adoption and scaling immediately, without checking quality metrics. High usage with low quality is a churn problem that just hasn't become visible yet.
+
+</details>
+
+## Reflect
+
+**The key insight: For AI products, quality metrics matter more than usage metrics.** High adoption without quality measurement is a blind risk.
+
+- Measure model quality BEFORE launch, not after — you need baselines
+- The regeneration rate is your best leading indicator for quality problems
+- Different stakeholders need different dashboards: engineering (latency/errors), product (quality/adoption), leadership (cost/ROI)
+
+---
+
+*Sources: Google Cloud "KPIs That Actually Matter for Production AI Agents" (2026), Google Cloud "KPIs for Gen AI" (2026), Product School "Evaluation Metrics for AI Products" (2026), Splunk "LLM Observability Explained" (2026)*

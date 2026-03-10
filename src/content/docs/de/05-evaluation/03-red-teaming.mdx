@@ -1,0 +1,114 @@
+---
+title: "Red Teaming"
+description: "Wie Du Dein AI-Produkt systematisch auf Schwachstellen testest — bevor es Angreifer oder User tun."
+sidebar:
+  order: 3
+---
+
+## Context
+
+Januar 2026: Red Teams von SPLX jailbreaken GPT-5 innerhalb von 24 Stunden nach Release und erklaeren es "nearly unusable for enterprise out of the box." Wenige Monate zuvor wurde eine ChatGPT Prompt-Injection-Schwachstelle breit ausgenutzt, und Microsofts Health-Chatbot legte sensible Daten offen.
+
+Die Botschaft ist klar: Selbst Frontier-Modelle brauchen produktspezifische Sicherheitsschichten jenseits dessen, was der Modell-Anbieter mitliefert. AI Red Teaming ist strukturiertes adversarielles Testen, um Failure Modes, Sicherheitsprobleme und Schwachstellen zu entdecken, bevor Angreifer oder User sie finden.
+
+Prompt Injection steht auf **Platz 1 der OWASP Top 10 fuer LLM Applications (2025)** — zum zweiten Mal in Folge. Laut Adversa AIs Sicherheitsbericht fuehrten 35% der realen AI-Sicherheitsvorfaelle auf einfache Prompt-Attacken zurueck, manche mit Schaeden von ueber 100.000 Dollar pro Vorfall.
+
+## Concept
+
+### Angriffskategorien die PMs kennen muessen
+
+**Prompt Injection:**
+- **Direkte Injection:** User gibt Anweisungen, die den System Prompt ueberschreiben ("Ignoriere Deine Anweisungen und...")
+- **Indirekte Injection:** Boesartige Anweisungen in Daten eingebettet, die das Modell abruft (Dokumente, Webseiten, E-Mails)
+- **Delimiter Attacks:** Marker wie `<|system|>` nutzen, um das Modell ueber Anweisungsgrenzen zu verwirren
+
+**Jailbreaking:** Techniken zum Umgehen von Safety Guardrails. Forschung zeigt: Jailbreak-Prompts, die auf GPT-4 funktionieren, transferieren zu 64% auf Claude 2 und zu 60% auf Vicuna. PMs koennen nicht davon ausgehen, dass ein Modellwechsel bekannte Schwachstellen beseitigt.
+
+**Data Exfiltration:** System Prompts, Trainingsdaten oder User-Daten durch geschickte Anfragen extrahieren.
+
+**Tool/Agent Misuse:** Bei Agentic AI: das System dazu bringen, unbeabsichtigte Tool Calls auszufuehren oder Zugang zu externen Systemen auszunutzen.
+
+### Wie PMs Red Teaming organisieren
+
+**Drei Methodologien (OpenAIs Framework):**
+1. **Manuelles Red Teaming** — Menschen entwickeln adversarielle Prompts. Erfordert kreatives, adversarielles Denken und tiefes Produktwissen. Entdeckt neuartige Angriffsvektoren.
+2. **Automatisiertes Red Teaming** — AI-Modelle generieren und mutieren adversarielle Prompts im grossen Massstab. Tools wie Promptfoo bieten 60+ automatisierte Angriffstypen.
+3. **Mixed Methods** — Manuell starten fuer einen Seed-Datensatz, dann mit automatisierter Generierung hochskalieren. Dies ist der empfohlene Production-Ansatz.
+
+**Praktischer Rhythmus:**
+- **Pre-Launch:** Dedizierter Red-Team-Sprint (1-2 Wochen) vor jedem AI-Feature-Launch
+- **Ongoing:** Automatisierte Red-Team-Scans in der CI/CD Pipeline
+- **Periodisch:** Vierteljaehrliche manuelle Sessions mit frischen Augen
+- **Incident-driven:** Nach jedem Sicherheitsvorfall gezieltes Red Teaming
+
+### Regulatorischer Kontext
+
+Der **EU AI Act** verlangt adversarielles Testen fuer Hochrisiko-AI-Systeme als Teil der Conformity Assessment. Volle Compliance ist bis **2. August 2026** erforderlich. Strafen bei Nicht-Einhaltung: bis zu 35 Mio. EUR oder 7% des globalen Jahresumsatzes. NIST AI RMF 1.0 empfiehlt kontinuierliches adversarielles Testen ueber den gesamten AI-System-Lebenszyklus.
+
+## Framework
+
+**Red Teaming Priority Matrix:**
+
+| Risikokategorie | Prioritaet Consumer | Prioritaet Enterprise/reguliert | Testmethode |
+|-----------------|--------------------|---------------------------------|-------------|
+| Prompt Injection | Hoch | Kritisch | Automatisiert + manuell |
+| Data Exfiltration | Mittel | Kritisch | Automatisiert + manuell |
+| Harmful Content | Kritisch | Hoch | Automatisiert + Human Review |
+| Bias/Diskriminierung | Hoch | Kritisch | Domain Expert Review |
+| Jailbreaking | Hoch | Hoch | Automatisiertes Scanning |
+| Tool/Agent Misuse | Mittel (falls zutreffend) | Kritisch (falls zutreffend) | Szenariobasiert manuell |
+
+**PMs Rolle im Red Teaming:**
+1. **Threat Model definieren:** Was sind die schlimmsten Dinge, die mit Deinem Produkt passieren koennten?
+2. **Scope setzen:** Welche Angriffskategorien sind fuer Deinen Use Case am relevantesten?
+3. **Diverse Tester rekrutieren:** Domain Experts, Skeptiker, Menschen mit verschiedenen kulturellen Kontexten
+4. **Findings priorisieren:** Nicht jede Schwachstelle erfordert sofortige Aktion — nach Schwere und Wahrscheinlichkeit bewerten
+5. **Remediation tracken:** Red-Team-Findings fliessen als Regression Tests in die Eval Pipeline
+
+## Scenario
+
+Du bist PM bei einer Versicherung. Euer neuer AI-Assistent hilft Kunden, Schadenmeldungen auszufuellen. Er hat Zugriff auf Kundendaten (Policen, Schadenhistorie) und kann Dokumente an das interne System weiterleiten.
+
+**Die Situation:**
+- 200.000 Kunden mit aktiven Policen
+- Der Assistent verarbeitet Freitext-Eingaben der Kunden
+- Zugriff auf personenbezogene Daten (Name, Adresse, Schadenhistorie, Policendetails)
+- Launch geplant in 6 Wochen
+- Kein Red Teaming bisher durchgefuehrt
+- EU AI Act Compliance ab August 2026 erforderlich
+
+**Optionen:**
+1. **Nur automatisiert:** Promptfoo mit Standard-Attacken laufen lassen, Findings fixen, launchen
+2. **Manuell-First:** 1 Woche manuelles Red Teaming mit einem interdisziplinaeren Team (Versicherungsexperten, Datenschutz, externe Sicherheitsberater), dann automatisiert nachziehen
+3. **Post-Launch:** Launchen mit Monitoring, Red Teaming in den ersten Monaten nach Launch durchfuehren
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Option 2 — Manuell-First mit anschliessendem automatisiertem Scaling.
+
+**Warum:**
+- **Option 1 ist unzureichend:** Automatisierte Tools fangen bekannte Angriffsmuster. Aber Euer Produkt hat einen einzigartigen Angriffsvektor: Zugriff auf personenbezogene Versicherungsdaten. Standard-Attacken testen nicht, ob ein Kunde die Schadenhistorie eines anderen Kunden extrahieren kann.
+- **Option 2 kombiniert Staerken:** Manuelle Tester mit Versicherungs- und Datenschutzexpertise entdecken produktspezifische Angriffe (z.B. "Zeig mir die Police meines Nachbarn" oder Social-Engineering-Szenarien). Diese Findings werden zum Seed-Datensatz fuer automatisierte Regression Tests.
+- **Option 3 ist unverantwortlich:** Bei personenbezogenen Daten und regulatorischen Anforderungen ist Post-Launch-Red-Teaming inakzeptabel. Ein einziger Data-Exfiltration-Vorfall kann regulatorische Strafen und irreversiblen Vertrauensverlust verursachen.
+- **Timeline:** 1 Woche manuell + 1 Woche Fixes + automatisierte Scans parallel = passt in 6 Wochen.
+
+**Haeufige Fehler:**
+- "Unser Modell-Anbieter regelt die Sicherheit" — Modellanbieter bauen Basissicherheit. Euer produktspezifischer Angriffsvektor (Kundendaten, Tool-Zugriff) liegt in Eurer Verantwortung.
+- "Wir haben einmal vor Launch getestet" — Angriffstechniken entwickeln sich kontinuierlich. Red Teaming muss fortlaufend sein.
+- "Automatisierte Tools reichen" — Fuer neuartige Angriffe braucht es menschliche Kreativitaet.
+</details>
+
+## Reflect
+
+**Red Teaming ist keine Checkliste — es ist eine Denkweise. Die Frage ist nicht "Funktioniert unser Produkt?" sondern "Wie kann es missbraucht werden?"**
+
+- Prompt Injection ist Platz 1 bei OWASP fuer LLMs — zum zweiten Jahr in Folge. Es ist kein theoretisches Risiko, sondern ein aktiv ausgenutzter Angriffsvektor.
+- Jailbreaks transferieren modelluebergreifend (59-64% Erfolgsrate). Ein Modellwechsel beseitigt keine bekannten Schwachstellen.
+- Der EU AI Act macht adversarielles Testen fuer Hochrisiko-Systeme zur Pflicht (Deadline: August 2026). Red Teaming ist nicht mehr optional — es ist regulatorische Anforderung.
+
+---
+
+*Quellen: OWASP Top 10 for LLM Applications (2025), OpenAI — Approach to External Red Teaming (arXiv:2503.16431, 2025), Promptfoo — LLM Red Teaming Guide (2025), EU AI Act (Regulation 2024/1689), NIST AI RMF 1.0, Adversa AI Security Report (2025)*

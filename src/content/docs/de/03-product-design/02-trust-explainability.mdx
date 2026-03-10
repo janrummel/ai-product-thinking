@@ -1,0 +1,124 @@
+---
+title: "Trust & Explainability"
+description: "Wie Du AI-Outputs gestaltest, denen Nutzer vertrauen — durch Confidence Indicators, Source Attribution und das richtige Mass an Transparenz."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Dein AI-Feature liefert gute Ergebnisse — aber die Nutzer vertrauen ihnen nicht. Sie pruefen alles manuell nach, umgehen das Feature oder beschweren sich im Support. Das Problem ist nicht die Accuracy. Das Problem ist, dass Dein Produkt nicht erklaert, *warum* es sich sicher ist.
+
+Als PM entscheidest Du nicht, wie das Modell funktioniert — aber Du entscheidest, wie viel davon der Nutzer sieht. Und diese Entscheidung bestimmt, ob Dein Feature adoptiert oder ignoriert wird.
+
+## Concept
+
+### Die vier Saeulen des AI-Vertrauens
+
+Vertrauen in AI folgt denselben psychologischen Mustern wie Vertrauen zwischen Menschen — mit vier Saeulen:
+
+| Saeule | Bedeutung | Produktbeispiel |
+|--------|-----------|-----------------|
+| **Ability** | "Kann es das?" | Accuracy, relevante Ergebnisse |
+| **Integrity** | "Ist es ehrlich?" | Gibt Unsicherheit zu, erfindet nichts |
+| **Predictability** | "Verhaelt es sich konsistent?" | Gleicher Input, aehnlicher Output |
+| **Benevolence** | "Handelt es in meinem Interesse?" | Nutzer-Ziele priorisiert, nicht Engagement |
+
+**Die Zahlen:** 72% der Nutzer sagen, dass die *Sprache* einer AI deren Vertrauenswuerdigkeit beeinflusst. 63% verlassen sich eher auf AI, die Confidence und Reasoning zeigt (NNG, 2024).
+
+### Confidence Indicators — das richtige Format
+
+Wie Du Unsicherheit zeigst, haengt von Deiner Zielgruppe ab:
+
+| Format | Beispiel | Fuer wen |
+|--------|----------|----------|
+| Prozent/Score | "85% confident" | Technische Nutzer, Data Teams |
+| Farbcodierung | Gruen >=85%, Gelb 60–84%, Rot unter 60% | Dashboards, Monitoring |
+| Klartext-Label | "Sicher", "Unsicher", "Pruefung noetig" | Non-Technical User |
+| Inline Hedging | "Das bedeutet vermutlich..." | Conversational AI |
+
+**Accessibility-Regel:** Immer Farbe + Text kombinieren. Farbcodierung allein schliesst Nutzer aus.
+
+### Source Attribution — wie AI Quellen zeigt
+
+| Pattern | Beispiel | Staerke | Schwaeche |
+|---------|----------|---------|-----------|
+| Nummerierte Fussnoten | Perplexity: "laut Studie [1]" | Akademisch praezise | Unterbricht Lesefluss |
+| Hyperlinks im Text | ChatGPT: verlinkte Begriffe | Natuerlich | Unklar welcher Claim belegt wird |
+| Ausklappbare Quellen | Claude, Perplexity: Hover-Preview | Nicht-invasiv, Detail on Demand | Quellen leicht ignorierbar |
+| Inline neben Response | Google PAIR: Quelle direkt neben Aussage | Maximale Transparenz | Visuell komplex |
+
+### "Show Your Work" — Progressive Disclosure
+
+Das Pattern fuer Transparenz ohne Ueberforderung:
+
+- **What:** Das Ergebnis — immer sichtbar
+- **How:** Der Reasoning-Pfad — auf Klick/Expand
+- **Why:** Die Evidenz/Quellen — auf Nachfrage
+
+Beispiel: ChatGPT zeigt "Thought for X seconds" als Einstieg, Perplexity baut die gesamte UX um Quellennachweise herum, Notion AI zeigt graue Loeschungen und blaue Ergaenzungen als Visual Diff.
+
+## Framework
+
+**Wann Unsicherheit zeigen — und wann nicht:**
+
+| Zeigen wenn... | Nicht zeigen wenn... |
+|----------------|----------------------|
+| Confidence unter Threshold | Triviale Outputs (Formatierung, Sortierung) |
+| Health, Finance, Legal | Konsistent hohe Confidence |
+| Widerspruechliche Quellen | Es Decision Paralysis ausloesen wuerde |
+| Irreversible Entscheidungen | |
+
+**Das Ziel ist kalibriertes Vertrauen, NICHT maximiertes Vertrauen.** Du willst nicht, dass Nutzer allem blind vertrauen. Du willst, dass sie wissen, *wann* sie nachpruefen muessen.
+
+### Anti-Patterns
+
+| Anti-Pattern | Problem |
+|-------------|---------|
+| Black-Box Output | Keine Erklaerung = kein Vertrauen |
+| AI verstecken | Nutzer fuehlen sich getaeuscht wenn sie es herausfinden |
+| False Precision | "92,7% sicher" suggeriert Genauigkeit die nicht existiert |
+| Source Theater | Quellen auflisten ohne klaren Bezug zum Claim |
+| Overclaiming | "AI-powered" fuer regelbasierte Features |
+| Uncertainty Overload | Jeder Output mit Warnungen = alles ignoriert |
+
+## Scenario
+
+Du bist PM bei einem B2B-SaaS fuer Vertragsanalyse. Euer AI-Feature extrahiert Risiko-Klauseln und bewertet deren Schweregrad. 800 Kunden, 30.000 Vertraege/Monat. User: Legal Teams.
+
+**Die Situation:**
+- Accuracy: 91% korrekte Klausel-Erkennung, aber nur 74% korrekte Schweregrad-Bewertung
+- Nutzer-Feedback: "Ich vertraue der Erkennung, aber nicht der Bewertung"
+- Support-Tickets: 40% betreffen Faelle, in denen User die AI-Bewertung nicht nachvollziehen koennen
+- Churn-Analyse: Teams, die das Feature nach 2 Wochen nicht mehr nutzen, nennen "nicht nachvollziehbar" als Hauptgrund
+
+**Drei Optionen:**
+1. **Confidence Score:** Jede Bewertung zeigt Prozent-Confidence + Farbcodierung. Keine weitere Erklaerung
+2. **Full Transparency:** Confidence + Reasoning ("Klausel X aehnelt 3 bekannten Risiko-Mustern") + Source-Links zu vergleichbaren Vertraegen
+3. **Progressive Disclosure:** Confidence-Label (Sicher/Unsicher/Pruefung noetig) + ausklappbares Reasoning + Quellen auf Nachfrage
+
+## Decide
+
+<details>
+<summary>Welchen Ansatz waehlst Du?</summary>
+
+**Die beste Entscheidung:** Option 3 — Progressive Disclosure.
+
+**Warum:**
+- Option 1 scheitert am Kern-Problem: Ein Prozent-Score allein erklaert *nichts*. Legal Teams wollen nicht wissen *wie sicher*, sondern *warum*. Ausserdem: False Precision bei 74% Accuracy untegraebt Vertrauen
+- Option 2 ist die richtige Idee, aber das falsche Timing. Immer alles zu zeigen erzeugt Cognitive Overload — besonders bei 30.000 Vertraegen/Monat
+- Option 3 trifft den Sweet Spot: Klartext-Labels ("Pruefung noetig") fuer schnelle Triage, Reasoning on Demand fuer die Faelle, die Aufmerksamkeit brauchen, Quellen fuer die, die tief einsteigen wollen
+
+**Der PM-Hebel:** Die 40% Support-Tickets adressierst Du nicht mit besserer Accuracy, sondern mit besserer Erklaerbarkeit. "Pruefung noetig — Klausel aehnelt 3 bekannten Haftungsmustern" ist sofort nachvollziehbar. "74% confident" ist es nicht.
+</details>
+
+## Reflect
+
+- **Vertrauen entsteht durch Ehrlichkeit, nicht durch Accuracy allein.** Eine AI, die "unsicher" sagt, ist vertrauenswuerdiger als eine, die falsch selbstsicher ist. Integrity schlaegt Ability.
+- **Das Format bestimmt die Wirkung.** "74% confident" sagt einem Legal Team nichts. "Pruefung noetig — aehnelt bekanntem Haftungsmuster" ist actionable. Waehle das Format fuer Deine Zielgruppe.
+- **Kalibriertes Vertrauen > maximiertes Vertrauen.** Du willst nicht, dass Nutzer allem vertrauen. Du willst, dass sie wissen, wann sie nachpruefen muessen. Das ist ein Design-Problem, kein Modell-Problem.
+- **Progressive Disclosure ist Dein bestes Werkzeug.** Ergebnis immer, Reasoning on Demand, Quellen auf Nachfrage. Nicht jeder braucht alles — aber jeder muss tiefer gehen *koennen*.
+
+---
+
+*Quellen: Smashing Magazine "Psychology of Trust in AI" (2025), Nielsen Norman Group "AI Trust & Language" (2024), Google PAIR "People + AI Guidebook" (2024), Perplexity/ChatGPT/Claude Product Analysis (2024/2025)*

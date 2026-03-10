@@ -1,0 +1,109 @@
+---
+title: "Opportunity Identification"
+description: "Where AI creates the most value, how to find the right opportunities — and why 10x better is the bar, not 10%."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Your leadership team has decided: "We're doing AI now." The roadmap has room for 2-3 AI initiatives. Engineering suggests an internal coding assistant. Sales wants an AI chatbot. Support wants automated ticket classification. All three sound reasonable.
+
+Your job as a PM: Don't build what's demanded loudest — find what creates the most value.
+
+## Concept
+
+### Where AI creates the most value
+
+McKinsey estimates Generative AI's annual value creation potential at $2.6-4.4 trillion. 75% of that value concentrates in four areas:
+
+| Area | Value driver | Example |
+|------|-------------|---------|
+| **Customer Operations** | Automation, faster resolution | Klarna: 2.3M chats automated |
+| **Marketing & Sales** | Personalization, content generation | Individual campaigns at scale |
+| **Software Engineering** | Code generation, testing, reviews | GitHub Copilot, internal tools |
+| **R&D** | Accelerated research, prototyping | Drug discovery, material science |
+
+Top industries: Banking, High Tech, Life Sciences. But these are averages — your opportunity depends on *your* context.
+
+### Three value levers
+
+Every AI opportunity leverages at least one of these:
+
+- **Automation:** Eliminate repetitive tasks. Klarna automated 2.3 million support chats — work previously done by humans.
+- **Prediction:** Spot patterns before they happen. Churn prediction, demand forecasting, anomaly detection.
+- **Personalization:** Individual experiences at scale. Duolingo adapts learning content to each user in real time.
+
+**The biggest value comes from combining all three.** A recommendation system that predicts preferences (Prediction), curates automatically (Automation), and adapts individually (Personalization) beats any single dimension alone.
+
+### Pain severity: The five critical questions
+
+Before you prioritize an opportunity, quantify the pain:
+
+1. **How frequently** does the problem occur? (Daily > Monthly > Rarely)
+2. **How severe** is the pain? (Business-critical > Annoying > Cosmetic)
+3. **How many users** are affected?
+4. **Can AI solve it *significantly* better than the status quo?** The bar is 10x, not 10%.
+5. **Is the required data available and of sufficient quality?**
+
+Question 4 is the one most often ignored. Marginal improvements don't justify AI complexity.
+
+## Framework
+
+**RICE-A: RICE with AI Complexity** (based on Dr. Marily Nika)
+
+The classic RICE framework extended with an AI Complexity factor:
+
+**Formula:** (Reach x Impact x Confidence) / (Effort + AI Complexity x 0.5)
+
+| Factor | Question | Scale |
+|--------|----------|-------|
+| **Reach** | How many users/month? | Absolute number |
+| **Impact** | How much does it improve the outcome? | 0.25 / 0.5 / 1 / 2 / 3 |
+| **Confidence** | How reliable are the estimates? | 50% / 80% / 100% |
+| **Effort** | Team effort in person-months? | Person-months |
+| **AI Complexity** | Data quality, model risk, eval effort? | 1 (low) – 5 (high) |
+
+AI Complexity is weighted at 0.5 and added to Effort — because AI-specific risks increase effective effort, but aren't directly comparable to traditional engineering effort.
+
+## Scenario
+
+You're a PM at a B2B SaaS with 15,000 paying customers. Three AI opportunities are on the table:
+
+| | Opportunity A | Opportunity B | Opportunity C |
+|---|---|---|---|
+| **What** | AI chatbot for support | Churn prediction + alerts | Internal code assistant |
+| **Reach** | 8,000 users/month | 15,000 customers | 45 engineers |
+| **Impact** | 1 (medium) | 3 (massive) | 2 (high) |
+| **Confidence** | 80% | 50% | 80% |
+| **Effort** | 3 PM | 4 PM | 2 PM |
+| **AI Complexity** | 2 | 4 | 1 |
+| **RICE-A Score** | 1,600 | 3,750 | 2,880 |
+
+Opportunity A sounds easiest. Opportunity C has the best effort-to-value ratio. Opportunity B scores highest — but with only 50% confidence.
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Start Opportunity C, validate Opportunity B in parallel.
+
+**Why:**
+- **Opportunity C** (Code assistant): High score, low complexity, 80% confidence. Reach is small (45 engineers), but internal impact is immediately measurable. Follows the Shopify logic: "Before asking for more headcount, show why AI can't solve it."
+- **Opportunity B** (Churn prediction): Highest score, but 50% confidence. Start with a 4-week data readiness check: Do your data actually contain churn signals? If yes, this becomes your biggest lever.
+- **Opportunity A** (Support chatbot): Lowest score. Support chatbots are a commodity now — hard to use as differentiation.
+
+**The most common mistake:** Choosing the most visible opportunity (chatbot) because stakeholders "get it." Instead: internal tooling and prediction models often deliver the highest ROI.
+</details>
+
+## Reflect
+
+- **75% of AI value sits in four areas.** Customer Operations, Marketing & Sales, Software Engineering, R&D. Start there, not with "cool-sounding" features.
+- **10x is the bar, not 10%.** Notion AI grew from $67M to $500M+ revenue because it was integrated into the workflow — not bolted on as a marginal feature. Perplexity hit $148M ARR with one clear pain point: search with real sources.
+- **Don't overlook internal opportunities.** Shopify's CEO made it policy: before teams ask for more headcount, they must show why AI can't get it done.
+- **Data readiness before feature readiness.** The best opportunity is worthless if the required data doesn't exist or is garbage.
+
+---
+
+*Sources: McKinsey "The Economic Potential of Generative AI" (2023), Dr. Marily Nika RICE-A Framework (2024), Shopify CEO Memo (April 2025), Klarna AI Assistant Report (2024), Notion AI Revenue (2025), Perplexity Growth Metrics (2025)*

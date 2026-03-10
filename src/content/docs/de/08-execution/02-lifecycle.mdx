@@ -1,0 +1,127 @@
+---
+title: "AI Product Lifecycle"
+description: "Warum AI-Produkte nie fertig sind — und wie Du den kontinuierlichen Lifecycle von Exploration bis Improvement managst."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Dein AI-Feature ist live. Die Zusammenfassungs-Funktion funktioniert, die Metriken sehen gut aus, das Team feiert den Launch. Drei Monate spaeter: Die Qualitaet sinkt. Nutzer beschweren sich ueber schlechte Zusammenfassungen. Was ist passiert?
+
+Niemand hat etwas geaendert — und genau das ist das Problem. Der Model Provider hat ein Update ausgerollt. Die Kundenanfragen haben sich veraendert (neues Produktrelease). Die Wissensdatenbank ist veraltet. In der traditionellen Softwareentwicklung heisst "nichts aendern" Stabilitaet. Bei AI-Produkten heisst "nichts aendern" Qualitaetsverlust.
+
+## Concept
+
+### Der AI Product Lifecycle ist nicht linear
+
+**Traditionell:** Discovery, Design, Build, Launch, Maintain
+**AI:** Discovery, Prototype, Evaluate, Build, Launch, Monitor, Re-evaluate, Improve, (Repeat)
+
+Der entscheidende Unterschied: **AI-Produkte erreichen nie eine stabile Maintenance-Phase.** Modelle driften, Nutzerverhalten aendert sich, die Welt aendert sich, Wettbewerber verbessern sich. Ein AI-Produkt, das nicht aktiv verbessert wird, degradiert aktiv.
+
+### Die vier Phasen
+
+**Phase 1: Exploration & Prototyping (Wochen)**
+- Ziel: Validieren, dass AI das Problem in akzeptabler Qualitaet loesen kann
+- Aktivitaeten: Prompt-Experimente, Modellvergleiche, Quick Prototypes
+- PM-Rolle: Problem klar genug definieren, um einen Prototyp bewertbar zu machen
+- Haeufiger Fehler: Diese Phase ueberspringen und sich nach einer Demo zum Full Build commiten
+
+**Phase 2: Evaluation & Hardening (Wochen bis Monate)**
+- Ziel: Robuste Eval-Infrastruktur aufbauen und Quality Baselines setzen
+- Aktivitaeten: Eval Datasets erstellen, automatisierte Eval Pipelines, Human Evaluations
+- PM-Rolle: Definieren was "gut genug" fuer Nutzer bedeutet
+- Haeufiger Fehler: Ohne Eval-Infrastruktur launchen — "wir messen Qualitaet spaeter"
+
+**Phase 3: Production & Scaling (Monate)**
+- Ziel: An Nutzer ausliefern und realen Traffic verarbeiten
+- PM-Rolle: Quality Metrics monitoren, User Feedback managen, Verbesserungen priorisieren
+- Haeufiger Fehler: Launch als Ziellinie behandeln statt als Startlinie
+
+**Phase 4: Continuous Improvement (fortlaufend)**
+- Ziel: Qualitaet aufrechterhalten und verbessern
+- Aktivitaeten: Model Updates, Prompt Refinement, Eval Dataset-Erweiterung
+- PM-Rolle: Improvement-Arbeit gegen neue Features priorisieren
+- Haeufiger Fehler: Nach Launch nicht mehr investieren und Qualitaet degradieren lassen
+
+### Model Versioning & Migration
+
+Wenn Anthropic Claude aktualisiert, wenn OpenAI ein neues GPT veroeffentlicht — aendert sich das Verhalten Deines Produkts. Manchmal dramatisch.
+
+**Best Practices:**
+1. Produktionsmodelle nie automatisch upgraden — immer auf spezifische Versionen pinnen
+2. Eval Suite auf neuem Modell laufen lassen, bevor migriert wird
+3. Prompt-Anpassungen einplanen — optimierte Prompts fuer Modell A funktionieren anders auf Modell B
+4. Rollback ermoeglichen — alte Konfiguration mindestens 2 Wochen nach Migration deploybar halten
+
+**Die Upgrade-Falle:** Ein neues Modell kann auf allgemeinen Benchmarks besser abschneiden, aber auf Deinem spezifischen Use Case schlechter performen. Immer auf DEINEM Eval-Dataset evaluieren.
+
+### Drei Ebenen des Monitorings
+
+| Ebene | Was wird gemessen | Beispiele |
+|-------|-------------------|-----------|
+| Infrastructure | Standard-Betrieb | Uptime, Error Rates, Latency, Throughput |
+| Quality (AI-spezifisch) | Output-Qualitaet | Sample Evaluations, Thumbs up/down Rate, Edit Distance, Drift Detection |
+| Business Impact | Geschaeftswirkung | Adoption Trends, Task Completion, Cost-per-Query, Revenue Attribution |
+
+Ein Modell kann online und innerhalb der SLA sein, waehrend es schreckliche Outputs produziert. Quality Monitoring ist nicht optional.
+
+## Framework
+
+**Prioritaeten fuer Post-Launch Arbeit:**
+
+| Prioritaet | Trigger | Aktion |
+|------------|---------|--------|
+| URGENT | Quality Regression (Metriken unter Launch-Schwellenwerten) | Sofort fixen |
+| HIGH | Model Provider Deprecation Notice | Migration mit Eval-Zyklus planen |
+| MEDIUM | Graduelle Qualitaetsdrift (Metriken sinken langsam) | Improvement Sprint einplanen |
+| LOW | Neues Modell mit besseren Benchmarks verfuegbar | Evaluieren wenn aktuelle Performance nicht reicht |
+
+**Immer:** Eval-Infrastruktur als erstklassiges Produkt-Concern behandeln.
+
+## Scenario
+
+Du bist PM eines AI-Schreibassistenten. Vor 4 Monaten habt ihr gelauncht. Die Situation heute:
+
+- **Acceptance Rate** (Nutzer uebernehmen AI-Vorschlag): von 68% bei Launch auf 54% gefallen
+- **Regeneration Rate** (Nutzer klicken "Neu generieren"): von 12% auf 23% gestiegen
+- **Latency:** unveraendert bei P95 von 2,1 Sekunden
+- **Kosten:** $2.800/Monat, im Budget
+- **Modell:** Ihr nutzt immer noch die gleiche Version
+- **Wissens-Update:** Die interne Style-Guide-Datenbank wurde seit Launch nicht aktualisiert
+- Euer CEO fragt: "Sollen wir auf das neueste Modell upgraden? Das ist doch bestimmt besser."
+
+Die Infrastruktur-Metriken sind alle gruen. Aber die Qualitaet degradiert offensichtlich.
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Nicht sofort auf ein neues Modell upgraden. Zuerst die Ursache der Qualitaetsdrift diagnostizieren.
+
+**Konkrete Schritte:**
+1. **Style-Guide-Datenbank aktualisieren.** Die wahrscheinlichste Ursache: Veralteter Context fuehrt zu Outputs, die nicht mehr zum aktuellen Stil passen
+2. **Sample-Analyse der Regenerations:** Die 23% Regenerations-Faelle analysieren — gibt es Muster? Bestimmte Texttypen? Bestimmte Nutzergruppen?
+3. **Erst dann Modell-Upgrade evaluieren** — auf dem eigenen Eval-Dataset, nicht auf allgemeinen Benchmarks
+
+**Warum nicht sofort upgraden:**
+- Ein Modell-Upgrade aendert das Verhalten ueberall — auch dort, wo es gut funktioniert
+- Wenn die Ursache veralteter Context ist, hilft ein neues Modell nicht
+- Upgrade ohne Diagnose ist Symptombehandlung
+
+**Was viele falsch machen:** Bei Qualitaetsproblemen reflexartig auf das neueste Modell upgraden, ohne die eigentliche Ursache zu verstehen. Oft ist es der Context, nicht das Modell.
+</details>
+
+## Reflect
+
+**AI-Produkte haben keinen stabilen Endzustand — der Launch ist die Startlinie, nicht die Ziellinie.**
+
+- Model Drift, Data Drift und sich aendernde Nutzererwartungen erfordern kontinuierliche Arbeit
+- Quality Monitoring ist getrennt von Infrastructure Monitoring — ein System kann online sein und trotzdem schlechte Outputs liefern
+- Model Upgrades sind keine kostenlosen Verbesserungen — jedes Upgrade braucht Evaluation auf dem eigenen Dataset
+
+---
+
+*Quellen: Anthropic Documentation — Model Cards & Migration Guides (2025), Stripe Engineering Blog — ML System Lifecycle, Chip Huyen "Designing Machine Learning Systems" (O'Reilly, 2022)*

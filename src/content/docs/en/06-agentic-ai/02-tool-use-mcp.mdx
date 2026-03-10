@@ -1,0 +1,116 @@
+---
+title: "Tool Use & Model Context Protocol"
+description: "How AI agents interact with the real world — and why MCP became the USB-C of AI integrations."
+sidebar:
+  order: 2
+---
+
+## Context
+
+Your AI agent can write brilliant analyses. But it can't send an email, query a database, or click a deploy button. An LLM on its own only generates text. Tool use is what turns a chatbot into an agent that can move things in the real world.
+
+The problem: until 2024, every AI application had to build custom integrations for every tool. 10 apps and 10 tools meant 100 integrations. Then the Model Context Protocol arrived — and fundamentally changed the equation.
+
+## Concept
+
+### How Tool Use Works
+
+An LLM can't call APIs. But it can generate structured "tool calls" — a combination of function name and parameters. The host application executes the call and returns the result. The model then reasons over the result.
+
+Example: the model generates `{"tool": "get_order_status", "params": {"order_id": "12345"}}`. Your system runs the database query. The result goes back to the model, which formulates a customer response.
+
+### What MCP Is
+
+The Model Context Protocol (MCP) is an open standard announced by Anthropic in November 2024 for connecting AI assistants to external data sources, tools, and services. The analogy: USB-C for AI integrations — one universal interface instead of proprietary adapters.
+
+MCP defines three primitives:
+- **Tools** — functions the model can call (execute code, query API, send email)
+- **Resources** — data the model can read (files, database records, documents)
+- **Prompts** — reusable prompt templates exposed by servers
+
+### Why MCP Won
+
+Before MCP: N applications times M tools = N x M integrations. With MCP: N + M — each app implements one client, each tool implements one server.
+
+The adoption was unprecedentedly fast:
+
+| Date | Milestone |
+|------|-----------|
+| Nov 2024 | Anthropic announces MCP, open-sources specification |
+| Mar 2025 | OpenAI adopts MCP for Agents SDK and ChatGPT |
+| Apr 2025 | Google DeepMind confirms MCP support in Gemini |
+| Nov 2025 | MCP spec v2025-11-25 with Streamable HTTP transport |
+| Dec 2025 | Anthropic donates MCP to Linux Foundation; 97M+ monthly SDK downloads |
+
+### Tool Selection as a Product Decision
+
+Too many tools increase latency (model has to reason over options), cost (more tokens), and attack surface. Too few tools limit capability.
+
+Five principles:
+1. **Read-only first** — lower risk, immediate value (search, lookup, summarize)
+2. **Write tools incrementally** — every write tool needs explicit user confirmation
+3. **Group tools by use case** — a support tool set differs from a development tool set
+4. **Monitor tool usage** — remove unused tools (reduces token overhead)
+5. **Design for failure** — every tool call can fail; the agent must handle errors gracefully
+
+### Security Implications
+
+Tool use opens new attack surfaces: prompt injection via tool results, excessive permissions, data exfiltration through agents, and confused deputy attacks. The answer: principle of least privilege, sandboxed execution, output filtering, and audit logging of all tool calls.
+
+## Framework
+
+The **Tool Readiness Assessment** — run through before shipping each new tool:
+
+| Dimension | Question | Action |
+|-----------|----------|--------|
+| **Permission** | Does the tool read or write? | Ship read-only first |
+| **Data access** | What data does the tool access? | Define permission boundaries |
+| **Failure behavior** | What happens when the tool fails? | Design fallback behavior |
+| **Authorization** | Who approves write actions? | Define approval requirements |
+| **Audit** | How do we log tool usage? | Plan logging before shipping |
+| **Latency** | How long does a tool call take? | Optimize slow tools or provide progress feedback |
+
+## Scenario
+
+You're a PM for an enterprise CRM with an AI assistant. The team wants to give the agent the following tools:
+
+**Read tools (8):** Contact search, deal history, email thread, meeting notes, pipeline status, revenue figures, support tickets, activity log
+
+**Write tools (6):** Send email, change deal status, book meeting, create contact, assign task, add note
+
+That's 14 tools for a single agent. The first prototype shows: the agent selects the wrong tool in 23% of cases. Average response time is 8 seconds — 4x slower than without tool selection.
+
+**The question:** How do you structure the tool set for launch?
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Launch with 5-6 read tools. No write tools in the first release. Segment the tool set by use case.
+
+**Concrete plan:**
+- **Phase 1 (Launch):** Contact search, deal history, email thread, pipeline status, support tickets — the 5 most-requested read operations
+- **Phase 2 (after 4 weeks of data):** Add note as the first write tool (low risk, reversible)
+- **Phase 3 (after validation):** Email draft (not send!) and meeting suggestion
+
+**Why:**
+- 14 tools overwhelm the model — under 15 is the recommendation, but under 8 is better for accuracy
+- 23% wrong tool selection with 14 tools drops below 5% with 5-6 tools
+- Read-only eliminates the risk of unintended actions
+- Write tools need approval gates — those aren't built yet
+
+**What many get wrong:** Enabling all tools at once because "the demo looks more impressive." This leads to tool overload and loss of trust after the first errors.
+</details>
+
+## Reflect
+
+**Tool use transforms AI from a text generator into an agent that can act — but every tool is both a capability and an attack surface.**
+
+- MCP solved the integration problem (N+M instead of NxM) — use the standard, don't build your own
+- Fewer, well-chosen tools beat more tools — the model performs better with 10 than with 50
+- Read-only first, write with confirmation, always with an audit trail
+
+---
+
+*Sources: Anthropic — Model Context Protocol (2024), MCP Specification v2025-11-25, The New Stack — Why MCP Won (2025), Pento — A Year of MCP (2025)*

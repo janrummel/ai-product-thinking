@@ -1,0 +1,97 @@
+---
+title: "Responsible AI"
+description: "Was Responsible AI in der Praxis bedeutet — jenseits von Prinzipien-PDFs und Marketing-Badges."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Dein Unternehmen will ein AI-Feature launchen, das Bewerbungen vorsortiert. Der CEO hat gruenes Licht gegeben, das Engineering-Team ist bereit. Dann fragt jemand: "Haben wir eigentlich geprueft, ob das diskriminiert?"
+
+Stille im Raum. Jemand verweist auf die "AI Principles" auf der Unternehmenswebsite. Aber niemand weiss, ob es einen konkreten Prozess gibt, der einen Launch stoppen koennte, wenn das Feature unfair ist.
+
+Das ist der Moment, in dem sich zeigt, ob Responsible AI in Deinem Unternehmen real ist — oder nur ein PDF.
+
+## Concept
+
+### Was Responsible AI wirklich bedeutet
+
+Responsible AI ist kein Guetesiegel und keine Checkliste. Es ist die operationalisierte Verpflichtung, AI-Systeme sicher, fair, transparent und accountable zu entwickeln — ueber den gesamten Produktlebenszyklus.
+
+Der Unterschied zwischen echtem und performativem Responsible AI: **Hat Dein Unternehmen jemals einen Launch verzoegert oder gestoppt, weil Safety-Bedenken bestanden?** Wenn nein, sind Deine AI-Prinzipien Dekoration.
+
+### Wie die grossen Anbieter es machen
+
+**Anthropic** nutzt zwei Saeulen: Constitutional AI (das Modell bewertet eigene Outputs gegen ein inspizierbare Prinzipien-Set) und die Responsible Scaling Policy (RSP 3.0). RSP definiert AI Safety Levels (ASL-1 bis ASL-4+), bei denen hoehere Capabilities automatisch strengere Sicherheitsanforderungen ausloesen. Fuer Claude Opus 4 wurden ASL-3 Standards aktiviert — als Vorsichtsmassnahme.
+
+**OpenAI** arbeitet mit dem Preparedness Framework (v2). Zwei Schwellenwerte — *High* und *Critical* — bestimmen, wann Safeguards greifen. Kontrovers: OpenAI erklaerte 2025, dass Safety-Anforderungen "angepasst" werden koennten, wenn ein Wettbewerber ein riskantes System ohne Schutz veroeffentlicht.
+
+**Google** kombiniert AI Principles (seit 2018) mit dem Secure AI Framework (SAIF) und dem Frontier Safety Framework. Kritiker bemerkten, dass das Framing "bold and responsible" es schwer macht zu erkennen, wann Safety tatsaechlich Produktentscheidungen einschraenkt.
+
+### Der EU AI Act — die regulatorische Realitaet
+
+Der EU AI Act ist das weltweit erste umfassende AI-Gesetz mit einem risikobasierten Klassifizierungssystem:
+
+| Risiko-Stufe | Beispiele | Anforderungen |
+|--------------|-----------|---------------|
+| **Unakzeptabel** | Social Scoring, biometrische Echtzeit-Identifikation | Verboten |
+| **Hoch** | AI in Hiring, Kreditvergabe, Medizinprodukte | Konformitaetsbewertung, CE-Kennzeichnung, menschliche Aufsicht |
+| **Begrenzt** | Chatbots, Deepfakes, Emotionserkennung | Transparenzpflichten |
+| **Minimal** | Spam-Filter, AI in Spielen | Keine spezifischen Pflichten |
+
+Wichtigste Deadline: **2. August 2026** — dann greifen die umfassenden Anforderungen fuer Hoch-Risiko-Systeme. Strafen: bis zu 35 Mio. EUR oder 7% des globalen Umsatzes.
+
+## Framework
+
+Der **Responsible AI Reality Check** — sechs Schritte fuer jeden AI-Feature-Launch:
+
+| Schritt | Aktion | Ergebnis |
+|---------|--------|----------|
+| 1. KLASSIFIZIERE | Feature in EU AI Act Risiko-Stufen einordnen | Regulatorische Baseline |
+| 2. IDENTIFIZIERE | Konkrete Schadensszenarien benennen (nicht abstrakt "Bias") | Spezifische Risiken |
+| 3. DEFINIERE | Sicherheitsmechanismen VOR dem Launch | Guardrails, Kill Switches |
+| 4. ETABLIERE | Eskalationspfade (wer entscheidet bei Problemen?) | Klare Verantwortlichkeiten |
+| 5. DOKUMENTIERE | Entscheidungen und Begruendungen festhalten | Audit Trail |
+| 6. MONITORE | Kontinuierliche Ueberwachung nach Launch | Laufende Sicherheit |
+
+## Scenario
+
+Du bist PM bei einem HR-Tech-Startup. Euer AI-Feature rankt Bewerbungen automatisch fuer Erstgespraeche. Der Sales-Druck ist hoch — drei Enterprise-Kunden warten auf das Feature.
+
+**Die Fakten:**
+- Trainingsdaten: 50.000 historische Einstellungsentscheidungen eines Kunden
+- Erste Tests zeigen: Das System bevorzugt systematisch Bewerber von bestimmten Universitaeten
+- Euer "AI Ethics Board" existiert auf dem Papier, hat sich aber nie getroffen
+- Go-Live ist in 4 Wochen geplant
+- Der CTO sagt: "Das koennen wir nach dem Launch fixen"
+
+Unter dem EU AI Act faellt AI im Hiring unter **Hoch-Risiko**. Ab August 2026 waeren Konformitaetsbewertung, technische Dokumentation und menschliche Aufsicht Pflicht.
+
+## Decide
+
+<details>
+<summary>Wie wuerdest Du entscheiden?</summary>
+
+**Die beste Entscheidung:** Launch verschieben. Den Bias dokumentieren, das Ethics Board aktivieren, die Trainingsdaten ueberpruefen, und eine Human-in-the-Loop-Komponente einbauen, bevor das Feature live geht.
+
+**Warum:**
+- AI im Hiring ist Hoch-Risiko unter dem EU AI Act — ein Bias-Vorfall waere nicht nur peinlich, sondern potentiell illegal
+- Historische Einstellungsdaten reproduzieren historische Diskriminierung — das ist ein bekanntes Pattern (Amazon stellte 2018 ein aehnliches System ein)
+- "Nach dem Launch fixen" funktioniert nicht bei Bias — jede diskriminierende Entscheidung in der Zwischenzeit ist ein realer Schaden fuer reale Menschen
+- Enterprise-Kunden in regulierten Branchen werden ein AI-Hiring-Tool ohne nachweisbare Fairness-Pruefung ablehnen
+
+**Was viele falsch machen:** Den Launch durchziehen mit dem Plan, spaeter nachzubessern — und dann ueberrascht sein, wenn ein Diskriminierungsfall oeffentlich wird und alle drei Enterprise-Kunden abspringen.
+</details>
+
+## Reflect
+
+**Responsible AI ist kein Gate vor dem Launch — es ist eine Eigenschaft des gesamten Produktentwicklungsprozesses.**
+
+- Prinzipien ohne Durchsetzungsmechanismen sind wertlos — der Test ist, ob sie einen Launch stoppen koennen
+- Der EU AI Act macht Responsible AI zur regulatorischen Pflicht, nicht zur optionalen Tugend
+- Als PM besitzt Du die Entscheidung, was shipped wird — das Ethics-Team ist eine Ressource, kein Schutzschild
+
+---
+
+*Quellen: Anthropic RSP 3.0 (2026), OpenAI Preparedness Framework v2 (2025), Google AI Principles, EU AI Act Implementation Timeline (artificialintelligenceact.eu), DLA Piper Analysis (2025)*

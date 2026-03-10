@@ -1,0 +1,67 @@
+---
+title: "Synthese: AI Foundations"
+description: "Wie die vier Foundations-Lektionen zusammenhaengen — und was sie gemeinsam ueber AI Product Management verraten."
+sidebar:
+  order: 5
+---
+
+## The Big Picture
+
+Du hast vier Lektionen durchgearbeitet: wie LLMs Token fuer Token generieren, welche ML-Paradigmen es gibt, warum AI-Outputs unsicher sind, und was Foundation Models von klassischem ML unterscheidet.
+
+Einzeln sind das nuetzliche Konzepte. Zusammen ergeben sie ein Denkmodell fuer AI Product Management.
+
+## Connections
+
+### 1. Von Tokens zu Produktdesign
+
+LLMs denken in Tokens und Wahrscheinlichkeiten (Lektion 1). Das macht sie fundamental **non-deterministic** (Lektion 3). Gleicher Input, anderer Output — das ist kein Bug, sondern die Architektur.
+
+**Fuer Dich als PM:** Jedes AI-Feature braucht ein Design, das mit variierenden Outputs umgehen kann. Deterministisches UX-Denken funktioniert hier nicht.
+
+### 2. Von ML-Paradigmen zu Foundation Models
+
+ML hat viele Paradigmen — Supervised, Unsupervised, Reinforcement Learning (Lektion 2). Foundation Models nutzen **Self-Supervised Learning** auf massiven Datensaetzen (Lektion 4) und sind dadurch ohne taskspezifisches Training auf viele Aufgaben anwendbar.
+
+**Fuer Dich als PM:** Du musst nicht fuer jedes Feature ein eigenes Modell trainieren. Aber Du musst wissen, wann ein spezialisiertes Modell trotzdem besser ist.
+
+### 3. Von Aufgabentypen zu Produktarchitekturen
+
+Classification und Generation sind unterschiedliche Aufgaben (Lektion 2), die auf **discriminative vs. generative** Modelle mappen. Die meisten AI-Produkte kombinieren beides in Pipelines — z.B. erst klassifizieren, dann generieren.
+
+**Fuer Dich als PM:** Denke nicht in "einem Modell", sondern in Pipelines. Ein Support-Bot klassifiziert erst die Anfrage und generiert dann die Antwort.
+
+### 4. Von Hallucinations zu RAG
+
+Hallucinations (Lektion 1) sind eine strukturelle Konsequenz von **probabilistischer Vorhersage** (Lektion 3). Sie lassen sich nicht wegtrainieren, aber durch **RAG-Grounding auf Foundation Models** (Lektion 4) reduzieren.
+
+**Fuer Dich als PM:** Die Loesung fuer Hallucinations ist nicht ein besseres Modell, sondern besserer Context. RAG ist dein wichtigstes Werkzeug.
+
+### 5. Von Temperature zu API-Parametern
+
+Temperature und Sampling (Lektion 1) sind Deine direkten Stellschrauben fuer den **Creativity-Accuracy-Tradeoff** (Lektion 3). Du wendest sie auf **Foundation Model APIs** an (Lektion 4).
+
+**Fuer Dich als PM:** Du brauchst keinen ML-Engineer, um die Output-Qualitaet zu steuern. Temperature, Top-P und System-Prompts sind PM-Werkzeuge.
+
+## The Meta-Insight
+
+> AI Product Management ist fundamental **Uncertainty Management** — in Model Outputs, in User-Erwartungen, in der sich schnell veraendernden Modelllandschaft und im organisationalen Verstaendnis davon, was AI kann und was nicht.
+
+Das ist der Unterschied zu klassischem Produktmanagement. Du designst nicht fuer deterministische Systeme. Du designst fuer Wahrscheinlichkeiten.
+
+## Your Foundations Checklist
+
+Was Du jetzt koennen solltest:
+
+- [ ] Stakeholdern erklaeren, was ein LLM tut (und was nicht) — Lektion 1
+- [ ] Den richtigen ML-Ansatz fuer ein Produktproblem waehlen — Lektion 2
+- [ ] Produkte designen, die mit Unsicherheit umgehen — Lektion 3
+- [ ] Foundation Models fuer einen Use Case auswaehlen und vergleichen — Lektion 4
+- [ ] Die Build vs Buy vs Blend-Entscheidung treffen — Lektion 4
+- [ ] Ein Evaluation Framework aufsetzen — Lektion 3
+
+Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. Diese Grundlagen tragen alles, was folgt.
+
+---
+
+*Quellen: Aufbauend auf Lektionen 1–4. Anthropic Documentation (2025), Chip Huyen "Designing Machine Learning Systems" (O'Reilly, 2022), Shanahan "Talking About Large Language Models" (2023)*

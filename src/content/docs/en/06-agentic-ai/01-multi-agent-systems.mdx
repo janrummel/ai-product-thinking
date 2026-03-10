@@ -1,0 +1,99 @@
+---
+title: "Multi-Agent Systems"
+description: "When multiple AI agents outperform a single one — and when they just create more problems."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Your team has built an AI coding agent that works well: it reads code, suggests changes, writes tests. But now management wants more — the agent should also handle deployments, write documentation, and perform code reviews. Your engineering team proposes: "We need multiple specialized agents."
+
+Sounds logical. But multi-agent systems aren't an upgrade you just bolt on. They're an architecture decision with real tradeoffs. A 5-agent pipeline where each agent has 95% reliability delivers only ~77% end-to-end reliability (0.95^5). More agents don't automatically mean better results.
+
+## Concept
+
+A multi-agent system (MAS) consists of multiple AI agents — each with a defined role, its own tools, and a bounded scope. Instead of one generalist, you deploy a team of specialists.
+
+### Orchestration Patterns
+
+Three primary patterns determine how agents collaborate:
+
+| Pattern | How it works | Best for | Risk |
+|---------|-------------|----------|------|
+| **Sequential (Pipeline)** | Agent A passes output to Agent B, then Agent C | Linear workflows (research, draft, review) | Bottleneck: one failure blocks everything |
+| **Parallel (Fan-out/Fan-in)** | Multiple agents work simultaneously, results are merged | Independent sub-tasks (analyze 5 competitors at once) | Inconsistent outputs when merging |
+| **Hierarchical (Manager-Worker)** | Orchestrator agent delegates to specialists | Complex tasks with dynamic planning | Single point of failure at orchestrator |
+
+A fourth pattern — **graph-based orchestration** (e.g., via LangGraph) — is gaining traction: agents form a directed graph with conditions, loops, and dynamic routing.
+
+### Framework Landscape (2025-2026)
+
+| Framework | Approach | Strength | Best Fit |
+|-----------|----------|----------|----------|
+| **LangGraph** | Graph-based state machines | Maximum control, compliance | Enterprise, mission-critical |
+| **CrewAI** | Role-driven crews | Simple mental model, rapid prototyping | Content pipelines, team simulations |
+| **AutoGen** (Microsoft) | Conversational multi-agent | Async execution, human-in-the-loop | Research, complex reasoning |
+| **OpenAI Agents SDK** | Lightweight handoffs | Simple agent-to-agent handoffs | OpenAI ecosystem products |
+| **Claude Agent SDK** | Tool-use with agentic loops | Deep tool integration, MCP-native | Complex agentic applications |
+
+### When Multi-Agent Makes Sense
+
+Multi-agent is justified when: sub-tasks are naturally separable, require different tools or permissions, benefit from parallel execution, or need different trust boundaries.
+
+Single-agent is better when: the task is linear and coherent, context sharing between steps is critical, latency matters more than thoroughness, or debugging simplicity is a priority.
+
+## Framework
+
+The **Multi-Agent Decision Ladder** — work through from top to bottom:
+
+| Step | Question | Result |
+|------|----------|--------|
+| 1 | Can a single agent with good tools solve this? | Yes: use single agent |
+| 2 | Are sub-tasks naturally independent? | Yes: consider parallel multi-agent |
+| 3 | Do sub-tasks require different tools/permissions? | Yes: consider specialized agents |
+| 4 | Is the workflow linear with clear stages? | Yes: sequential pipeline |
+| 5 | Does the task require dynamic planning? | Yes: hierarchical with orchestrator |
+| 6 | Always: start with 2-3 agents max | Add complexity only with evidence |
+
+## Scenario
+
+You're a PM at a B2B SaaS company. Your product is a content marketing platform. The team wants to build an AI content workflow:
+
+1. **Research Agent** — analyzes trends and competitor content (needs web access)
+2. **Writer Agent** — creates articles based on research (needs brand guidelines)
+3. **SEO Agent** — optimizes for search engines (needs SEO tools)
+4. **Editor Agent** — checks quality and facts (needs fact-checking tools)
+5. **Publisher Agent** — formats and publishes (needs CMS access)
+
+The engineering team estimates 8 weeks of development for the 5-agent pipeline. A single agent with all tools would take 3 weeks. Your current manual pipeline takes 4 hours per article with 3 people.
+
+**The question:** 5 agents, 1 agent, or a compromise?
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Start with 2-3 agents, not 5. Specifically: one Research+Writer agent (they share a lot of context) and one Review+Publish agent (they share quality gates). SEO optimization as a tool, not a separate agent.
+
+**Why:**
+- Research and writing need maximum context transfer — an agent boundary between them loses nuance
+- SEO is a tool call (check keyword density, generate meta tags), not its own reasoning loop
+- 3 weeks for 1 agent vs. 8 for 5 — start with 2-3 in ~5 weeks and validate
+- End-to-end reliability with 2 agents (95% each): 90%. With 5 agents: 77%
+
+**What many get wrong:** Creating a separate agent for every step in the manual process. Human division of labor doesn't map 1:1 to agent architecture — agents can handle multiple roles but need shared context.
+</details>
+
+## Reflect
+
+**Multi-agent systems solve real problems — but the first question must always be: is a single agent actually failing at this task?**
+
+- Every agent boundary is a place where context is lost and errors multiply
+- Framework choice (LangGraph, CrewAI, etc.) is rarely the differentiator — prompts, tools, and data are
+- Start small: 2-3 agents maximum, add complexity only with evidence
+
+---
+
+*Sources: Adopt AI — Multi-Agent Frameworks (2025), Turing — AI Agent Frameworks (2026), DEV Community — LangGraph vs CrewAI vs AutoGen (2026)*

@@ -1,0 +1,112 @@
+---
+title: "Autonomy Levels"
+description: "The five levels of AI autonomy — and why the right level is a product decision, not a technical one."
+sidebar:
+  order: 3
+---
+
+## Context
+
+Your competitor just launched a "fully autonomous AI agent." Your CEO asks: "Why isn't our agent autonomous too?" The honest answer: because autonomy isn't a feature you toggle on. It's a spectrum — and the right level depends on risk, domain, and the trust you've built.
+
+The analogy to autonomous driving helps: nobody would put a Level 5 self-driving car on the road without years of validation. Similar principles apply to AI agents — with one crucial difference: most AI errors are reversible (git revert, undo). Car crashes are not.
+
+## Concept
+
+### The Autonomy Spectrum
+
+AI agent autonomy exists on a spectrum defined by the degree of human involvement. The most-cited framework (Feng et al., 2025) defines five levels:
+
+| Level | Human Role | Agent Behavior | Product Example |
+|-------|-----------|----------------|-----------------|
+| **L1: Operator** | Human does the work, AI assists | Suggestions, autocomplete | GitHub Copilot inline suggestions |
+| **L2: Collaborator** | Human and AI work together interactively | AI drafts, human edits | ChatGPT, Claude chat |
+| **L3: Consultant** | Human sets goal, reviews result | Agent plans and executes, human reviews | Claude Code (default), Cursor |
+| **L4: Approver** | AI executes, human approves at checkpoints | Autonomous work with approval gates | Devin, CI/CD with AI-generated PRs |
+| **L5: Observer** | AI executes fully, human monitors | Fully autonomous with dashboard | Replit Agent, automated trading bots |
+
+### Autonomy Is a Design Decision
+
+Autonomy is not an inherent technical property of the model. It is shaped by:
+- **UI constraints** — confirmation dialogs, approval gates, read-only modes
+- **Scope limits** — which tools the agent can access, which actions are permitted
+- **Guardrails** — content filters, budget caps, rate limits
+- **Escalation triggers** — confidence thresholds, error counts, sensitive-topic detection
+
+### When to Increase Autonomy
+
+Increasing autonomy should be driven by evidence, not ambition:
+
+| Signal | Action |
+|--------|--------|
+| Approval rate above 95% over 30 days | Consider auto-approving that action class |
+| Error rate below 1% for a task category | Candidate for reduced oversight |
+| Users consistently skip the review step | The review step may be unnecessary friction |
+| Regulatory requirement exists | Do NOT increase autonomy regardless of metrics |
+| High output variance observed | Decrease autonomy, add human checkpoints |
+
+### Risk Profile by Level
+
+| Level | Speed | Quality Risk | Safety Risk | Cost |
+|-------|-------|-------------|-------------|------|
+| L1 | Slowest | Lowest | Lowest | Highest (human labor) |
+| L3 | Fast | Moderate | Moderate | Moderate |
+| L5 | Fastest | Highest | Highest | Lowest (if it works) |
+
+## Framework
+
+The **Autonomy Decision Ladder** — run through for every new AI feature:
+
+| Question | Answer | Recommendation |
+|----------|--------|----------------|
+| What is the cost of an error? | High (financial, safety, legal) | L1-L2 |
+| Is the action reversible? | Yes | L3-L4 possible |
+| Does regulation require human approval? | Yes | L2-L3 maximum |
+| Is the task well-defined and repetitive? | Yes | Candidate for higher autonomy |
+| Do we have enough validation data? | No | Start at L1-L2 |
+| Can we implement gradual escalation? | Yes | Start low, increase with evidence |
+
+## Scenario
+
+You're the PM for a fintech startup. Your product is an AI bookkeeping agent that processes invoices, categorizes them, and prepares payments. Three user segments:
+
+**Freelancers (5,000 users):** Average 20 invoices/month, amounts under 500 euros, simple categorization. Beta approval rate: 97%.
+
+**SMBs (800 users):** Average 200 invoices/month, amounts up to 50,000 euros, complex cost centers. Beta approval rate: 89%.
+
+**Enterprise (50 users):** Average 2,000 invoices/month, regulatory requirements (local GAAP/IFRS), four-eyes principle mandated. Beta approval rate: 91%.
+
+**The question:** Which autonomy level for which segment?
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Different levels per segment.
+
+- **Freelancers → L4 (Approver):** 97% approval rate, low amounts, simple structure. Agent categorizes and prepares payment, user approves via batch approval. High time savings at low risk.
+
+- **SMBs → L3 (Consultant):** 89% approval rate is too low for L4. Agent categorizes and suggests, user reviews each entry individually. Upgrade to L4 as approval rate improves.
+
+- **Enterprise → L2-L3 (Collaborator/Consultant):** Four-eyes principle is mandated by regulation. Even at 99% approval rate, the agent cannot book autonomously. Agent prepares, first human checks, second human approves. L3 for preparation, L2 for final sign-off.
+
+**Why:**
+- Keeping freelancers at L2 wastes the product-market fit — they want time savings
+- Setting SMBs to L4 with 89% approval rate means 11% error rate on amounts up to 50,000 euros
+- Enterprise CANNOT go higher than L3, regardless of model quality — regulation is the constraint
+
+**What many get wrong:** One autonomy level for all users. Power users get frustrated, risk-sensitive users lose trust.
+</details>
+
+## Reflect
+
+**Autonomy is not a goal but a design parameter. The right question isn't "How autonomous can we get?" but "How autonomous should we be for this user in this context?"**
+
+- L3 is the sweet spot for most B2B products in 2026 — fast enough to be valuable, controlled enough to be trustworthy
+- Autonomy must be adjustable per user segment, task type, and domain
+- The path to L5 runs through months of L3-L4 evidence — there are no shortcuts
+
+---
+
+*Sources: Knight First Amendment Institute — Levels of Autonomy for AI Agents (Feng et al., 2025), MIT AI Agent Index 2025, Sema4.ai — Five Levels of Agentic Automation (2025)*

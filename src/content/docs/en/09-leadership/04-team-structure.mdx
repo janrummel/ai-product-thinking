@@ -1,0 +1,123 @@
+---
+title: "Team Structure Evolution"
+description: "How AI changes existing roles, which new roles are emerging, and why the PM role becomes more important rather than disappearing."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Your Head of Engineering comes to you and says: "We need a prompt engineer." Your designer asks whether they now need to learn AI interaction design. A PM colleague sends you an article headlined "AI Will Replace Product Managers by 2028."
+
+Meanwhile, Shopify has announced that no new roles will be approved without first demonstrating that AI cannot do the job. Duolingo has reduced its contractor workforce for content creation and replaced it with AI pipelines.
+
+The question isn't whether team structures will change. The question is: How do you navigate this shift as a PM?
+
+## Concept
+
+### How AI Changes Existing Roles
+
+**Product Managers:**
+- Traditional: Define features, write specs, prioritize the backlog
+- AI era: Define eval criteria, set quality thresholds, manage probabilistic outcomes, prototype with AI tools, write prompts as product specifications
+- **Core shift:** From "specify exactly what to build" to "define what good enough looks like and how to measure it"
+
+**Engineers:**
+- Traditional: Write deterministic code, debug clear cause-and-effect issues
+- AI era: Integrate AI APIs, build eval pipelines, optimize prompts, manage model versioning, handle non-deterministic testing
+- **Core shift:** From "write the logic" to "orchestrate AI capabilities and build guardrails"
+
+**Designers:**
+- Traditional: Design pixel-perfect interfaces with predictable states
+- AI era: Design for uncertainty (confidence indicators, graceful degradation), feedback mechanisms (thumbs up/down, corrections), trust-building patterns
+- **Core shift:** From "design the output" to "design the experience around unpredictable output"
+
+### New Roles in AI Teams
+
+| Role | Focus | Why it matters |
+|------|-------|----------------|
+| Prompt Engineer | Optimize prompts for production, A/B test variations | Direct impact on quality and cost |
+| Eval Specialist | Build eval datasets, quality assessment pipelines | Often understaffed but critical |
+| AI Trainer / RLHF | Human feedback, labeling quality | Often outsourced but needs oversight |
+| Agent Ops | Monitor, train, and govern AI agents | Established as a discipline by 2026 |
+
+### The "Will AI Replace PMs?" Question
+
+The evidence-based answer (as of 2026): **No, but the job is changing significantly.**
+
+**What AI automates for PMs:** Data analysis and reporting, first drafts of PRDs and specs, competitive research summaries, meeting notes, basic prioritization scoring.
+
+**What AI cannot replace:** Stakeholder alignment and organizational navigation, judgment calls on tradeoffs, user empathy and qualitative insight synthesis, vision and strategy, cross-functional leadership.
+
+**The polarization pattern (2025-2026):** Roles are splitting into AI-augmented generalists (PMs who use AI to do more with less) and AI-focused specialists (PMs who specialize in building AI products). The traditional middle ground is under the most pressure.
+
+### Team Evolution by AI Maturity
+
+| Stage | Timeframe | Team setup | Focus |
+|-------|-----------|------------|-------|
+| Exploring | 0-6 months | Existing team + 1 ML/integration engineer | First AI feature, proof of concept |
+| Building | 6-18 months | Dedicated AI pod (PM + 2-3 engineers + designer) | Production features, eval infrastructure |
+| Scaling | 18-36 months | Multiple AI pods + shared platform team | Multiple features, shared infra, cost optimization |
+| AI-Native | 36+ months | AI embedded in every team, central governance | AI as core capability, org transformation |
+
+## Framework
+
+**Hire vs. Upskill Decision Matrix:**
+
+| Situation | Hire | Upskill |
+|-----------|------|---------|
+| Training custom models | Yes | - |
+| AI is the core product | Yes | - |
+| Eval infrastructure from scratch | Yes | - |
+| Scale requires dedicated ops | Yes | - |
+| Using foundation model APIs | - | Yes |
+| AI is a feature within the product | - | Yes |
+| Strong engineering foundation exists | - | Yes |
+| Budget is constrained | - | Yes |
+
+**Always ensure:** At least one person on the team deeply understands model behavior and limitations.
+
+## Scenario
+
+You're Head of Product at a Series B startup (80 employees). Your product is a recruiting platform. You want to launch three AI features: automatic CV summarization, job-candidate matching, and an interview question generator. Current team: 4 PMs, 12 engineers, 3 designers. No dedicated AI talent.
+
+**Budget:** You can either hire 2 AI specialists ($180k/year each) or invest $100k in upskilling plus $60k for AI tooling.
+
+**Context:** All three features are based on foundation model APIs (no custom model training needed). Your senior engineer has already built a prototype with the OpenAI API.
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Upskilling + tooling ($160k) over two new hires ($360k/year).
+
+**Why:**
+- All features use foundation model APIs — no custom model training needed
+- The senior engineer already has a prototype — the foundation is there
+- Upskilling brings broader AI understanding across the entire team, not just 2 people
+- $200k/year saved that can flow into better tooling and eval infrastructure
+
+**Specifically:**
+- 1 PM becomes the AI PM (focused on eval criteria and quality thresholds)
+- 2-3 engineers learn prompt engineering, RAG patterns, eval frameworks
+- 1 designer learns AI interaction design
+- $60k for tooling: eval framework, model serving, monitoring
+
+**When to hire anyway:** If after 6 months eval quality isn't where it needs to be, or if you need to switch to custom models.
+
+**What many get wrong:** Hiring "AI specialists" for work that's actually integration and evaluation — not research or model training.
+
+</details>
+
+## Reflect
+
+**The key insight: AI automates PM tasks, not the PM role.** Judgment, strategy, and leadership become more important, not less.
+
+- Most AI product work in 2026 is integration and evaluation, not model training — upskilling often beats hiring
+- Prompt engineering for production systems is complex and high-impact — not a junior task
+- Plan for evolution: Start at Stage 1, but design the structure so that Stage 2 is achievable
+
+---
+
+*Sources: Shopify CEO AI-First Memo (2025), Duolingo AI Restructuring (2025), HBR "To Drive AI Adoption, Build Your Team's Product Management Skills" (2026), Agents Today "The Great Reshuffling" (2026), 8Allocate "AI Team Structure" (2026)*

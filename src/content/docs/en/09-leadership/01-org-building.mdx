@@ -1,0 +1,112 @@
+---
+title: "AI Org Building"
+description: "How to structure an organization that doesn't just build AI products, but operates them sustainably."
+sidebar:
+  order: 1
+---
+
+## Context
+
+Your company has successfully launched its first AI feature. The CEO now wants "AI everywhere." Three business units are simultaneously asking for AI resources. Your small ML team of four is overwhelmed, and each project has different requirements.
+
+You're facing the question every organization must answer sooner or later: How do we structure our AI teams? Centralized, distributed, or something in between? The answer determines how fast you deliver, how consistent quality is, and whether AI becomes a strategic advantage or a patchwork of disconnected efforts.
+
+## Concept
+
+### Three Models for AI Teams
+
+**1. Centralized (Center of Excellence)**
+A dedicated AI team serves the entire organization. All AI expertise sits in one group.
+
+- **Pros:** Consistent standards, shared tooling, efficient use of scarce AI talent
+- **Cons:** Can become a bottleneck, may lack domain context, prioritization conflicts between business units
+- **Best for:** Early AI adoption (maturity level 1-2), companies with limited AI talent
+
+**2. Distributed / Embedded**
+AI engineers sit directly within product teams. Each squad has its own AI capability.
+
+- **Pros:** Deep domain knowledge, faster iteration, direct accountability
+- **Cons:** Duplicated effort, inconsistent practices, harder to maintain platform infrastructure
+- **Best for:** AI-mature organizations (maturity level 3+) with sufficient AI talent supply
+
+**3. Hub-and-Spoke (Hybrid)**
+A central AI platform team maintains shared infrastructure (model serving, eval pipelines, feature stores) while embedded engineers sit within product teams.
+
+- **Pros:** Balances consistency with domain focus, scales better than pure centralization
+- **Cons:** Matrix-reporting complexity, requires strong coordination
+- **Best for:** Mid-to-large organizations scaling from initial AI success to broad deployment
+
+### The AI PM Role
+
+The AI Product Manager role has evolved from "PM who works with ML engineers" to a distinct specialty. McKinsey found that demand for AI fluency in job postings nearly increased sevenfold between 2023 and 2025, with the strongest growth in management and business roles.
+
+An AI PM doesn't need to train models. But they must:
+- Understand model capabilities and limitations
+- Define evaluation criteria and quality thresholds
+- Handle probabilistic outputs with confidence
+- Manage user expectations for non-deterministic products
+
+### Upskilling Over Replacement
+
+The most effective approach isn't replacing teams but expanding existing knowledge:
+- **PMs:** Learn to write evals, understand model tradeoffs (cost vs. quality vs. latency)
+- **Engineers:** Prompt engineering, RAG patterns, evaluation frameworks
+- **Designers:** Interaction patterns for non-deterministic outputs, progressive disclosure
+
+## Framework
+
+**Decision Matrix: Which Org Model Fits?**
+
+| Factor | Centralized | Hub-and-Spoke | Distributed |
+|--------|-------------|---------------|-------------|
+| AI talent | Fewer than 5 people | 5–20 people | More than 20 people |
+| AI maturity | Level 1-2 | Level 2-3 | Level 3+ |
+| Products with AI | 1-2 | 3-5 | 5+ |
+| AI literacy | Low | Growing | Widespread |
+
+**Always maintain**, regardless of model: shared eval infrastructure, model governance, cost monitoring.
+
+**Evolution path:** Start centralized, move to hub-and-spoke as maturity grows, go distributed only when AI literacy is organization-wide.
+
+## Scenario
+
+You're VP of Product at a B2B SaaS company with 400 employees. You have 6 AI engineers, 3 product teams that need AI features, and one successful AI feature in production. The CEO wants AI across all product lines within 12 months.
+
+**Current situation:**
+- 6 AI engineers sit in a centralized team
+- Team takes an average of 6 weeks per AI feature
+- 3 product teams are each waiting for AI resources
+- Product teams have limited AI understanding
+- No shared eval framework — each project builds its own
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Transition to the hub-and-spoke model. Keep 2-3 engineers as the central platform team (eval infrastructure, model serving, cost monitoring). Embed the other 3-4 as embedded engineers in the product teams.
+
+**Why:**
+- 6 AI engineers and 3 products sit squarely in the hub-and-spoke sweet spot
+- The central team builds the shared infrastructure that's currently missing (especially the eval framework)
+- Embedded engineers bring domain context and eliminate the 6-week wait
+- In parallel: run an upskilling program for existing product engineers
+
+**What many get wrong:**
+- Distributing all 6 engineers without a central platform team — leads to inconsistent quality and duplicated effort
+- Staying purely centralized — the bottleneck only gets worse with 3 waiting teams
+- Hiring immediately instead of restructuring — doesn't solve the organizational problem
+
+</details>
+
+## Reflect
+
+**The key insight: AI org building is not a one-time decision but an evolution path.** Start simple, scale the structure with maturity.
+
+- Your org model must match your AI maturity level — not your ambitions
+- Upskilling existing teams is faster and cheaper than hiring from scratch
+- Shared infrastructure (eval, monitoring, governance) is the backbone of any model
+
+---
+
+*Sources: HBR "To Drive AI Adoption, Build Your Team's Product Management Skills" (2026), Shopify CEO AI-First Memo (2025), Duolingo AI-First Restructuring (2025), Product School "AI Product Manager: Real Role or Buzzword?"*

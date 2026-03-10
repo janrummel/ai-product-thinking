@@ -1,0 +1,130 @@
+---
+title: "Data Quality & Governance"
+description: "Why data quality in AI products is a product problem — and how PMs operationalize data governance."
+sidebar:
+  order: 4
+---
+
+## Context
+
+Your AI-powered helpdesk bot has been live for two months. Accuracy was 88% at launch. Now it's at 71%. The engineering team hasn't changed anything about the model or prompt. What happened?
+
+The answer: your knowledge base. Three product pages were updated, but the old versions are still in the index. Two policy documents contradict each other. And since launch, 40 new FAQ entries were added — without quality review.
+
+In traditional software, data quality affects reports and analytics. In AI products, data quality directly affects product quality. Bad data in, bad AI outputs out, bad user experience.
+
+## Concept
+
+### Three types of data quality issues
+
+**1. Training/Fine-Tuning Data Quality**
+- Applies to: custom models and fine-tuning
+- Issues: mislabeled data, biased samples, outdated information
+- Impact: model learns wrong patterns, performs poorly on underrepresented cases
+
+**2. Context Data Quality (RAG/Knowledge Base)**
+- Applies to: RAG-based products
+- Issues: stale documents, contradictory information, poor chunking, missing metadata
+- Impact: AI gives outdated answers, cites irrelevant sources, hallucinations increase
+
+**3. User Input Data Quality**
+- Applies to: all AI products
+- Issues: ambiguous queries, adversarial inputs, out-of-scope requests
+- Impact: poor responses, safety violations, wasted compute
+
+### The data quality pyramid
+
+Each layer depends on the ones below it:
+
+| Layer | Question | Priority |
+|-------|----------|----------|
+| **Availability** | Can the AI access the data at inference time? | Prerequisite |
+| **Accuracy** | Is the data factually correct? | High — errors propagate into every output |
+| **Consistency** | Are there contradictions between sources? | High — AI can't decide which source is right |
+| **Completeness** | Does the data cover all relevant cases? | Medium — gaps lead to hallucinations |
+| **Freshness** | Is the data current? | Medium — stale data degrades over time |
+
+There's no point optimizing freshness if the data is inaccurate.
+
+### Data governance for AI products
+
+Data governance defines who can use what data, how, and under what constraints. For AI products, this becomes critical:
+
+| Question | Why it matters |
+|----------|---------------|
+| Where does our training data come from? | Legal risk, bias risk |
+| Is user data sent to third-party APIs? | Privacy, compliance |
+| Does the model provider train on our data? | IP protection, competitive risk |
+| How do we handle PII in AI contexts? | GDPR, CCPA compliance |
+| Who approves changes to training data? | Quality control, accountability |
+
+### Practical measures for RAG products
+
+1. **Document freshness policy:** Define how often knowledge base documents are reviewed and updated. Stale documents are the number one cause of incorrect RAG responses.
+2. **Chunking strategy:** How documents are split into chunks directly affects answer quality. Poor chunking leads to poor retrieval leads to hallucinations.
+3. **Metadata enrichment:** Adding date, author, topic, and reliability rating to documents improves retrieval quality and enables source attribution.
+4. **Contradiction detection:** When multiple documents provide conflicting information, the product needs a policy for which source takes precedence.
+
+### GIGO in the AI context
+
+The "garbage in, garbage out" problem is amplified in AI products:
+- AI makes errors look authoritative (confident wrong answers)
+- Users often don't verify AI outputs, propagating errors downstream
+- Scale means a small data quality issue affects thousands of users
+- Feedback loops: if users accept wrong AI answers and those feed back into the system, quality degrades over time
+
+## Framework
+
+**Data quality investment by product type:**
+
+| Product type | Primary focus | Secondary focus |
+|-------------|--------------|-----------------|
+| RAG product | Knowledge base quality (freshness, chunking, dedup) | User input handling |
+| Fine-tuned model | Training data quality, bias auditing | Output governance |
+| API-only (no RAG, no fine-tuning) | User input handling, output governance | Data flow documentation |
+
+**Always:** understand your data flows (what goes where), have DPAs with providers, log responsibly.
+
+## Scenario
+
+You're PM of an internal AI assistant at an insurance company. The bot answers employee questions about policies and processes. 2,000 queries per week. RAG-based with 5,000 documents in the knowledge base.
+
+**Current situation:**
+- 60% of "bad answers" (user thumbs down) involve information from documents older than 6 months
+- 15% of errors come from contradictory documents (old policy vs. new policy, both in the index)
+- The compliance team asks: "Are employee queries about customer data being sent to OpenAI?"
+- Budget for data quality: 2 person-days per month
+- The engineering lead suggests: "We need a better model"
+
+## Decide
+
+<details>
+<summary>How would you decide?</summary>
+
+**The best decision:** Prioritize data quality, not a model upgrade. 75% of errors trace back to outdated or contradictory documents.
+
+**Concrete actions:**
+1. **Immediately:** Introduce a document freshness policy — review all documents older than 6 months, remove or update stale ones
+2. **Immediately:** Contradiction resolution — when two documents cover the same topic, prioritize the newer one and archive the old version
+3. **Address compliance:** Verify whether PII is sent to the API. Confirm the DPA with the model provider. If needed, add a PII filter before the API call
+4. **Monthly:** Use the 2 person-days for knowledge base hygiene — review, dedup, freshness check
+
+**Why not upgrade the model:**
+- 75% of errors are data problems — a better model won't fix them
+- Practitioner reports show: 60-80% of RAG quality issues are knowledge base problems, not model problems
+- A model upgrade without data cleanup will improve metrics minimally
+
+**What many get wrong:** Dismissing data quality as an engineering problem and hoping a better model will solve it.
+</details>
+
+## Reflect
+
+**In RAG products, data quality equals product quality — the model is only as good as the data it can retrieve.**
+
+- 60-80% of quality issues in RAG products trace back to the knowledge base, not the model
+- Data governance is not a nice-to-have: PII in API calls, training data usage, and data deletion rights are real compliance risks
+- Document freshness is the simplest and most impactful measure for RAG quality
+
+---
+
+*Sources: Samsung ChatGPT Data Leak (Bloomberg/Reuters, 2023), GDPR & AI Right to Erasure — Legal Analyses, LangChain Community RAG Quality Reports, Anthropic/OpenAI/Google API Data Usage Policies*

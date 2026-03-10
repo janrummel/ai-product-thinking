@@ -1,0 +1,69 @@
+---
+title: "Synthesis: Evaluation"
+description: "How the five Evaluation lessons form a complete quality system — and why evaluation is what sets AI Product Management apart from traditional PM."
+sidebar:
+  order: 6
+---
+
+## The Big Picture
+
+You have worked through five lessons: how to build eval frameworks (Lesson 1), which metrics apply for which product types (Lesson 2), how to adversarially test your product (Lesson 3), how to make ship/no-ship decisions (Lesson 4), and how to detect bias and ensure fairness (Lesson 5).
+
+Individually, these are quality tools. Together, they form a quality system where each lesson builds on and reinforces the others: Lesson 1 asks **HOW** you measure quality. Lesson 2 asks **WHAT** you measure. Lesson 3 asks **AGAINST WHAT** you test. Lesson 4 asks **WHEN** you ship. Lesson 5 asks **FOR WHOM** your product works — and for whom it does not.
+
+## Connections
+
+### 1. Evals Need Metrics — and Vice Versa
+
+An eval framework (Lesson 1) without the right metrics (Lesson 2) is a test suite that measures the wrong thing. The eval pipeline operationalizes the metrics that matter for your product type. Conversely: metrics without eval infrastructure are numbers without consequences — they produce no decisions.
+
+**For you as a PM:** Start with metric selection (which tradeoffs can your product tolerate?) and then build the pipeline that enforces them.
+
+### 2. Red Teaming Feeds the Eval Pipeline
+
+Every red team finding (Lesson 3) becomes a regression test in the golden dataset (Lesson 1). Red teaming discovers failure modes; evals prevent them from recurring. Without this feedback loop, red team results are one-time insights rather than systematic improvements.
+
+**For you as a PM:** Build the process so that every red team finding automatically lands as a test case in the eval suite. A finding without a regression test is a finding you will forget.
+
+### 3. Ship/No-Ship Stands on the Foundation of the First Three Lessons
+
+Quality gates (Lesson 4) are defined by metrics (Lesson 2), enforced by eval pipelines (Lesson 1), and validated by red teaming (Lesson 3). Without this foundation, ship decisions are subjective and inconsistent — "It feels good" instead of "It passed all gates."
+
+**For you as a PM:** The ship/no-ship checklist is only as strong as the systems behind it. If your eval suite is weak, your quality gates are an illusion.
+
+### 4. Fairness Is a Lens, Not a Separate Workstream
+
+Bias & Fairness (Lesson 5) is not a standalone activity — it is a dimension of every other evaluation. Metrics must be disaggregated by group (Lesson 2). Red teaming must include bias-specific scenarios (Lesson 3). Ship decisions must include fairness gates (Lesson 4). Treating fairness as an add-on after the fact is the surest way to miss it.
+
+**For you as a PM:** Integrate fairness from the start into eval pipeline, metrics, and quality gates — not as a separate audit step after building.
+
+### 5. The Eval Flywheel
+
+Production failures discovered through monitoring (Lesson 4) feed back into the golden dataset (Lesson 1), improve the metrics (Lesson 2), and raise the quality bar for future ship decisions (Lesson 4). This is not a linear process — it is a continuous improvement loop. Every production interaction generates data that makes the system better.
+
+**For you as a PM:** Build the loop from day 1. Not the perfect eval system. One that improves itself.
+
+## The Meta-Insight
+
+> Evaluation is where AI product management becomes most distinct from traditional product management. In traditional software, testing proves the product works. In AI products, evaluation **defines** what "works" means — and that definition is a product decision, an ethical decision, and a business decision all at once.
+
+The PM who masters evaluation does not just ship better AI products. They build the organizational capability to improve AI products systematically over time, because every production interaction flows through the eval flywheel.
+
+## Your Evaluation Checklist
+
+What you should now be able to do:
+
+- [ ] Build a golden dataset with domain experts and maintain it as a living artifact — Lesson 1
+- [ ] Implement LLM-as-Judge and validate it against human labels — Lesson 1
+- [ ] Choose the right metrics for your product type (classification vs. generation vs. task-specific) — Lesson 2
+- [ ] Translate metrics into business impact that stakeholders understand — Lesson 2
+- [ ] Define a threat model for your AI product and organize red teaming — Lesson 3
+- [ ] Define quality gates before building and execute staged rollouts — Lesson 4
+- [ ] Choose fairness metrics, conduct bias audits, and justify the choice — Lesson 5
+- [ ] Build the eval flywheel: production failures back into the golden dataset, continuous improvement — Lessons 1-5
+
+If any of these feel uncertain, go back to the relevant lesson. These evaluation foundations determine whether your AI product systematically improves — or systematically erodes trust.
+
+---
+
+*Sources: Building on Lessons 1-5. Hamel Husain — Eval Methodology (2024), OWASP Top 10 for LLMs (2025), EU AI Act (2024/1689), Buolamwini & Gebru — Gender Shades (2018), Chouldechova — Impossibility Theorem (2017), Flagsmith — Shipping AI Features (2025)*
