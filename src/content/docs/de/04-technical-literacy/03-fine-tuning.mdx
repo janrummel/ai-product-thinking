@@ -30,7 +30,7 @@ Fine-Tuning nimmt ein vortrainiertes LLM und trainiert es auf einem domainspezif
 
 ### Fine-Tuning-Methoden
 
-**LoRA (Low-Rank Adaptation):** Die dominante Methode 2025-2026. Friert die Originalgewichte ein und trainiert kleine Adapter-Matrizen. Erreicht 95% der Full-Fine-Tuning-Performance bei 10% der Kosten. Adapter sind klein (10-100 MB) und koennen getauscht werden — mehrere Spezialisierungen aus einem Basismodell. Kosten: 500-5.000 Euro pro Run.
+**LoRA (Low-Rank Adaptation):** Die dominante Methode seit 2025. Friert die Originalgewichte ein und trainiert kleine Adapter-Matrizen. Erreicht 95% der Full-Fine-Tuning-Performance bei 10% der Kosten. Adapter sind klein (10-100 MB) und koennen getauscht werden — mehrere Spezialisierungen aus einem Basismodell. Kosten: 500-5.000 Euro pro Run.
 
 **QLoRA:** Kombiniert LoRA mit Quantisierung (16-Bit auf 4-Bit). Ermoeglicht Fine-Tuning eines 7B-Modells auf einer Consumer-GPU (RTX 4090, ca. 1.500 Euro). Leichter Qualitaetsverlust vs. Standard-LoRA. Ideal fuer Experimente und Proof of Concept.
 

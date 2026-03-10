@@ -79,7 +79,7 @@ You are a PM at a real estate platform. Your AI feature evaluates rental applica
 **The situation:**
 - 30,000 rental applications/month
 - Overall accuracy: 89% (correct prediction of whether a tenant will pay reliably)
-- Disaggregated analysis: Accuracy for applicants with German-sounding names: 91%. Accuracy for applicants with Turkish or Arabic-sounding names: 79%.
+- Disaggregated analysis: Accuracy for applicants with German-sounding names: 91%. Accuracy for applicants with Turkish or Arabic-sounding names: 79%. This disparity disappears in the aggregate metric because the majority group dominates the sample — a classic Simpson's paradox problem.
 - Feature analysis: "First name" is not a direct input, but "neighborhood" and "previous landlords" correlate strongly with ethnic background
 - The VP Product says: "Overall accuracy is good. We can launch."
 - EU AI Act compliance required by August 2026
@@ -97,7 +97,7 @@ You are a PM at a real estate platform. Your AI feature evaluates rental applica
 **The best decision:** Option 3 — Optimize with disaggregation using equalized odds.
 
 **Why:**
-- **Option 1 is legally and ethically untenable:** A 12-percentage-point accuracy gap along ethnic lines is not a footnote — it is systematic discrimination. The EU AI Act explicitly requires bias detection and mitigation (Article 10(2)(f)). Penalties: up to 35 million EUR or 7% of annual turnover.
+- **Option 1 is legally and ethically untenable:** A 12-percentage-point accuracy gap along ethnic lines is not a footnote — it is systematic discrimination. The EU AI Act explicitly requires bias detection and mitigation for high-risk systems (Article 10). Penalties for high-risk system violations: up to 15 million EUR or 3% of global annual turnover (the higher threshold of 35 million EUR / 7% applies only to prohibited AI practices under Article 5).
 - **Option 2 is necessary but insufficient:** Removing proxy features reduces direct correlation, but other features may encode the same bias. And "neighborhood" carries real predictive value — removing it blindly lowers accuracy for everyone.
 - **Option 3 addresses the root cause:** Equalized odds ensures reliable tenants from all groups have equal chances of correct evaluation. Yes, overall accuracy likely drops from 89% to 85-87%. But a fair model at 86% is preferable to a discriminatory one at 89%.
 - **Additionally:** Build an appeal mechanism for applicants. Create transparency about the score. Schedule regular re-audits.

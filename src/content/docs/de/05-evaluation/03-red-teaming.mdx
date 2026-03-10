@@ -22,7 +22,7 @@ Prompt Injection steht auf **Platz 1 der OWASP Top 10 fuer LLM Applications (202
 - **Indirekte Injection:** Boesartige Anweisungen in Daten eingebettet, die das Modell abruft (Dokumente, Webseiten, E-Mails)
 - **Delimiter Attacks:** Marker wie `<|system|>` nutzen, um das Modell ueber Anweisungsgrenzen zu verwirren
 
-**Jailbreaking:** Techniken zum Umgehen von Safety Guardrails. Forschung zeigt: Jailbreak-Prompts, die auf GPT-4 funktionieren, transferieren zu 64% auf Claude 2 und zu 60% auf Vicuna. PMs koennen nicht davon ausgehen, dass ein Modellwechsel bekannte Schwachstellen beseitigt.
+**Jailbreaking:** Techniken zum Umgehen von Safety Guardrails. Fruehe Forschung (Zou et al., 2023) zeigte, dass Jailbreak-Prompts zwischen Modellen transferierbar sind — damalige Tests auf GPT-4, Claude 2 und Vicuna zeigten Transfer-Raten von 60-64%. Aktuelle Modelle haben ihre Abwehr seitdem deutlich verbessert, aber das Prinzip bleibt: Ein Angriff, der auf einem Modell funktioniert, sollte auf allen getestet werden.
 
 **Data Exfiltration:** System Prompts, Trainingsdaten oder User-Daten durch geschickte Anfragen extrahieren.
 
@@ -106,7 +106,7 @@ Du bist PM bei einer Versicherung. Euer neuer AI-Assistent hilft Kunden, Schaden
 **Red Teaming ist keine Checkliste — es ist eine Denkweise. Die Frage ist nicht "Funktioniert unser Produkt?" sondern "Wie kann es missbraucht werden?"**
 
 - Prompt Injection ist Platz 1 bei OWASP fuer LLMs — zum zweiten Jahr in Folge. Es ist kein theoretisches Risiko, sondern ein aktiv ausgenutzter Angriffsvektor.
-- Jailbreaks transferieren modelluebergreifend (59-64% Erfolgsrate). Ein Modellwechsel beseitigt keine bekannten Schwachstellen.
+- Jailbreaks transferieren modelluebergreifend (Zou et al., 2023: 60-64% in fruehen Tests). Ein Modellwechsel beseitigt keine bekannten Schwachstellen.
 - Der EU AI Act macht adversarielles Testen fuer Hochrisiko-Systeme zur Pflicht (Deadline: August 2026). Red Teaming ist nicht mehr optional — es ist regulatorische Anforderung.
 
 ---

@@ -22,7 +22,7 @@ Prompt injection sits at **#1 in OWASP's 2025 Top 10 for LLM Applications** for 
 - **Indirect injection:** Malicious instructions embedded in data the model retrieves (documents, web pages, emails)
 - **Delimiter attacks:** Using markers like `<|system|>` to confuse the model about instruction boundaries
 
-**Jailbreaking:** Techniques to bypass safety guardrails. Research shows jailbreak prompts that succeed on GPT-4 transfer to Claude 2 at 64% and to Vicuna at 60%. PMs cannot assume that switching models eliminates known vulnerabilities.
+**Jailbreaking:** Techniques to bypass safety guardrails. Early research (Zou et al., 2023) showed that jailbreak prompts transfer between models — tests on GPT-4, Claude 2, and Vicuna showed transfer rates of 60-64%. Current models have significantly improved their defenses since, but the principle remains: an attack that works on one model should be tested on all.
 
 **Data Exfiltration:** Extracting system prompts, training data, or user data through carefully crafted queries.
 
@@ -106,7 +106,7 @@ You are a PM at an insurance company. Your new AI assistant helps customers fill
 **Red teaming is not a checklist — it is a mindset. The question is not "Does our product work?" but "How can it be misused?"**
 
 - Prompt injection is #1 on OWASP for LLMs — for the second year running. It is not a theoretical risk but an actively exploited attack vector.
-- Jailbreaks transfer across models (59-64% success rate). Switching models does not eliminate known vulnerabilities.
+- Jailbreaks transfer across models (Zou et al., 2023: 60-64% in early tests). Switching models does not eliminate known vulnerabilities.
 - The EU AI Act makes adversarial testing mandatory for high-risk systems (deadline: August 2026). Red teaming is no longer optional — it is a regulatory requirement.
 
 ---

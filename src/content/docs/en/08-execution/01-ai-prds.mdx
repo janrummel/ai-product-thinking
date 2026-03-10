@@ -66,6 +66,50 @@ Google treats prompts as code artifacts: version control, mandatory review, eval
 
 **Golden rule:** As soon as an AI component is involved, the PRD needs evaluation criteria — even if the rest stays traditional.
 
+### AI PRD Template
+
+The following template is a starting point — adapt it to your product and organization.
+
+:::note[AI PRD Template — Short Version]
+**1. Problem Statement & User Context**
+- What problem are we solving? For whom?
+- Manual effort today: ___ hours/month
+- Expected reduction: ___%
+
+**2. AI Approach & Rationale**
+- Chosen approach: [ ] LLM API  [ ] RAG  [ ] Fine-tuning  [ ] Agent Workflow
+- Why AI instead of rules/traditional code: ___
+- Alternative approaches evaluated: ___
+
+**3. Evaluation Criteria**
+- Golden dataset: ___ examples, source: ___
+- Primary metric: ___ (e.g., accuracy, ROUGE, human rating)
+- Minimum threshold for launch: ___
+- Secondary metrics: Hallucination rate < ___%, Latency < ___ms, Cost < $___/query
+
+**4. Model & Infrastructure**
+- Model: ___ | Rationale: ___
+- Expected volume: ___ requests/month
+- Cost projection: $___/month at expected volume
+
+**5. User Experience**
+- Output presentation: ___
+- Confidence indicator: [ ] Yes  [ ] No
+- Fallback on low confidence: ___
+- Feedback mechanism: [ ] Thumbs  [ ] Regenerate  [ ] Edit  [ ] Other
+
+**6. Risk & Mitigation**
+- Top 3 failure modes: ___
+- Guardrails: ___
+- Bias considerations: ___
+- Privacy implications: ___
+
+**7. Success Metrics & Iteration Plan**
+- Launch metric: ___
+- Post-launch monitoring: ___ (cadence: daily/weekly)
+- Planned improvement cadence: ___
+:::
+
 ## Scenario
 
 You're a PM at a SaaS company. Your product is a helpdesk tool. Feature request: AI should automatically summarize incoming tickets and suggest a priority level.
