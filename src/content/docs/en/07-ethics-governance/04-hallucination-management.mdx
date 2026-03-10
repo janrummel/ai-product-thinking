@@ -37,7 +37,7 @@ LLM hallucinations are not software bugs to be fixed. They are a structural prop
 
 ### Mitigation strategies (none solves it alone)
 
-**RAG (Retrieval-Augmented Generation)** reduces hallucinations by 40-71% by grounding responses in external documents. But: a Stanford study on Legal RAG shows that hallucinations "remain substantial, wide-ranging, and potentially insidious" — even with RAG.
+**RAG (Retrieval-Augmented Generation)** anchors responses in external documents. General benchmarks show reductions of 40-71%. However, for specialized domains the picture differs — a Stanford study on Legal RAG found that hallucinations 'remain substantial, diverse, and potentially insidious,' even with RAG. The reduction rate depends heavily on retrieval quality and domain.
 
 **Span-level verification** checks each individual claim against evidence from retrieved sources. Goes beyond document-level RAG to sentence-level grounding.
 
