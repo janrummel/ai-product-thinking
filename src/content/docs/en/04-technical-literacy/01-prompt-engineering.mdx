@@ -31,7 +31,7 @@ Not every task needs the same technique. The skill is starting with the simplest
 
 **Self-Consistency:** Run the same prompt multiple times, take the majority answer. Increases accuracy at 3-5x cost — only for high-stakes decisions.
 
-**Blended Prompting (2025-2026 best practice):** Combine few-shot + role instruction + format constraints + CoT in a single prompt. Most production prompts use this approach.
+**Blended Prompting (current best practice):** Combine few-shot + role instruction + format constraints + CoT in a single prompt. Most production prompts use this approach.
 
 ### What PMs Get Wrong
 
@@ -83,7 +83,7 @@ You're a PM at a legal tech SaaS (B2B, 2,000 law firms). Your next feature: auto
 
 **Why:**
 - **Follow the escalation path:** Zero-shot delivers 60%. Before you start fine-tuning, you must exhaust prompt options. This isn't optional — it's best practice
-- **Cost risk:** Fine-tuning for $15,000 on a feature that might reach 90%+ with better prompting is premature. Studies show: fine-tuning a weaker model often loses to good prompting on a stronger model
+- **Cost risk:** Fine-tuning for $15,000 on a feature that might reach 90%+ with better prompting is premature. Practical experience across many teams shows: fine-tuning a weaker model often loses to good prompting on a stronger model
 - **Structured output is critical:** JSON with risk level + reasoning makes output downstream-ready (UI rendering, database) and enforces consistent formatting
 - **Timeline:** 1 week instead of 3. If the blended prompt hits 85%, you can add more few-shot examples. If it hits 90%+, fine-tuning is unnecessary
 - **Expected impact:** Experience shows that few-shot + CoT together can deliver 15-25 percentage point improvement over zero-shot
@@ -95,7 +95,7 @@ You're a PM at a legal tech SaaS (B2B, 2,000 law firms). Your next feature: auto
 
 - **The prompt is the product specification.** If you don't understand the prompt, you don't understand what the AI feature does. PMs must own prompt design — not delegate it.
 - Always start with zero-shot and escalate only for measurable failures. Each level costs more tokens and complexity.
-- Blended prompting (few-shot + role + CoT + structured output) is the 2025-2026 production standard — not any single technique in isolation.
+- Blended prompting (few-shot + role + CoT + structured output) is the current production standard — not any single technique in isolation.
 - Prompts need versioning and monitoring. A prompt that works on GPT-4 may fail on GPT-5.
 
 ---

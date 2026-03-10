@@ -66,6 +66,50 @@ Google behandelt Prompts als Code Artifacts: Version Control, Review-Pflicht, Ev
 
 **Goldene Regel:** Sobald eine AI-Komponente beteiligt ist, braucht das PRD Evaluation Criteria — auch wenn der Rest traditionell bleibt.
 
+### AI PRD Template
+
+Das folgende Template ist ein Startpunkt — passe es an Dein Produkt und Deine Organisation an.
+
+:::note[AI PRD Template — Kurzversion]
+**1. Problem Statement & User Context**
+- Welches Problem loesen wir? Fuer wen?
+- Manueller Aufwand heute: ___ Stunden/Monat
+- Erwartete Reduktion: ___%
+
+**2. AI Approach & Rationale**
+- Gewaehlter Ansatz: [ ] LLM API  [ ] RAG  [ ] Fine-Tuning  [ ] Agent Workflow
+- Warum AI statt Regeln/klassischem Code: ___
+- Alternative Ansaetze evaluiert: ___
+
+**3. Evaluation Criteria**
+- Golden Dataset: ___ Beispiele, Quelle: ___
+- Primaermetrik: ___ (z.B. Accuracy, ROUGE, Human Rating)
+- Minimum-Schwellenwert fuer Launch: ___
+- Sekundaermetriken: Hallucination Rate < ___%, Latency < ___ms, Cost < $___/Query
+
+**4. Model & Infrastructure**
+- Modell: ___ | Begruendung: ___
+- Erwartetes Volumen: ___ Anfragen/Monat
+- Kostenprojektion: $___/Monat bei erwartetem Volumen
+
+**5. User Experience**
+- Output-Darstellung: ___
+- Confidence Indicator: [ ] Ja  [ ] Nein
+- Fallback bei Low Confidence: ___
+- Feedback-Mechanismus: [ ] Thumbs  [ ] Regenerate  [ ] Edit  [ ] Sonstiges
+
+**6. Risk & Mitigation**
+- Top-3 Failure Modes: ___
+- Guardrails: ___
+- Bias-Betrachtung: ___
+- Privacy-Implikationen: ___
+
+**7. Success Metrics & Iteration Plan**
+- Launch-Metrik: ___
+- Post-Launch Monitoring: ___ (Kadenz: taeglich/woechentlich)
+- Geplante Verbesserungskadenz: ___
+:::
+
 ## Scenario
 
 Du bist PM bei einem SaaS-Unternehmen. Euer Produkt ist ein Helpdesk-Tool. Feature-Anfrage: AI soll eingehende Tickets automatisch zusammenfassen und eine Prioritaet vorschlagen.
