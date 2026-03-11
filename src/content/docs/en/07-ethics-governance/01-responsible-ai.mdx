@@ -55,43 +55,85 @@ The **Responsible AI Reality Check** — six steps for every AI feature launch:
 | 5. DOCUMENT | Record decisions and rationale | Audit trail |
 | 6. MONITOR | Continuous oversight post-launch | Ongoing safety |
 
-## Scenario
+## Scenario: Clearview AI — When Responsible AI Is Ignored
 
-You're a PM at an HR tech startup. Your AI feature automatically ranks applications for initial interviews. Sales pressure is high — three enterprise customers are waiting for the feature.
+Clearview AI built a facial recognition search engine. The product: upload a photo, instantly find all publicly available images of that person — along with the sources. To do this, Clearview scraped over 20 billion images from social media platforms, news sites, and other public sources. Without the knowledge of those depicted. Without consent. Without any opt-out mechanism.
+
+Primary customers: US law enforcement agencies. Clearview marketed the tool as an investigative aid — a "Google for faces." There was no internal ethics board, no Responsible AI framework, no self-imposed constraints. The defense: "The data is publicly available."
 
 **The facts:**
-- Training data: 50,000 historical hiring decisions from one client
-- Early tests show: the system systematically favors applicants from certain universities
-- Your "AI Ethics Board" exists on paper but has never met
-- Go-live is planned in 4 weeks
-- The CTO says: "We can fix this after launch"
+- France (CNIL): EUR 20M fine (2022)
+- Italy (Garante): EUR 20M fine (2022)
+- Greece (HDPA): EUR 20M fine (2022)
+- UK (ICO): GBP 7.5M (~EUR 9M) fine (2022)
+- Netherlands (AP): EUR 30.5M fine (2024)
+- Australia (OAIC): operations declared unlawful (2021)
+- ACLU settlement (2022): Clearview prohibited from selling to private companies in the US
+- Total penalties: over EUR 100M
 
-Under the EU AI Act, AI in hiring falls under **High-Risk**. Starting August 2026, conformity assessments, technical documentation, and human oversight will be mandatory.
+Regulators in every jurisdiction rejected the "publicly available data" argument. Publicly visible does not mean freely exploitable. Consent is still required.
+
+Under the EU AI Act, real-time biometric identification in public spaces falls under **Unacceptable Risk** — the product would simply be banned. Clearview continues operating despite international prohibitions and sells to US agencies.
+
+**The question:**
+What would have happened if someone at Clearview had applied the Responsible AI Reality Check?
 
 ## Decide
 
 <details>
-<summary>How would you decide?</summary>
+<summary>Clearview AI through the Reality Check</summary>
 
-**The best decision:** Delay the launch. Document the bias, activate the Ethics Board, audit the training data, and build in a human-in-the-loop component before the feature goes live.
+Imagine you were a PM at Clearview in 2019. The product is built, the first law enforcement customers are interested. You apply the Reality Check:
 
-**Why:**
-- AI in hiring is high-risk under the EU AI Act — a bias incident wouldn't just be embarrassing, it could be illegal
-- Historical hiring data reproduces historical discrimination — this is a well-known pattern (Amazon shut down a similar system in 2018)
-- "Fix it after launch" doesn't work with bias — every discriminatory decision in the meantime is real harm to real people
-- Enterprise customers in regulated industries will reject an AI hiring tool without demonstrable fairness testing
+**1. CLASSIFY — Map the feature to EU AI Act risk tiers**
 
-**What many get wrong:** Pushing the launch through with plans to fix it later — then being surprised when a discrimination case goes public and all three enterprise customers walk away.
+Biometric identification of individuals in public spaces falls under **Unacceptable Risk**. Full stop. No compliance pathway, no mitigation catalog — the product is outright banned in the EU. At this very first step, any PM with basic knowledge of AI regulation would have pulled the emergency brake.
+
+*What Clearview did:* No classification. No regulatory analysis. Just kept going.
+
+**2. IDENTIFY — Name concrete harm scenarios**
+
+The harm scenarios are obvious: mass surveillance without the knowledge of those affected. Abuse by stalkers if the tool falls into the wrong hands. False positives that drag innocent people into investigations. Chilling effects on free speech when every person in public can be identified. Discrimination through differential error rates across ethnic groups — a well-documented problem in facial recognition.
+
+*What Clearview did:* No harm analysis. Not a single one of these scenarios addressed.
+
+**3. DEFINE — Set safety mechanisms BEFORE launch**
+
+What would have been needed: consent mechanisms for data collection. Opt-out for affected individuals. Access controls for the tool. Accuracy thresholds. Usage restrictions.
+
+*What Clearview did:* None of this. No consent, no opt-out, no guardrails, no kill switch.
+
+**4. ESTABLISH — Create escalation paths**
+
+Who decides when something goes wrong? Who shuts down the system in cases of misuse? Who is accountable for harm to affected individuals?
+
+*What Clearview did:* No ethics board. No escalation paths. No defined accountability. When regulators identified violations, the response was not correction but resistance.
+
+**5. DOCUMENT — Record decisions and rationale**
+
+An audit trail would have documented: Why was data collected without consent? What legal basis was assumed? What risks were assessed and accepted?
+
+*What Clearview did:* No documentation. The only publicly known rationale — "the data is public" — was rejected by every single regulator.
+
+**6. MONITOR — Continuous oversight post-launch**
+
+Monitoring would have meant: accuracy tracking across demographic groups. Misuse detection. Regular compliance reviews against evolving regulation.
+
+*What Clearview did:* No monitoring. Instead, the database grew to 20+ billion images while bans and fines piled up across the globe.
+
+**The result:** Clearview failed at every single step. Not partially, not almost — completely. The outcome: over EUR 100M in penalties, bans in multiple countries, and the status of a canonical negative case study for AI ethics violations.
+
 </details>
 
 ## Reflect
 
-**Responsible AI is not a gate before launch — it's a property of the entire product development process.**
+**Responsible AI is not a gate before launch — it's a property of the entire process. Principles without enforcement are worthless. The EU AI Act makes this a regulatory obligation.**
 
-- Principles without enforcement mechanisms are worthless — the test is whether they can stop a launch
-- The EU AI Act turns Responsible AI from an optional virtue into a regulatory obligation
-- As a PM, you own the decision about what ships — the ethics team is a resource, not a shield
+- **"Publicly available" does not mean "free to exploit."** Clearview's entire defense rested on a fallacy that every single regulator rejected. As a PM, you must validate legal assumptions — not pick the interpretation that is most convenient.
+- **Without internal resistance, there is no course correction.** Clearview had no ethics board, no escalation path, nobody who could or would say no. Responsible AI requires institutionalized friction — processes that can stop a launch, not merely accompany one.
+- **Regulation is coming — the only question is whether you are prepared.** Clearview built a product that falls into the highest prohibition category under the EU AI Act. Anyone who had run the Reality Check in 2019 would have seen this in five minutes. Over EUR 100M in fines later, the lesson is expensive but unambiguous.
+- **Negative examples teach more than principle PDFs.** Clearview is proof: if you ignore every step of a Responsible AI framework, the world counts the consequences in nine-figure sums.
 
 ---
 
-*Sources: Anthropic RSP 3.0 (2026), OpenAI Preparedness Framework v2 (2025), Google AI Principles, EU AI Act Implementation Timeline (artificialintelligenceact.eu), DLA Piper Analysis (2025)*
+*Sources: CNIL Clearview AI Decision (2022), Garante per la protezione dei dati personali Decision (2022), HDPA Decision (2022), ICO Monetary Penalty Notice (2022), Autoriteit Persoonsgegevens Decision (2024), OAIC Determination (2021), ACLU v. Clearview AI Settlement (2022), EU AI Act Art. 5 — Prohibited Practices, Anthropic RSP 3.0 (2026), OpenAI Preparedness Framework v2 (2025), Google AI Principles*

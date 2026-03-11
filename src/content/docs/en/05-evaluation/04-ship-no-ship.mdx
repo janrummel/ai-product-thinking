@@ -61,52 +61,73 @@ AI features demand more cautious rollouts than deterministic software because fa
 | Fallback | What happens when it fails? | Graceful degradation defined and tested | No fallback — failure = broken experience |
 | Rollback | Can we undo this? | Instant rollback via feature flag | No rollback mechanism |
 
-## Scenario
+## Scenario: GitHub Copilot — From Preview to GA
 
-You are a PM at an HR-tech company. Your AI feature generates summaries of job applications for recruiters. The feature has passed the eval suite and is ready for rollout.
+It is summer 2021. GitHub, in partnership with OpenAI, has built an AI feature that generates code suggestions directly in the editor: Copilot. The internal demos are impressive — the model completes functions, writes boilerplate, and even suggests tests. The engineering team is convinced: the product works.
 
-**The situation:**
-- 15,000 applications/month through the platform
-- Eval suite: 92% faithfulness (summaries are fact-based), 4% hallucination rate
-- Latency: P95 at 2.8 seconds (budget: 3 seconds)
-- Cost: $0.09 per summary (budget: $0.13)
-- Fairness audit: Summaries for male applicants contain terms like "strong leader" and "decisive" 23% more frequently than for female applicants with comparable experience
-- No shadow mode conducted
-- Feature flag is implemented
+But GitHub faces a difficult ship/no-ship decision. Copilot is not meant for a few hundred power users — it needs to reach millions of developers. Code suggestions that are wrong 70% of the time would not just annoy people; they would actively introduce bugs into production codebases. And every suggestion a developer accepts becomes part of software that other people rely on.
 
-**Options:**
-1. **Ship:** All gates passed except fairness — but the bias fix is estimated at 3 weeks
-2. **Ship with disclaimer:** Launch the feature with a note "AI-generated, please review independently"
-3. **Block:** Fix the fairness issue first, then shadow mode, then canary release
+**The facts:**
+
+- Suggestion acceptance rate started at roughly 30% — seven out of ten suggestions were dismissed
+- Internal dogfooding showed: developers were more productive, but suggestion quality varied significantly across programming languages and contexts
+- GitHub implemented feature flags per user and organization for instant rollback
+- The SPACE framework (Satisfaction, Performance, Activity, Communication, Efficiency) was established to measure developer productivity impact
+- Copilot ran in the background generating suggestions while GitHub measured which ones were accepted versus dismissed — a shadow-mode equivalent at the suggestion level
+- A controlled study found that developers completed tasks 55% faster with Copilot
+- In enabled repositories, roughly 46% of code came from Copilot suggestions
+
+**The question:**
+
+Three months into the Technical Preview, the metrics look promising. Acceptance rate is climbing, developer satisfaction is high, and controlled studies show clear productivity gains. Stakeholders are pushing: why not go GA now? The product is "good enough" — every month of waiting is lost market share. Would you go GA after 3 months, or wait?
 
 ## Decide
 
 <details>
-<summary>How would you decide?</summary>
+<summary>How did GitHub decide — and what can we learn from it?</summary>
 
-**The best decision:** Option 3 — Block and fix the fairness issue first.
+**GitHub's decision:** A 12-month staged rollout — from June 2021 (Technical Preview) to June 2022 (General Availability). Despite promising early metrics, GitHub did not accelerate.
 
-**Why:**
-- **Fairness is not a "nice-to-have" in recruiting:** An AI tool that systematically describes female applicants differently from male applicants is a discrimination risk. This is a high-stakes context — flawed summaries influence hiring decisions.
-- **Option 2 is false security:** A disclaimer offers no legal protection and changes nothing about the behavior. Recruiters under time pressure will use the AI summary as their basis — with built-in gender bias.
-- **4% hallucination rate in recruiting is high:** At 15,000 applications/month, that is 600 summaries with fabricated facts. In a recruiting context, a single hallucinated qualification can distort a hiring decision.
-- **Shadow mode is missing:** Without shadow mode, you don't know how the feature performs on real, current traffic. The eval suite is a proxy — not proof.
-- **Timeline:** 3 weeks fairness fix + 2 weeks shadow mode + 2 weeks canary = 7 weeks. That is a justifiable price for a feature that affects careers.
+**The rollout in stages:**
 
-**Common mistakes:**
-- "We'll ship when it's perfect" — AI is never perfect. But for recruiting, the tolerance for bias is extremely low.
-- "Shadow mode is wasted effort" — a few days of shadow mode would have revealed the fairness gap before the pressure of a launch decision.
-- "Our thresholds should be fixed" — quality bars should evolve. Start conservative, relax as you gain confidence.
+1. **Internal dogfooding:** GitHub engineers used Copilot in their daily work. First quality gates: does it work for our own engineers? Where does it break?
+2. **Invited testers:** Selected external developers with dedicated feedback channels. Quality gate: does the acceptance rate hold outside of GitHub's own codebase patterns?
+3. **Public Technical Preview:** Open access with a waitlist. Quality gate: does the infrastructure scale? Do metrics remain stable under heterogeneous traffic?
+4. **General Availability:** Paid product for everyone. Quality gate: is the acceptance rate high enough that developers would pay for the service?
+
+**Why 12 months instead of 3:**
+
+Viewed through the ship/no-ship lens, GitHub systematically checked at each gate:
+
+| Gate | GitHub's approach |
+|------|-------------------|
+| Eval suite | SPACE framework across five dimensions — not just "does the code compile" but "are developers more satisfied and productive?" |
+| Safety | Security scans on generated code, checks for leaked secrets and license violations in suggestions |
+| Latency | Suggestion latency optimized so Copilot would not interrupt developer flow |
+| Cost | Cost per suggestion brought to a sustainable level for a subscription model |
+| Fairness | Performance measured across programming languages and developer experience levels |
+| Fallback | Dismissing a suggestion = no harm. Feature flag = instant rollback per user/org |
+
+The acceptance rate was optimized from roughly 30% to roughly 34%. That sounds like a small jump — but at millions of suggestions per day, every percentage point of reduced noise is a significant quality improvement.
+
+**Why "good enough" at 3 months was not good enough:**
+
+- The early-adopter cohort was not representative of the GA audience. Power users tolerate more friction than mainstream developers
+- Security-relevant edge cases (generated code with vulnerabilities, copied license fragments) required time to identify and address
+- The pricing model needed validation — developer satisfaction alone is insufficient if the unit economics do not work
+- GitHub needed evidence beyond demos: the 55%-faster study was conducted during the extended preview, not before it
+
+**The outcome:** Copilot became the fastest-adopted developer tool in GitHub's history. The additional 9 months were not lost market share — they were an investment in a product that millions of developers trusted enough to pay for.
+
 </details>
 
 ## Reflect
 
-**The ship/no-ship decision for AI is never "Does it work?" but "Is it better than the alternative — with acceptable failure modes?"**
-
-- Define quality gates before building, not during launch review. Six gates: eval suite, safety, latency, cost, fairness, fallback.
-- Shadow mode is not wasted effort — it catches catastrophic failures at zero user risk. The few days invested prevent incidents that can damage trust irreversibly.
-- Staged rollouts are not optional for AI. Shadow mode, then canary (1-5%), then gradual expansion — each phase with clear exit criteria.
+- **Define quality gates before building, not during launch review.** GitHub did not invent the SPACE framework when Copilot was "done" — it was the measurement system from the start. Five dimensions instead of a single metric, because developer productivity cannot be reduced to acceptance rate alone.
+- **Staged rollouts are mandatory for AI.** GitHub's four-stage rollout (internal, invited, preview, GA) systematically addressed different risks: first functionality, then external validation, then scale, then monetization. Each stage had its own exit criteria.
+- **Shadow mode catches failures at zero user risk.** Copilot's suggest-and-measure approach was an elegant shadow-mode equivalent: the model generated, but the developer decided. Every dismissed suggestion was a data point with no user harm.
+- **"Good enough" for early adopters is not "good enough" for GA.** The hardest lesson from Copilot's rollout: three months of preview data from tech-savvy early adopters tells you little about how millions of mainstream users will behave. GitHub's patience was not timidity — it was a deliberate ship/no-ship decision.
 
 ---
 
-*Sources: Flagsmith — 10 Best Practices to Ship AI Features (2025), Clarifai — AI Model Deployment Strategies (2025), JFrog ML — Shadow Deployment vs. Canary Release (2025), Neptune.ai — Model Deployment Strategies (2025)*
+*Sources: GitHub Blog — Research: Quantifying GitHub Copilot's Impact on Developer Productivity and Happiness (2022), Ziegler et al. — Productivity Assessment of Neural Code Completion (2022), GitHub Blog — GitHub Copilot is Generally Available (2022), Jaffe et al. — The SPACE of Developer Productivity (2021)*

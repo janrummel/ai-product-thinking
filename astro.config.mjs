@@ -2,17 +2,17 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
+const base = process.env.GITHUB_ACTIONS ? '/ai-product-thinking' : '';
+
 export default defineConfig({
 	site: process.env.GITHUB_ACTIONS
 		? 'https://janrummel.github.io'
 		: 'http://localhost:4321',
-	base: process.env.GITHUB_ACTIONS
-		? '/ai-product-thinking'
-		: undefined,
+	base: base || undefined,
 	redirects: {
-		'/': '/de/start/',
-		'/de/': '/de/start/',
-		'/en/': '/en/start/',
+		'/': `${base}/de/start/`,
+		'/de/': `${base}/de/start/`,
+		'/en/': `${base}/en/start/`,
 	},
 	integrations: [
 		starlight({

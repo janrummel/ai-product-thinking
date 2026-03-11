@@ -77,48 +77,52 @@ AI-Operationen sind inhaerent langsamer als CRUD. Streaming ist nicht optional:
 4. **Variabilitaet einbauen** — "Generate Again", Varianten, Slider
 5. **Bestehende Workflows respektieren** — Linear-Ansatz: AI verstaerkt, statt Chatbot hinzuzufuegen
 
-## Scenario
+## Scenario: Notion AI — Inline statt Chat
 
-Du bist PM bei einem Projektmanagement-Tool (B2B SaaS, 8.000 Teams). Euer naechstes Feature: AI-gestuetzte Sprint-Planung. Das Design-Team praesentiertdrei Optionen:
+Ende 2022. Notion hat ueber 30 Millionen User und ist eines der meistgenutzten Produktivitaets-Tools weltweit. Der AI-Hype explodiert — ChatGPT ist gerade gelauncht, jedes SaaS-Produkt kuendigt "AI Features" an. Notion steht unter Druck: Die Waitlist fuer Notion AI hat bereits ueber 2 Millionen Eintraege. Die User erwarten etwas.
 
-**Die Situation:**
-- 65% der User nutzen Board-View, 25% List-View, 10% Calendar
-- Durchschnittliche Sprint-Planung: 45 Minuten pro Team pro Sprint
-- User-Feedback: "Wir wollen schnellere Planung, nicht ein neues Tool lernen"
-- Konkurrent hat Chat-basierte Sprint-Planung gelauncht, NPS bei -12
+Die zentrale Frage fuer das Produkt-Team: *Wie* soll AI in Notion erscheinen?
 
-**Optionen:**
-1. **Chat-Interface:** Dedizierter AI-Chat fuer Sprint-Planung. "Plane meinen naechsten Sprint" → AI schlaegt Tickets vor
-2. **Inline-AI:** AI-Vorschlaege direkt im Board. Lila markierte Suggestions, Ein-Klick-Accept. Kein neues Interface
-3. **Hybrid:** Chat fuer explorative Fragen ("Welche Tickets sind blocked?"), Structured Output fuer die eigentliche Planung (Drag-and-Drop mit AI-Ranking)
+**Die Fakten:**
+- 2M+ Waitlist-Signups fuer Notion AI vor dem Launch
+- Notion ist ein Editor-zentriertes Produkt — User verbringen ihre Zeit in Dokumenten
+- Der Marktstandard 2022/2023: Standalone-Chatbot als separates Feature
+- User-Insight aus der Forschung: "Ich will mein Dokument nicht verlassen, um mit einer AI zu reden"
+
+**Die Entscheidung — drei Optionen:**
+1. **Standalone AI Chat:** Ein separates Chat-Fenster neben dem Editor. User stellen Fragen, kopieren Ergebnisse zurueck ins Dokument
+2. **Inline AI:** AI direkt im Editor — ueber Slash-Commands (`/ai`), lila hervorgehoben, im bestehenden Dokument-Workflow. Kein neues Interface
+3. **Hybrid:** Chat-Sidebar fuer komplexe Fragen, Inline fuer schnelle Aktionen
 
 ## Decide
 
 <details>
-<summary>Wie wuerdest Du entscheiden?</summary>
+<summary>Was hat Notion entschieden — und warum?</summary>
 
-**Die beste Entscheidung:** Option 3 — Hybrid, mit Schwerpunkt auf Inline.
+**Die Entscheidung:** Option 2 — Inline AI, vollstaendig integriert in den Editor.
 
-**Warum:**
-- **User-Feedback ist eindeutig:** "Schnellere Planung, nicht neues Tool." Das schliesst ein reines Chat-Interface aus
-- **Konkurrent-Signal:** Chat-only Sprint-Planung hat NPS -12. Der Markt hat schon geantwortet
-- **Board-View dominiert (65%):** Die AI muss *im Board* erscheinen, nicht daneben. Lila markierte Vorschlaege mit Confidence Score (Progressive Disclosure Level 1), Reasoning per Hover (Level 2)
-- **Chat fuer den richtigen Moment:** "Zeig mir alle Tickets die seit 3 Sprints verschoben werden" ist eine valide Chat-Anfrage. Die Antwort sollte aber als strukturierte Liste erscheinen, nicht als Fliesstext
-- **Erwarteter Impact:** 45 Min → ~25 Min Sprint-Planung durch AI-Ranking + Ein-Klick-Accept. Chat-only wuerde die Zeit vermutlich *erhoehen* (Prompt-Formulierung statt Klicken)
+Notion hat den "Chatbot draufschrauben"-Ansatz explizit abgelehnt. Stattdessen: "Write with AI" und "Edit with AI" als native Funktionen im Dokument. Der Slash-Command `/ai` fuegt sich nahtlos in das bestehende Slash-Command-System ein, das Notion-User bereits kennen. AI-generierter Content erscheint lila hervorgehoben — direkt dort, wo der User arbeitet.
 
-**Anti-Patterns die Du vermeidest:**
-- **Chat-for-everything:** Euer Konkurrent hat es versucht. NPS -12
-- **Non-Determinism verstecken:** AI-Vorschlaege muessen als Vorschlaege erkennbar sein, mit "Shuffle"-Button fuer Alternativen
-- **Workflow-Bruch:** User sollen im Board bleiben, nicht in ein Chat-Fenster wechseln
+**Warum es funktioniert hat — durch die Linse der AI-UX Pattern-Matrix:**
+
+- **Modalitaet an Aufgabe gematcht:** Notion ist ein Schreib-Tool. Die Aufgabe ist "Text erstellen und bearbeiten" — nicht "mit einer AI explorativ diskutieren". Inline-AI passt zur Aufgabe, ein Chatbot haette ein neues Interaktionsmuster erzwungen
+- **Bestehende Workflows respektiert:** User kannten Slash-Commands bereits. Kein neues Interaktionsmodell noetig. Default-on fuer alle User, kein separates Onboarding
+- **Progressive Disclosure umgesetzt:** Level 1 ist das Kernergebnis direkt im Dokument (lila markiert). Level 2 erscheint bei Hover oder Klick — Optionen zum Verfeinern, Kuerzen, Umformulieren. Kein Information Overload
+- **Variabilitaet eingebaut:** "Try Again", Tone-Anpassungen und Laengen-Optionen geben dem User Kontrolle ueber den nicht-deterministischen Output
+
+**Das Ergebnis:** Launch im Februar 2023. Rund 50% der aktiven User haben AI-Features innerhalb von sechs Monaten adoptiert — eine aussergewoehnlich hohe Adoptionsrate fuer ein neues Feature.
+
+**Das entscheidende Insight:** User wollen ihr Dokument nicht verlassen, um mit einer AI zu sprechen. Die Integration in den bestehenden Workflow hat die Huerde eliminiert, die ein separates Chat-Interface aufgebaut haette.
+
 </details>
 
 ## Reflect
 
-- **Das Interface muss zur Aufgabe passen, nicht zur Technologie.** Chat ist ein Interaktionsmuster, kein Default. Bekannte Workflows verdienen Inline-Integration.
-- **Non-Determinism ist ein Feature, kein Bug.** Zeige Variabilitaet durch Regeneration, Confidence Scores und Alternativen — verstecke sie nicht hinter einem deterministischen Interface.
-- **Progressive Disclosure ist Pflicht bei AI.** Level 1 fuer alle, Level 2 bei Interesse, Level 3 fuer Power-User. Microsofts DAB-Ansatz zeigt die Richtung.
-- **Streaming ist Wahrnehmungsdesign.** 40-60% schneller wahrgenommen bei gleicher Latenz. Aber Accessibility nicht vergessen.
+- **Das Interface muss zur Aufgabe passen, nicht zur Technologie.** Notion hat nicht gefragt "Wie bauen wir einen Chatbot?" sondern "Wie wird Schreiben besser?". Chat ist ein Interaktionsmuster — nicht der Default. Die Slash-Command-Integration war moeglich, weil das Team die bestehende Aufgabe verstanden hat, nicht die Technologie in den Vordergrund gestellt hat.
+- **"Bolt on a chatbot" ist das Anti-Pattern dieser Generation.** Notion hat es explizit abgelehnt. Ein separates Chat-Fenster haette den Workflow gebrochen und eine Copy-Paste-Schleife erzeugt. Die hohe Adoptionsrate (ca. 50% in sechs Monaten) zeigt: Geringe Friktionskosten schlagen Feature-Reichtum.
+- **Progressive Disclosure entscheidet ueber Adoption.** Lila Highlight als Level 1, Optionen bei Hover als Level 2 — Notion hat AI-Output geschichtet, statt alles auf einmal zu zeigen. Das reduziert Ueberforderung bei Gelegenheitsnutzern und gibt Power-Usern trotzdem Kontrolle.
+- **Default-on senkt die Aktivierungsenergie.** Kein separates Onboarding, kein Feature-Toggle, kein "AI aktivieren"-Button. Die AI war einfach da — im gleichen Slash-Command-Menue, das User schon kannten. Die beste AI-UX ist die, die kein neues mentales Modell erfordert.
 
 ---
 
-*Quellen: UX Planet "Chat vs. Forms" (2024), Microsoft Copilot DAB Documentation (2025), GitHub Copilot UX Research (2024), Nielsen Norman Group AI UX Patterns (2024), Linear Product Philosophy (2024)*
+*Quellen: Notion AI Launch Announcement (Februar 2023), Notion AI Waitlist Data (2022), "Notion AI: Lessons in Building AI-First Features" — Lenny's Podcast (2023), Nielsen Norman Group "AI UX Patterns" (2024)*
