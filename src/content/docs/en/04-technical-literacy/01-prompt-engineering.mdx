@@ -33,6 +33,16 @@ Not every task needs the same technique. The skill is starting with the simplest
 
 **Blended Prompting (current best practice):** Combine few-shot + role instruction + format constraints + CoT in a single prompt. Most production prompts use this approach.
 
+### Prompt Security — What PMs Need to Know
+
+Prompts are not protected commands — they are attackable. PMs need to understand the key risks:
+
+- **Prompt injection:** User input overrides the system instruction ("Ignore all previous instructions and..."). Defense: input sanitization, clearly separated system/user prompts, output validation
+- **Jailbreaking:** Creative circumvention of safety guardrails. No prompt alone protects against this — multiple defense layers needed (input filters, output filters, monitoring)
+- **Data exfiltration:** The model leaks information from the system prompt or context not intended for the user
+
+**PM decision:** What actions can your AI feature perform? The more autonomy it has (sending emails, modifying data), the more critical prompt security becomes. For high-stakes features, security testing (red teaming, see Chapter 5) belongs in the launch process.
+
 ### What PMs Get Wrong
 
 1. **"Longer prompts = better results."** False. Overly verbose prompts dilute the signal. Concise, specific instructions outperform lengthy ones.
