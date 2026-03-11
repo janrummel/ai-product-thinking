@@ -1,49 +1,58 @@
 # AI Product Thinking
 
-**Das kostenlose Curriculum fuer AI Product Management — auf Deutsch und Englisch.**
+**The free AI Product Management curriculum — in English and German.**
 
-> Nicht noch ein AI-Hype-Kurs. Sondern ein strukturierter Lernpfad, der PMs beibringt, bessere Entscheidungen ueber AI-Produkte zu treffen.
+> Not another AI hype course. A structured learning path that teaches PMs to make better decisions about AI products.
 
-**[Zum Kurs](https://janrummel.github.io/ai-product-thinking/)** | [English Version](https://janrummel.github.io/ai-product-thinking/en/start/)
+<p align="center">
+  <a href="https://janrummel.github.io/ai-product-thinking/"><strong>Start the Course</strong></a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="https://janrummel.github.io/ai-product-thinking/de/01-foundations/">Deutsche Version</a>
+</p>
 
 ---
 
-## Was ist das?
+## What is this?
 
-Ein vollstaendiges, frei zugaengliches Curriculum fuer Product Manager, Tech Leads und alle, die AI-Produkte bauen oder darueber entscheiden. 9 Kapitel, 46 Lektionen, 4 Real-World Case Studies, 27 Entscheidungsszenarien — komplett zweisprachig (DE + EN).
+A complete, free curriculum for Product Managers, Tech Leads, and anyone who builds or decides about AI products. 9 chapters, 46 lessons, 4 real-world case studies, 27 decision scenarios — fully bilingual (EN + DE).
 
-**Der Unterschied zu bezahlten Kursen:** Hier geht es nicht um Wissen sammeln, sondern um Entscheidungen trainieren. Jede Lektion endet mit einem realistischen Szenario, in dem Du als PM eine Entscheidung treffen musst — mit echten Zahlen, echten Tradeoffs.
+**What makes it different from paid courses:** This isn't about collecting knowledge — it's about training decisions. Every lesson ends with a realistic scenario where you make a PM decision with real numbers and real tradeoffs.
 
 ## Curriculum
 
-| Kapitel | Thema | Lektionen |
-|---------|-------|-----------|
-| 01 | **AI Foundations** | Wie LLMs denken, ML Landscape, Probabilistisches Denken, Foundation Models |
-| 02 | **AI Strategy** | Wann AI, Build vs. Buy, PMF Impact, Opportunity Identification |
+| Chapter | Topic | Lessons |
+|---------|-------|---------|
+| 01 | **AI Foundations** | How LLMs think, ML Landscape, Probabilistic Thinking, Foundation Models |
+| 02 | **AI Strategy** | When AI, Build vs. Buy, PMF Impact, Opportunity Identification |
 | 03 | **AI Product Design** | AI-native UX, Trust & Explainability, Interaction Patterns, Generative Features |
 | 04 | **Technical Literacy** | Prompt Engineering, RAG, Fine-Tuning, Model Selection, Cost/Quality Tradeoffs |
-| 05 | **AI Evaluation** | Eval Frameworks, Metriken, Red Teaming, Ship/No-Ship, Bias & Fairness |
-| 06 | **Agentic AI** | Multi-Agent Systeme, Tool Use & MCP, Autonomie-Level, Human-in-the-Loop |
+| 05 | **AI Evaluation** | Eval Frameworks, Metrics, Red Teaming, Ship/No-Ship, Bias & Fairness |
+| 06 | **Agentic AI** | Multi-Agent Systems, Tool Use & MCP, Autonomy Levels, Human-in-the-Loop |
 | 07 | **Ethics & Governance** | Responsible AI, Guardrails, Privacy, Hallucination Management |
-| 08 | **AI Execution** | AI PRDs, Lifecycle, Cross-functional Collaboration, Data Quality, Agile fuer AI |
+| 08 | **AI Execution** | AI PRDs, Lifecycle, Cross-functional Collaboration, Data Quality, Agile for AI |
 | 09 | **AI Leadership** | Org Building, Go-to-Market, KPIs, Team Structure |
 
 **Case Studies:** Notion AI, GitHub Copilot, Clearview AI, Duolingo Max
 
-## Fuer wen?
+## Who is this for?
 
-- **Product Manager**, die AI-Features verantworten oder verantworten wollen
-- **Tech Leads**, die die PM-Perspektive auf AI verstehen wollen
-- **Founders**, die AI-Produkte bauen
-- **Alle**, die AI-Entscheidungen treffen — nicht nur AI-Code schreiben
+- **Product Managers** who own or want to own AI features
+- **Tech Leads** who want to understand the PM perspective on AI
+- **Founders** building AI products
+- **Anyone** who makes AI decisions — not just writes AI code
 
-Du brauchst keine ML-Vorkenntnisse. Das Curriculum erklaert technische Konzepte auf PM-Level: tief genug zum Entscheiden, nicht tief genug zum Implementieren.
+No ML background required. Technical concepts are explained at PM level: deep enough to decide, not deep enough to implement.
 
-## Wie nutzen?
+## Pedagogical Design
 
-**Online lesen:** [janrummel.github.io/ai-product-thinking](https://janrummel.github.io/ai-product-thinking/)
+Every lesson follows the same pattern:
 
-**Lokal starten:**
+**Context** (real situation) → **Concept** (theory/framework) → **Framework** (decision tool) → **Scenario** (decision scenario with real numbers) → **Decide** (your decision) → **Reflect** (key takeaways)
+
+Each chapter closes with a **Synthesis**: connections between lessons + 3 self-assessment scenarios that combine multiple concepts.
+
+## Run locally
+
 ```bash
 git clone https://github.com/janrummel/ai-product-thinking.git
 cd ai-product-thinking
@@ -51,25 +60,14 @@ npm install
 npm run dev
 ```
 
-## Pedagogisches Design
-
-Jede Lektion folgt dem gleichen Muster:
-
-**Context** (reale Situation) → **Concept** (Theorie/Framework) → **Framework** (Entscheidungswerkzeug) → **Scenario** (Entscheidungsszenario mit echten Zahlen) → **Decide** (Deine Entscheidung) → **Reflect** (Key Takeaways)
-
-Jedes Kapitel schliesst mit einer **Synthese** ab: Verbindungen zwischen den Lektionen + 3 Self-Assessment-Szenarien, die mehrere Konzepte kombinieren.
-
 ## Tech Stack
 
-- [Astro](https://astro.build) + [Starlight](https://starlight.astro.build) (Documentation Framework)
-- MDX fuer alle Inhalte
-- Zweisprachig (DE + EN) mit i18n-Routing
-- Deployed via GitHub Pages
+[Astro](https://astro.build) + [Starlight](https://starlight.astro.build) · MDX · Bilingual i18n routing · GitHub Pages
 
-## Verwandtes Projekt
+## Related Project
 
-**[Level Up AI](https://github.com/janrummel/level-up-ai)** — Der technische Gegenpart: AI Engineering Lernpfad fuer Entwickler. Gleiche Qualitaet, andere Perspektive.
+**[Level Up AI](https://github.com/janrummel/level-up-ai)** — The technical counterpart: an AI Engineering learning path for developers. Same quality, different perspective.
 
-## Lizenz
+## License
 
-Inhalte stehen unter [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Code unter MIT.
+Content: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) · Code: MIT

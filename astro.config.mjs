@@ -10,7 +10,6 @@ export default defineConfig({
 		: 'http://localhost:4321',
 	base: base || undefined,
 	redirects: {
-		'/': `${base}/de/start/`,
 		'/de/': `${base}/de/start/`,
 		'/en/': `${base}/en/start/`,
 	},
