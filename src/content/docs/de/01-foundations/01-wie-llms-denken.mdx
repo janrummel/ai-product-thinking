@@ -31,7 +31,7 @@ Das Modell sieht Deinen Prompt und berechnet: Welches Token kommt am wahrscheinl
 Das bedeutet:
 - Das Modell *plant* nicht. Es generiert sequenziell.
 - Das Modell *weiss* nichts. Es hat statistische Muster gelernt.
-- Das Modell *entscheidet* nicht. Es sampelt aus Wahrscheinlichkeitsverteilungen.
+- Das Modell *entscheidet* nicht. Es sampelt aus Wahrscheinlichkeitsverteilungen (bei Temperature 0 wird deterministisch das wahrscheinlichste Token gewaehlt).
 
 ### Temperature
 
@@ -47,7 +47,7 @@ Die Temperature steuert, wie "kreativ" das Modell antwortet:
 
 Wenn ein LLM etwas "erfindet", ist das keine Fehlfunktion — es ist das Modell, das tut was es immer tut: die wahrscheinlichste Fortsetzung generieren. Manchmal ist die wahrscheinlichste Fortsetzung faktisch falsch.
 
-> *"Hallucinations sind kein Bug. Sie sind eine unvermeidliche Eigenschaft von Systemen, die auf Wahrscheinlichkeit basieren."*
+> *"Hallucinations sind kein Bug. Sie sind eine inhärente Eigenschaft von Systemen, die auf Wahrscheinlichkeit basieren — reduzierbar, aber nicht vollständig eliminierbar."*
 
 ## Framework
 
