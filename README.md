@@ -1,49 +1,75 @@
-# Starlight Starter Kit: Basics
+# AI Product Thinking
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+**Das kostenlose Curriculum fuer AI Product Management — auf Deutsch und Englisch.**
 
+> Nicht noch ein AI-Hype-Kurs. Sondern ein strukturierter Lernpfad, der PMs beibringt, bessere Entscheidungen ueber AI-Produkte zu treffen.
+
+**[Zum Kurs](https://janrummel.github.io/ai-product-thinking/)** | [English Version](https://janrummel.github.io/ai-product-thinking/en/start/)
+
+---
+
+## Was ist das?
+
+Ein vollstaendiges, frei zugaengliches Curriculum fuer Product Manager, Tech Leads und alle, die AI-Produkte bauen oder darueber entscheiden. 9 Kapitel, 46 Lektionen, 4 Real-World Case Studies, 27 Entscheidungsszenarien — komplett zweisprachig (DE + EN).
+
+**Der Unterschied zu bezahlten Kursen:** Hier geht es nicht um Wissen sammeln, sondern um Entscheidungen trainieren. Jede Lektion endet mit einem realistischen Szenario, in dem Du als PM eine Entscheidung treffen musst — mit echten Zahlen, echten Tradeoffs.
+
+## Curriculum
+
+| Kapitel | Thema | Lektionen |
+|---------|-------|-----------|
+| 01 | **AI Foundations** | Wie LLMs denken, ML Landscape, Probabilistisches Denken, Foundation Models |
+| 02 | **AI Strategy** | Wann AI, Build vs. Buy, PMF Impact, Opportunity Identification |
+| 03 | **AI Product Design** | AI-native UX, Trust & Explainability, Interaction Patterns, Generative Features |
+| 04 | **Technical Literacy** | Prompt Engineering, RAG, Fine-Tuning, Model Selection, Cost/Quality Tradeoffs |
+| 05 | **AI Evaluation** | Eval Frameworks, Metriken, Red Teaming, Ship/No-Ship, Bias & Fairness |
+| 06 | **Agentic AI** | Multi-Agent Systeme, Tool Use & MCP, Autonomie-Level, Human-in-the-Loop |
+| 07 | **Ethics & Governance** | Responsible AI, Guardrails, Privacy, Hallucination Management |
+| 08 | **AI Execution** | AI PRDs, Lifecycle, Cross-functional Collaboration, Data Quality, Agile fuer AI |
+| 09 | **AI Leadership** | Org Building, Go-to-Market, KPIs, Team Structure |
+
+**Case Studies:** Notion AI, GitHub Copilot, Clearview AI, Duolingo Max
+
+## Fuer wen?
+
+- **Product Manager**, die AI-Features verantworten oder verantworten wollen
+- **Tech Leads**, die die PM-Perspektive auf AI verstehen wollen
+- **Founders**, die AI-Produkte bauen
+- **Alle**, die AI-Entscheidungen treffen — nicht nur AI-Code schreiben
+
+Du brauchst keine ML-Vorkenntnisse. Das Curriculum erklaert technische Konzepte auf PM-Level: tief genug zum Entscheiden, nicht tief genug zum Implementieren.
+
+## Wie nutzen?
+
+**Online lesen:** [janrummel.github.io/ai-product-thinking](https://janrummel.github.io/ai-product-thinking/)
+
+**Lokal starten:**
+```bash
+git clone https://github.com/janrummel/ai-product-thinking.git
+cd ai-product-thinking
+npm install
+npm run dev
 ```
-npm create astro@latest -- --template starlight
-```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Pedagogisches Design
 
-## 🚀 Project Structure
+Jede Lektion folgt dem gleichen Muster:
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+**Context** (reale Situation) → **Concept** (Theorie/Framework) → **Framework** (Entscheidungswerkzeug) → **Scenario** (Entscheidungsszenario mit echten Zahlen) → **Decide** (Deine Entscheidung) → **Reflect** (Key Takeaways)
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
-```
+Jedes Kapitel schliesst mit einer **Synthese** ab: Verbindungen zwischen den Lektionen + 3 Self-Assessment-Szenarien, die mehrere Konzepte kombinieren.
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+## Tech Stack
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+- [Astro](https://astro.build) + [Starlight](https://starlight.astro.build) (Documentation Framework)
+- MDX fuer alle Inhalte
+- Zweisprachig (DE + EN) mit i18n-Routing
+- Deployed via GitHub Pages
 
-Static assets, like favicons, can be placed in the `public/` directory.
+## Verwandtes Projekt
 
-## 🧞 Commands
+**[Level Up AI](https://github.com/janrummel/level-up-ai)** — Der technische Gegenpart: AI Engineering Lernpfad fuer Entwickler. Gleiche Qualitaet, andere Perspektive.
 
-All commands are run from the root of the project, from a terminal:
+## Lizenz
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+Inhalte stehen unter [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Code unter MIT.
