@@ -44,7 +44,7 @@ LLM-as-Judge nutzt ein Sprachmodell, um die Outputs eines anderen Modells zu bew
 - Chain-of-Thought Reasoning im Judge Prompt erzwingen
 - Staerkeres Modell als Judge verwenden (z.B. Claude Opus bewertet Sonnet-Outputs)
 - Judge gegen Human Labels validieren — Ziel: 80%+ Uebereinstimmung
-- LLM-as-Judge bietet Kostenersparnisse um den Faktor 500-5000x gegenueber Human Review
+- LLM-as-Judge bietet erhebliche Kostenersparnisse gegenueber Human Review (typisch 10-50x, abhaengig von Aufgabenkomplexitaet und Bewertungstiefe)
 
 ### Human Eval bleibt unverzichtbar
 
@@ -108,7 +108,7 @@ Du bist PM bei einem Legal-Tech-Startup. Euer AI-Feature fasst Vertraege zusamme
 **Evals sind die wichtigste Kompetenz fuer AI PMs — weil sie definieren, was "gut" bedeutet, bevor es zu spaet ist.**
 
 - Golden Datasets sind lebendige Artefakte: Klein starten (50-100 Beispiele), Production Failures als Regression Tests hinzufuegen, kontinuierlich wachsen lassen.
-- LLM-as-Judge skaliert Human Judgment um den Faktor 500-5000x — aber nur wenn der Judge gegen echte Human Labels validiert ist.
+- LLM-as-Judge skaliert Human Judgment um Groessenordnungen (typisch 10-50x guenstiger) — aber nur wenn der Judge gegen echte Human Labels validiert ist.
 - Die groesste PM-Falle: "Wir brauchen zuerst ein Tool." Starte mit manueller Error Analysis. 30 Minuten, 20-50 Outputs. Das zeigt mehr als jedes Dashboard.
 
 ---

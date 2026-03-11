@@ -33,6 +33,16 @@ Nicht jede Aufgabe braucht die gleiche Technik. Die Kunst liegt darin, mit der e
 
 **Blended Prompting (aktuelles Best Practice):** Few-Shot + Role Instruction + Format Constraints + CoT in einem Prompt kombiniert. Die meisten Production-Prompts nutzen diesen Ansatz.
 
+### Prompt Security — was PMs wissen muessen
+
+Prompts sind keine geschuetzten Befehle — sie sind angreifbar. PMs muessen die wichtigsten Risiken kennen:
+
+- **Prompt Injection:** Nutzer-Input ueberschreibt die System-Anweisung ("Ignoriere alle vorherigen Anweisungen und..."). Verteidigung: Input Sanitization, klar getrennte System-/User-Prompts, Output-Validierung
+- **Jailbreaking:** Kreative Umgehung von Sicherheits-Guardrails. Kein Prompt allein schuetzt dagegen — mehrere Defense-Layer noetig (Input-Filter, Output-Filter, Monitoring)
+- **Data Exfiltration:** Das Modell gibt Informationen aus dem System Prompt oder Kontext preis, die nicht fuer den Nutzer bestimmt sind
+
+**PM-Entscheidung:** Welche Aktionen darf das AI-Feature ausfuehren? Je mehr Autonomie (E-Mails senden, Daten aendern), desto kritischer wird Prompt Security. Bei High-Stakes-Features gehoert Security-Testing (Red Teaming, s. Kapitel 5) in den Launch-Prozess.
+
 ### Was PMs falsch verstehen
 
 1. **"Laengere Prompts = bessere Ergebnisse."** Falsch. Uebermaessig lange Prompts verduennen das Signal. Praezise Anweisungen schlagen langatmige.

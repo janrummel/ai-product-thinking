@@ -25,7 +25,7 @@ Three primary patterns determine how agents collaborate:
 | **Parallel (Fan-out/Fan-in)** | Multiple agents work simultaneously, results are merged | Independent sub-tasks (analyze 5 competitors at once) | Inconsistent outputs when merging |
 | **Hierarchical (Manager-Worker)** | Orchestrator agent delegates to specialists | Complex tasks with dynamic planning | Single point of failure at orchestrator |
 
-A fourth pattern — **graph-based orchestration** (e.g., via LangGraph) — is gaining traction: agents form a directed graph with conditions, loops, and dynamic routing.
+**Graph-based orchestration** (e.g., via LangGraph) is not a separate fourth pattern but an implementation method for the three patterns above: agents form a directed graph with conditions, loops, and dynamic routing.
 
 ### Framework Landscape (since 2025)
 

@@ -44,7 +44,7 @@ LLM-as-Judge uses a language model to evaluate the outputs of another model — 
 - Always include chain-of-thought reasoning in the judge prompt
 - Use a stronger model as judge (e.g., Claude Opus judging Sonnet outputs)
 - Validate judge accuracy against human labels — target 80%+ agreement
-- LLM-as-Judge offers cost savings of roughly 500-5000x compared to human review
+- LLM-as-Judge offers significant cost savings compared to human review (typically 10-50x, depending on task complexity and evaluation depth)
 
 ### Human Eval Remains Essential
 
@@ -108,7 +108,7 @@ You are a PM at a legal-tech startup. Your AI feature summarizes contracts (5,00
 **Evals are the most important skill for AI PMs — because they define what "good" means before it's too late.**
 
 - Golden datasets are living artifacts: start small (50-100 examples), add production failures as regression tests, grow continuously.
-- LLM-as-Judge scales human judgment by a factor of 500-5000x — but only when the judge is validated against real human labels.
+- LLM-as-Judge scales human judgment by orders of magnitude (typically 10-50x cheaper) — but only when the judge is validated against real human labels.
 - The biggest PM trap: "We need a tool first." Start with manual error analysis. 30 minutes, 20-50 outputs. That reveals more than any dashboard.
 
 ---

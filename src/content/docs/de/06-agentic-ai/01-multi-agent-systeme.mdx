@@ -25,7 +25,7 @@ Drei Hauptmuster bestimmen, wie Agents zusammenarbeiten:
 | **Parallel (Fan-out/Fan-in)** | Mehrere Agents arbeiten gleichzeitig, Ergebnisse werden zusammengefuehrt | Unabhaengige Teilaufgaben (5 Wettbewerber gleichzeitig analysieren) | Inkonsistente Outputs beim Mergen |
 | **Hierarchisch (Manager-Worker)** | Orchestrator-Agent delegiert an Spezialisten | Komplexe Aufgaben mit dynamischer Planung | Single Point of Failure beim Orchestrator |
 
-Ein viertes Pattern — **Graph-basierte Orchestrierung** (z.B. via LangGraph) — gewinnt an Bedeutung: Agents bilden einen gerichteten Graphen mit Bedingungen, Schleifen und dynamischem Routing.
+**Graph-basierte Orchestrierung** (z.B. via LangGraph) ist kein separates viertes Pattern, sondern eine Implementierungsmethode fuer die drei Patterns oben: Agents bilden einen gerichteten Graphen mit Bedingungen, Schleifen und dynamischem Routing.
 
 ### Framework-Landschaft (ab 2025)
 
