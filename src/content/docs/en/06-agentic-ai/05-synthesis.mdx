@@ -61,6 +61,43 @@ If any of these feel uncertain, go back to the relevant lesson. These concepts f
 
 You build AI systems. [Chapter 7](/en/07-ethics-governance/) shows how to make them responsible and compliant.
 
+## Self-Assessment
+
+Three scenarios combining multiple concepts from this chapter. Think through your answer before revealing the solution.
+
+### Scenario 1: The Overeager Agent
+
+Your recruiting agent is supposed to pre-screen applications and present a shortlist to hiring managers. The engineering team built an agent that uses MCP to access the ATS (Applicant Tracking System), scores applications, and forwards top candidates directly to interview scheduling — without hiring manager approval. The agent works flawlessly from a technical standpoint. What's the problem?
+
+<details>
+<summary>Solution</summary>
+
+The autonomy level is wrong (Lesson 3). Recruiting decisions have high consequences and are hard to reverse — this requires L3 (Consultant) at most, not L4 or L5. The agent should present a shortlist and wait for approval, not schedule interviews on its own. The appropriate HITL pattern (Lesson 4) is an Approval Gate: the agent prepares the decision, the human makes it. The fact that the agent has MCP write access to the ATS (Lesson 2) makes things worse — tool access and autonomy level are two independent dimensions, and both are set too high here.
+
+</details>
+
+### Scenario 2: The Tool Sprawl
+
+Your customer success agent now has 22 tools: CRM, ticketing, billing, knowledge base, email, calendar, Slack, and more. Error rates are climbing — the agent increasingly picks the wrong tool for the job. Your engineering team proposes rebuilding as a multi-agent system. Is that the right call?
+
+<details>
+<summary>Solution</summary>
+
+The diagnosis is correct: 22 tools overwhelm a single agent (Lesson 1 identifies 15 tools as the threshold). But before switching to multi-agent, first check whether all 22 tools are truly needed — often a reduction to core tools plus better prompts for tool selection is enough. If multi-agent is justified, group tools by trust boundaries (Lesson 1): e.g., one agent for read-only queries (CRM, knowledge base), one agent for actions with customer impact (ticketing, billing). Keep in mind the HITL multiplier (Lesson 4): each agent needs its own escalation criteria, and you must define whether an escalation pauses the entire pipeline or just one branch.
+
+</details>
+
+### Scenario 3: The Autonomy Gradient
+
+Your AI product is a coding assistant that uses MCP to access the repository, CI pipeline, and issue tracker. For experienced senior developers, it works well at L4 (Approver) — they briefly review changes and merge. But junior developers complain that the agent changes too much and they lose track. How do you solve this?
+
+<details>
+<summary>Solution</summary>
+
+This is a case for different autonomy levels per user segment (Lesson 3). Instead of a uniform level, you need an autonomy gradient: seniors stay at L4 (Approver), juniors start at L2 (Collaborator) — the agent suggests changes and explains them rather than implementing directly. The HITL patterns (Lesson 4) change accordingly: seniors get Checkpoint Audits, juniors need Approval Gates at every step. The key: build a mechanism that lets juniors graduate to higher levels over time based on usage data — that's the trust gradient in practice.
+
+</details>
+
 ---
 
 *Sources: Building on Lessons 1-4. Anthropic MCP Docs (2024-2025), Feng et al. — Levels of Autonomy (2025), MIT AI Agent Index (2025), Martin Fowler — Humans and Agents (2025)*

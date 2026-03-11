@@ -72,6 +72,43 @@ Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. D
 
 Du kennst die Technologie. [Kapitel 5](/de/05-evaluation/) zeigt, wie Du AI-Qualitaet misst und Ship/No-Ship-Entscheidungen triffst.
 
+## Self-Assessment
+
+Drei Szenarien, die mehrere Konzepte aus diesem Kapitel kombinieren. Ueberleg Dir Deine Antwort, bevor Du die Aufloesung oeffnest.
+
+### Szenario 1: Der Support-Bot mit Wissensproblem
+
+Dein AI-Support-Bot beantwortet Kundenfragen zu Euren Produkten. Die Antwortqualitaet schwankt stark: Manchmal halluziniert das Modell Features, die nicht existieren. Dein Engineering-Lead schlaegt Fine-Tuning auf Euren Support-Daten vor. Wie gehst Du vor?
+
+<details>
+<summary>Aufloesung</summary>
+
+Bevor Fine-Tuning (Lektion 3) ueberhaupt diskutiert wird, pruefe die Optimierungshierarchie von oben nach unten. Halluzinierte Features deuten darauf hin, dass das Modell keinen Zugang zu aktuellen Produktdaten hat — das ist ein RAG-Problem (Lektion 2), kein Verhaltensproblem. Verbessere zuerst den System Prompt mit klaren Anweisungen wie "Antworte nur basierend auf den bereitgestellten Dokumenten" (Lektion 1), baue dann eine RAG-Pipeline auf Eure Produktdokumentation. Fine-Tuning waere erst gerechtfertigt, wenn Prompting + RAG das Problem nicht loesen.
+
+</details>
+
+### Szenario 2: Frontier-Modell fuer alles
+
+Euer AI-Feature nutzt GPT-4o fuer alle Anfragen — von simplen FAQ-Antworten bis zu komplexen Fehlerdiagnosen. Die monatlichen API-Kosten sind auf 45.000 Euro gestiegen, und das Management will sie halbieren, ohne die Nutzerzufriedenheit zu senken. Was schlaegst Du vor?
+
+<details>
+<summary>Aufloesung</summary>
+
+Das ist ein klassischer Fall fuer Multi-Model Routing (Lektion 4 + 5). Analysiere Deine Anfragen: Einfache FAQ-Fragen (vermutlich 60-70% des Volumens) koennen von einem guenstigeren Modell bearbeitet werden, waehrend komplexe Diagnosen beim Frontier-Modell bleiben. Kombiniere das mit Caching fuer haeufig gestellte Fragen (Lektion 5). Entscheidend ist, vorher "gut genug" pro Anfragekategorie zu definieren (Lektion 5) und per Blind-Evaluation auf 50+ Anfragen zu validieren (Lektion 4), dass das kleinere Modell fuer einfache Faelle genuegt.
+
+</details>
+
+### Szenario 3: Der Stil-Wunsch
+
+Euer Produkt ist eine Lernplattform. Das Produktteam will, dass die AI im Stil eines ermutigenden Tutors antwortet — nicht neutral-sachlich. Nach drei Wochen Prompt-Iteration sagt das Engineering-Team: "Der Ton stimmt in 70% der Faelle, aber in 30% faellt das Modell in den Default-Stil zurueck." Lohnt sich Fine-Tuning?
+
+<details>
+<summary>Aufloesung</summary>
+
+Hier sind drei Lektionen relevant: Zuerst pruefen, ob Few-Shot Prompting mit 3-5 Beispielen des gewuenschten Stils die 30% Ausreisser reduziert (Lektion 1). Falls nicht, ist das ein legitimer Fine-Tuning-Kandidat (Lektion 3) — konsistentes Stilverhalten ist genau der Use Case, fuer den Fine-Tuning sich lohnt, und drei Wochen Prompt-Iteration zeigen, dass Prompting an seine Grenzen stoesst. Vor dem Fine-Tuning aber die Modellwahl pruefen (Lektion 4): Manche Modelle folgen Stil-Anweisungen besser als andere. Ein Modellwechsel kostet Stunden, Fine-Tuning Wochen.
+
+</details>
+
 ---
 
 *Quellen: Aufbauend auf Lektionen 1-5. IBM RAG vs Fine-Tuning vs Prompt Engineering, a16z LLMflation, DAIR.AI Prompt Engineering Guide, Artificial Analysis LLM Leaderboard, Pinecone RAG Architecture Guide*

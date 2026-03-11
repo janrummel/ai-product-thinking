@@ -68,6 +68,43 @@ If any of these feel uncertain, go back to the relevant lesson. These evaluation
 
 You measure AI quality. [Chapter 6](/en/06-agentic-ai/) shows the next level: autonomous AI systems that act independently.
 
+## Self-Assessment
+
+Three scenarios combining multiple concepts from this chapter. Think through your answer before revealing the solution.
+
+### Scenario 1: The Surprising Post-Launch Failure
+
+Your AI-powered contract analysis feature passed all quality gates: precision is 94%, the red team found no critical failure modes, and stakeholders are thrilled. Two weeks after launch, healthcare-sector users report that medical contract clauses are systematically misclassified. What went wrong, and how do you fix it?
+
+<details>
+<summary>Solution</summary>
+
+Two problems: First, metrics were not disaggregated by user group (Lesson 2 + Lesson 5) — the 94% precision was an average that masked poor performance for the healthcare segment. Second, red teaming (Lesson 3) didn't cover domain-specific scenarios. The fix: add medical contract clauses as a segment to the golden dataset (Lesson 1), disaggregate precision by industry (Lesson 2), and set up industry-specific quality gates (Lesson 4). This is the eval flywheel in action — feeding production failures back into the system.
+
+</details>
+
+### Scenario 2: The Red Team Flood
+
+Your red team has documented 47 findings after two days of testing. Your engineering team says: "We can't fix all of these and still hit the launch date." How do you prioritize?
+
+<details>
+<summary>Solution</summary>
+
+Apply ship/no-ship logic (Lesson 4): categorize findings by severity. Safety-critical findings (e.g., the model gives medical advice in a finance product) are ship blockers and must be fixed before launch. Findings that can be caught by quality gates (e.g., edge cases with low occurrence probability) can be managed through staged rollouts. The key move: every finding becomes a regression test in the golden dataset (Lesson 3 + Lesson 1), so it can't silently reappear after a fix. The 47 findings aren't a problem — they're 47 new test cases for your eval system.
+
+</details>
+
+### Scenario 3: The Biased Judge
+
+Your team uses GPT-4o as an LLM-as-Judge for the eval pipeline of a summarization feature. A stakeholder asks: "How do we know the judge scores correctly?" Then a spot check reveals the judge systematically gives higher scores to longer summaries — regardless of quality. What do you do?
+
+<details>
+<summary>Solution</summary>
+
+This is a well-known LLM-as-Judge bias (Lesson 1): length bias, where longer outputs receive higher ratings. First, validate the judge against human labels on a representative sample (Lesson 1) — if correlation is too low, the judge isn't fit for purpose. Second, adjust the judge prompts to explicitly instruct against length bias, or switch to pairwise comparisons instead of absolute scores. Third, check whether this bias has affected your past ship decisions (Lesson 4) — if the judge has been systematically too generous, features may be live that wouldn't have passed the actual quality gates.
+
+</details>
+
 ---
 
 *Sources: Building on Lessons 1-5. Hamel Husain — Eval Methodology (2024), OWASP Top 10 for LLMs (2025), EU AI Act (2024/1689), Buolamwini & Gebru — Gender Shades (2018), Chouldechova — Impossibility Theorem (2017), Flagsmith — Shipping AI Features (2025)*

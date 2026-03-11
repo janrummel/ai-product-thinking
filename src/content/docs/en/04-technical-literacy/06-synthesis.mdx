@@ -72,6 +72,43 @@ If any of these feel uncertain, go back to the relevant lesson. These technical 
 
 You know the technology. [Chapter 5](/en/05-evaluation/) shows how to measure AI quality and make ship/no-ship decisions.
 
+## Self-Assessment
+
+Three scenarios combining multiple concepts from this chapter. Think through your answer before revealing the solution.
+
+### Scenario 1: The Hallucinating Support Bot
+
+Your AI support bot answers customer questions about your products. Quality is inconsistent: the model sometimes invents features that don't exist. Your engineering lead proposes fine-tuning on your support data. What's your move?
+
+<details>
+<summary>Solution</summary>
+
+Before fine-tuning (Lesson 3) even enters the conversation, work through the optimization hierarchy top-down. Hallucinated features suggest the model lacks access to current product data — that's a RAG problem (Lesson 2), not a behavior problem. First, improve the system prompt with clear instructions like "Only answer based on the provided documents" (Lesson 1), then build a RAG pipeline over your product documentation. Fine-tuning would only be justified if prompting + RAG fail to solve the problem.
+
+</details>
+
+### Scenario 2: The Expensive Default
+
+Your AI feature uses GPT-4o for every request — from simple FAQ answers to complex troubleshooting. Monthly API costs have climbed to $50,000, and leadership wants them cut in half without hurting user satisfaction. What do you propose?
+
+<details>
+<summary>Solution</summary>
+
+This is a textbook case for multi-model routing (Lessons 4 + 5). Analyze your request distribution: simple FAQ queries (likely 60-70% of volume) can be handled by a cheaper model, while complex diagnostics stay on the frontier model. Combine this with caching for frequently asked questions (Lesson 5). The key is to define "good enough" per request category first (Lesson 5) and validate with a blind evaluation on 50+ queries (Lesson 4) that the smaller model is sufficient for simple cases.
+
+</details>
+
+### Scenario 3: The Tone Problem
+
+Your product is a learning platform. The product team wants the AI to respond like an encouraging tutor — not neutral and clinical. After three weeks of prompt iteration, engineering reports: "The tone is right 70% of the time, but 30% of responses revert to the default style." Is fine-tuning worth it?
+
+<details>
+<summary>Solution</summary>
+
+Three lessons come into play here. First, check whether few-shot prompting with 3-5 examples of the desired style reduces the 30% outliers (Lesson 1). If not, this is a legitimate fine-tuning candidate (Lesson 3) — consistent style behavior is exactly the use case fine-tuning excels at, and three weeks of prompt iteration show that prompting has hit its limits. But before fine-tuning, check model selection (Lesson 4): some models follow style instructions better than others. Switching models costs hours; fine-tuning costs weeks.
+
+</details>
+
 ---
 
 *Sources: Building on Lessons 1-5. IBM RAG vs Fine-Tuning vs Prompt Engineering, a16z LLMflation, DAIR.AI Prompt Engineering Guide, Artificial Analysis LLM Leaderboard, Pinecone RAG Architecture Guide*
