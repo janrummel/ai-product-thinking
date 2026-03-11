@@ -68,6 +68,43 @@ Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. D
 
 Du misst AI-Qualitaet. [Kapitel 6](/de/06-agentic-ai/) zeigt die naechste Stufe: autonome AI-Systeme, die selbststaendig handeln.
 
+## Self-Assessment
+
+Drei Szenarien, die mehrere Konzepte aus diesem Kapitel kombinieren. Ueberleg Dir Deine Antwort, bevor Du die Aufloesung oeffnest.
+
+### Szenario 1: Der ueberraschende Launch-Erfolg
+
+Euer AI-Feature fuer automatische Vertragsanalyse hat alle Quality Gates bestanden: Precision liegt bei 94%, das Red Team hat keine kritischen Failure Modes gefunden, und die Stakeholder sind begeistert. Zwei Wochen nach Launch berichten Nutzer aus dem Gesundheitssektor, dass medizinische Vertragsklauseln systematisch falsch klassifiziert werden. Was ist schiefgelaufen, und wie reparierst Du es?
+
+<details>
+<summary>Aufloesung</summary>
+
+Zwei Probleme: Erstens wurden die Metriken nicht nach Nutzergruppen disaggregiert (Lektion 2 + Lektion 5) — die 94% Precision war ein Durchschnitt, der die schlechte Performance fuer den Gesundheitssektor verdeckt hat. Zweitens hat das Red Teaming (Lektion 3) keine domaenenspezifischen Szenarien abgedeckt. Die Reparatur: medizinische Vertragsklauseln als Segment ins Golden Dataset aufnehmen (Lektion 1), Precision nach Branche disaggregieren (Lektion 2), und branchenspezifische Quality Gates einrichten (Lektion 4). Das ist das Eval Flywheel in Aktion — Production Failures zurueck ins System speisen.
+
+</details>
+
+### Szenario 2: Die Red-Team-Flut
+
+Dein Red Team hat nach zwei Tagen Testing 47 Findings dokumentiert. Dein Engineering-Team sagt: "Wir koennen nicht alle fixen und trotzdem den Launch-Termin halten." Wie priorisierst Du?
+
+<details>
+<summary>Aufloesung</summary>
+
+Nutze die Ship/No-Ship-Logik (Lektion 4): Kategorisiere die Findings nach Severity — Safety-kritische Findings (z.B. das Modell gibt medizinische Ratschlaege bei einem Finanzprodukt) sind Ship-Blocker und muessen vor Launch gefixt werden. Findings, die durch Quality Gates abgefangen werden koennen (z.B. Edge Cases mit geringer Auftrittswahrscheinlichkeit), koennen per Staged Rollout gemanagt werden. Entscheidend: Jedes Finding wird als Regression Test ins Golden Dataset aufgenommen (Lektion 3 + Lektion 1), damit es nach dem Fix nicht zurueckkommt. Die 47 Findings sind kein Problem — sie sind 47 neue Test Cases fuer Dein Eval-System.
+
+</details>
+
+### Szenario 3: LLM-as-Judge unter Druck
+
+Dein Team nutzt GPT-4o als LLM-as-Judge fuer die Eval Pipeline eines Summarization-Features. Ein Stakeholder fragt: "Wie wissen wir, dass der Judge richtig bewertet?" Dann zeigt eine Stichprobe, dass der Judge bei laengeren Summaries systematisch hoehere Scores vergibt — unabhaengig von der Qualitaet. Was tust Du?
+
+<details>
+<summary>Aufloesung</summary>
+
+Das ist ein bekanntes Bias-Problem bei LLM-as-Judge (Lektion 1): Laenge-Bias, bei dem laengere Outputs hoehere Bewertungen bekommen. Erstens: Validiere den Judge gegen Human Labels auf einem repraesentativen Sample (Lektion 1) — wenn die Korrelation zu niedrig ist, taugt der Judge nicht. Zweitens: Passe die Judge-Prompts an, um explizit gegen Laenge-Bias zu instruieren, oder nutze paarweise Vergleiche statt absoluter Scores. Drittens: Pruefe, ob dieser Bias Deine bisherigen Ship-Entscheidungen beeinflusst hat (Lektion 4) — wenn der Judge systematisch zu positiv bewertet hat, koennten Features live sein, die die tatsaechlichen Quality Gates nicht bestanden haetten.
+
+</details>
+
 ---
 
 *Quellen: Aufbauend auf Lektionen 1-5. Hamel Husain — Eval Methodology (2024), OWASP Top 10 for LLMs (2025), EU AI Act (2024/1689), Buolamwini & Gebru — Gender Shades (2018), Chouldechova — Impossibility Theorem (2017), Flagsmith — Shipping AI Features (2025)*

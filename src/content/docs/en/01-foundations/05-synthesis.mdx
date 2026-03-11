@@ -66,6 +66,43 @@ If any of these feel shaky, go back to the relevant lesson. These foundations ca
 
 You now know HOW AI works. [Chapter 2](/en/02-strategy/) answers WHEN AI is the right solution — and when it is not.
 
+## Self-Assessment
+
+Three scenarios combining multiple concepts from this chapter. Think through your answer before revealing the solution.
+
+### Scenario 1: The Unreliable Summary Bot
+
+Your team built an internal bot that summarizes long customer support tickets. The summaries are mostly good, but sometimes the bot invents details that aren't in the original ticket. A stakeholder demands: "We need a better model — one that doesn't hallucinate." How do you respond?
+
+<details>
+<summary>Solution</summary>
+
+A "better model" won't solve this because hallucinations are a structural consequence of probabilistic prediction (Lesson 3) — you can't train them away. The more effective lever is RAG grounding (Lesson 4): feed the original ticket as context so the model draws from it rather than generating freely. You should also lower the temperature (Lesson 1) to keep outputs closer to the most probable tokens. And the UX must account for varying outputs — for example, by linking back to the original ticket for verification (Lesson 3).
+
+</details>
+
+### Scenario 2: Classify or Generate?
+
+Your support team receives 500 tickets daily. Currently they're manually sorted into 12 categories and routed to specialized teams. Your CEO suggests: "Just let ChatGPT answer the tickets directly." How do you frame the problem?
+
+<details>
+<summary>Solution</summary>
+
+This conflates two fundamentally different ML tasks (Lesson 2): classification (assigning a ticket to a category) and generation (composing a response). The right architecture is a pipeline (Lesson 2, Synthesis Connection 3): first a discriminative model for classification, then — only for suitable categories — a generative model for the response. For classification, a specialized smaller model may outperform a foundation model (Lesson 4), while for generation, a foundation model via API with low temperature makes sense (Lesson 1).
+
+</details>
+
+### Scenario 3: Foundation Model or Custom Training?
+
+You're building a feature that reviews legal contracts for problematic clauses. Your CTO wants to train a custom model because "accuracy on legal documents must be as high as possible." A colleague says: "Just use GPT-4 with a good prompt." How do you decide?
+
+<details>
+<summary>Solution</summary>
+
+The decision maps to the Build vs Buy vs Blend framework (Lesson 4). A foundation model with RAG (the Blend approach) is the sensible starting point: use a foundation model via API, grounded with your specific contract database. Custom training only makes sense once you have enough labeled legal data AND can demonstrate that foundation model performance is insufficient — both unlikely at the start. At the same time, the design must account for probabilistic output (Lesson 3): with legal documents, output should never be presented as definitive, but as suggestions for a lawyer to review. An evaluation framework (Lesson 3) involving legal experts is essential here.
+
+</details>
+
 ---
 
 *Sources: Building on Lessons 1–4. Anthropic Documentation (2025), Chip Huyen "Designing Machine Learning Systems" (O'Reilly, 2022), Shanahan "Talking About Large Language Models" (2023)*

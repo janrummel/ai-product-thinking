@@ -66,6 +66,43 @@ Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. D
 
 Du weisst jetzt WIE AI funktioniert. [Kapitel 2](/de/02-strategy/) beantwortet WANN AI die richtige Loesung ist — und wann nicht.
 
+## Self-Assessment
+
+Drei Szenarien, die mehrere Konzepte aus diesem Kapitel kombinieren. Ueberleg Dir Deine Antwort, bevor Du die Aufloesung oeffnest.
+
+### Szenario 1: Der unzuverlaessige Zusammenfassungs-Bot
+
+Dein Team hat einen internen Bot gebaut, der lange Kundenservice-Tickets zusammenfasst. Die Zusammenfassungen sind meist gut, aber manchmal erfindet der Bot Details, die im Ticket gar nicht stehen. Ein Stakeholder fordert: "Wir brauchen ein besseres Modell — eins, das nicht halluziniert." Was antwortest Du?
+
+<details>
+<summary>Aufloesung</summary>
+
+Ein "besseres Modell" loest das Problem nicht, weil Hallucinations eine strukturelle Konsequenz probabilistischer Vorhersage sind (Lektion 3) — sie lassen sich nicht wegtrainieren. Der wirksamere Hebel ist RAG-Grounding (Lektion 4): Du gibst dem Modell das Original-Ticket als Context mit, sodass es sich darauf stuetzt statt frei zu generieren. Zusaetzlich solltest Du die Temperature senken (Lektion 1), um den Output naeher an den wahrscheinlichsten Tokens zu halten. Und das UX-Design muss mit variierenden Outputs rechnen — z.B. durch eine Verlinkung zum Original-Ticket zur Verifikation (Lektion 3).
+
+</details>
+
+### Szenario 2: Klassifizieren oder generieren?
+
+Euer Support-Team erhaelt taeglich 500 Tickets. Bisher werden sie manuell in 12 Kategorien sortiert und dann an spezialisierte Teams weitergeleitet. Dein CEO schlaegt vor: "Lass doch ChatGPT die Tickets gleich beantworten." Wie strukturierst Du das Problem?
+
+<details>
+<summary>Aufloesung</summary>
+
+Hier werden zwei fundamental verschiedene ML-Aufgaben vermischt (Lektion 2): Classification (Ticket einer Kategorie zuordnen) und Generation (eine Antwort formulieren). Die sinnvolle Architektur ist eine Pipeline (Lektion 2, Synthese-Connection 3): Erst ein discriminatives Modell zur Klassifikation, dann — nur fuer geeignete Kategorien — ein generatives Modell fuer die Antwort. Fuer die Klassifikation koennte ein spezialisiertes, kleineres Modell besser sein als ein Foundation Model (Lektion 4), waehrend fuer die Generierung ein Foundation Model via API mit niedriger Temperature sinnvoll ist (Lektion 1).
+
+</details>
+
+### Szenario 3: Foundation Model oder Custom Training?
+
+Du baust ein Feature, das juristische Vertraege auf problematische Klauseln prueft. Euer CTO will ein eigenes Modell trainieren, weil "die Genauigkeit bei Rechtsdokumenten maximal sein muss." Ein anderer Kollege sagt: "Nimm einfach GPT-4 mit einem guten Prompt." Wie entscheidest Du?
+
+<details>
+<summary>Aufloesung</summary>
+
+Die Entscheidung haengt von der Build-vs-Buy-vs-Blend-Logik ab (Lektion 4). Ein Foundation Model mit RAG (Blend-Ansatz) ist der sinnvolle Startpunkt: Du nutzt ein Foundation Model via API und grounded es mit eurer spezifischen Vertragsdatenbank. Custom Training ist erst sinnvoll, wenn ihr genuegend gelabelte juristische Daten habt UND die Foundation-Model-Performance nachweislich nicht reicht — beides ist anfangs unwahrscheinlich. Gleichzeitig muss das Design beruecksichtigen, dass der Output probabilistisch ist (Lektion 3): Bei juristischen Dokumenten darf der Output nie als definitiv dargestellt werden, sondern als Vorschlag, den ein Jurist prueft. Ein Evaluation Framework (Lektion 3) mit juristischen Experten ist hier unverzichtbar.
+
+</details>
+
 ---
 
 *Quellen: Aufbauend auf Lektionen 1–4. Anthropic Documentation (2025), Chip Huyen "Designing Machine Learning Systems" (O'Reilly, 2022), Shanahan "Talking About Large Language Models" (2023)*

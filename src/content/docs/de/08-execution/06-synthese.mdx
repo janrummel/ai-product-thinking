@@ -64,6 +64,43 @@ Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. E
 
 Du lieferst AI-Features. [Kapitel 9](/de/09-leadership/) zeigt, wie Du AI-Organisationen aufbaust und skalierst.
 
+## Self-Assessment
+
+Drei Szenarien, die mehrere Konzepte aus diesem Kapitel kombinieren. Ueberleg Dir Deine Antwort, bevor Du die Aufloesung oeffnest.
+
+### Szenario 1: Der Launch ohne Eval-Kriterien
+
+Dein AI-Feature (ein interner Support-Bot) ist seit drei Monaten live. Nutzer beschweren sich ueber sinkende Antwortqualitaet, aber niemand kann quantifizieren, wie schlecht es wirklich ist — es gibt keine Baseline-Metriken vom Launch. Der VP Product will einen sofortigen Fix. Was schlägst Du vor?
+
+<details>
+<summary>Aufloesung</summary>
+
+Hier fehlt die Verbindung zwischen PRD (Lektion 1) und Lifecycle (Lektion 2). Ohne Eval-Kriterien im PRD gibt es keine Baseline — Du weisst nicht, ob das Modell degradiert oder die Daten veraltet sind. Erster Schritt: Retroaktiv Eval-Kriterien definieren und eine Baseline messen. Zweiter Schritt: Data Quality pruefen (Lektion 4) — ist die Knowledge Base aktuell? Dritter Schritt: Ein Eval Review Ritual etablieren (Lektion 3), damit das Problem nicht wieder unbemerkt bleibt. Der sofortige Fix ohne Diagnose waere blinder Aktionismus.
+
+</details>
+
+### Szenario 2: Der Solo-Experiment-Sprint
+
+Dein ML-Engineer hat in einem zweiwöchigen Experiment-Spike drei Prompt-Varianten getestet und will die mit der hoechsten Accuracy deployen. Die UX-Designerin wurde nicht einbezogen, weil "es nur um Prompts geht". Der Engineer praesentiert beeindruckende technische Metriken. Stimmst Du dem Deploy zu?
+
+<details>
+<summary>Aufloesung</summary>
+
+Dieses Szenario verbindet Agile fuer AI (Lektion 5) mit Cross-Functional Collaboration (Lektion 3). Experiment-Spikes brauchen alle Perspektiven — technische Accuracy allein sagt nichts ueber User Experience. Die Prompt-Variante mit der hoechsten Accuracy koennte die laengsten, unlesbarsten Antworten produzieren. Als PM solltest Du ein Decision Gate einberufen mit PM, Tech Lead und Designer. Erst wenn auch User-facing Metriken (Response Clarity, Task Completion) geprueft sind, wird deployed. Das verlangsamt den Deploy um Tage, verhindert aber einen Rollback nach Wochen.
+
+</details>
+
+### Szenario 3: Die veraltete Knowledge Base
+
+Dein AI-Produkt beantwortet Kundenfragen zu Versicherungspolicen. Die Knowledge Base wurde seit sechs Monaten nicht aktualisiert, aber es gab in dieser Zeit drei Policy-Aenderungen. Dein Data-Team sagt, sie haetten keine Kapazitaet fuer Updates. Die Hallucination Rate steigt messbar. Was priorisierst Du?
+
+<details>
+<summary>Aufloesung</summary>
+
+Hier treffen Data Quality (Lektion 4) und Lifecycle Management (Lektion 2) aufeinander. Steigende Hallucination Rate bei unveraendertem Modell ist ein klares Signal fuer Data Drift — die Realitaet hat sich weiterentwickelt, die Daten nicht. Das gehoert ins AI PRD als Anforderung (Lektion 1): Wie oft muessen Dokumente aktualisiert werden? Die Prioritaet ist eindeutig: Knowledge-Base-Update vor jedem Feature-Work. Ein AI-Produkt, das veraltete Informationen als Fakten praesentiert, zerstoert Vertrauen schneller als fehlende Features.
+
+</details>
+
 ---
 
 *Quellen: Aufbauend auf Lektionen 1–5. Anthropic Documentation (2025), Google Cloud Engineering Blog, Spotify Engineering Blog, LangChain Community Reports*

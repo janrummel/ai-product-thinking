@@ -69,6 +69,43 @@ Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. D
 
 Du designst AI-Features. [Kapitel 4](/de/04-technical-literacy/) gibt Dir die technische Sprache, um mit Engineers auf Augenhoehe zu sprechen.
 
+## Self-Assessment
+
+Drei Szenarien, die mehrere Konzepte aus diesem Kapitel kombinieren. Ueberleg Dir Deine Antwort, bevor Du die Aufloesung oeffnest.
+
+### Szenario 1: Der Chatbot, dem niemand vertraut
+
+Dein Team hat einen AI-gesteuerten Finanzberater-Chatbot gelauncht. Die Antwortqualitaet ist hoch, aber die User-Retention nach einer Woche liegt bei nur 15%. Nutzerinterviews zeigen: "Ich weiss nicht, ob ich dem vertrauen kann." Wie redesignst Du das Feature?
+
+<details>
+<summary>Aufloesung</summary>
+
+Das Problem ist nicht die Antwortqualitaet, sondern das Vertrauensdesign (Lektion 2). Drei Hebel: Erstens, "Show your work" — Quellenangaben und Reasoning Chain sichtbar machen, damit Nutzer nachvollziehen koennen, wie der Bot zu seiner Empfehlung kommt. Zweitens, Konfidenz-Kommunikation einbauen: Wo ist der Bot sicher, wo unsicher? Drittens, Progressive Disclosure (Connection 3) anwenden: Ergebnis zuerst, dann auf Wunsch Konfidenz, Quellen und die vollstaendige Reasoning Chain. Zusaetzlich solltest Du den Autonomiegrad (Lektion 3) ueberdenken — bei Finanzen ist ein Copilot-Ansatz (Vorschlag + User-Entscheidung) vertrauenswuerdiger als ein autonomer Agent.
+
+</details>
+
+### Szenario 2: Bolt-on vs. AI-native
+
+Dein Produktteam hat einem bestehenden Notiz-Tool einen "AI schreib fuer mich"-Button hinzugefuegt. Die Feature-Adoption liegt bei 8% nach drei Monaten, und das Feedback ist: "Das fuehlt sich aufgesetzt an." Wie gehst Du das Problem an?
+
+<details>
+<summary>Aufloesung</summary>
+
+Das ist ein klassisches Bolt-on-Problem (Connection 4, AI-Native Rethink): AI wurde auf ein bestehendes UI geschraubt, statt in den Workflow integriert zu werden. Der Weg fuehrt von Phase 1 (Bolt-on) zu Phase 2 (Integrated). Statt eines separaten Buttons sollte AI in den Schreibfluss eingebettet sein — z.B. als Ghost Text im Copilot-Stil (Lektion 3), der beim Tippen Vorschlaege macht. Das adressiert auch die Judgment Gap (Connection 5): Nutzer wollen nicht, dass AI fuer sie schreibt, sondern dass AI ihnen hilft, besser zu schreiben. Generative Features sollten auf Iteration statt Single-Shot ausgelegt sein (Lektion 4) — Varianten anbieten, verfeinern lassen, nicht ein fertiges Ergebnis praesentieren.
+
+</details>
+
+### Szenario 3: Das Autonomie-Dilemma
+
+Du designst ein AI-Feature fuer ein E-Mail-Tool, das automatisch Antworten vorschlaegt. In Tests zeigt sich: Power User wollen, dass die AI Routine-Mails direkt versendet. Gelegentliche Nutzer wollen jeden Vorschlag erst pruefen. Wie loest Du diesen Konflikt?
+
+<details>
+<summary>Aufloesung</summary>
+
+Das ist genau das Autonomie-Spektrum (Connection 1): Verschiedene Nutzer brauchen verschiedene Positionen auf dem Spektrum. Die Loesung ist ein Autonomy Dial (Lektion 3) — konfigurierbare Autonomie, die Nutzer selbst einstellen koennen. Fuer neue Nutzer startest Du im Copilot-Modus (Vorschlag anzeigen, Nutzer bestaetigt). Mit wachsendem Vertrauen koennen Nutzer den Autonomiegrad erhoehen — z.B. "Routine-Antworten nach meiner Freigabe direkt senden." Wichtig: Auch im autonomen Modus braucht es Recovery-Moeglichkeiten (Connection 2) — Undo, Audit Trail, Benachrichtigung ueber gesendete Mails. Vertrauen entsteht durch die Moeglichkeit zur Korrektur, nicht durch Fehlerfreiheit.
+
+</details>
+
 ---
 
 *Quellen: Aufbauend auf Lektionen 1–4. Lenny's Newsletter AI-Native UX (2024), Figma AI & Design Report (2025), Service Recovery Paradox Research, Google PAIR Guidelines (2024), Nielsen Norman Group AI UX Studies (2024–2025)*

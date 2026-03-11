@@ -57,6 +57,43 @@ If any point feels uncertain, go back to the relevant lesson. These topics are n
 
 You understand the risks. [Chapter 8](/en/08-execution/) shows how to execute AI projects in practice — PRDs, lifecycle, teams.
 
+## Self-Assessment
+
+Three scenarios combining multiple concepts from this chapter. Think through your answer before revealing the solution.
+
+### Scenario 1: The Health Chatbot's Data Appetite
+
+Your team is building an AI chatbot for a health insurer that helps members with medical questions. The ML lead proposes logging all conversations to better detect hallucinations and improve guardrails. Compliance loves the idea — more data, better quality. What's your position as PM?
+
+<details>
+<summary>Solution</summary>
+
+This is a collision between privacy (Lesson 3) and guardrails/hallucination management (Lessons 2+4). Health data is highly sensitive — full conversation logging violates data minimization principles. The right approach: input filtering and hallucination detection must happen BEFORE logging. You can track aggregate metrics (hallucination rate, block rate) without storing individual conversations. As a high-risk system under the EU AI Act, you need both: robust quality assurance AND privacy by design.
+
+</details>
+
+### Scenario 2: Social Screening in Hiring
+
+A startup pitches your company an AI tool that analyzes publicly available social media data to build personality profiles of job candidates. The tool shows impressive accuracy metrics and your CEO is enthusiastic. You're asked to own the integration as PM. How do you evaluate this?
+
+<details>
+<summary>Solution</summary>
+
+This scenario connects Responsible AI (Lesson 1) with bias/fairness and privacy (Lesson 3). First: recruiting falls under high-risk in the EU AI Act — strict requirements apply. Second: collecting data without explicit consent follows the Clearview AI pattern from Lesson 1 — technically possible, but ethically and legally problematic. Third: social media data correlates with age, ethnicity, and socioeconomic status, creating systematic bias. As PM, you should reject the project and document why — without Responsible AI principles as your frame, this path leads to reputational and legal risk.
+
+</details>
+
+### Scenario 3: Guardrails vs. User Experience
+
+Your AI writing assistant for lawyers blocks 15% of all requests — three times the industry average. Guardrails were set conservatively because legal content is sensitive. Users are complaining heavily and retention is dropping. Your engineering lead wants to loosen the guardrails; your legal team wants to keep them. What do you do?
+
+<details>
+<summary>Solution</summary>
+
+This is where guardrails (Lesson 2) and hallucination management (Lesson 4) overlap. A high block rate alone isn't a quality indicator — you need to measure block rate AND user satisfaction. The right approach: analyze WHICH requests are being blocked. Many are likely false positives. Rather than loosening guardrails across the board, introduce differentiated guardrails — stricter output validation for medical/financial claims, lighter for drafting assistance. Supplement with RAG (simultaneously a guardrail and hallucination mitigation) to ground outputs in verified legal sources.
+
+</details>
+
 ---
 
 *Sources: Building on Lessons 1–4. Anthropic RSP 3.0 (2026), EU AI Act (artificialintelligenceact.eu), Stanford Legal RAG Study (2025), NVIDIA NeMo Guardrails, Stanford AI Index Report 2025*

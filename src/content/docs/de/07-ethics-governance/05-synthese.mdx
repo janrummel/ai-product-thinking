@@ -57,6 +57,43 @@ Wenn ein Punkt unsicher ist, geh zurueck zur entsprechenden Lektion. Diese Theme
 
 Du kennst die Risiken. [Kapitel 8](/de/08-execution/) zeigt, wie Du AI-Projekte in der Praxis umsetzt — PRDs, Lifecycle, Teams.
 
+## Self-Assessment
+
+Drei Szenarien, die mehrere Konzepte aus diesem Kapitel kombinieren. Ueberleg Dir Deine Antwort, bevor Du die Aufloesung oeffnest.
+
+### Szenario 1: Der Medical-Chatbot mit Datenhunger
+
+Dein Team baut einen AI-Chatbot fuer eine Krankenversicherung, der Versicherten bei Gesundheitsfragen hilft. Der ML-Lead schlaegt vor, alle Chat-Verlaeufe zu loggen, um Hallucinations besser zu erkennen und Guardrails zu verbessern. Die Compliance-Abteilung ist begeistert — mehr Daten, bessere Qualitaet. Was ist Deine Position als PM?
+
+<details>
+<summary>Aufloesung</summary>
+
+Hier kollidieren Privacy (Lektion 3) und Guardrails/Hallucination Management (Lektionen 2+4). Gesundheitsdaten sind hochsensibel — vollstaendiges Logging widerspricht dem Prinzip der Datenminimierung. Die richtige Loesung: Input-Filtering und Hallucination-Detection muessen VOR dem Logging passieren. Du kannst aggregierte Metriken (Hallucination Rate, Block Rate) tracken, ohne individuelle Gespraeche zu speichern. Als Hochrisiko-System unter dem EU AI Act brauchst Du beides: robuste Qualitaetssicherung UND Privacy by Design.
+
+</details>
+
+### Szenario 2: Clearview AI im Recruiting
+
+Ein Startup pitcht Deinem Unternehmen ein AI-Tool, das oeffentlich verfuegbare Social-Media-Daten analysiert, um Persoenlichkeitsprofile von Bewerbern zu erstellen. Das Tool hat beeindruckende Accuracy-Metriken und der CEO ist begeistert. Du sollst als PM die Integration verantworten. Wie bewertest Du das?
+
+<details>
+<summary>Aufloesung</summary>
+
+Dieses Szenario verbindet Responsible AI (Lektion 1) mit Bias/Fairness und Privacy (Lektion 3). Erstens: Recruiting faellt unter Hochrisiko im EU AI Act — strenge Anforderungen. Zweitens: Die Datenerhebung ohne explizite Einwilligung ist das Clearview-AI-Muster aus Lektion 1 — technisch moeglich, aber ethisch und rechtlich problematisch. Drittens: Social-Media-Daten korrelieren mit Alter, Ethnie und sozioekonomischem Status, was systematische Bias erzeugt. Als PM solltest Du das Projekt ablehnen und dokumentieren warum — ein Rahmen ohne Responsible-AI-Prinzipien fuehrt hier zu Reputations- und Rechtsrisiken.
+
+</details>
+
+### Szenario 3: Guardrails vs. User Experience
+
+Dein AI-Schreibassistent fuer Juristen blockiert 15% aller Anfragen — dreimal mehr als der Branchendurchschnitt. Die Guardrails wurden konservativ eingestellt, weil juristische Inhalte sensibel sind. Nutzer beschweren sich massiv, die Retention sinkt. Dein Engineering-Lead will die Guardrails lockern, Dein Legal-Team will sie beibehalten. Was tust Du?
+
+<details>
+<summary>Aufloesung</summary>
+
+Hier ueberlappen Guardrails (Lektion 2) und Hallucination Management (Lektion 4). Eine hohe Block Rate allein ist kein Qualitaetsmerkmal — Du musst Block Rate UND User Satisfaction messen. Der richtige Ansatz: Analysiere, WELCHE Anfragen geblockt werden. Wahrscheinlich sind viele False Positives darunter. Statt Guardrails pauschal zu lockern, fuehre differenzierte Guardrails ein — strengere Output-Validierung bei medizinischen/finanziellen Aussagen, lockerere bei Formulierungshilfe. Ergaenze mit RAG (gleichzeitig Guardrail und Hallucination-Mitigation), um Outputs in verifizierten Rechtsquellen zu verankern.
+
+</details>
+
 ---
 
 *Quellen: Aufbauend auf Lektionen 1–4. Anthropic RSP 3.0 (2026), EU AI Act (artificialintelligenceact.eu), Stanford Legal RAG Study (2025), NVIDIA NeMo Guardrails, Stanford AI Index Report 2025*

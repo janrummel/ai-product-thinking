@@ -69,6 +69,43 @@ If any of these feel uncertain, go back to the relevant lesson. These design fou
 
 You design AI features. [Chapter 4](/en/04-technical-literacy/) gives you the technical language to speak with engineers as equals.
 
+## Self-Assessment
+
+Three scenarios combining multiple concepts from this chapter. Think through your answer before revealing the solution.
+
+### Scenario 1: The Chatbot Nobody Trusts
+
+Your team launched an AI-powered financial advisor chatbot. Response quality is high, but week-one user retention is only 15%. User interviews reveal: "I don't know if I can trust this." How do you redesign the feature?
+
+<details>
+<summary>Solution</summary>
+
+The problem isn't response quality — it's trust design (Lesson 2). Three levers: First, "show your work" — make citations and reasoning chains visible so users can trace how the bot arrived at its recommendation. Second, build in confidence communication: where is the bot certain, where uncertain? Third, apply progressive disclosure (Connection 3): result first, then confidence, sources, and full reasoning chain on demand. Additionally, reconsider the autonomy level (Lesson 3) — for financial advice, a copilot approach (suggestion + user decision) is more trustworthy than an autonomous agent.
+
+</details>
+
+### Scenario 2: Bolt-on vs. AI-Native
+
+Your product team added an "AI write for me" button to an existing note-taking tool. Feature adoption is at 8% after three months, and feedback says: "It feels tacked on." How do you approach the problem?
+
+<details>
+<summary>Solution</summary>
+
+This is a classic bolt-on problem (Connection 4, AI-Native Rethink): AI was bolted onto an existing UI instead of being integrated into the workflow. The path leads from Phase 1 (Bolt-on) to Phase 2 (Integrated). Instead of a separate button, AI should be embedded in the writing flow — for example, as copilot-style ghost text (Lesson 3) that suggests while typing. This also addresses the Judgment Gap (Connection 5): users don't want AI to write for them, they want AI to help them write better. Generative features should be designed for iteration rather than single-shot (Lesson 4) — offer variations, allow refinement, don't present a finished result.
+
+</details>
+
+### Scenario 3: The Autonomy Dilemma
+
+You're designing an AI feature for an email tool that automatically suggests replies. During testing, power users want the AI to send routine emails directly. Occasional users want to review every suggestion first. How do you resolve this conflict?
+
+<details>
+<summary>Solution</summary>
+
+This is exactly the autonomy spectrum (Connection 1): different users need different positions on the spectrum. The solution is an Autonomy Dial (Lesson 3) — configurable autonomy that users can set themselves. For new users, start in copilot mode (show suggestion, user confirms). As trust builds, users can increase the autonomy level — e.g., "send routine replies directly after my initial approval." Crucially, even in autonomous mode you need recovery options (Connection 2) — undo, audit trail, notifications about sent emails. Trust is built through the ability to correct, not through flawlessness.
+
+</details>
+
 ---
 
 *Sources: Building on Lessons 1–4. Lenny's Newsletter AI-Native UX (2024), Figma AI & Design Report (2025), Service Recovery Paradox Research, Google PAIR Guidelines (2024), Nielsen Norman Group AI UX Studies (2024–2025)*

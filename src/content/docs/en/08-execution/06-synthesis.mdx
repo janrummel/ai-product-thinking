@@ -64,6 +64,43 @@ If any of these feel uncertain, go back to the relevant lesson. Execution is the
 
 You deliver AI features. [Chapter 9](/en/09-leadership/) shows how to build and scale AI organizations.
 
+## Self-Assessment
+
+Three scenarios combining multiple concepts from this chapter. Think through your answer before revealing the solution.
+
+### Scenario 1: The Launch Without Eval Criteria
+
+Your AI feature (an internal support bot) has been live for three months. Users are complaining about declining answer quality, but no one can quantify how bad it actually is — there are no baseline metrics from launch. The VP of Product wants an immediate fix. What do you propose?
+
+<details>
+<summary>Solution</summary>
+
+This is a missing link between the PRD (Lesson 1) and lifecycle management (Lesson 2). Without eval criteria in the PRD, there's no baseline — you can't tell whether the model has degraded or the data has gone stale. Step one: retroactively define eval criteria and measure a baseline. Step two: check data quality (Lesson 4) — is the knowledge base current? Step three: establish an eval review ritual (Lesson 3) so the problem doesn't go unnoticed again. An immediate fix without diagnosis would be blind action.
+
+</details>
+
+### Scenario 2: The Solo Experiment Sprint
+
+Your ML engineer ran a two-week experiment spike testing three prompt variants and wants to deploy the one with the highest accuracy. The UX designer wasn't involved because "it's just prompts." The engineer presents impressive technical metrics. Do you approve the deploy?
+
+<details>
+<summary>Solution</summary>
+
+This scenario connects Agile for AI (Lesson 5) with cross-functional collaboration (Lesson 3). Experiment spikes need all perspectives — technical accuracy alone says nothing about user experience. The prompt variant with the highest accuracy might produce the longest, least readable responses. As PM, you should convene a decision gate with PM, tech lead, and designer. Only deploy once user-facing metrics (response clarity, task completion) have also been reviewed. This delays the deploy by days but prevents a rollback after weeks.
+
+</details>
+
+### Scenario 3: The Stale Knowledge Base
+
+Your AI product answers customer questions about insurance policies. The knowledge base hasn't been updated in six months, but there have been three policy changes in that time. Your data team says they have no capacity for updates. The hallucination rate is measurably rising. What do you prioritize?
+
+<details>
+<summary>Solution</summary>
+
+This is where data quality (Lesson 4) meets lifecycle management (Lesson 2). A rising hallucination rate with an unchanged model is a clear signal of data drift — reality has moved on, the data hasn't. This belongs in the AI PRD as a requirement (Lesson 1): how often must documents be updated? The priority is clear: knowledge base updates before any feature work. An AI product presenting outdated information as facts destroys trust faster than missing features do.
+
+</details>
+
 ---
 
 *Sources: Building on Lessons 1–5. Anthropic Documentation (2025), Google Cloud Engineering Blog, Spotify Engineering Blog, LangChain Community Reports*
