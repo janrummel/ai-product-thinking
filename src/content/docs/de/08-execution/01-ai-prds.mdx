@@ -110,49 +110,59 @@ Das folgende Template ist ein Startpunkt — passe es an Dein Produkt und Deine 
 - Geplante Verbesserungskadenz: ___
 :::
 
-## Scenario
+## Scenario: Duolingo Max — AI PRD fuer Sprachlernen mit GPT-4
 
-Du bist PM bei einem SaaS-Unternehmen. Euer Produkt ist ein Helpdesk-Tool. Feature-Anfrage: AI soll eingehende Tickets automatisch zusammenfassen und eine Prioritaet vorschlagen.
+Anfang 2023. OpenAI veroeffentlicht GPT-4. Duolingo — mit 500+ Millionen registrierten Nutzern die groesste Sprachlern-App der Welt — sieht eine historische Chance: AI-gesteuerte Konversationen koennten das groesste ungeloeste Problem im Sprachlernen angehen. Nutzer ueben Vokabeln und Grammatik, aber kaum jemand fuehrt echte Gespraeche. Ein LLM koennte das aendern.
 
-**Fakten:**
-- 8.000 Tickets pro Monat
-- Support-Team von 15 Agents
-- Aktuell liest jeder Agent jedes Ticket komplett (durchschnittlich 3 Minuten pro Ticket)
-- Ziel: Lesezeit auf 30 Sekunden reduzieren
-- Budget: $500/Monat fuer AI-Kosten
-- Euer Engineering Lead schlaegt vor: "Wir nehmen ein LLM, schreiben einen Prompt, fertig in zwei Sprints"
+Das Team bewegt sich schnell. Innerhalb weniger Wochen entsteht "Duolingo Max" — ein neues Premium-Tier fuer $30/Monat mit zwei GPT-4-Features.
 
-Der Engineering Lead hat bereits einen Prototyp gebaut. Die Zusammenfassungen "sehen gut aus". Aber es gibt kein Eval-Dataset, keine definierten Qualitaetsschwellen und keinen Plan fuer Failure Cases.
+**Die Fakten:**
+- **Roleplay:** Konversationsuebungen mit einem AI-Partner in realistischen Szenarien (Kaffee bestellen, nach dem Weg fragen)
+- **Explain My Answer:** AI erklaert, warum eine Antwort richtig oder falsch war — personalisiert, nicht aus einer Datenbank
+- **Tech Stack:** GPT-4 API kombiniert mit Duolingos proprietaerem "Birdbrain" ML-Modell, das die Sprachkompetenz jedes Nutzers trackt
+- **Launch:** Maerz 2023, zunaechst fuer Spanisch und Franzoesisch auf iOS
+- **Ergebnis:** Nur ~5% der zahlenden Subscriber upgradeten auf Max
+- **Margin Impact:** ~120 Basispunkte Margenverlust durch GPT-4 API-Kosten
+- **Pivot:** Duolingo Max wurde spaeter zu "Duolingo Pro" — die AI-Features wanderten in alle bezahlten Tiers statt als Premium-Aufpreis zu bleiben
+
+**Die Frage:**
+Stell Dir vor, Du schreibst das AI PRD fuer Duolingo Max vor dem Launch. Welche Evaluation Criteria wuerdest Du fuer "gute Konversation" definieren? Welches Cost Ceiling wuerdest Du setzen? Und wie misst Du, ob Nutzer durch Roleplay tatsaechlich besser eine Sprache lernen?
 
 ## Decide
 
 <details>
-<summary>Wie wuerdest Du entscheiden?</summary>
+<summary>Was ist bei Duolingo Max passiert — und was haette das PRD verhindern koennen?</summary>
 
-**Die beste Entscheidung:** Erstelle ein AI PRD mit klaren Eval-Kriterien, bevor Du in die Produktion gehst. Der Prototyp ist ein guter Start, aber ohne messbare Qualitaet weisst Du nicht, wann das Feature "fertig" ist.
+**Was passiert ist:** Duolingo Max startete schnell, getrieben von Wettbewerbsdruck und der Verfuegbarkeit von GPT-4. Die Features funktionierten technisch. Aber die Unit Economics stimmten nicht: GPT-4 Inference-Kosten waren hoch, die Adoption mit ~5% der Subscriber niedrig, und $30/Monat lag ueber der Zahlungsbereitschaft der meisten Nutzer. Duolingo musste spaeter den gesamten Pricing-Ansatz ueberarbeiten und die AI-Features in alle bezahlten Tiers integrieren.
 
-**Konkret brauchst Du:**
-- Ein Golden Dataset: 200 manuell zusammengefasste Tickets als Referenz
-- Qualitaetsschwellen: z.B. 90% der Zusammenfassungen bewahren alle kritischen Informationen, Prioritaetsvorschlag in 80% der Faelle korrekt
-- Failure-Definition: Was passiert, wenn die Zusammenfassung wichtige Details auslaesst?
-- Cost Check: Bei 8.000 Tickets und ~500 Tokens pro Ticket pruefen, ob das Budget reicht
+**Was ein AI PRD haette flaggen muessen — angewandt auf das Template aus dieser Lektion:**
 
-**Warum nicht "einfach shippen":**
-- Ohne Baseline weisst Du nicht, ob spaetere Aenderungen die Qualitaet verbessern oder verschlechtern
-- "Sieht gut aus" ist kein Qualitaetskriterium — es ist eine Anekdote
-- Wenn die AI ein kritisches Ticket falsch priorisiert, kostet das Kundenvertrauen
+**3. Evaluation Criteria — die fehlende Kernfrage:**
+Wie misst man, ob eine AI-Konversation "gut" war? Traditionelle NLP-Metriken (BLEU, ROUGE) messen Textuebereinstimmung — aber nicht, ob ein Lerner etwas gelernt hat. Duolingo brauchte Proxy-Metriken:
+- Engagement: Wie viele Roleplay-Sessions pro Woche? Wie lang?
+- Retention: Kommen Roleplay-Nutzer haeufiger zurueck?
+- Lernfortschritt: Verbessern sich Nutzer schneller in den Birdbrain-Kompetenzwerten?
+- User Satisfaction: NPS oder qualitatives Feedback nach Sessions
 
-**Was viele falsch machen:** Den Prototyp direkt in Produktion nehmen, weil er "gut genug aussieht". Ohne Eval-Kriterien merkst Du Qualitaetsprobleme erst, wenn Kunden sich beschweren.
+Ohne diese Kriterien vorab zu definieren, gab es keine Baseline. Das Team konnte nicht beantworten: "Ist dieses Feature den Aufpreis wert?"
+
+**4. Model & Infrastructure — das fehlende Cost Ceiling:**
+GPT-4 war Anfang 2023 eines der teuersten LLMs. Ein AI PRD haette eine klare Kostenprojektion enthalten muessen: Kosten pro Roleplay-Session, maximaler Anteil an den Subscription-Erloesen, Break-Even bei welcher Adoption Rate. Die ~120 Basispunkte Margenverlust zeigen, dass diese Rechnung entweder nicht gemacht oder ignoriert wurde.
+
+**5. User Experience — die Pricing-Disconnect:**
+$30/Monat fuer zwei AI-Features — zusaetzlich zum bestehenden Abo. Das PRD haette die Frage stellen muessen: Welchen wahrgenommenen Wert liefern diese Features? Nutzer zahlen fuer Ergebnisse (Sprache lernen), nicht fuer Technologie (GPT-4).
+
+**Die zentrale Lektion:** Duolingo hatte die Technologie und die Nutzer. Was fehlte, war die PRD-Disziplin: klare Eval-Kriterien fuer Lernqualitaet, ein Cost Ceiling fuer Inference-Kosten und eine realistische Pricing-Validierung vor dem Launch.
+
 </details>
 
 ## Reflect
 
-**Ein AI PRD ist kein traditionelles PRD mit "AI" im Titel — die Evaluation Section veraendert das gesamte Dokument.**
-
-- Prompts sind Produktspezifikationen: Aenderungen am Prompt sind Produktaenderungen und brauchen Testing
-- Ohne vordefinierte Qualitaetsschwellen gibt es keine Baseline fuer Verbesserung
-- Die Eval-Kriterien zu definieren ist die wichtigste PM-Arbeit bei AI-Features — nicht die Prompt-Optimierung
+- **Evaluation Criteria sind bei AI-Features die haerteste PM-Arbeit:** Bei Duolingo Max war die zentrale Herausforderung nicht technisch — GPT-4 konnte Konversationen fuehren. Die Herausforderung war zu definieren, was eine "gute" Konversation im Kontext von Sprachlernen ueberhaupt bedeutet. Ohne diese Definition fehlte die Grundlage fuer jede weitere Entscheidung.
+- **Cost Ceiling gehoert ins PRD, nicht in die Retro:** Duolingos ~120 Basispunkte Margenverlust waren kein ueberraschendes Ergebnis — sie waren eine vorhersehbare Konsequenz fehlender Kostenplanung. Ein AI PRD mit klarer Kostenprojektion haette frueher alternative Modelle oder Pricing-Strategien erzwungen.
+- **"Schnell launchen" ist kein Ersatz fuer "richtig definieren":** Der Wettbewerbsdruck durch GPT-4 war real. Aber Geschwindigkeit ohne Eval-Kriterien fuehrt zu einem Produkt, das Du nicht messen, nicht verbessern und nicht verteidigen kannst — wie der spaetere Pivot von Max zu Pro gezeigt hat.
+- **Ohne vordefinierte Qualitaetsschwellen gibt es keine Baseline fuer Verbesserung:** Ein AI PRD ist kein traditionelles PRD mit "AI" im Titel. Die Evaluation Section veraendert das gesamte Dokument — sie zwingt Dich, vor dem Bauen zu definieren, was "gut genug" bedeutet.
 
 ---
 
-*Quellen: Anthropic Documentation (2025), Google Cloud Engineering Blog, Linear Engineering Blog, GitHub Blog — Copilot Acceptance Rate Metrics*
+*Quellen: Duolingo Earnings Calls Q1-Q3 2023, Duolingo Engineering Blog ("How Duolingo Uses AI"), The Verge — "Duolingo Max Review" (2023), Stratechery — "Duolingo and the AI Opportunity" (2023), OpenAI GPT-4 Technical Report (2023)*
