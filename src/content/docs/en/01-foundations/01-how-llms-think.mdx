@@ -31,7 +31,7 @@ The model sees your prompt and calculates: which token is most likely next? Then
 This means:
 - The model doesn't *plan*. It generates sequentially.
 - The model doesn't *know* things. It has learned statistical patterns.
-- The model doesn't *decide*. It samples from probability distributions.
+- The model doesn't *decide*. It samples from probability distributions (at temperature 0, it deterministically picks the most likely token).
 
 ### Temperature
 
@@ -47,7 +47,7 @@ Temperature controls how "creative" the model responds:
 
 When an LLM "invents" something, it's not a malfunction — it's the model doing what it always does: generating the most likely continuation. Sometimes the most likely continuation is factually wrong.
 
-> *"Hallucinations are not a bug. They are an inevitable property of systems based on probability."*
+> *"Hallucinations are not a bug. They are an inherent property of systems based on probability — reducible, but not fully eliminable."*
 
 ## Framework
 
