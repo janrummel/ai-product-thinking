@@ -76,6 +76,16 @@ export default defineConfig({
 					translations: { de: '09 — Leadership' },
 					autogenerate: { directory: '09-leadership' },
 				},
+				{
+					label: '10 — Capstone',
+					translations: { de: '10 — Capstone' },
+					autogenerate: { directory: '10-capstone' },
+				},
+				{
+					label: 'Templates',
+					translations: { de: 'Templates' },
+					autogenerate: { directory: 'templates' },
+				},
 			],
 		}),
 	],

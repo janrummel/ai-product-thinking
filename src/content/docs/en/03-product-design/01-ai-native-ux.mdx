@@ -33,7 +33,7 @@ Not every AI interaction needs a chat window. The distinction matters:
 | Weakness | Inefficient for repetitive tasks | Inflexible for open-ended questions |
 | Example | "Analyze this contract" | Invoice classification with dropdowns |
 
-**The rule:** "If it's a form, it should stay a form" (UX Planet). Forcing a form into a chat interface makes it worse, not better.
+**The rule:** "If it's a form, it should stay a form" (widely cited UX design principle). Forcing a form into a chat interface makes it worse, not better.
 
 **Best practice:** Every form should be triggerable conversationally, and every agent should be able to hand off to a form. The pure chat paradigm is already outdated for complex workflows.
 
@@ -46,6 +46,17 @@ AI outputs contain a lot of information. Not all of it belongs on the first scre
 - **Level 3:** Full chain of thought, raw data, alternatives
 
 Microsoft's Copilot dynamically adapts its interface based on user behavior: power users see more options and detail, casual users see less.
+
+### User Onboarding for AI Features
+
+The biggest UX danger with AI features: The demo feels magical, reality disappoints. This "Magic Demo Gap" is the most common reason AI features lose adoption after launch.
+
+- **Expectation management:** Clearly communicate what the AI can and cannot do — before the user sees the first result
+- **Progressive trust:** Start with simple, reliable AI functions. Only offer more complex ones once trust is established
+- **Leverage existing patterns:** Notion introduced AI through slash commands — a pattern users already knew. New interaction patterns require more onboarding effort
+- **No feature dump:** Gradual introduction beats "here are all 12 AI features at once"
+
+**For you as a PM:** Plan onboarding as part of the AI feature, not an afterthought. The first AI contact determines whether users trust the feature or ignore it.
 
 ### Loading and Streaming UX
 

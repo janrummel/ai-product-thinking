@@ -1,0 +1,286 @@
+---
+title: "Templates"
+description: "Five working templates for AI Product Management — ready to use."
+sidebar:
+  order: 1
+---
+
+Five templates from the curriculum. Copy them, adapt them, use them in your projects.
+
+---
+
+## 1. AI PRD Template
+
+Based on Chapter 8: Writing AI PRDs.
+
+```
+AI PRD: [Product Name / Feature]
+Date: [Date]
+Author: [Name]
+
+---
+
+1. PROBLEM STATEMENT & USER CONTEXT
+- Problem: [What is the problem? Quantify the manual effort.]
+- Target audience: [Who has this problem? How often?]
+- Current workaround: [How do users solve this today?]
+
+2. AI APPROACH & RATIONALE
+- Why AI? [Why not rules/traditional code?]
+- Approach: [ ] LLM API  [ ] RAG  [ ] Fine-Tuning  [ ] Agent Workflow
+- Rationale: [Why this approach?]
+- AI suitability (5 Check Questions):
+  [ ] Does the use case tolerate occasional errors?
+  [ ] Is there enough training data / context?
+  [ ] Is the value over rules significant?
+  [ ] Is cost per query economically viable?
+  [ ] Is the risk of errors acceptable?
+
+3. EVALUATION CRITERIA
+- Golden Dataset: [Size, source, labeling process]
+- Metrics + thresholds:
+  | Metric | Minimum | Target | Measurement |
+  |--------|---------|--------|-------------|
+  | [e.g. Accuracy] | [e.g. 85%] | [e.g. 92%] | [e.g. Golden Dataset] |
+  | [e.g. Hallucination Rate] | [e.g. <5%] | [e.g. <2%] | [e.g. LLM-as-Judge] |
+  | [e.g. Latency P95] | [e.g. <3s] | [e.g. <1s] | [e.g. APM] |
+  | [e.g. Cost/Query] | [e.g. <$0.05] | [e.g. <$0.02] | [e.g. Provider Dashboard] |
+
+4. MODEL & INFRASTRUCTURE
+- Model: [e.g. Claude Sonnet 4.5 / GPT-4o-mini]
+- Rationale: [Cost/quality/latency tradeoff]
+- Expected volume: [Queries/day]
+- Cost projection: [$/month]
+
+5. USER EXPERIENCE
+- AI output presentation: [e.g. Inline suggestion, separate panel, chat]
+- Confidence indicators: [ ] Yes  [ ] No — Rationale: [...]
+- Fallback for low confidence: [e.g. manual review, disclaimer]
+- Feedback mechanism: [e.g. Thumbs up/down, Regenerate, Edit]
+
+6. RISK & MITIGATION
+- Failure modes:
+  | Failure Mode | Probability | Impact | Mitigation |
+  |-------------|------------|--------|------------|
+  | [e.g. Hallucination on domain terms] | [Medium] | [High] | [RAG with verified source] |
+  | [e.g. Prompt injection] | [Low] | [High] | [Input validation + guardrails] |
+- Bias consideration: [Which groups could be disadvantaged?]
+- Privacy: [What data flows into the model? Tier 1/2/3?]
+
+7. SUCCESS METRICS & ITERATION PLAN
+- Launch criteria: [Eval metrics above threshold + human review passed]
+- Post-launch monitoring: [Which metrics, what cadence?]
+- Improvement cadence: [e.g. prompt updates weekly, model upgrade quarterly]
+- Rollback trigger: [At what values do you roll back?]
+```
+
+---
+
+## 2. RICE-A Scoring
+
+Based on Chapter 2: Opportunity Identification. RICE extended with AI-Readiness.
+
+```
+RICE-A SCORING: [Project / Feature List]
+Date: [Date]
+
+| Feature | Reach | Impact | Confidence | Effort | AI-Readiness | RICE-A Score |
+|---------|-------|--------|------------|--------|-------------|-------------|
+| [Feature A] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [calculated] |
+| [Feature B] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [calculated] |
+| [Feature C] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [calculated] |
+
+Formula: (Reach x Impact x Confidence x AI-Readiness) / Effort
+
+SCALES:
+
+Reach (1-10):
+  1-3: <1,000 users affected
+  4-6: 1,000-10,000 users
+  7-10: >10,000 users
+
+Impact (1-5):
+  1: Minimal — nice-to-have
+  2: Low — saves some time
+  3: Medium — noticeable improvement
+  4: High — solves a real problem
+  5: Massive — game changer
+
+Confidence (0.5-1.0):
+  0.5: Gut feeling, no data
+  0.7: Some user signals
+  0.8: Solid evidence
+  1.0: Validated by prototype/pilot
+
+Effort (1-10):
+  1-3: <2 weeks, 1-2 people
+  4-6: 2-6 weeks, small team
+  7-10: >6 weeks, cross-functional
+
+AI-Readiness (1-5):
+  1: No data, unclear use case
+  2: Data available but unstructured
+  3: Structured data, clear use case
+  4: Eval data available, prototype possible
+  5: Proven — similar use case already validated
+```
+
+---
+
+## 3. Red Team Plan
+
+Based on Chapter 5: Red Teaming.
+
+```
+RED TEAM PLAN: [Product Name / Feature]
+Date: [Date]
+Test window: [Start — End]
+Owner: [Name/Team]
+
+SCOPE
+- System under test: [e.g. Support chatbot, content generator]
+- Model: [e.g. Claude Sonnet 4.5]
+- Access path: [e.g. Web UI, API, Mobile App]
+
+PRIORITY MATRIX
+| Category | Priority | Test Cases | Status |
+|----------|----------|------------|--------|
+| Prompt Injection (direct) | Critical | [e.g. "Ignore all previous instructions"] | [ ] Open |
+| Prompt Injection (indirect) | Critical | [e.g. Malicious content in uploads/URLs] | [ ] Open |
+| Data Extraction | High | [e.g. Extract system prompt, read PII] | [ ] Open |
+| Jailbreaking | High | [e.g. Roleplay attacks, multi-turn manipulation] | [ ] Open |
+| Bias / Fairness | High | [e.g. Compare results by gender, ethnicity, age] | [ ] Open |
+| Hallucination | Medium | [e.g. Ask for facts not in context] | [ ] Open |
+| Edge Cases | Medium | [e.g. Empty input, very long input, different language] | [ ] Open |
+| Misuse | Medium | [e.g. Generate harmful content] | [ ] Open |
+
+TEST PROTOCOL PER FINDING
+- Finding ID: [RT-001]
+- Category: [e.g. Prompt Injection]
+- Severity: [Critical / High / Medium / Low]
+- Input: [Exact prompt]
+- Expected behavior: [What should happen]
+- Actual behavior: [What happened]
+- Reproducible: [ ] Yes  [ ] No  [ ] Partially
+- Recommendation: [Fix / Accepted risk / Monitoring]
+
+RESULTS SUMMARY
+| Severity | Found | Fixed | Accepted | Open |
+|----------|-------|-------|----------|------|
+| Critical | [n] | [n] | [n] | [n] |
+| High | [n] | [n] | [n] | [n] |
+| Medium | [n] | [n] | [n] | [n] |
+| Low | [n] | [n] | [n] | [n] |
+
+SHIP DECISION: [ ] Ship  [ ] Fix First  [ ] No-Ship
+Rationale: [...]
+```
+
+---
+
+## 4. Ship/No-Ship Checklist
+
+Based on Chapter 5: Ship/No-Ship Decisions.
+
+```
+SHIP/NO-SHIP CHECKLIST: [Feature]
+Date: [Date]
+Decision maker: [Name]
+
+EVALUATION
+[ ] Golden Dataset defined and current
+[ ] All core metrics above minimum threshold
+    Accuracy: [current] vs. [minimum]
+    Hallucination Rate: [current] vs. [maximum]
+    Latency P95: [current] vs. [maximum]
+[ ] Performance checked on relevant subgroups (no aggregation problem)
+
+RED TEAMING
+[ ] Red team completed (date: [...])
+[ ] No open findings with severity "Critical"
+[ ] Open "High" findings documented with mitigation
+
+BIAS & FAIRNESS
+[ ] Metrics disaggregated by relevant groups
+[ ] No significant performance differences between groups
+[ ] Fairness decision documented (which metric prioritized?)
+
+ROLLBACK
+[ ] Feature flag / kill switch in place
+[ ] Rollback possible in <1h
+[ ] Rollback triggers defined (at what values?)
+
+MONITORING
+[ ] Real-time monitoring for core metrics set up
+[ ] Alerting configured (thresholds + recipients)
+[ ] Feedback loop for user reports in place
+
+COMPLIANCE
+[ ] Privacy review completed
+[ ] EU AI Act risk category determined
+[ ] Guardrails implemented and tested
+[ ] Documentation requirements fulfilled
+
+DECISION
+[ ] SHIP — all checks passed
+[ ] SHIP WITH CONSTRAINTS — [which and why]
+[ ] FIX FIRST — [what needs to happen]
+[ ] NO-SHIP — [rationale]
+
+Signature: __________ Date: __________
+```
+
+---
+
+## 5. AI KPI Dashboard
+
+Based on Chapter 9: KPIs for AI Products.
+
+```
+AI KPI DASHBOARD: [Product Name]
+Date: [Date]
+Reporting cadence: [weekly / monthly]
+
+--- QUALITY METRICS (Technical Quality) ---
+
+| Metric | Current | Target | Trend | Alert at |
+|--------|---------|--------|-------|----------|
+| Hallucination Rate | [%] | [<5%] | [up/down/stable] | [>8%] |
+| Groundedness Score | [%] | [>90%] | [up/down/stable] | [<85%] |
+| Task Completion Rate | [%] | [>80%] | [up/down/stable] | [<70%] |
+| Latency P95 | [ms] | [<2000ms] | [up/down/stable] | [>3000ms] |
+| Eval Score (Golden Dataset) | [%] | [>85%] | [up/down/stable] | [<80%] |
+
+--- BUSINESS METRICS (Business Impact) ---
+
+| Metric | Current | Target | Trend | Alert at |
+|--------|---------|--------|-------|----------|
+| AI Feature Adoption Rate | [%] | [>30%] | [up/down/stable] | [<15%] |
+| Regeneration Rate | [%] | [<20%] | [up/down/stable] | [>35%] |
+| Revenue Impact | [$] | [...] | [up/down/stable] | [...] |
+| Cost per Query | [$] | [<$0.05] | [up/down/stable] | [>$0.10] |
+| User Retention (AI vs. Non-AI) | [%] | [...] | [up/down/stable] | [...] |
+
+--- OPERATIONAL METRICS (Operations) ---
+
+| Metric | Current | Target | Trend | Alert at |
+|--------|---------|--------|-------|----------|
+| Error Rate | [%] | [<1%] | [up/down/stable] | [>3%] |
+| API Availability | [%] | [>99.5%] | [up/down/stable] | [<99%] |
+| Monthly AI Cost | [$] | [...] | [up/down/stable] | [...] |
+| Cost Trend (MoM) | [%] | [stable] | [up/down/stable] | [>+20%] |
+| Guardrail Trigger Rate | [%] | [<5%] | [up/down/stable] | [>10%] |
+
+--- LEADING INDICATORS ---
+
+Regeneration Rate is the most important leading indicator:
+- Rising → Users are unhappy with AI output → Quality problem
+- Falling → AI output is being accepted → Quality is improving
+- Correlates with churn? → If yes: Quality is directly revenue-relevant
+
+--- ACTIONS ---
+
+| Metric in alarm | Root cause | Action | Owner | Deadline |
+|----------------|-----------|--------|-------|----------|
+| [...] | [...] | [...] | [...] | [...] |
+```

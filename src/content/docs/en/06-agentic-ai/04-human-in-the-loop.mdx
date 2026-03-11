@@ -54,6 +54,18 @@ The goal isn't to eliminate humans but to shift them from repetitive approvals t
 3. **Maintain audit trails** — keep logging everything even after reducing HITL
 4. **Keep override mechanisms** — users must always be able to re-enable HITL for any action class
 
+### Automation Bias: The Invisible Risk
+
+Automation bias describes the human tendency to accept AI outputs uncritically — especially when the system is right most of the time. Research shows that after 50+ consecutive reviews, human attention drops drastically. The result is "rubber-stamping" — and the single biggest risk to any HITL system.
+
+Countermeasures:
+- **Build in attention checks** — occasionally inject known errors to verify reviewers are actually reading
+- **Time-limit review sessions** — enforce breaks after 60-90 minutes
+- **Display confidence scores** — reviewers need to see how certain the model is
+- **Rotate reviewers** — different reviewers for different batches
+
+**For you as a PM:** A HITL system is only as good as the human attention behind it. If your reviewers approve 200 decisions in a row, you don't have human-in-the-loop — you have security theater.
+
 ### The Cost of HITL
 
 HITL is expensive. Key cost drivers: latency (each approval round adds minutes to hours), labor (human reviewers are the most expensive component), context switching (reviewers must load full context before deciding), and scaling (HITL doesn't scale linearly).
