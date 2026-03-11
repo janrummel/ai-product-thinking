@@ -21,7 +21,7 @@ Not every task needs the same technique. The skill is starting with the simplest
 
 **Few-Shot:** Provide 1-5 examples of desired input-output pairs. Research shows strong accuracy gains from 1-2 examples, with diminishing returns beyond 4-5. PM trap: adding 10+ examples "just to be safe" wastes tokens and can confuse the model.
 
-**Chain-of-Thought (CoT):** Instruct the model to reason step by step. Delivers up to a 19-point improvement on complex reasoning tasks (MMLU-Pro benchmark). But caution: for reasoning models (o-series, Claude Extended Thinking), explicit CoT is redundant — they already do it internally.
+**Chain-of-Thought (CoT):** Instruct the model to reason step by step. Delivers up to a 19-point improvement on complex reasoning tasks according to the original benchmark study (MMLU-Pro). But caution: for reasoning models (o-series, Claude Extended Thinking), explicit CoT is redundant — they already do it internally.
 
 **System Prompts:** The invisible frame that defines role, constraints, and behavior. System prompts are typically cached (Anthropic charges 0.1x base rate for cached reads) — cost-efficient for repeated use.
 

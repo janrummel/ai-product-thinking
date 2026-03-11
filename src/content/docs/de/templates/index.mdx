@@ -1,0 +1,286 @@
+---
+title: "Templates"
+description: "Fuenf Arbeitsvorlagen fuer AI Product Management — direkt einsetzbar."
+sidebar:
+  order: 1
+---
+
+Fuenf Templates aus dem Curriculum. Kopiere sie, passe sie an, nutze sie in Deinen Projekten.
+
+---
+
+## 1. AI PRD Template
+
+Basierend auf Kapitel 8: AI PRDs schreiben.
+
+```
+AI PRD: [Produktname / Feature]
+Stand: [Datum]
+Autor: [Name]
+
+---
+
+1. PROBLEM STATEMENT & USER CONTEXT
+- Problem: [Was ist das Problem? Quantifiziere den manuellen Aufwand.]
+- Zielgruppe: [Wer hat das Problem? Wie oft?]
+- Aktueller Workaround: [Wie loesen User das Problem heute?]
+
+2. AI APPROACH & RATIONALE
+- Warum AI? [Warum nicht Regeln/klassischer Code?]
+- Ansatz: [ ] LLM API  [ ] RAG  [ ] Fine-Tuning  [ ] Agent Workflow
+- Begruendung: [Warum dieser Ansatz?]
+- AI-Eignung (5 Check-Fragen):
+  [ ] Toleriert der Use Case gelegentliche Fehler?
+  [ ] Gibt es genuegend Trainingsdaten / Kontext?
+  [ ] Ist der Mehrwert gegenueber Regeln signifikant?
+  [ ] Sind die Kosten pro Query wirtschaftlich?
+  [ ] Ist das Risiko bei Fehlern akzeptabel?
+
+3. EVALUATION CRITERIA
+- Golden Dataset: [Groesse, Quelle, Labeling-Prozess]
+- Metriken + Schwellenwerte:
+  | Metrik | Minimum | Ziel | Messmethode |
+  |--------|---------|------|-------------|
+  | [z.B. Accuracy] | [z.B. 85%] | [z.B. 92%] | [z.B. Golden Dataset] |
+  | [z.B. Hallucination Rate] | [z.B. <5%] | [z.B. <2%] | [z.B. LLM-as-Judge] |
+  | [z.B. Latency P95] | [z.B. <3s] | [z.B. <1s] | [z.B. APM] |
+  | [z.B. Cost/Query] | [z.B. <$0.05] | [z.B. <$0.02] | [z.B. Provider Dashboard] |
+
+4. MODEL & INFRASTRUCTURE
+- Modell: [z.B. Claude Sonnet 4.5 / GPT-4o-mini]
+- Begruendung: [Cost/Quality/Latency Tradeoff]
+- Erwartetes Volumen: [Queries/Tag]
+- Kostenprojektion: [$/Monat]
+
+5. USER EXPERIENCE
+- AI-Output-Darstellung: [z.B. Inline-Suggestion, separater Bereich, Chat]
+- Confidence Indicators: [ ] Ja  [ ] Nein — Begruendung: [...]
+- Fallback bei niedriger Confidence: [z.B. manueller Review, Disclaimer]
+- Feedback-Mechanismus: [z.B. Thumbs up/down, Regenerate, Edit]
+
+6. RISK & MITIGATION
+- Failure Modes:
+  | Failure Mode | Wahrscheinlichkeit | Impact | Mitigation |
+  |-------------|-------------------|--------|------------|
+  | [z.B. Hallucination bei Fachbegriffen] | [Mittel] | [Hoch] | [RAG mit verifizierter Quelle] |
+  | [z.B. Prompt Injection] | [Niedrig] | [Hoch] | [Input-Validierung + Guardrails] |
+- Bias-Betrachtung: [Welche Gruppen koennten benachteiligt werden?]
+- Privacy: [Welche Daten fliessen ins Modell? Tier 1/2/3?]
+
+7. SUCCESS METRICS & ITERATION PLAN
+- Launch-Kriterien: [Eval Metrics ueber Schwellenwert + Human Review bestanden]
+- Post-Launch Monitoring: [Welche Metriken, welche Kadenz?]
+- Verbesserungskadenz: [z.B. Prompt-Updates woechentlich, Modell-Upgrade quartalsweise]
+- Rollback-Trigger: [Bei welchen Werten wird zurueckgerollt?]
+```
+
+---
+
+## 2. RICE-A Scoring
+
+Basierend auf Kapitel 2: Opportunity Identification. RICE erweitert um AI-Readiness.
+
+```
+RICE-A SCORING: [Projekt / Feature-Liste]
+Stand: [Datum]
+
+| Feature | Reach | Impact | Confidence | Effort | AI-Readiness | RICE-A Score |
+|---------|-------|--------|------------|--------|-------------|-------------|
+| [Feature A] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [berechnet] |
+| [Feature B] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [berechnet] |
+| [Feature C] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [berechnet] |
+
+Formel: (Reach × Impact × Confidence × AI-Readiness) / Effort
+
+SKALEN:
+
+Reach (1-10):
+  1-3: <1.000 User betroffen
+  4-6: 1.000-10.000 User
+  7-10: >10.000 User
+
+Impact (1-5):
+  1: Minimal — nice-to-have
+  2: Niedrig — spart etwas Zeit
+  3: Mittel — spuerbare Verbesserung
+  4: Hoch — loest ein echtes Problem
+  5: Massiv — Game Changer
+
+Confidence (0.5-1.0):
+  0.5: Bauchgefuehl, keine Daten
+  0.7: Einige User-Signale
+  0.8: Solide Evidenz
+  1.0: Validiert durch Prototyp/Pilot
+
+Effort (1-10):
+  1-3: <2 Wochen, 1-2 Personen
+  4-6: 2-6 Wochen, kleines Team
+  7-10: >6 Wochen, cross-funktional
+
+AI-Readiness (1-5):
+  1: Keine Daten, unklarer Use Case
+  2: Daten vorhanden, aber unstrukturiert
+  3: Strukturierte Daten, klarer Use Case
+  4: Eval-Daten vorhanden, Prototyp moeglich
+  5: Proven — aehnlicher Use Case bereits validiert
+```
+
+---
+
+## 3. Red Team Plan
+
+Basierend auf Kapitel 5: Red Teaming.
+
+```
+RED TEAM PLAN: [Produktname / Feature]
+Stand: [Datum]
+Testfenster: [Start — Ende]
+Verantwortlich: [Name/Team]
+
+SCOPE
+- System unter Test: [z.B. Support-Chatbot, Content-Generator]
+- Modell: [z.B. Claude Sonnet 4.5]
+- Zugangsweg: [z.B. Web-UI, API, Mobile App]
+
+PRIORITAETS-MATRIX
+| Kategorie | Prioritaet | Testfaelle | Status |
+|-----------|-----------|------------|--------|
+| Prompt Injection (direkt) | Kritisch | [z.B. "Ignoriere alle vorherigen Anweisungen"] | [ ] Offen |
+| Prompt Injection (indirekt) | Kritisch | [z.B. Schadhafter Inhalt in Uploads/URLs] | [ ] Offen |
+| Datenextraktion | Hoch | [z.B. System Prompt extrahieren, PII auslesen] | [ ] Offen |
+| Jailbreaking | Hoch | [z.B. Rollenspiel-Angriffe, Multi-Turn Manipulation] | [ ] Offen |
+| Bias / Fairness | Hoch | [z.B. Ergebnisse nach Geschlecht, Ethnie, Alter vergleichen] | [ ] Offen |
+| Hallucination | Mittel | [z.B. Fakten abfragen die nicht im Kontext stehen] | [ ] Offen |
+| Edge Cases | Mittel | [z.B. Leere Eingabe, extrem lange Eingabe, andere Sprache] | [ ] Offen |
+| Missbrauch | Mittel | [z.B. Schaedliche Inhalte generieren lassen] | [ ] Offen |
+
+TESTPROTOKOLL PRO FINDING
+- Finding-ID: [RT-001]
+- Kategorie: [z.B. Prompt Injection]
+- Schweregrad: [Kritisch / Hoch / Mittel / Niedrig]
+- Eingabe: [Exakter Prompt]
+- Erwartetes Verhalten: [Was sollte passieren]
+- Tatsaechliches Verhalten: [Was ist passiert]
+- Reproduzierbar: [ ] Ja  [ ] Nein  [ ] Teilweise
+- Empfehlung: [Fix / Akzeptiertes Risiko / Monitoring]
+
+ERGEBNIS-ZUSAMMENFASSUNG
+| Schweregrad | Gefunden | Gefixt | Akzeptiert | Offen |
+|-------------|---------|--------|-----------|-------|
+| Kritisch | [n] | [n] | [n] | [n] |
+| Hoch | [n] | [n] | [n] | [n] |
+| Mittel | [n] | [n] | [n] | [n] |
+| Niedrig | [n] | [n] | [n] | [n] |
+
+SHIP-ENTSCHEIDUNG: [ ] Ship  [ ] Fix First  [ ] No-Ship
+Begruendung: [...]
+```
+
+---
+
+## 4. Ship/No-Ship Checklist
+
+Basierend auf Kapitel 5: Ship/No-Ship Decisions.
+
+```
+SHIP/NO-SHIP CHECKLIST: [Feature]
+Stand: [Datum]
+Entscheider: [Name]
+
+EVALUATION
+[ ] Golden Dataset definiert und aktuell
+[ ] Alle Kern-Metriken ueber Minimum-Schwellenwert
+    Accuracy: [aktuell] vs. [Minimum]
+    Hallucination Rate: [aktuell] vs. [Maximum]
+    Latency P95: [aktuell] vs. [Maximum]
+[ ] Performance auf relevanten Subgruppen geprueft (kein Aggregationsproblem)
+
+RED TEAMING
+[ ] Red Team durchgefuehrt (Datum: [...])
+[ ] Keine offenen Findings mit Schweregrad "Kritisch"
+[ ] Offene "Hoch"-Findings dokumentiert mit Mitigation
+
+BIAS & FAIRNESS
+[ ] Metriken nach relevanten Gruppen disaggregiert
+[ ] Keine signifikanten Leistungsunterschiede zwischen Gruppen
+[ ] Fairness-Entscheidung dokumentiert (welche Metrik priorisiert?)
+
+ROLLBACK
+[ ] Feature Flag / Kill Switch vorhanden
+[ ] Rollback in <1h moeglich
+[ ] Rollback-Trigger definiert (bei welchen Werten?)
+
+MONITORING
+[ ] Real-Time Monitoring fuer Kern-Metriken eingerichtet
+[ ] Alerting konfiguriert (Schwellenwerte + Empfaenger)
+[ ] Feedback-Loop fuer User-Reports vorhanden
+
+COMPLIANCE
+[ ] Privacy-Review abgeschlossen
+[ ] EU AI Act Risikokategorie bestimmt
+[ ] Guardrails implementiert und getestet
+[ ] Dokumentationspflichten erfuellt
+
+ENTSCHEIDUNG
+[ ] SHIP — alle Checks bestanden
+[ ] SHIP MIT EINSCHRAENKUNG — [welche und warum]
+[ ] FIX FIRST — [was muss noch passieren]
+[ ] NO-SHIP — [Begruendung]
+
+Unterschrift: __________ Datum: __________
+```
+
+---
+
+## 5. AI KPI Dashboard
+
+Basierend auf Kapitel 9: KPIs fuer AI-Produkte.
+
+```
+AI KPI DASHBOARD: [Produktname]
+Stand: [Datum]
+Reporting-Kadenz: [woechentlich / monatlich]
+
+--- QUALITY METRICS (Technische Qualitaet) ---
+
+| Metrik | Aktuell | Ziel | Trend | Alarm bei |
+|--------|---------|------|-------|-----------|
+| Hallucination Rate | [%] | [<5%] | [↑↓→] | [>8%] |
+| Groundedness Score | [%] | [>90%] | [↑↓→] | [<85%] |
+| Task Completion Rate | [%] | [>80%] | [↑↓→] | [<70%] |
+| Latency P95 | [ms] | [<2000ms] | [↑↓→] | [>3000ms] |
+| Eval Score (Golden Dataset) | [%] | [>85%] | [↑↓→] | [<80%] |
+
+--- BUSINESS METRICS (Geschaeftlicher Impact) ---
+
+| Metrik | Aktuell | Ziel | Trend | Alarm bei |
+|--------|---------|------|-------|-----------|
+| AI Feature Adoption Rate | [%] | [>30%] | [↑↓→] | [<15%] |
+| Regeneration Rate | [%] | [<20%] | [↑↓→] | [>35%] |
+| Revenue Impact | [$] | [...] | [↑↓→] | [...] |
+| Cost per Query | [$] | [<$0.05] | [↑↓→] | [>$0.10] |
+| User Retention (AI-User vs. Non-AI) | [%] | [...] | [↑↓→] | [...] |
+
+--- OPERATIONAL METRICS (Betrieb) ---
+
+| Metrik | Aktuell | Ziel | Trend | Alarm bei |
+|--------|---------|------|-------|-----------|
+| Error Rate | [%] | [<1%] | [↑↓→] | [>3%] |
+| API Availability | [%] | [>99.5%] | [↑↓→] | [<99%] |
+| Monthly AI Cost | [$] | [...] | [↑↓→] | [...] |
+| Cost Trend (MoM) | [%] | [stabil] | [↑↓→] | [>+20%] |
+| Guardrail Trigger Rate | [%] | [<5%] | [↑↓→] | [>10%] |
+
+--- LEADING INDICATORS ---
+
+Regeneration Rate ist der wichtigste Leading Indicator:
+- Steigt sie → User sind unzufrieden mit AI-Output → Quality-Problem
+- Sinkt sie → AI-Output wird akzeptiert → Quality verbessert sich
+- Korreliert sie mit Churn? → Falls ja: Qualitaet direkt umsatzrelevant
+
+--- ACTIONS ---
+
+| Metrik im Alarm | Root Cause | Massnahme | Owner | Deadline |
+|----------------|-----------|-----------|-------|----------|
+| [...] | [...] | [...] | [...] | [...] |
+```

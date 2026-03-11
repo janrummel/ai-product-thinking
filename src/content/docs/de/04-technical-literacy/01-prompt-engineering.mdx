@@ -21,7 +21,7 @@ Nicht jede Aufgabe braucht die gleiche Technik. Die Kunst liegt darin, mit der e
 
 **Few-Shot:** 1-5 Beispiele von gewuenschten Input-Output-Paaren mitgeben. Forschung zeigt starke Verbesserungen ab 1-2 Beispielen, mit abnehmenden Ertraegen ab 4-5. PM-Falle: 10+ Beispiele "zur Sicherheit" verschwenden Tokens und koennen das Modell verwirren.
 
-**Chain-of-Thought (CoT):** Das Modell anweisen, Schritt fuer Schritt zu denken. Bringt bis zu 19 Punkte Verbesserung bei komplexen Reasoning-Aufgaben (MMLU-Pro Benchmark). Aber Vorsicht: Bei Reasoning-Modellen (o-Serie, Claude Extended Thinking) ist explizites CoT redundant — sie machen es intern bereits.
+**Chain-of-Thought (CoT):** Das Modell anweisen, Schritt fuer Schritt zu denken. Bringt laut der urspruenglichen Benchmark-Studie bis zu 19 Punkte Verbesserung bei komplexen Reasoning-Aufgaben (MMLU-Pro Benchmark). Aber Vorsicht: Bei Reasoning-Modellen (o-Serie, Claude Extended Thinking) ist explizites CoT redundant — sie machen es intern bereits.
 
 **System Prompts:** Der unsichtbare Rahmen, der Rolle, Einschraenkungen und Verhalten definiert. System Prompts werden typischerweise gecacht (Anthropic berechnet 0,1x des Basispreises fuer gecachte Reads) — kosteneffizient bei wiederholter Nutzung.
 

@@ -43,6 +43,16 @@ Production failures discovered through monitoring (Lesson 4) feed back into the 
 
 **For you as a PM:** Build the loop from day 1. Not the perfect eval system. One that improves itself.
 
+### 6. Bridge to Agentic Evaluation
+
+Everything you learned in this chapter gets harder with agentic AI. Agentic systems are non-deterministic, multi-step, and use tool calls — making traditional eval approaches insufficient. A golden dataset for agents doesn't evaluate individual outputs but end-to-end task completion: did the agent solve the task, not just generate good text?
+
+Three metrics become central: **Task Completion Rate** (did the agent achieve the goal?), **Step Efficiency** (how many steps did it take?), and **Tool Call Accuracy** (did it call the right tools with the right parameters?).
+
+There's also a mathematical challenge: if each step in a 5-step agent workflow has 95% reliability, end-to-end reliability is 0.95^5 = 77%. Reliability degrades multiplicatively — which is why agentic AI requires new architecture patterns.
+
+**For you as a PM:** The eval infrastructure you learned in this chapter is the foundation — but for agents, you need to extend it. The bottleneck isn't the model, it's the eval infrastructure for multi-step workflows. Chapter 6 covers agentic architectures in detail.
+
 ## The Meta-Insight
 
 > Evaluation is where AI product management becomes most distinct from traditional product management. In traditional software, testing proves the product works. In AI products, evaluation **defines** what "works" means — and that definition is a product decision, an ethical decision, and a business decision all at once.
