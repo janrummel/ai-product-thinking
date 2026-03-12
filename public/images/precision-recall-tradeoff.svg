@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;" role="img" aria-label="Precision vs Recall Tradeoff — jeder Schwellenwert kodiert eine Produktentscheidung">
+  <title>Precision vs Recall Tradeoff</title>
+  <desc>Visualisierung des Tradeoffs zwischen High Precision (wenige Fehler, aber viele verpasste Faelle) und High Recall (fast alles gefunden, aber viele Fehlalarme). Waage-Metapher mit F1-Score als Balance. Use Cases: Fraud Detection vs Cancer Screening.</desc>
   <defs>
     <filter id="sketchy" x="-1%" y="-1%" width="102%" height="102%">
       <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="3" result="noise"/>

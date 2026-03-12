@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;" role="img" aria-label="AI Product Lifecycle vs Traditional Software — linearer Endpunkt vs kontinuierlicher Zyklus">
+  <title>AI Product Lifecycle vs Traditional</title>
+  <desc>Vergleich zwischen linearem traditionellem Software-Lifecycle (Discovery bis Maintenance) und zirkulaerem AI-Product-Lifecycle mit 4 Phasen (Explore, Evaluate, Ship, Improve) plus Drift-Faktoren (Model, Data, World Drift).</desc>
   <defs>
     <filter id="sketchy" x="-1%" y="-1%" width="102%" height="102%">
       <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="3" result="noise"/>

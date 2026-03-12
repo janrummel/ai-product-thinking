@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 520" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 520" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;" role="img" aria-label="Multi-Agent Orchestration Patterns — Sequential, Parallel, Hierarchical">
+  <title>Multi-Agent Orchestration Patterns</title>
+  <desc>Drei Agent-Orchestrierungsmuster: Sequential Pipeline (linear, Bottleneck-Risiko), Parallel Fan-Out/Fan-In (gleichzeitig, Merge-Risiko) und Hierarchical Manager-Worker (Orchestrator delegiert an Coder, Researcher, Reviewer, Deployer, Single-Point-of-Failure-Risiko).</desc>
   <defs>
     <filter id="sketchy" x="-1%" y="-1%" width="102%" height="102%">
       <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="3" result="noise"/>
