@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;">
+  <defs>
+    <filter id="sketchy" x="-1%" y="-1%" width="102%" height="102%">
+      <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="arrowB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowV" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="820" height="460" rx="12" fill="#fefefe"/>
+
+  <!-- Title -->
+  <text x="410" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#1e293b">AI Product Lifecycle vs Traditional</text>
+  <text x="410" y="48" text-anchor="middle" font-size="11" fill="#64748b">Linear endpoint vs continuous cycle</text>
+
+  <!-- ===== TOP: TRADITIONAL LINEAR ===== -->
+  <rect x="18" y="65" width="784" height="110" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="8 4" filter="url(#sketchy)"/>
+  <text x="36" y="87" font-size="11" font-weight="700" fill="#64748b" letter-spacing="1.5">TRADITIONAL SOFTWARE</text>
+  <text x="200" y="87" font-size="10" fill="#94a3b8">Linear — reaches stable maintenance</text>
+
+  <!-- Traditional phases -->
+  <rect x="40" y="100" width="110" height="48" rx="10" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" filter="url(#sketchy)"/>
+  <text x="95" y="128" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Discovery</text>
+
+  <path d="M 155 124 Q 170 121 183 124" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowB)" stroke-linecap="round"/>
+
+  <rect x="193" y="100" width="100" height="48" rx="10" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" filter="url(#sketchy)"/>
+  <text x="243" y="128" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Design</text>
+
+  <path d="M 298 124 Q 313 121 326 124" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowB)" stroke-linecap="round"/>
+
+  <rect x="336" y="100" width="100" height="48" rx="10" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" filter="url(#sketchy)"/>
+  <text x="386" y="128" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Build</text>
+
+  <path d="M 441 124 Q 456 121 469 124" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowB)" stroke-linecap="round"/>
+
+  <rect x="479" y="100" width="100" height="48" rx="10" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" filter="url(#sketchy)"/>
+  <text x="529" y="128" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Launch</text>
+
+  <path d="M 584 124 Q 599 121 612 124" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowB)" stroke-linecap="round"/>
+
+  <rect x="622" y="100" width="120" height="48" rx="10" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" filter="url(#sketchy)"/>
+  <text x="682" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Maintain</text>
+  <text x="682" y="140" text-anchor="middle" font-size="9" fill="#94a3b8">Stable endpoint</text>
+
+  <!-- Finish flag -->
+  <text x="760" y="128" font-size="16" fill="#94a3b8">&#x2690;</text>
+
+  <!-- ===== BOTTOM: AI CIRCULAR ===== -->
+  <rect x="18" y="195" width="784" height="250" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5" stroke-dasharray="8 4" filter="url(#sketchy)"/>
+  <text x="36" y="217" font-size="11" font-weight="700" fill="#16a34a" letter-spacing="1.5">AI PRODUCT</text>
+  <text x="130" y="217" font-size="10" fill="#4ade80">Circular — never reaches stable end state</text>
+
+  <!-- Phase 1: Exploration -->
+  <rect x="40" y="240" width="155" height="65" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" filter="url(#sketchy)"/>
+  <text x="117" y="263" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">1. Explore</text>
+  <text x="117" y="280" text-anchor="middle" font-size="9" fill="#3b82f6">Prototype &amp; Validate</text>
+  <text x="117" y="294" text-anchor="middle" font-size="9" fill="#3b82f6">Weeks</text>
+
+  <!-- Arrow 1→2 -->
+  <path d="M 200 272 Q 220 269 238 272" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowG)" stroke-linecap="round"/>
+
+  <!-- Phase 2: Evaluate -->
+  <rect x="248" y="240" width="155" height="65" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" filter="url(#sketchy)"/>
+  <text x="325" y="263" text-anchor="middle" font-size="12" font-weight="700" fill="#92400e">2. Evaluate</text>
+  <text x="325" y="280" text-anchor="middle" font-size="9" fill="#b45309">Eval Infra &amp; Baselines</text>
+  <text x="325" y="294" text-anchor="middle" font-size="9" fill="#b45309">Weeks-Months</text>
+
+  <!-- Arrow 2→3 -->
+  <path d="M 408 272 Q 428 269 446 272" stroke="#f59e0b" stroke-width="2" fill="none" marker-end="url(#arrowV)" stroke-linecap="round"/>
+
+  <!-- Phase 3: Production -->
+  <rect x="456" y="240" width="155" height="65" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2" filter="url(#sketchy)"/>
+  <text x="533" y="263" text-anchor="middle" font-size="12" font-weight="700" fill="#5b21b6">3. Ship</text>
+  <text x="533" y="280" text-anchor="middle" font-size="9" fill="#7c3aed">Production &amp; Scale</text>
+  <text x="533" y="294" text-anchor="middle" font-size="9" fill="#7c3aed">Months</text>
+
+  <!-- Arrow 3→4 -->
+  <path d="M 616 272 Q 636 269 654 272" stroke="#8b5cf6" stroke-width="2" fill="none" marker-end="url(#arrowO)" stroke-linecap="round"/>
+
+  <!-- Phase 4: Improve -->
+  <rect x="664" y="240" width="125" height="65" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="2.5" filter="url(#sketchy)"/>
+  <text x="726" y="263" text-anchor="middle" font-size="12" font-weight="700" fill="#9a3412">4. Improve</text>
+  <text x="726" y="280" text-anchor="middle" font-size="9" fill="#c2410c">Monitor &amp; Iterate</text>
+  <text x="726" y="294" text-anchor="middle" font-size="9" fill="#c2410c">Ongoing</text>
+
+  <!-- CIRCULAR ARROW: from Improve back to Evaluate -->
+  <path d="M 726 310 C 726 370 325 385 325 310" stroke="#f97316" stroke-width="2.5" fill="none" marker-end="url(#arrowO)" stroke-linecap="round" stroke-dasharray="8 4"/>
+  <text x="530" y="365" font-size="10" font-weight="600" fill="#c2410c" font-style="italic">Re-evaluate &amp; Improve (continuous)</text>
+
+  <!-- Why it loops: drift indicators -->
+  <rect x="50" y="385" width="180" height="48" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5" filter="url(#sketchy)"/>
+  <text x="140" y="404" text-anchor="middle" font-size="10" font-weight="600" fill="#9d174d">Model Drift</text>
+  <text x="140" y="420" text-anchor="middle" font-size="9" fill="#be185d">Provider updates change behavior</text>
+
+  <rect x="250" y="385" width="180" height="48" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5" filter="url(#sketchy)"/>
+  <text x="340" y="404" text-anchor="middle" font-size="10" font-weight="600" fill="#9d174d">Data Drift</text>
+  <text x="340" y="420" text-anchor="middle" font-size="9" fill="#be185d">User queries evolve over time</text>
+
+  <rect x="450" y="385" width="180" height="48" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="1.5" filter="url(#sketchy)"/>
+  <text x="540" y="404" text-anchor="middle" font-size="10" font-weight="600" fill="#9d174d">World Drift</text>
+  <text x="540" y="420" text-anchor="middle" font-size="9" fill="#be185d">Context &amp; knowledge outdated</text>
+
+  <!-- Key insight -->
+  <rect x="650" y="388" width="140" height="42" rx="8" fill="#fef9c3" stroke="#fbbf24" stroke-width="1.5" filter="url(#sketchy)"/>
+  <text x="720" y="406" text-anchor="middle" font-size="9" font-weight="700" fill="#78350f">Launch = Start Line</text>
+  <text x="720" y="420" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e">not Finish Line</text>
+</svg>

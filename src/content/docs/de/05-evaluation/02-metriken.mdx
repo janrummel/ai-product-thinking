@@ -15,6 +15,8 @@ Als PM musst Du nicht jede Formel verstehen. Aber Du musst wissen, welche Metrik
 
 ### Classification Metrics
 
+<img src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/precision-recall-tradeoff.svg`} alt="Precision vs Recall Tradeoff" style="width: 100%; margin: 1.5rem 0;" />
+
 Die meisten AI-Produkte enthalten Klassifikationskomponenten — Spam-Erkennung, Intent Routing, Content Moderation. Drei Metriken musst Du verstehen:
 
 **Precision:** Von allen Items, die das Modell als positiv markiert hat — wie viele waren tatsaechlich positiv? Hohe Precision bedeutet wenige Fehlalarme. Priorisiere Precision, wenn False Positives teuer sind (z.B. legitime Transaktionen als Betrug markieren).

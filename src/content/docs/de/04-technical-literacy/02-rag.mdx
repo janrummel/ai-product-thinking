@@ -15,6 +15,8 @@ RAG (Retrieval-Augmented Generation) ist das primaere Muster, um AI-Features mit
 
 ### Die RAG-Pipeline: Embed, Store, Retrieve, Generate
 
+<img src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/rag-pipeline.svg`} alt="RAG Pipeline — Embed, Store, Retrieve, Generate" style="width: 100%; margin: 1.5rem 0;" />
+
 **Schritt 1 — Embed (Indexierung):**
 Dokumente werden in Chunks aufgeteilt und in Vektoren umgewandelt — hochdimensionale Zahlenrepraesentationen von Bedeutung. "Auto" und "Fahrzeug" haben aehnliche Vektoren, weil sie Aehnliches bedeuten. Gaengige Embedding-Modelle: OpenAI text-embedding-3-large, Cohere embed-v4, Open-Source-Alternativen (BGE, E5).
 
