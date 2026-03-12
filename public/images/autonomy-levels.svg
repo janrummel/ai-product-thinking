@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 380" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 380" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;" role="img" aria-label="AI Autonomy Levels — L1 Operator bis L5 Observer">
+  <title>AI Autonomy Levels</title>
+  <desc>Fuenf Autonomiestufen von L1 Operator (Mensch arbeitet, AI assistiert) bis L5 Observer (AI voll autonom, Mensch ueberwacht). L3 Consultant ist als Sweet Spot 2026 hervorgehoben. Mit Speed-, Risk- und Cost-Vergleich.</desc>
   <defs>
     <filter id="sketchy" x="-1%" y="-1%" width="102%" height="102%">
       <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="3" result="noise"/>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 480" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 480" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;" role="img" aria-label="RAG Pipeline — Embed, Store, Retrieve, Generate">
+  <title>RAG Pipeline</title>
+  <desc>Retrieval-Augmented Generation Pipeline in zwei Phasen: Indexing (Documents, Chunk, Embed, Vector DB) und Query (User Query, Embed, Similarity Search, LLM mit Context, Answer mit Quellenangabe).</desc>
   <defs>
     <filter id="sketchy" x="-1%" y="-1%" width="102%" height="102%">
       <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="3" result="noise"/>
