@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 380" style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;">
+  <defs>
+    <filter id="sketchy" x="-1%" y="-1%" width="102%" height="102%">
+      <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <linearGradient id="spectrumGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#dbeafe;stop-opacity:1"/>
+      <stop offset="25%" style="stop-color:#dcfce7;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#fef3c7;stop-opacity:1"/>
+      <stop offset="75%" style="stop-color:#ffedd5;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#fce7f3;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="820" height="380" rx="12" fill="#fefefe"/>
+
+  <!-- Title -->
+  <text x="410" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#1e293b">AI Autonomy Levels</text>
+  <text x="410" y="48" text-anchor="middle" font-size="11" fill="#64748b">L1 Operator · L2 Collaborator · L3 Consultant · L4 Approver · L5 Observer</text>
+
+  <!-- Spectrum bar -->
+  <rect x="40" y="68" width="740" height="14" rx="7" fill="url(#spectrumGrad)" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="40" y="100" font-size="10" fill="#64748b">Human Control</text>
+  <text x="780" y="100" text-anchor="end" font-size="10" fill="#64748b">AI Autonomy</text>
+
+  <!-- Arrow indicators -->
+  <text x="55" y="65" font-size="10" fill="#3b82f6">&#x25C0;</text>
+  <text x="770" y="65" font-size="10" fill="#ec4899">&#x25B6;</text>
+
+  <!-- L1 -->
+  <rect x="30" y="115" width="148" height="130" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" filter="url(#sketchy)"/>
+  <rect x="30" y="115" width="148" height="32" rx="10" fill="#3b82f6" filter="url(#sketchy)"/>
+  <rect x="30" y="130" width="148" height="17" fill="#3b82f6"/>
+  <text x="104" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="white">L1: Operator</text>
+  <text x="104" y="168" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="600">Human works</text>
+  <text x="104" y="182" text-anchor="middle" font-size="10" fill="#1e40af">AI assists</text>
+  <line x1="50" y1="195" x2="158" y2="195" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="104" y="212" text-anchor="middle" font-size="9" fill="#3b82f6">Copilot Suggestions</text>
+  <text x="104" y="226" text-anchor="middle" font-size="9" fill="#3b82f6">Autocomplete</text>
+
+  <!-- L2 -->
+  <rect x="188" y="115" width="148" height="130" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2" filter="url(#sketchy)"/>
+  <rect x="188" y="115" width="148" height="32" rx="10" fill="#22c55e" filter="url(#sketchy)"/>
+  <rect x="188" y="130" width="148" height="17" fill="#22c55e"/>
+  <text x="262" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="white">L2: Collaborator</text>
+  <text x="262" y="168" text-anchor="middle" font-size="10" fill="#166534" font-weight="600">Interactive</text>
+  <text x="262" y="182" text-anchor="middle" font-size="10" fill="#166534">AI drafts, human edits</text>
+  <line x1="208" y1="195" x2="316" y2="195" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="262" y="212" text-anchor="middle" font-size="9" fill="#16a34a">ChatGPT, Claude Chat</text>
+  <text x="262" y="226" text-anchor="middle" font-size="9" fill="#16a34a">Pair Programming</text>
+
+  <!-- L3 (highlighted as sweet spot) -->
+  <rect x="346" y="110" width="148" height="140" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5" filter="url(#sketchy)"/>
+  <rect x="346" y="110" width="148" height="32" rx="10" fill="#f59e0b" filter="url(#sketchy)"/>
+  <rect x="346" y="125" width="148" height="17" fill="#f59e0b"/>
+  <text x="420" y="131" text-anchor="middle" font-size="13" font-weight="700" fill="white">L3: Consultant</text>
+  <text x="420" y="163" text-anchor="middle" font-size="10" fill="#92400e" font-weight="600">Human sets goal</text>
+  <text x="420" y="177" text-anchor="middle" font-size="10" fill="#92400e">Agent executes + review</text>
+  <line x1="366" y1="190" x2="474" y2="190" stroke="#fde68a" stroke-width="1"/>
+  <text x="420" y="207" text-anchor="middle" font-size="9" fill="#b45309">Claude Code, Cursor</text>
+  <text x="420" y="221" text-anchor="middle" font-size="9" fill="#b45309">AI Coding Assistants</text>
+  <!-- Sweet spot badge -->
+  <rect x="375" y="232" width="90" height="16" rx="8" fill="#fbbf24" stroke="#f59e0b" stroke-width="1"/>
+  <text x="420" y="244" text-anchor="middle" font-size="8" font-weight="700" fill="#78350f">SWEET SPOT 2026</text>
+
+  <!-- L4 -->
+  <rect x="504" y="115" width="148" height="130" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="2" filter="url(#sketchy)"/>
+  <rect x="504" y="115" width="148" height="32" rx="10" fill="#f97316" filter="url(#sketchy)"/>
+  <rect x="504" y="130" width="148" height="17" fill="#f97316"/>
+  <text x="578" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="white">L4: Approver</text>
+  <text x="578" y="168" text-anchor="middle" font-size="10" fill="#9a3412" font-weight="600">AI executes</text>
+  <text x="578" y="182" text-anchor="middle" font-size="10" fill="#9a3412">Human approves gates</text>
+  <line x1="524" y1="195" x2="632" y2="195" stroke="#fed7aa" stroke-width="1"/>
+  <text x="578" y="212" text-anchor="middle" font-size="9" fill="#c2410c">Devin, AI PRs</text>
+  <text x="578" y="226" text-anchor="middle" font-size="9" fill="#c2410c">CI/CD Automation</text>
+
+  <!-- L5 -->
+  <rect x="662" y="115" width="148" height="130" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2" filter="url(#sketchy)"/>
+  <rect x="662" y="115" width="148" height="32" rx="10" fill="#ec4899" filter="url(#sketchy)"/>
+  <rect x="662" y="130" width="148" height="17" fill="#ec4899"/>
+  <text x="736" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="white">L5: Observer</text>
+  <text x="736" y="168" text-anchor="middle" font-size="10" fill="#9d174d" font-weight="600">AI fully autonomous</text>
+  <text x="736" y="182" text-anchor="middle" font-size="10" fill="#9d174d">Human monitors</text>
+  <line x1="682" y1="195" x2="790" y2="195" stroke="#fbcfe8" stroke-width="1"/>
+  <text x="736" y="212" text-anchor="middle" font-size="9" fill="#be185d">Replit Agent</text>
+  <text x="736" y="226" text-anchor="middle" font-size="9" fill="#be185d">Trading Bots</text>
+
+  <!-- Bottom: Risk/Speed tradeoff bars -->
+  <text x="40" y="280" font-size="11" font-weight="700" fill="#1e293b">Speed</text>
+  <rect x="100" y="268" width="60" height="14" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <rect x="258" y="268" width="80" height="14" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <rect x="416" y="268" width="110" height="14" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <rect x="574" y="268" width="140" height="14" rx="4" fill="#ffedd5" stroke="#f97316" stroke-width="1"/>
+  <rect x="732" y="268" width="78" height="14" rx="4" fill="#fce7f3" stroke="#ec4899" stroke-width="1"/>
+
+  <text x="40" y="308" font-size="11" font-weight="700" fill="#1e293b">Risk</text>
+  <rect x="100" y="296" width="30" height="14" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <rect x="258" y="296" width="50" height="14" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <rect x="416" y="296" width="80" height="14" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <rect x="574" y="296" width="120" height="14" rx="4" fill="#ffedd5" stroke="#f97316" stroke-width="1"/>
+  <rect x="732" y="296" width="78" height="14" rx="4" fill="#fce7f3" stroke="#ec4899" stroke-width="1"/>
+
+  <text x="40" y="336" font-size="11" font-weight="700" fill="#1e293b">Cost</text>
+  <rect x="100" y="324" width="78" height="14" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="139" y="335" text-anchor="middle" font-size="8" fill="#1e40af">Highest</text>
+  <rect x="258" y="324" width="60" height="14" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <rect x="416" y="324" width="45" height="14" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <rect x="574" y="324" width="30" height="14" rx="4" fill="#ffedd5" stroke="#f97316" stroke-width="1"/>
+  <rect x="732" y="324" width="20" height="14" rx="4" fill="#fce7f3" stroke="#ec4899" stroke-width="1"/>
+  <text x="742" y="335" text-anchor="middle" font-size="8" fill="#9d174d">Lowest</text>
+
+  <!-- Key insight -->
+  <rect x="160" y="352" width="500" height="22" rx="8" fill="#fef9c3" stroke="#fbbf24" stroke-width="1"/>
+  <text x="410" y="367" text-anchor="middle" font-size="10" font-weight="600" fill="#78350f">Autonomy is a design decision — not a technical property of the model</text>
+</svg>
