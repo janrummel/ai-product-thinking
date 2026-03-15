@@ -5,6 +5,10 @@ sidebar:
   order: 4
 ---
 
+import LessonProgress from '../../../../components/LessonProgress.astro';
+
+<LessonProgress label="Lektion" />
+
 ## Context
 
 Euer Head of Engineering hat eine Tabelle mit 15 LLMs erstellt, sortiert nach MMLU-Score. "Wir nehmen das beste Modell" ist seine Empfehlung. Das Problem: Das #1-Modell kostet 10x so viel wie #5 — und fuer Euren Use Case (Ticket-Klassifikation) ist der Qualitaetsunterschied marginal. Dein CFO wird die API-Rechnung im zweiten Monat sehen und fragen, warum Ihr das teuerste Modell fuer eine Aufgabe nutzt, die ein guenstigeres genauso gut erledigt.
