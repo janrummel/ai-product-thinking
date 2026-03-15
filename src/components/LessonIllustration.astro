@@ -1,0 +1,28 @@
+---
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+}
+
+const { src, alt } = Astro.props;
+---
+
+<div class="lesson-illustration" role="img" aria-label={alt}>
+  <img src={src.src} alt={alt} width={src.width} height={src.height} loading="lazy" />
+</div>
+
+<style>
+  .lesson-illustration {
+    max-width: 400px;
+    margin: 1.5rem auto 2rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .lesson-illustration img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+</style>

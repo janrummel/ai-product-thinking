@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2C2218"/>
+  <rect x="50" y="50" width="300" height="200" rx="16" fill="none" stroke="#B85C38" stroke-width="2" stroke-dasharray="8 4"/>
+  <text x="200" y="130" text-anchor="middle" fill="#B85C38" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">PLACEHOLDER</text>
+  <text x="200" y="160" text-anchor="middle" fill="#B85C3880" font-family="system-ui, sans-serif" font-size="13">Storyset: "programming" or "engineering"</text>
+  <text x="200" y="185" text-anchor="middle" fill="#B85C3860" font-family="system-ui, sans-serif" font-size="11">Rafiki style · Color: #B85C38</text>
+</svg>
