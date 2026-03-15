@@ -345,3 +345,54 @@ nav.sidebar .top-level > li:nth-child(11) summary {
 		max-width: 100%;
 	}
 }
+
+/* ── Progress Indicators ── */
+.lesson-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin: -0.5rem 0 1.5rem;
+}
+
+.progress-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.progress-dot {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--sl-color-gray-5);
+    background: transparent;
+    transition: all 0.2s;
+}
+
+.progress-dot.past {
+    background: var(--sl-color-text-muted);
+    border-color: var(--sl-color-text-muted);
+}
+
+.progress-dot.current {
+    background: var(--sl-color-text-accent);
+    border-color: var(--sl-color-text-accent);
+    transform: scale(1.3);
+}
+
+.progress-dot:hover:not(.current) {
+    border-color: var(--sl-color-text-accent);
+    transform: scale(1.2);
+}
+
+.progress-label {
+    font-size: 12px;
+    color: var(--sl-color-text-muted);
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 480px) {
+    .progress-label { display: none; }
+}
