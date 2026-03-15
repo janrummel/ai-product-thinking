@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  label?: string;
+}
+
+const { label = 'Lesson' } = Astro.props;
+
+// Get current path and extract the chapter folder
+// URL pattern: /ai-product-thinking/en/01-foundations/01-wie-llms-denken/
+const currentPath = Astro.url.pathname;
+const pathParts = currentPath.split('/').filter(Boolean);
+
+// With base "/ai-product-thinking": pathParts = ["ai-product-thinking", "en", "01-foundations", "01-wie-llms-denken"]
+// Without base: pathParts = ["en", "01-foundations", "01-wie-llms-denken"]
+const baseSegment = import.meta.env.BASE_URL.replace(/^\/|\/$/g, '');
+const startIdx = baseSegment ? pathParts.indexOf(baseSegment) + 1 : 0;
+
+const locale = pathParts[startIdx]; // "en" or "de"
+const chapterFolder = pathParts[startIdx + 1]; // "01-foundations"
+const currentPage = pathParts[startIdx + 2]; // "01-wie-llms-denken"
+
+// Get all docs and filter to siblings in the same chapter folder
+const allDocs = await getCollection('docs');
+const chapterPrefix = `${locale}/${chapterFolder}/`;
+const siblingPages = allDocs
+  .filter(doc => doc.id.startsWith(chapterPrefix) && doc.id.split('/').length === 3)
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+// Find current page index by matching the last segment of the doc ID
+const currentIndex = siblingPages.findIndex(doc => {
+  const docPage = doc.id.split('/').pop();
+  return docPage === currentPage;
+});
+
+const total = siblingPages.length;
+const current = currentIndex + 1;
+
+// Build dot data with URLs
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const dots = siblingPages.map((doc, i) => ({
+  index: i,
+  url: `${base}/${doc.id}/`,
+  isCurrent: i === currentIndex,
+  isPast: i < currentIndex,
+}));
+---
+
+{total > 1 && (
+  <nav class="lesson-progress" aria-label={`${label} progress`}>
+    <div class="progress-dots">
+      {dots.map(dot => (
+        <a
+          href={dot.url}
+          class:list={['progress-dot', { current: dot.isCurrent, past: dot.isPast }]}
+          aria-label={`${label} ${dot.index + 1}`}
+          aria-current={dot.isCurrent ? 'step' : undefined}
+        />
+      ))}
+    </div>
+    <span class="progress-label">{`${label} ${current} of ${total}`}</span>
+  </nav>
+)}
