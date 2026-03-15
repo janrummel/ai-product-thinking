@@ -1,16 +1,27 @@
-# AI Product Thinking
+<p align="center">
+  <img src="https://em-content.zobj.net/source/apple/391/brain_1f9e0.png" width="80" alt="AI Product Thinking">
+</p>
 
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
-
-**The free AI Product Management curriculum — in English and German.**
-
-> Not another AI hype course. A structured learning path that teaches PMs to make better decisions about AI products.
+<h1 align="center">AI Product Thinking</h1>
 
 <p align="center">
-  <a href="https://janrummel.github.io/ai-product-thinking/"><strong>Start the Course</strong></a>
-  &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="https://janrummel.github.io/ai-product-thinking/de/01-foundations/">Deutsche Version</a>
+  <strong>The free AI Product Management curriculum.</strong><br>
+  Not another AI hype course. Train decisions, not knowledge.
+</p>
+
+<p align="center">
+  <a href="https://janrummel.github.io/ai-product-thinking/">Website</a> ·
+  <a href="#curriculum">Curriculum</a> ·
+  <a href="#who-is-this-for">Who is this for</a> ·
+  <a href="#run-locally">Run locally</a> ·
+  <a href="#case-studies">Case Studies</a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/chapters-9-B85C38" alt="Chapters">
+  <img src="https://img.shields.io/badge/lessons-46-D4734A" alt="Lessons">
+  <img src="https://img.shields.io/badge/languages-EN%20%2B%20DE-58a6ff" alt="Languages">
+  <img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" alt="License">
 </p>
 
 ---
@@ -19,7 +30,7 @@
 
 A complete, free curriculum for Product Managers, Tech Leads, and anyone who builds or decides about AI products. 9 chapters, 46 lessons, 4 real-world case studies, 27 decision scenarios — fully bilingual (EN + DE).
 
-**What makes it different from paid courses:** This isn't about collecting knowledge — it's about training decisions. Every lesson ends with a realistic scenario where you make a PM decision with real numbers and real tradeoffs.
+**What makes it different:** This isn't about collecting knowledge — it's about training decisions. Every lesson ends with a realistic scenario where you make a PM decision with real numbers and real tradeoffs.
 
 ## Curriculum
 
@@ -35,7 +46,7 @@ A complete, free curriculum for Product Managers, Tech Leads, and anyone who bui
 | 08 | **AI Execution** | AI PRDs, Lifecycle, Cross-functional Collaboration, Data Quality, Agile for AI |
 | 09 | **AI Leadership** | Org Building, Go-to-Market, KPIs, Team Structure |
 
-**Case Studies:** Notion AI, GitHub Copilot, Clearview AI, Duolingo Max
+Every lesson: **Context → Concept → Framework → Scenario → Decide → Reflect**
 
 ## Who is this for?
 
@@ -44,15 +55,11 @@ A complete, free curriculum for Product Managers, Tech Leads, and anyone who bui
 - **Founders** building AI products
 - **Anyone** who makes AI decisions — not just writes AI code
 
-No ML background required. Technical concepts are explained at PM level: deep enough to decide, not deep enough to implement.
+No ML background required. Deep enough to decide, not deep enough to implement.
 
-## Pedagogical Design
+## Case Studies
 
-Every lesson follows the same pattern:
-
-**Context** (real situation) → **Concept** (theory/framework) → **Framework** (decision tool) → **Scenario** (decision scenario with real numbers) → **Decide** (your decision) → **Reflect** (key takeaways)
-
-Each chapter closes with a **Synthesis**: connections between lessons + 3 self-assessment scenarios that combine multiple concepts.
+Real companies, real decisions: **Notion AI** · **GitHub Copilot** · **Clearview AI** · **Duolingo Max**
 
 ## Run locally
 
@@ -69,7 +76,7 @@ npm run dev
 
 ## Related Project
 
-**[Level Up AI](https://github.com/janrummel/level-up-ai)** — The technical counterpart: an AI Engineering learning path for developers. Same quality, different perspective.
+**[Level Up AI](https://github.com/janrummel/level-up-ai)** — The technical counterpart: a free AI Engineering learning path for developers. Same quality, different perspective.
 
 ## Contributing
 
