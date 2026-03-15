@@ -46,7 +46,13 @@ A complete, free curriculum for Product Managers, Tech Leads, and anyone who bui
 | 08 | **AI Execution** | AI PRDs, Lifecycle, Cross-functional Collaboration, Data Quality, Agile for AI |
 | 09 | **AI Leadership** | Org Building, Go-to-Market, KPIs, Team Structure |
 
-Every lesson: **Context → Concept → Framework → Scenario → Decide → Reflect**
+## How each lesson works
+
+Every lesson follows the same pattern:
+
+**Context** (real situation) → **Concept** (theory/framework) → **Framework** (decision tool) → **Scenario** (decision with real numbers) → **Decide** (your call) → **Reflect** (key takeaways)
+
+Each chapter closes with a **Synthesis**: connections between lessons + 3 self-assessment scenarios that combine multiple concepts.
 
 ## Who is this for?
 
@@ -57,9 +63,17 @@ Every lesson: **Context → Concept → Framework → Scenario → Decide → Re
 
 No ML background required. Deep enough to decide, not deep enough to implement.
 
+**Prerequisites:** Node.js 18+ to run locally. No other tools needed — the course runs in the browser.
+
+**Time:** ~30-40 hours for the full curriculum. Each chapter works standalone (2-4 hours each).
+
 ## Case Studies
 
 Real companies, real decisions: **Notion AI** · **GitHub Copilot** · **Clearview AI** · **Duolingo Max**
+
+## Built on
+
+Content as of March 2026. 27 decision scenarios with real numbers. Peer-reviewed curriculum (8-9/10). 5 SVG architecture diagrams. Fully bilingual with native-quality translations.
 
 ## Run locally
 
@@ -80,7 +94,7 @@ npm run dev
 
 ## Contributing
 
-Found an error? Have a suggestion? Issues and pull requests are welcome.
+Found an error? Have a suggestion? Issues and pull requests are welcome — whether it's a typo, a framework improvement, a translation fix, or a new decision scenario.
 
 ## License
 
