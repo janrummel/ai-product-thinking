@@ -1,5 +1,8 @@
 # AI Product Thinking
 
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+
 **The free AI Product Management curriculum — in English and German.**
 
 > Not another AI hype course. A structured learning path that teaches PMs to make better decisions about AI products.
@@ -67,6 +70,10 @@ npm run dev
 ## Related Project
 
 **[Level Up AI](https://github.com/janrummel/level-up-ai)** — The technical counterpart: an AI Engineering learning path for developers. Same quality, different perspective.
+
+## Contributing
+
+Found an error? Have a suggestion? Issues and pull requests are welcome.
 
 ## License
 
