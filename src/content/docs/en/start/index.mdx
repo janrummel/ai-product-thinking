@@ -1,33 +1,81 @@
 ---
 title: AI Product Thinking
-description: Understand the principles behind AI products.
+description: Understand the principles behind AI products. A free curriculum for AI Product Management.
 template: splash
 hero:
   title: AI Product Thinking
-  tagline: Understand the principles behind AI products. A learning path for Product Managers and Engineers who want to not just build AI products, but think them through.
+  tagline: A free curriculum for AI Product Management — learn to make better decisions about AI products.
   actions:
-    - text: Start with 01 — Foundations
+    - text: Start Chapter 1
       link: ../01-foundations/
       icon: right-arrow
+      variant: primary
 ---
 
-Nine chapters. From foundations to leadership. Each chapter poses a question, gives you a framework, and lets you decide.
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-No hype. No buzzwords. Just what you need to understand, evaluate, and shape AI products.
+## Not another AI hype course
 
-## Learning Paths
+Most AI courses collect knowledge. This one trains decisions. Every lesson ends with a realistic scenario where you make a PM decision with real numbers and real tradeoffs. No hype, no buzzwords — just what you need to understand, evaluate, and shape AI products.
 
-Three tracks — depending on where you are.
+## What you'll learn
+
+<CardGrid>
+  <Card title="AI Foundations & Strategy" icon="rocket">
+    How LLMs work, when to use AI, build vs. buy decisions, and opportunity identification.
+  </Card>
+  <Card title="Product Design & Technical Literacy" icon="puzzle">
+    AI-native UX, prompt engineering, RAG, fine-tuning, and cost/quality tradeoffs.
+  </Card>
+  <Card title="Evaluation & Agentic AI" icon="magnifier">
+    Eval frameworks, red teaming, multi-agent systems, tool use, and human-in-the-loop.
+  </Card>
+  <Card title="Ethics, Execution & Leadership" icon="star">
+    Responsible AI, guardrails, AI PRDs, team structure, and go-to-market strategy.
+  </Card>
+</CardGrid>
+
+## How it works
+
+Every lesson follows the same pattern:
+
+<CardGrid>
+  <Card title="1. Context" icon="open-book">
+    A real situation that sets the stage.
+  </Card>
+  <Card title="2. Concept & Framework" icon="seti:notebook">
+    Theory and a decision tool you can apply.
+  </Card>
+  <Card title="3. Scenario" icon="warning">
+    A decision scenario with real numbers — you decide.
+  </Card>
+  <Card title="4. Reflect" icon="approve-check-circle">
+    Key takeaways and connections to other lessons.
+  </Card>
+</CardGrid>
+
+## Three learning tracks
 
 | Track | Chapters | Who it's for |
 |-------|----------|--------------|
-| **Foundations Track** | 1–3 | PMs new to AI. Basics, landscape, strategy. |
-| **Builder Track** | 4–6 | PMs actively building AI features. Technical decisions, evaluation, agents. |
-| **Leader Track** | 7–9 | Senior PMs and managers. Ethics, execution, organization. |
+| **Foundations** | 1–3 | PMs new to AI. Basics, landscape, strategy. |
+| **Builder** | 4–6 | PMs actively building AI features. Technical decisions, evaluation, agents. |
+| **Leader** | 7–9 | Senior PMs and managers. Ethics, execution, organization. |
 
-All three tracks end with the **Capstone Project** — so you apply what you learned to a real-world case.
+All tracks end with a **Capstone Project** — apply what you learned to a real-world case.
 
-## Where Do You Start?
+## Who is this for?
+
+- **Product Managers** who own or want to own AI features
+- **Tech Leads** who want to understand the PM perspective on AI
+- **Founders** building AI products
+- **Anyone** who makes AI decisions — not just writes AI code
+
+No ML background required. Technical concepts are explained at PM level: deep enough to decide, not deep enough to implement.
+
+**Case Studies:** Notion AI, GitHub Copilot, Clearview AI, Duolingo Max.
+
+## Where do you start?
 
 Five questions. Answer honestly and you'll know where to jump in.
 
@@ -45,3 +93,43 @@ Five questions. Answer honestly and you'll know where to jump in.
 
 5. **All no?**
    → Start at Chapter 1. No disadvantage — the curriculum builds on itself.
+
+## Frequently asked questions
+
+<details>
+<summary>Do I need a technical background?</summary>
+
+No. This curriculum is designed for PMs and decision-makers. Technical concepts like RAG, fine-tuning, and model selection are explained at PM level — deep enough to make informed decisions, not deep enough to implement them yourself.
+</details>
+
+<details>
+<summary>How is this different from paid AI PM courses?</summary>
+
+Most courses collect knowledge. This one trains decisions. Every lesson ends with a scenario where you make a call with real numbers and real constraints. No certificates, no fluff — just skills you can use Monday morning.
+</details>
+
+<details>
+<summary>How long does it take?</summary>
+
+Each chapter takes 2-4 hours. The full curriculum (9 chapters + capstone) takes about 30-40 hours. You can complete it in 2-3 months at a comfortable pace, or faster if you focus on one track.
+</details>
+
+<details>
+<summary>Can I skip chapters?</summary>
+
+Yes. Use the self-assessment above to find your starting point. Each chapter builds on previous ones, but the tracks (Foundations, Builder, Leader) work as entry points. If you already ship AI features, start at the Leader track.
+</details>
+
+<details>
+<summary>Is this available in German?</summary>
+
+Yes. The full curriculum is bilingual — every lesson exists in both English and German. Use the language switcher in the top navigation to switch anytime.
+</details>
+
+## Related project
+
+<LinkCard title="Level Up AI" href="https://janrummel.github.io/level-up-ai/" description="The technical counterpart: a free AI Engineering learning path for developers. Same quality, different perspective — code instead of decisions." />
+
+## Why this exists
+
+The gap between "AI is transforming everything" and "here's how to actually make good AI product decisions" is enormous. This curriculum exists because PMs deserve better than buzzword-filled slide decks. Every framework is tested against real cases, every scenario grounded in real constraints. Built for people who ship, not people who spectate.

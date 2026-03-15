@@ -1,31 +1,79 @@
 ---
 title: AI Product Thinking
-description: Die Prinzipien hinter AI-Produkten verstehen.
+description: Die Prinzipien hinter AI-Produkten verstehen. Ein kostenloser Lernpfad fuer AI Product Management.
 template: splash
 hero:
   title: AI Product Thinking
   tagline: Die Prinzipien hinter AI-Produkten verstehen. Ein Lernpfad fuer Product Manager und Engineers, die AI-Produkte nicht nur bauen, sondern durchdenken wollen.
   actions:
-    - text: Beginne mit 01 — Foundations
+    - text: Kapitel 1 starten
       link: ../01-foundations/
       icon: right-arrow
+      variant: primary
 ---
 
-Neun Kapitel. Von den Grundlagen bis zur Fuehrung. Jedes Kapitel stellt eine Frage, gibt Dir ein Framework, und laesst Dich entscheiden.
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-Kein Hype. Keine Buzzwords. Nur das, was Du brauchst um AI-Produkte zu verstehen, zu bewerten und zu gestalten.
+## Kein weiterer AI-Hype-Kurs
 
-## Lernpfade
+Die meisten AI-Kurse sammeln Wissen. Dieser trainiert Entscheidungen. Jede Lektion endet mit einem realistischen Szenario, in dem Du eine PM-Entscheidung triffst — mit echten Zahlen und echten Tradeoffs. Kein Hype, keine Buzzwords — nur das, was Du brauchst um AI-Produkte zu verstehen, zu bewerten und zu gestalten.
 
-Drei Tracks — je nachdem wo Du stehst.
+## Was Du lernst
+
+<CardGrid>
+  <Card title="AI Grundlagen & Strategie" icon="rocket">
+    Wie LLMs funktionieren, wann AI sinnvoll ist, Build vs. Buy Entscheidungen und Opportunity Identification.
+  </Card>
+  <Card title="Produktdesign & Technisches Wissen" icon="puzzle">
+    AI-native UX, Prompt Engineering, RAG, Fine-Tuning und Cost/Quality Tradeoffs.
+  </Card>
+  <Card title="Evaluation & Agentic AI" icon="magnifier">
+    Eval Frameworks, Red Teaming, Multi-Agent Systeme, Tool Use und Human-in-the-Loop.
+  </Card>
+  <Card title="Ethik, Umsetzung & Leadership" icon="star">
+    Responsible AI, Guardrails, AI PRDs, Team-Struktur und Go-to-Market Strategie.
+  </Card>
+</CardGrid>
+
+## Wie es funktioniert
+
+Jede Lektion folgt dem gleichen Muster:
+
+<CardGrid>
+  <Card title="1. Kontext" icon="open-book">
+    Eine reale Situation als Ausgangspunkt.
+  </Card>
+  <Card title="2. Konzept & Framework" icon="seti:notebook">
+    Theorie und ein Entscheidungswerkzeug zum Anwenden.
+  </Card>
+  <Card title="3. Szenario" icon="warning">
+    Ein Entscheidungsszenario mit echten Zahlen — Du entscheidest.
+  </Card>
+  <Card title="4. Reflexion" icon="approve-check-circle">
+    Kernaussagen und Verbindungen zu anderen Lektionen.
+  </Card>
+</CardGrid>
+
+## Drei Lernpfade
 
 | Track | Kapitel | Fuer wen |
 |-------|---------|----------|
-| **Foundations Track** | 1–3 | PMs, die neu bei AI sind. Grundlagen, Landscape, Strategie. |
-| **Builder Track** | 4–6 | PMs, die aktiv AI-Features bauen. Technische Entscheidungen, Evaluation, Agents. |
-| **Leader Track** | 7–9 | Senior PMs und Manager. Ethik, Umsetzung, Organisation. |
+| **Foundations** | 1–3 | PMs, die neu bei AI sind. Grundlagen, Landscape, Strategie. |
+| **Builder** | 4–6 | PMs, die aktiv AI-Features bauen. Technische Entscheidungen, Evaluation, Agents. |
+| **Leader** | 7–9 | Senior PMs und Manager. Ethik, Umsetzung, Organisation. |
 
 Alle drei Tracks enden mit dem **Capstone Project** — damit Du das Gelernte an einem realen Case anwendest.
+
+## Fuer wen ist das?
+
+- **Product Manager**, die AI-Features verantworten oder verantworten wollen
+- **Tech Leads**, die die PM-Perspektive auf AI verstehen wollen
+- **Gruender**, die AI-Produkte bauen
+- **Alle**, die AI-Entscheidungen treffen — nicht nur AI-Code schreiben
+
+Keine ML-Vorkenntnisse noetig. Technische Konzepte werden auf PM-Level erklaert: tief genug zum Entscheiden, nicht tief genug zum Implementieren.
+
+**Case Studies:** Notion AI, GitHub Copilot, Clearview AI, Duolingo Max.
 
 ## Wo startest Du?
 
@@ -45,3 +93,43 @@ Fuenf Fragen. Ehrlich beantworten, dann weisst Du wo Du einsteigen sollst.
 
 5. **Alles nein?**
    → Starte bei Kapitel 1. Kein Nachteil — das Curriculum baut aufeinander auf.
+
+## Haeufig gestellte Fragen
+
+<details>
+<summary>Brauche ich einen technischen Hintergrund?</summary>
+
+Nein. Dieses Curriculum ist fuer PMs und Entscheider konzipiert. Technische Konzepte wie RAG, Fine-Tuning und Model Selection werden auf PM-Level erklaert — tief genug fuer informierte Entscheidungen, nicht tief genug zum Selbst-Implementieren.
+</details>
+
+<details>
+<summary>Wie unterscheidet sich das von bezahlten AI PM Kursen?</summary>
+
+Die meisten Kurse sammeln Wissen. Dieser trainiert Entscheidungen. Jede Lektion endet mit einem Szenario, in dem Du eine Entscheidung triffst — mit echten Zahlen und echten Constraints. Keine Zertifikate, kein Filler — nur Skills die Du am Montag nutzen kannst.
+</details>
+
+<details>
+<summary>Wie lange dauert es?</summary>
+
+Jedes Kapitel braucht 2-4 Stunden. Das gesamte Curriculum (9 Kapitel + Capstone) dauert ca. 30-40 Stunden. In 2-3 Monaten bei komfortablem Tempo machbar, oder schneller wenn Du Dich auf einen Track fokussierst.
+</details>
+
+<details>
+<summary>Kann ich Kapitel ueberspringen?</summary>
+
+Ja. Nutze das Self-Assessment oben um Deinen Einstiegspunkt zu finden. Die Tracks (Foundations, Builder, Leader) funktionieren als Einstiegspunkte. Wenn Du schon AI-Features shippst, starte beim Leader Track.
+</details>
+
+<details>
+<summary>Gibt es den Kurs auf Englisch?</summary>
+
+Ja. Das gesamte Curriculum ist zweisprachig — jede Lektion existiert auf Deutsch und Englisch. Nutze den Language Switcher oben in der Navigation um jederzeit zu wechseln.
+</details>
+
+## Verwandtes Projekt
+
+<LinkCard title="Level Up AI" href="https://janrummel.github.io/level-up-ai/" description="Das technische Gegenstueck: ein kostenloser AI Engineering Lernpfad fuer Entwickler. Gleiche Qualitaet, andere Perspektive — Code statt Entscheidungen." />
+
+## Warum es das gibt
+
+Die Luecke zwischen "AI veraendert alles" und "hier ist wie man gute AI-Produktentscheidungen trifft" ist riesig. Dieses Curriculum existiert, weil PMs Besseres verdienen als Buzzword-gefuellte Slide Decks. Jedes Framework ist an realen Cases getestet, jedes Szenario in echten Constraints verankert. Gebaut fuer Leute die shippen, nicht fuer Leute die zuschauen.

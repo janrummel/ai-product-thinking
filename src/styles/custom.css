@@ -290,6 +290,37 @@ nav.sidebar .group-label {
 	border-color: var(--apt-accent);
 }
 
+/* --- Chapter Color System — Visual Orientation --- */
+/* Foundations Track (Ch 1-3): Blue */
+nav.sidebar .top-level > li:nth-child(2) summary,
+nav.sidebar .top-level > li:nth-child(3) summary,
+nav.sidebar .top-level > li:nth-child(4) summary {
+	border-left: 3px solid #2997FF;
+	padding-left: 0.5rem;
+}
+
+/* Builder Track (Ch 4-6): Green */
+nav.sidebar .top-level > li:nth-child(5) summary,
+nav.sidebar .top-level > li:nth-child(6) summary,
+nav.sidebar .top-level > li:nth-child(7) summary {
+	border-left: 3px solid #30D158;
+	padding-left: 0.5rem;
+}
+
+/* Leader Track (Ch 7-9): Orange */
+nav.sidebar .top-level > li:nth-child(8) summary,
+nav.sidebar .top-level > li:nth-child(9) summary,
+nav.sidebar .top-level > li:nth-child(10) summary {
+	border-left: 3px solid #FF9F0A;
+	padding-left: 0.5rem;
+}
+
+/* Capstone + Templates: Purple */
+nav.sidebar .top-level > li:nth-child(11) summary {
+	border-left: 3px solid #BF5AF2;
+	padding-left: 0.5rem;
+}
+
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
 	*,

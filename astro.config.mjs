@@ -10,23 +10,34 @@ export default defineConfig({
 		: 'http://localhost:4321',
 	base: base || undefined,
 	redirects: {
+		'/': `${base}/en/start/`,
 		'/de/': `${base}/de/start/`,
 		'/en/': `${base}/en/start/`,
 	},
 	integrations: [
 		starlight({
 			title: 'AI Product Thinking',
-			defaultLocale: 'de',
+			defaultLocale: 'en',
 			locales: {
-				de: { label: 'Deutsch', lang: 'de' },
 				en: { label: 'English', lang: 'en' },
+				de: { label: 'Deutsch', lang: 'de' },
 			},
 			customCss: ['./src/styles/custom.css'],
-			social: [],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/janrummel/ai-product-thinking' }],
+			head: [
+				{ tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
+				{ tag: 'meta', attrs: { property: 'og:site_name', content: 'AI Product Thinking' } },
+				{ tag: 'meta', attrs: { property: 'og:title', content: 'AI Product Thinking — Free AI Product Management Curriculum' } },
+				{ tag: 'meta', attrs: { property: 'og:description', content: '9 chapters, 46 lessons, real-world case studies. Learn to make better decisions about AI products. Free, bilingual (EN/DE).' } },
+				{ tag: 'meta', attrs: { property: 'og:url', content: 'https://janrummel.github.io/ai-product-thinking/' } },
+				{ tag: 'meta', attrs: { property: 'og:image', content: 'https://janrummel.github.io/ai-product-thinking/og-image.png' } },
+				{ tag: 'meta', attrs: { name: 'twitter:card', content: 'summary' } },
+				{ tag: 'meta', attrs: { name: 'twitter:title', content: 'AI Product Thinking — AI PM Curriculum' } },
+				{ tag: 'meta', attrs: { name: 'twitter:description', content: '9 chapters, 46 lessons, case studies. Free AI Product Management learning path.' } },
+			],
 			sidebar: [
 				{
 					label: 'Start',
-					translations: { en: 'Start' },
 					items: [
 						{ slug: 'start' },
 					],
