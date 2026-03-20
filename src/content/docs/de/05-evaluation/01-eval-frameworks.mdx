@@ -1,6 +1,6 @@
 ---
 title: "Eval Frameworks"
-description: "Warum Evals die wichtigste Kompetenz fÃ¼r AI Product Manager sind — und wie Du Dein erstes Eval-System aufbaust."
+description: "Warum Evals die wichtigste Kompetenz fuer AI Product Manager sind — und wie Du Dein erstes Eval-System aufbaust."
 sidebar:
   order: 1
 ---
@@ -11,9 +11,9 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Dein Team hat ein AI-Feature gelauncht: Ein Chatbot beantwortet Kundenfragen zu Euren Produkten. Nach zwei Wochen beschweren sich User Ã¼ber falsche Antworten. Der CTO fragt: "Wie schlecht ist es genau?" Niemand kann antworten, weil es keine systematische Evaluation gibt.
+Dein Team hat ein AI-Feature gelauncht: Ein Chatbot beantwortet Kundenfragen zu Euren Produkten. Nach zwei Wochen beschweren sich User ueber falsche Antworten. Der CTO fragt: "Wie schlecht ist es genau?" Niemand kann antworten, weil es keine systematische Evaluation gibt.
 
-Traditionelles Software-Testing prÃ¼ft deterministisches Verhalten: Input X ergibt immer Output Y. AI-Systeme sind probabilistisch — derselbe Input kann bei jedem Durchlauf verschiedene Outputs erzeugen. Das macht klassische Unit Tests unzureichend. Evaluation ("Evals") ist die Disziplin, AI-Output-QualitÃ¤t systematisch zu messen, damit Teams mit Zuversicht iterieren kÃ¶nnen.
+Traditionelles Software-Testing prueft deterministisches Verhalten: Input X ergibt immer Output Y. AI-Systeme sind probabilistisch — derselbe Input kann bei jedem Durchlauf verschiedene Outputs erzeugen. Das macht klassische Unit Tests unzureichend. Evaluation ("Evals") ist die Disziplin, AI-Output-Qualitaet systematisch zu messen, damit Teams mit Zuversicht iterieren koennen.
 
 Hamel Husain und Shreya Shankar, die Entwickler des meistbesuchten AI-Evals-Kurses, bringen es auf den Punkt: "Your AI product needs evals" ist kein optionaler Ratschlag — es ist das Fundament jedes Verbesserungszyklus.
 
@@ -21,9 +21,9 @@ Hamel Husain und Shreya Shankar, die Entwickler des meistbesuchten AI-Evals-Kurs
 
 ### Die Eval Ownership Chain
 
-Der PM besitzt die Eval-Strategie, weil der PM definiert, was "gut" fÃ¼r den User bedeutet. Die Verantwortung verteilt sich so:
+Der PM besitzt die Eval-Strategie, weil der PM definiert, was "gut" fuer den User bedeutet. Die Verantwortung verteilt sich so:
 
-- **PM** definiert Qualitaetskriterien (was fÃ¼r User und Business zaehlt)
+- **PM** definiert Qualitaetskriterien (was fuer User und Business zaehlt)
 - **Domain Expert** labelt Golden Datasets und validiert Edge Cases
 - **Engineer** implementiert automatisierte Eval Pipelines und CI-Integration
 - **PM + Domain Expert** reviewen Ergebnisse und treffen Ship/No-Ship-Entscheidungen
@@ -36,12 +36,12 @@ Ein Golden Dataset ist ein kuratierter Satz von Input-Output-Paaren, bei denen d
 1. **Echte Inputs sammeln** — aus Production Logs, Support-Tickets, User Sessions. Nie ausschliesslich synthetische Daten verwenden.
 2. **Diversitaet sicherstellen** — Themen, Intentionen, Schwierigkeitsgrade, Edge Cases und adversarielle Inputs abdecken.
 3. **Domain Experts labeln lassen** — PASS/FAIL-Urteile statt 1-5-Skalen. Ein Experte, der User-Beduerfnisse versteht, ist wertvoller als zehn oberflaechliche Annotatoren.
-4. **Reasoning dokumentieren** — FÃ¼r jedes Label erklÃ¤rt der Experte kurz, warum der Output besteht oder durchfaellt.
+4. **Reasoning dokumentieren** — Fuer jedes Label erklaert der Experte kurz, warum der Output besteht oder durchfaellt.
 5. **Klein starten, kontinuierlich wachsen** — Mit 50-100 Beispielen beginnen. Production Failures als Regression Tests hinzufuegen.
 
 ### LLM-as-Judge
 
-LLM-as-Judge nutzt ein Sprachmodell, um die Outputs eines anderen Modells zu bewerten — Human Judgment im grossen MaÃstab. Die wichtigste Eval-Technik fÃ¼r generative AI-Produkte mit subjektiven Outputs.
+LLM-as-Judge nutzt ein Sprachmodell, um die Outputs eines anderen Modells zu bewerten — Human Judgment im grossen Massstab. Die wichtigste Eval-Technik fuer generative AI-Produkte mit subjektiven Outputs.
 
 **Best Practices (2025 Konsens):**
 - PASS/FAIL statt numerische Skalen — klareres Signal
@@ -68,7 +68,7 @@ Automatisierung ersetzt nicht den menschlichen Blick:
 | 2 | Failure Modes kategorisieren (falsche Antwort, Halluzination, Ton, Format) | Tag 2-3 |
 | 3 | Golden Dataset mit 100 gelabelten Beispielen aufbauen | Woche 1-2 |
 | 4 | Einfaches Eval-Skript schreiben (kein fancy Tool) | Woche 2 |
-| 5 | LLM-as-Judge fÃ¼r subjektive Dimensionen hinzufuegen | Woche 3 |
+| 5 | LLM-as-Judge fuer subjektive Dimensionen hinzufuegen | Woche 3 |
 | 6 | In CI/CD mit Pass/Fail-Schwellenwerten integrieren | Woche 4 |
 | 7 | Production Sampling: % des Live-Traffic asynchron bewerten | Monat 2 |
 | 8 | Plattform-Tool adoptieren wenn Skalierung es erfordert | Monat 3+ |
@@ -78,9 +78,9 @@ Automatisierung ersetzt nicht den menschlichen Blick:
 Du bist PM bei einem Legal-Tech-Startup. Euer AI-Feature fasst Vertraege zusammen (5.000 Summaries/Monat). Der VP Product will wissen, ob Ihr von GPT-4o auf Claude Sonnet wechseln koennt, um Kosten zu senken.
 
 **Die Situation:**
-- Kein bestehendes Eval-System — QualitÃ¤t wird aktuell per "Team vibes" bewertet
+- Kein bestehendes Eval-System — Qualitaet wird aktuell per "Team vibes" bewertet
 - 3 Anwaelte im Team, die Domain-Expertise haben
-- Budget fÃ¼r Eval-Aufbau: 2 Wochen Engineering-Zeit
+- Budget fuer Eval-Aufbau: 2 Wochen Engineering-Zeit
 - Stakeholder will Modell-Entscheidung in 4 Wochen
 
 **Optionen:**
@@ -97,7 +97,7 @@ Du bist PM bei einem Legal-Tech-Startup. Euer AI-Feature fasst Vertraege zusamme
 
 **Warum:**
 - **Option 1 ist zu duenn:** 20 Beispiele ohne strukturierte Kriterien sind ein Bauchgefuehl-Check, keine Evaluation. Bei 5.000 Summaries/Monat riskierst Du systematische Fehler, die in 20 Stichproben nicht auftauchen.
-- **Option 2 schafft bleibendes Asset:** Das Golden Dataset dient nicht nur fÃ¼r diesen Modellvergleich — es wird zum Fundament fÃ¼r jede zukuenftige Aenderung (Prompt-Updates, neue Modelle, Feature-Erweiterungen).
+- **Option 2 schafft bleibendes Asset:** Das Golden Dataset dient nicht nur fuer diesen Modellvergleich — es wird zum Fundament fuer jede zukuenftige Aenderung (Prompt-Updates, neue Modelle, Feature-Erweiterungen).
 - **Option 3 ist die falsche Reihenfolge:** Tools verstaerken eine gute Eval-Strategie, sie ersetzen keine. Ohne Golden Dataset und klare Kriterien misst auch das beste Tool das Falsche.
 - **Timeline passt:** 2 Wochen Golden Dataset + 1 Woche Eval-Runs + 1 Woche Analyse = 4 Wochen.
 
@@ -109,11 +109,11 @@ Du bist PM bei einem Legal-Tech-Startup. Euer AI-Feature fasst Vertraege zusamme
 
 ## Reflect
 
-**Evals sind die wichtigste Kompetenz fÃ¼r AI PMs — weil sie definieren, was "gut" bedeutet, bevor es zu spaet ist.**
+**Evals sind die wichtigste Kompetenz fuer AI PMs — weil sie definieren, was "gut" bedeutet, bevor es zu spaet ist.**
 
 - Golden Datasets sind lebendige Artefakte: Klein starten (50-100 Beispiele), Production Failures als Regression Tests hinzufuegen, kontinuierlich wachsen lassen.
 - LLM-as-Judge skaliert Human Judgment um Groessenordnungen (typisch 10-50x guenstiger) — aber nur wenn der Judge gegen echte Human Labels validiert ist.
-- Die grÃ¶Ãte PM-Falle: "Wir brauchen zuerst ein Tool." Starte mit manueller Error Analysis. 30 Minuten, 20-50 Outputs. Das zeigt mehr als jedes Dashboard.
+- Die groesste PM-Falle: "Wir brauchen zuerst ein Tool." Starte mit manueller Error Analysis. 30 Minuten, 20-50 Outputs. Das zeigt mehr als jedes Dashboard.
 
 ---
 

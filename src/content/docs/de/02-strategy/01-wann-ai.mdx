@@ -1,6 +1,6 @@
 ---
 title: "Wann AI"
-description: "Wann AI die richtige LÃ¶sung ist, wann eine einfache Regel reicht — und wie Du die teuersten PM-Fehler vermeidest."
+description: "Wann AI die richtige Loesung ist, wann eine einfache Regel reicht — und wie Du die teuersten PM-Fehler vermeidest."
 sidebar:
   order: 1
 ---
@@ -11,7 +11,7 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Dein Stakeholder will einen "AI-powered" Workflow. Dein Engineering-Team kann das bauen. Die Frage, die niemand stellt: Braucht dieses Problem Ã¼berhaupt AI?
+Dein Stakeholder will einen "AI-powered" Workflow. Dein Engineering-Team kann das bauen. Die Frage, die niemand stellt: Braucht dieses Problem ueberhaupt AI?
 
 Als PM ist Deine wichtigste Faehigkeit nicht, AI einzusetzen — sondern zu erkennen, wann Du es *nicht* tun solltest. Denn die teuersten AI-Projekte sind nicht die, die scheitern. Es sind die, die ein Problem loesen, das keins war.
 
@@ -24,21 +24,21 @@ Nicht jedes Problem ist ein AI-Problem. Die entscheidende Frage: Ist das Problem
 | | Deterministisch | Probabilistisch |
 |---|---|---|
 | Logik | Klar, stabil, dokumentierbar | Mehrdeutig, kontextabhaengig |
-| Regeln | Endliche If-Then-Ketten | Zu viele Ausnahmen fÃ¼r Regeln |
+| Regeln | Endliche If-Then-Ketten | Zu viele Ausnahmen fuer Regeln |
 | Ergebnis | Ein "richtiges" Ergebnis | Kein einzelnes "richtiges" Ergebnis |
 | Beispiel | Steuerberechnung, Validierung | Sentiment-Analyse, Empfehlungen |
 
-**Wann Rule-Based reicht:** Logik klar und stabil, Entscheidungen mÃ¼ssen auditierbar sein, Prozesse sind wiederholbar.
+**Wann Rule-Based reicht:** Logik klar und stabil, Entscheidungen muessen auditierbar sein, Prozesse sind wiederholbar.
 
 **Wann AI/ML Sinn macht:** Kein einzelnes "richtiges" Ergebnis, System verbessert sich mit mehr Daten, Regeln haben zu viele Ausnahmen.
 
-**Die RealitÃ¤t:** Die meisten Enterprise-Probleme sind Hybride. Dein Login-Flow ist deterministisch. Deine Fraud Detection ist probabilistisch. Beides im selben Produkt.
+**Die Realitaet:** Die meisten Enterprise-Probleme sind Hybride. Dein Login-Flow ist deterministisch. Deine Fraud Detection ist probabilistisch. Beides im selben Produkt.
 
 ### Die "AI um der AI willen"-Falle
 
 Die Zahlen sind ernuechternd:
 
-- **64% der User** wÃ¼rden Features deaktivieren oder Produkte verlassen, wenn AI-Features aufgezwungen werden (ZDNET/Aberdeen)
+- **64% der User** wuerden Features deaktivieren oder Produkte verlassen, wenn AI-Features aufgezwungen werden (ZDNET/Aberdeen)
 - **Nur 5-30%** der AI-Implementierungen liefern messbaren P&L-Impact — je nach Studie und Definition (MIT Sloan Management Review 2025, McKinsey Global AI Survey 2024)
 - **Nur 1 von 4** AI-Projekten liefert den versprochenen ROI, nur 16% skalieren unternehmensweit (IBM, 2025)
 
@@ -48,7 +48,7 @@ Das Problem ist selten die Technologie. Das Problem ist, dass kein klares User-P
 
 - **Humane AI Pin & Rabbit R1:** "A solution looking for a problem" (Logitech CEO). Hardware-Produkte ohne klaren Use Case.
 - **McDonald's AI Drive-Thru (IBM):** Nach 3 Jahren gestoppt. Virales TikTok-Video: 260 McNuggets bestellt, weil das System Hintergrundgeraeusche als Bestellungen interpretierte.
-- **United Healthcare:** 90% Fehlerrate bei einem spezifischen Algorithmus (nH Predict) fÃ¼r Post-Acute-Care-Ablehnungen (STAT News Investigation).
+- **United Healthcare:** 90% Fehlerrate bei einem spezifischen Algorithmus (nH Predict) fuer Post-Acute-Care-Ablehnungen (STAT News Investigation).
 - **Google AI Overviews:** "Put glue on pizza"-Empfehlungen. Deployment ohne ausreichende Error Tolerance Definition.
 
 ## Framework
@@ -58,7 +58,7 @@ Das Problem ist selten die Technologie. Das Problem ist, dass kein klares User-P
 | # | Frage | Nein = Warnsignal |
 |---|-------|-------------------|
 | 1 | Ist das Problem probabilistisch? | Rule-Based Engine reicht vermutlich |
-| 2 | Verbessert sich das System mit mehr Daten? | Statische LÃ¶sung ist effizienter |
+| 2 | Verbessert sich das System mit mehr Daten? | Statische Loesung ist effizienter |
 | 3 | Gibt es genug qualitative Trainingsdaten? | Cold-Start-Problem, hohe Anfangsinvestition |
 | 4 | Ist die Fehlertoleranz akzeptabel? | High-Stakes-Domain ohne Human Review = Risiko |
 | 5 | Uebersteigt der erwartete Wert die AI-spezifischen Kosten? | Variable LLM-Kosten in Fixed Subscriptions = Unit-Economics-Problem |
@@ -67,19 +67,19 @@ Das Problem ist selten die Technologie. Das Problem ist, dass kein klares User-P
 
 ## Scenario
 
-Du bist PM bei einem B2B-SaaS fÃ¼r Rechnungsverarbeitung. Der VP Product will "AI-powered Invoice Processing" auf der Roadmap. Aktuell nutzt Ihr Template-basierte OCR mit festen Regeln.
+Du bist PM bei einem B2B-SaaS fuer Rechnungsverarbeitung. Der VP Product will "AI-powered Invoice Processing" auf der Roadmap. Aktuell nutzt Ihr Template-basierte OCR mit festen Regeln.
 
 **Die Situation:**
 - 120.000 Rechnungen/Monat, 85% folgen 4 Standardformaten
-- Aktuelle Rule-Based Accuracy: 94% fÃ¼r Standardformate, 45% fÃ¼r Sonderformate
-- AI-Modell im Eval: 96% fÃ¼r Standard, 82% fÃ¼r Sonderformate
+- Aktuelle Rule-Based Accuracy: 94% fuer Standardformate, 45% fuer Sonderformate
+- AI-Modell im Eval: 96% fuer Standard, 82% fuer Sonderformate
 - AI-Kosten: $0.03 pro Rechnung (LLM-basiert) vs. $0.001 pro Rechnung (Rule-Based)
 - 15% der Rechnungen (Sonderformate) verursachen 60% des manuellen Aufwands
 
 **Optionen:**
 1. **Alles auf AI umstellen:** 96%/82% Accuracy, $3.600/Monat
 2. **Alles Rule-Based lassen:** 94%/45% Accuracy, $120/Monat
-3. **Hybrid:** Rule-Based fÃ¼r Standardformate, AI nur fÃ¼r Sonderformate
+3. **Hybrid:** Rule-Based fuer Standardformate, AI nur fuer Sonderformate
 
 ## Decide
 
@@ -91,18 +91,18 @@ Du bist PM bei einem B2B-SaaS fÃ¼r Rechnungsverarbeitung. Der VP Product will 
 **Warum:**
 - Standardformate: Rule-Based liefert 94% bei 30x niedrigeren Kosten. Die 2% Verbesserung durch AI rechtfertigt nicht den 30-fachen Preisanstieg
 - Sonderformate: AI verbessert von 45% auf 82% — das ist der echte Hebel. Diese 15% der Rechnungen verursachen 60% des manuellen Aufwands
-- Hybrid-Kosten: ~$660/Monat (Rule-Based fÃ¼r 102k Standard + AI fÃ¼r 18k Sonder) statt $3.600
+- Hybrid-Kosten: ~$660/Monat (Rule-Based fuer 102k Standard + AI fuer 18k Sonder) statt $3.600
 
 **Die PM-Fehler in diesem Szenario:**
-- **"Bolt-On AI":** AI draufschrauben ohne den Workflow neu zu denken. Rule-Based funktioniert fÃ¼r 85% der Faelle — warum ersetzen?
+- **"Bolt-On AI":** AI draufschrauben ohne den Workflow neu zu denken. Rule-Based funktioniert fuer 85% der Faelle — warum ersetzen?
 - **Modelle als Strategie:** Das Modell ist austauschbar. Dein Wettbewerbsvorteil liegt in der Daten-Pipeline und den Validierungsregeln.
 - **Unit Economics ignorieren:** $0.03 pro Rechnung klingt billig — bis Du 120k Rechnungen/Monat durchrechnest.
 </details>
 
 ## Reflect
 
-- **AI ist eine LÃ¶sung, kein Feature.** Starte beim Problem, nicht bei der Technologie. Wenn Du nicht erklÃ¤ren kannst welches User-Problem AI loest, hast Du keins.
-- **Die meisten Probleme sind Hybride.** Deterministisch wo mÃ¶glich, probabilistisch wo noetig. Das spart Kosten und reduziert Fehler.
+- **AI ist eine Loesung, kein Feature.** Starte beim Problem, nicht bei der Technologie. Wenn Du nicht erklaeren kannst welches User-Problem AI loest, hast Du keins.
+- **Die meisten Probleme sind Hybride.** Deterministisch wo moeglich, probabilistisch wo noetig. Das spart Kosten und reduziert Fehler.
 - **Fehlertoleranz vor Deployment definieren.** McDonald's, United Healthcare und Google haben gezeigt, was passiert, wenn man das nicht tut.
 - **Unit Economics durchrechnen.** Variable LLM-Kosten in Fixed-Price-Subscriptions sind ein Geschaeftsmodell-Risiko, kein technisches Detail.
 

@@ -1,6 +1,6 @@
 ---
 title: "Model Selection"
-description: "Wie Du das richtige Modell fÃ¼r Dein AI-Feature waehlst — jenseits von Leaderboards, basierend auf Task, Kosten und Latenz."
+description: "Wie Du das richtige Modell fuer Dein AI-Feature waehlst — jenseits von Leaderboards, basierend auf Task, Kosten und Latenz."
 sidebar:
   order: 4
 ---
@@ -11,19 +11,19 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Euer Head of Engineering hat eine Tabelle mit 15 LLMs erstellt, sortiert nach MMLU-Score. "Wir nehmen das beste Modell" ist seine Empfehlung. Das Problem: Das #1-Modell kostet 10x so viel wie #5 — und fÃ¼r Euren Use Case (Ticket-Klassifikation) ist der Qualitaetsunterschied marginal. Dein CFO wird die API-Rechnung im zweiten Monat sehen und fragen, warum Ihr das teuerste Modell fÃ¼r eine Aufgabe nutzt, die ein guenstigeres genauso gut erledigt.
+Euer Head of Engineering hat eine Tabelle mit 15 LLMs erstellt, sortiert nach MMLU-Score. "Wir nehmen das beste Modell" ist seine Empfehlung. Das Problem: Das #1-Modell kostet 10x so viel wie #5 — und fuer Euren Use Case (Ticket-Klassifikation) ist der Qualitaetsunterschied marginal. Dein CFO wird die API-Rechnung im zweiten Monat sehen und fragen, warum Ihr das teuerste Modell fuer eine Aufgabe nutzt, die ein guenstigeres genauso gut erledigt.
 
-Model Selection ist keine einmalige technische Entscheidung. Es ist eine Produktentscheidung, die QualitÃ¤t, Kosten, Latenz und Compliance-Anforderungen balanciert — und die sich quartalsmaessig Ã¤ndern kann, weil der Modellmarkt sich so schnell bewegt.
+Model Selection ist keine einmalige technische Entscheidung. Es ist eine Produktentscheidung, die Qualitaet, Kosten, Latenz und Compliance-Anforderungen balanciert — und die sich quartalsmaessig aendern kann, weil der Modellmarkt sich so schnell bewegt.
 
 ## Concept
 
 ### Die Modelllandschaft 2026
 
-> **Stand: Maerz 2026.** Modellpreise Ã¤ndern sich quartalsmaessig. Die Prinzipien (Multi-Model Routing, eigene Evals, Design fÃ¼r Wechsel) bleiben stabil — konkrete Preise nicht.
+> **Stand: Maerz 2026.** Modellpreise aendern sich quartalsmaessig. Die Prinzipien (Multi-Model Routing, eigene Evals, Design fuer Wechsel) bleiben stabil — konkrete Preise nicht.
 
 Der Markt hat sich um wenige grosse Anbieter konsolidiert:
 
-| Anbieter | Frontier-Modell | StÃ¤rke | Input $/1M Tokens | Output $/1M Tokens |
+| Anbieter | Frontier-Modell | Staerke | Input $/1M Tokens | Output $/1M Tokens |
 |----------|----------------|---------|-------------------|-------------------|
 | OpenAI | GPT-5.2 / GPT-5.4 | Allround, starkes Tooling-Ecosystem | $1,75-$3,00 | $7,00-$14,00 |
 | Anthropic | Claude Opus 4.6 | Writing, Safety, Agentic Coding, 200K Context | $5,00 | $25,00 |
@@ -37,17 +37,17 @@ Der Markt hat sich um wenige grosse Anbieter konsolidiert:
 
 ### Benchmarks — und ihre Grenzen
 
-**Was PMs wissen mÃ¼ssen:**
-- **MMLU/MMLU-Pro:** Allgemeinwissen Ã¼ber 57+ Domainen. Der meistzitierte Benchmark, aber zunehmend gesaettigt an der Spitze
-- **SWE-bench:** Echte Software-Engineering-Aufgaben (GitHub Issues loesen). Aussagekraeftiger als HumanEval fÃ¼r Production-Coding
+**Was PMs wissen muessen:**
+- **MMLU/MMLU-Pro:** Allgemeinwissen ueber 57+ Domainen. Der meistzitierte Benchmark, aber zunehmend gesaettigt an der Spitze
+- **SWE-bench:** Echte Software-Engineering-Aufgaben (GitHub Issues loesen). Aussagekraeftiger als HumanEval fuer Production-Coding
 - **ARC-AGI:** Abstraktes Reasoning. Testet Mustererkennung, die Menschen leicht finden, aber LLMs schwer
-- **LMArena (ehem. LMSYS Chatbot Arena):** Community-basiertes Elo-Ranking durch blinde Nutzer-Votes. Naeher an realer Nutzererfahrung als automatisierte Benchmarks — aber anfaellig fÃ¼r Style-Over-Substance-Bias (laengere, huebschere Antworten werden bevorzugt)
+- **LMArena (ehem. LMSYS Chatbot Arena):** Community-basiertes Elo-Ranking durch blinde Nutzer-Votes. Naeher an realer Nutzererfahrung als automatisierte Benchmarks — aber anfaellig fuer Style-Over-Substance-Bias (laengere, huebschere Antworten werden bevorzugt)
 
 **PM-Caveat:** Benchmarks messen Modell-Faehigkeiten unter kontrollierten Bedingungen. Sie messen nicht die Performance auf DEINEM spezifischen Task. Ein Modell auf Platz 1 bei MMLU kann bei Deinem Kundensupport-Use-Case unterdurchschnittlich abschneiden. Immer auf eigenen Daten evaluieren.
 
 ### Multi-Model Routing
 
-Das aufkommende Production-Pattern: Verschiedene Modelle fÃ¼r verschiedene Aufgaben statt ein Modell fÃ¼r alles.
+Das aufkommende Production-Pattern: Verschiedene Modelle fuer verschiedene Aufgaben statt ein Modell fuer alles.
 
 **Tiered Routing Architecture:**
 - **Fast/Guenstig-Tier** (Gemini Flash, GPT-4o-mini, Llama): Einfache Klassifikation, Extraktion, Formatierung — 70-80% der Anfragen
@@ -60,11 +60,11 @@ Das aufkommende Production-Pattern: Verschiedene Modelle fÃ¼r verschiedene Auf
 
 | Kriterium | Warum wichtig | Wie evaluieren |
 |-----------|-------------|----------------|
-| Task-spezifische QualitÃ¤t | Benchmarks sagen Deinen Use Case nicht voraus | 50-100 repraesentative Anfragen blind bewerten |
+| Task-spezifische Qualitaet | Benchmarks sagen Deinen Use Case nicht voraus | 50-100 repraesentative Anfragen blind bewerten |
 | Latenz (TTFT + TPS) | User Experience bei Echtzeit-Features | Time-to-First-Token und Tokens-pro-Sekunde messen |
 | Kosten bei DEINEM Volumen | 10x Preisunterschied zwischen Modellen | Monatskosten bei projiziertem Volumen berechnen |
-| Datenschutz/Compliance | Regulatorische Anforderungen | Datenverarbeitungsbedingungen prÃ¼fen; Self-Hosted Open Models in Betracht ziehen |
-| Ecosystem/Tooling | Entwicklerproduktivitaet | Function Calling, JSON Mode, Streaming, SDK-QualitÃ¤t |
+| Datenschutz/Compliance | Regulatorische Anforderungen | Datenverarbeitungsbedingungen pruefen; Self-Hosted Open Models in Betracht ziehen |
+| Ecosystem/Tooling | Entwicklerproduktivitaet | Function Calling, JSON Mode, Streaming, SDK-Qualitaet |
 
 ## Framework
 
@@ -74,17 +74,17 @@ Das aufkommende Production-Pattern: Verschiedene Modelle fÃ¼r verschiedene Auf
 
 | Dimension | Fragen |
 |-----------|--------|
-| QualitÃ¤t | Was ist "gut genug" fÃ¼r dieses Feature? |
+| Qualitaet | Was ist "gut genug" fuer dieses Feature? |
 | Latenz | Echtzeit (unter 2s)? Hintergrundverarbeitung OK? |
 | Kosten | Monatliches Budget bei projiziertem Volumen? |
 | Compliance | Datenresidenz? Datenschutz? Branchenregulierung? |
 
 **Schritt 2 — Kandidaten evaluieren:**
 - 50-100 repraesentative Anfragen auf 3-4 Kandidaten laufen lassen
-- Blind bewerten (Modellnamen entfernen, QualitÃ¤t 1-5 bewerten)
+- Blind bewerten (Modellnamen entfernen, Qualitaet 1-5 bewerten)
 - Latenz messen und Kosten bei projiziertem Volumen berechnen
 
-**Schritt 3 — FÃ¼r Wechsel designen:**
+**Schritt 3 — Fuer Wechsel designen:**
 - Modellagnostische Abstraktionen nutzen (LiteLLM, OpenRouter, oder Provider-SDKs mit Adaptern)
 - Prompts pro Modell versionieren (verschiedene Modelle reagieren unterschiedlich auf denselben Prompt)
 - Qualitaetsmetriken kontinuierlich monitoren
@@ -98,14 +98,14 @@ Du bist PM bei einem E-Commerce SaaS (B2B, 1.200 Shops). Euer naechstes Feature:
 - Basic: 70% des Volumens (einfache Produkte)
 - Standard: 25% (Hauptkatalog)
 - Premium: 5% (Flaggschiff-Produkte)
-- Budget: 8.000 Euro/Monat fÃ¼r AI-Kosten
-- Anforderung: Latenz unter 5 Sekunden fÃ¼r alle Stufen
+- Budget: 8.000 Euro/Monat fuer AI-Kosten
+- Anforderung: Latenz unter 5 Sekunden fuer alle Stufen
 - Sprachen: Deutsch, Englisch, Franzoesisch
 
 **Optionen:**
-1. **Single Model:** Claude Sonnet 4.6 fÃ¼r alle Stufen. Geschaetzte Kosten: 22.000 Euro/Monat
-2. **Zwei Tiers:** Gemini 2.5 Flash fÃ¼r Basic + Standard, Claude Sonnet 4.6 fÃ¼r Premium. Geschaetzte Kosten: 5.800 Euro/Monat
-3. **Drei Tiers:** Llama 4 Scout (via API) fÃ¼r Basic, Gemini 2.5 Flash fÃ¼r Standard, Claude Opus 4.6 fÃ¼r Premium. Geschaetzte Kosten: 4.200 Euro/Monat
+1. **Single Model:** Claude Sonnet 4.6 fuer alle Stufen. Geschaetzte Kosten: 22.000 Euro/Monat
+2. **Zwei Tiers:** Gemini 2.5 Flash fuer Basic + Standard, Claude Sonnet 4.6 fuer Premium. Geschaetzte Kosten: 5.800 Euro/Monat
+3. **Drei Tiers:** Llama 4 Scout (via API) fuer Basic, Gemini 2.5 Flash fuer Standard, Claude Opus 4.6 fuer Premium. Geschaetzte Kosten: 4.200 Euro/Monat
 
 ## Decide
 
@@ -115,21 +115,21 @@ Du bist PM bei einem E-Commerce SaaS (B2B, 1.200 Shops). Euer naechstes Feature:
 **Die beste Entscheidung:** Option 2 — Zwei Tiers.
 
 **Warum:**
-- **Option 1 ist 2,75x Ã¼ber Budget:** 22.000 Euro vs. 8.000 Euro Budget. Claude Sonnet fÃ¼r Bullet Points ist wie ein Ferrari fÃ¼r den Parkplatz
-- **Option 2 trifft den Sweet Spot:** 5.800 Euro liegt im Budget. Gemini 2.5 Flash ist fÃ¼r einfache Generierung ausreichend und bei 70-95% des Volumens massiv guenstiger. Claude Sonnet liefert Premium-QualitÃ¤t nur dort, wo sie zaehlt (5% des Volumens)
-- **Option 3 spart nochmal, aber:** Llama 4 Scout erfordert entweder Self-Hosting (Infrastruktur-Aufwand) oder einen Third-Party-API-Provider. Die zusaetzliche KomplexitÃ¤t eines dritten Modells spart nur 1.600 Euro/Monat — das rechtfertigt den Engineering-Overhead fÃ¼r Routing, Testing und Monitoring nicht
-- **Blind-Evaluation entscheidend:** Vor dem Launch 100 Produktbeschreibungen je Modell generieren, blind bewerten lassen. Wenn Flash fÃ¼r Standard-Produkte 4/5 erreicht, ist die Zwei-Tier-Architektur validiert
-- **FÃ¼r Wechsel designen:** Mit LiteLLM oder aehnlicher Abstraktion bauen. Wenn Gemini Flash in 6 Monaten 2x besser wird (oder ein neues Modell erscheint), sollte der Modellwechsel ein Config-Change sein, kein Rewrite
+- **Option 1 ist 2,75x ueber Budget:** 22.000 Euro vs. 8.000 Euro Budget. Claude Sonnet fuer Bullet Points ist wie ein Ferrari fuer den Parkplatz
+- **Option 2 trifft den Sweet Spot:** 5.800 Euro liegt im Budget. Gemini 2.5 Flash ist fuer einfache Generierung ausreichend und bei 70-95% des Volumens massiv guenstiger. Claude Sonnet liefert Premium-Qualitaet nur dort, wo sie zaehlt (5% des Volumens)
+- **Option 3 spart nochmal, aber:** Llama 4 Scout erfordert entweder Self-Hosting (Infrastruktur-Aufwand) oder einen Third-Party-API-Provider. Die zusaetzliche Komplexitaet eines dritten Modells spart nur 1.600 Euro/Monat — das rechtfertigt den Engineering-Overhead fuer Routing, Testing und Monitoring nicht
+- **Blind-Evaluation entscheidend:** Vor dem Launch 100 Produktbeschreibungen je Modell generieren, blind bewerten lassen. Wenn Flash fuer Standard-Produkte 4/5 erreicht, ist die Zwei-Tier-Architektur validiert
+- **Fuer Wechsel designen:** Mit LiteLLM oder aehnlicher Abstraktion bauen. Wenn Gemini Flash in 6 Monaten 2x besser wird (oder ein neues Modell erscheint), sollte der Modellwechsel ein Config-Change sein, kein Rewrite
 
-**Haeufiger Fehler:** Das teuerste Modell waehlen, weil es auf dem Leaderboard fuehrt. Der Qualitaetsunterschied zwischen Tier-1- und Tier-2-Modellen ist fÃ¼r viele Tasks marginal, der Kostenunterschied aber dramatisch.
+**Haeufiger Fehler:** Das teuerste Modell waehlen, weil es auf dem Leaderboard fuehrt. Der Qualitaetsunterschied zwischen Tier-1- und Tier-2-Modellen ist fuer viele Tasks marginal, der Kostenunterschied aber dramatisch.
 </details>
 
 ## Reflect
 
-- **Benchmarks sind Orientierung, keine Entscheidungsgrundlage.** Immer auf eigenen Daten evaluieren — 50-100 repraesentative Anfragen, blind bewertet. Der Leaderboard-Sieger ist nicht automatisch die beste Wahl fÃ¼r Deinen Task.
+- **Benchmarks sind Orientierung, keine Entscheidungsgrundlage.** Immer auf eigenen Daten evaluieren — 50-100 repraesentative Anfragen, blind bewertet. Der Leaderboard-Sieger ist nicht automatisch die beste Wahl fuer Deinen Task.
 - Multi-Model Routing ist der Production-Standard. 70-80% der Anfragen gehen an das guenstige Modell, nur komplexe Aufgaben an das teure. 5-10x Kostenersparnis sind realistisch.
-- Designe fÃ¼r Modellwechsel. Die Modelllandschaft Ã¤ndert sich quartalsmaessig. Wer sich an ein Modell bindet, zahlt spÃ¤ter den Preis.
-- Datenschutz und Compliance kÃ¶nnen die Modellwahl einschraenken. Self-Hosted Open Models (Llama, Mistral) sind die Antwort, wenn keine Daten das Unternehmen verlassen duerfen.
+- Designe fuer Modellwechsel. Die Modelllandschaft aendert sich quartalsmaessig. Wer sich an ein Modell bindet, zahlt spaeter den Preis.
+- Datenschutz und Compliance koennen die Modellwahl einschraenken. Self-Hosted Open Models (Llama, Mistral) sind die Antwort, wenn keine Daten das Unternehmen verlassen duerfen.
 
 ---
 

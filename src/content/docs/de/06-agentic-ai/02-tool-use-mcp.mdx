@@ -1,6 +1,6 @@
 ---
 title: "Tool Use & Model Context Protocol"
-description: "Wie AI Agents mit der echten Welt interagieren — und warum MCP der USB-C fÃ¼r AI-Integrationen geworden ist."
+description: "Wie AI Agents mit der echten Welt interagieren — und warum MCP der USB-C fuer AI-Integrationen geworden ist."
 sidebar:
   order: 2
 ---
@@ -13,22 +13,22 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 Dein AI-Agent kann brillante Analysen schreiben. Aber er kann keine E-Mail senden, keine Datenbank abfragen und keinen Deployment-Button druecken. Ein LLM allein generiert nur Text. Erst Tool Use macht aus einem Chatbot einen Agent, der Dinge in der echten Welt bewegen kann.
 
-Das Problem: Bis 2024 musste jede AI-Applikation eigene Integrationen fÃ¼r jedes Tool bauen. 10 Apps und 10 Tools bedeuteten 100 Integrationen. Dann kam das Model Context Protocol — und veraenderte die Gleichung fundamental.
+Das Problem: Bis 2024 musste jede AI-Applikation eigene Integrationen fuer jedes Tool bauen. 10 Apps und 10 Tools bedeuteten 100 Integrationen. Dann kam das Model Context Protocol — und veraenderte die Gleichung fundamental.
 
 ## Concept
 
 ### Wie Tool Use funktioniert
 
-Ein LLM kann keine APIs aufrufen. Aber es kann strukturierte "Tool Calls" generieren — eine Kombination aus Funktionsname und Parametern. Die Host-Applikation fuehrt den Call aus und gibt das Ergebnis zurÃ¼ck. Das Modell reasoned dann Ã¼ber das Ergebnis.
+Ein LLM kann keine APIs aufrufen. Aber es kann strukturierte "Tool Calls" generieren — eine Kombination aus Funktionsname und Parametern. Die Host-Applikation fuehrt den Call aus und gibt das Ergebnis zurueck. Das Modell reasoned dann ueber das Ergebnis.
 
-Beispiel: Das Modell generiert `{"tool": "get_order_status", "params": {"order_id": "12345"}}`. Dein System fuehrt die Datenbankabfrage aus. Das Ergebnis geht zurÃ¼ck ans Modell, das daraus eine Kundenantwort formuliert.
+Beispiel: Das Modell generiert `{"tool": "get_order_status", "params": {"order_id": "12345"}}`. Dein System fuehrt die Datenbankabfrage aus. Das Ergebnis geht zurueck ans Modell, das daraus eine Kundenantwort formuliert.
 
 ### Was MCP ist
 
-Das Model Context Protocol (MCP) ist ein offener Standard, angekuendigt von Anthropic im November 2024, fÃ¼r die Verbindung von AI-Assistenten mit externen Datenquellen, Tools und Services. Die Analogie: USB-C fÃ¼r AI-Integrationen — ein universelles Interface statt proprietÃ¤rer Adapter.
+Das Model Context Protocol (MCP) ist ein offener Standard, angekuendigt von Anthropic im November 2024, fuer die Verbindung von AI-Assistenten mit externen Datenquellen, Tools und Services. Die Analogie: USB-C fuer AI-Integrationen — ein universelles Interface statt proprietaerer Adapter.
 
 MCP definiert drei Primitives:
-- **Tools** — Funktionen, die das Modell aufrufen kann (Code ausfÃ¼hren, API abfragen, E-Mail senden)
+- **Tools** — Funktionen, die das Modell aufrufen kann (Code ausfuehren, API abfragen, E-Mail senden)
 - **Resources** — Daten, die das Modell lesen kann (Dateien, Datenbank-Records, Dokumente)
 - **Prompts** — Wiederverwendbare Prompt-Templates, die Server bereitstellen
 
@@ -41,25 +41,25 @@ Die Adoption war beispiellos schnell:
 | Datum | Meilenstein |
 |-------|-------------|
 | Nov 2024 | Anthropic kuendigt MCP an, Open-Source-Spezifikation |
-| Maerz 2025 | OpenAI adoptiert MCP fÃ¼r Agents SDK und ChatGPT |
+| Maerz 2025 | OpenAI adoptiert MCP fuer Agents SDK und ChatGPT |
 | April 2025 | Google DeepMind bestaetigt MCP-Support in Gemini |
 | Nov 2025 | MCP Spec v2025-11-25 mit Streamable HTTP Transport |
 | Dez 2025 | Anthropic uebergibt MCP an die Linux Foundation; 97M+ monatliche SDK-Downloads (laut Angaben der Linux Foundation / Anthropic, Stand Ende 2025) |
 
 ### Tool-Auswahl als Produktentscheidung
 
-Zu viele Tools erhÃ¶hen Latenz (Modell muss Ã¼ber Optionen nachdenken), Kosten (mehr Tokens) und Angriffsflaeche. Zu wenige Tools begrenzen die Faehigkeiten.
+Zu viele Tools erhoehen Latenz (Modell muss ueber Optionen nachdenken), Kosten (mehr Tokens) und Angriffsflaeche. Zu wenige Tools begrenzen die Faehigkeiten.
 
 Fuenf Prinzipien:
 1. **Read-Only zuerst** — geringeres Risiko, sofortiger Wert (Suche, Lookup, Zusammenfassung)
 2. **Write-Tools inkrementell** — jedes Write-Tool braucht explizite User-Bestaetigung
 3. **Tools nach Use Case gruppieren** — ein Support-Toolset ist anders als ein Development-Toolset
 4. **Tool-Nutzung monitoren** — ungenutzte Tools entfernen (reduziert Token-Overhead)
-5. **FÃ¼r Fehler designen** — jeder Tool Call kann fehlschlagen; der Agent muss Errors graceful handlen
+5. **Fuer Fehler designen** — jeder Tool Call kann fehlschlagen; der Agent muss Errors graceful handlen
 
 ### Security-Implikationen
 
-Tool Use eroeffnet neue Angriffsflaechen: Prompt Injection Ã¼ber Tool-Ergebnisse, uebermaessige Permissions, Data Exfiltration durch Agents, und Confused Deputy Attacks. Die Antwort: Principle of Least Privilege, Sandboxed Execution, Output Filtering und Audit Logging aller Tool Calls.
+Tool Use eroeffnet neue Angriffsflaechen: Prompt Injection ueber Tool-Ergebnisse, uebermaessige Permissions, Data Exfiltration durch Agents, und Confused Deputy Attacks. Die Antwort: Principle of Least Privilege, Sandboxed Execution, Output Filtering und Audit Logging aller Tool Calls.
 
 ## Framework
 
@@ -76,15 +76,15 @@ Das **Tool-Readiness-Assessment** — vor dem Shipping jedes neuen Tools durchge
 
 ## Scenario
 
-Du bist PM fÃ¼r ein Enterprise-CRM mit AI-Assistent. Das Team will dem Agenten folgende Tools geben:
+Du bist PM fuer ein Enterprise-CRM mit AI-Assistent. Das Team will dem Agenten folgende Tools geben:
 
 **Read-Tools (8):** Kontaktsuche, Deal-Historie, E-Mail-Verlauf, Meeting-Notizen, Pipeline-Status, Umsatzzahlen, Support-Tickets, Aktivitaets-Log
 
-**Write-Tools (6):** E-Mail senden, Deal-Status Ã¤ndern, Meeting einbuchen, Kontakt erstellen, Task zuweisen, Notiz hinzufuegen
+**Write-Tools (6):** E-Mail senden, Deal-Status aendern, Meeting einbuchen, Kontakt erstellen, Task zuweisen, Notiz hinzufuegen
 
-Das sind 14 Tools fÃ¼r einen einzelnen Agent. Der erste Prototyp zeigt: Der Agent waehlt in 23% der Faelle das falsche Tool. Die durchschnittliche Antwortzeit ist 8 Sekunden — 4x langsamer als ohne Tool-Auswahl.
+Das sind 14 Tools fuer einen einzelnen Agent. Der erste Prototyp zeigt: Der Agent waehlt in 23% der Faelle das falsche Tool. Die durchschnittliche Antwortzeit ist 8 Sekunden — 4x langsamer als ohne Tool-Auswahl.
 
-**Die Frage:** Wie strukturierst Du die Tool-Auswahl fÃ¼r den Launch?
+**Die Frage:** Wie strukturierst Du die Tool-Auswahl fuer den Launch?
 
 ## Decide
 
@@ -99,7 +99,7 @@ Das sind 14 Tools fÃ¼r einen einzelnen Agent. Der erste Prototyp zeigt: Der Ag
 - **Phase 3 (nach Validierung):** E-Mail-Entwurf (nicht Senden!) und Meeting-Vorschlag
 
 **Warum:**
-- 14 Tools ueberfordern das Modell — unter 15 ist die Empfehlung, aber unter 8 ist besser fÃ¼r Genauigkeit
+- 14 Tools ueberfordern das Modell — unter 15 ist die Empfehlung, aber unter 8 ist besser fuer Genauigkeit
 - 23% falsche Tool-Wahl bei 14 Tools sinkt auf unter 5% bei 5-6 Tools
 - Read-Only eliminiert das Risiko ungewollter Aktionen
 - Write-Tools brauchen Approval Gates — die sind noch nicht gebaut
