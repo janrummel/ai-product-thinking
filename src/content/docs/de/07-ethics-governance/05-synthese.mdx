@@ -11,7 +11,7 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## The Big Picture
 
-Du hast vier Lektionen durchgearbeitet: was Responsible AI in der Praxis bedeutet, wie Guardrails AI-Verhalten begrenzen, warum Privacy in AI-Produkten mehrere Oberflaechen hat, und wie Du mit der strukturellen Realitaet von Hallucinations umgehst.
+Du hast vier Lektionen durchgearbeitet: was Responsible AI in der Praxis bedeutet, wie Guardrails AI-Verhalten begrenzen, warum Privacy in AI-Produkten mehrere Oberflaechen hat, und wie Du mit der strukturellen RealitÃ¤t von Hallucinations umgehst.
 
 Diese Themen werden oft als separate Compliance-Aufgaben behandelt. Das ist ein Fehler. Sie bilden zusammen den **ethischen Stack** Deines AI-Produkts — und jede Schicht haengt von den anderen ab.
 
@@ -21,25 +21,25 @@ Diese Themen werden oft als separate Compliance-Aufgaben behandelt. Das ist ein 
 
 Responsible AI (Lektion 1) definiert das "Was" und "Warum". Guardrails (Lektion 2) sind das "Wie" auf technischer Ebene. Privacy (Lektion 3) schuetzt die User. Hallucination Management (Lektion 4) erhaelt das Vertrauen. Ohne den Rahmen fehlt den Massnahmen die Richtung; ohne die Massnahmen bleibt der Rahmen ein PDF.
 
-**Fuer Dich als PM:** Fang beim Rahmen an (EU AI Act Risiko-Klassifizierung) und arbeite Dich zu den konkreten Massnahmen vor.
+**FÃ¼r Dich als PM:** Fang beim Rahmen an (EU AI Act Risiko-Klassifizierung) und arbeite Dich zu den konkreten Massnahmen vor.
 
 ### 2. Guardrails und Hallucination Management ueberlappen
 
 RAG ist gleichzeitig eine Hallucination-Mitigation (Lektion 4) UND ein Guardrail (Lektion 2) — es verankert Outputs in verifizierten Quellen. Output-Filter sind Guardrails, die auch halluzinierte schaedliche Inhalte abfangen. Dieselbe Infrastruktur dient beiden Zwecken.
 
-**Fuer Dich als PM:** Plane Guardrails und Hallucination-Mitigation nicht als separate Workstreams. Sie teilen sich Architektur und Tools.
+**FÃ¼r Dich als PM:** Plane Guardrails und Hallucination-Mitigation nicht als separate Workstreams. Sie teilen sich Architektur und Tools.
 
 ### 3. Privacy und Guardrails erzeugen Spannung
 
-Effektive Guardrails erfordern die Inspektion von User-Inputs (Jailbreak-Detection, PII-Erkennung). Aber Input-Inspektion hat Privacy-Implikationen (Lektion 3). Die Loesung: Input-Filtering muss VOR dem Logging und Speichern passieren.
+Effektive Guardrails erfordern die Inspektion von User-Inputs (Jailbreak-Detection, PII-Erkennung). Aber Input-Inspektion hat Privacy-Implikationen (Lektion 3). Die LÃ¶sung: Input-Filtering muss VOR dem Logging und Speichern passieren.
 
-**Fuer Dich als PM:** Balance Safety-Monitoring mit Datenminimierung. Die Reihenfolge der Processing-Pipeline bestimmt, ob Du beides erreichst.
+**FÃ¼r Dich als PM:** Balance Safety-Monitoring mit Datenminimierung. Die Reihenfolge der Processing-Pipeline bestimmt, ob Du beides erreichst.
 
 ### 4. Regulierung verbindet alles
 
-Der EU AI Act verlangt all diese Themen gleichzeitig: Risikomanagement (Lektion 1), technische Robustheit (Lektion 2), Daten-Governance (Lektion 3) und Genauigkeit/Transparenz (Lektion 4). Ab August 2026 ist das keine Best Practice mehr — es ist Pflicht fuer Hochrisiko-Systeme.
+Der EU AI Act verlangt all diese Themen gleichzeitig: Risikomanagement (Lektion 1), technische Robustheit (Lektion 2), Daten-Governance (Lektion 3) und Genauigkeit/Transparenz (Lektion 4). Ab August 2026 ist das keine Best Practice mehr — es ist Pflicht fÃ¼r Hochrisiko-Systeme.
 
-**Fuer Dich als PM:** Der EU AI Act ist Dein natuerlicher Rahmen, auch wenn Du nicht in der EU bist — er setzt den globalen Standard.
+**FÃ¼r Dich als PM:** Der EU AI Act ist Dein natuerlicher Rahmen, auch wenn Du nicht in der EU bist — er setzt den globalen Standard.
 
 ## The Meta-Insight
 
@@ -47,15 +47,15 @@ Der EU AI Act verlangt all diese Themen gleichzeitig: Risikomanagement (Lektion 
 
 ## Your Ethics & Governance Checklist
 
-Was Du jetzt koennen solltest:
+Was Du jetzt kÃ¶nnen solltest:
 
 - [ ] Ein AI-Feature in EU AI Act Risiko-Stufen einordnen und daraus Anforderungen ableiten — Lektion 1
 - [ ] Guardrails designen, die Safety und Utility balancieren (Block Rate UND User Satisfaction messen) — Lektion 2
 - [ ] Die Privacy-Architektur Deines AI-Produkts bewerten und das richtige Tier waehlen — Lektion 3
-- [ ] Eine Hallucination-Mitigation-Strategie fuer Deine Domain definieren (Technik + UX) — Lektion 4
-- [ ] Den Zusammenhang zwischen allen vier Themen erklaeren und sie als integrierten Stack umsetzen — Synthese
+- [ ] Eine Hallucination-Mitigation-Strategie fÃ¼r Deine Domain definieren (Technik + UX) — Lektion 4
+- [ ] Den Zusammenhang zwischen allen vier Themen erklÃ¤ren und sie als integrierten Stack umsetzen — Synthese
 
-Wenn ein Punkt unsicher ist, geh zurueck zur entsprechenden Lektion. Diese Themen sind nicht optional — sie bestimmen, ob Dein AI-Produkt Vertrauen aufbaut oder zerstoert.
+Wenn ein Punkt unsicher ist, geh zurÃ¼ck zur entsprechenden Lektion. Diese Themen sind nicht optional — sie bestimmen, ob Dein AI-Produkt Vertrauen aufbaut oder zerstoert.
 
 ## Weiter mit: AI Execution
 
@@ -67,29 +67,29 @@ Drei Szenarien, die mehrere Konzepte aus diesem Kapitel kombinieren. Ueberleg Di
 
 ### Szenario 1: Der Medical-Chatbot mit Datenhunger
 
-Dein Team baut einen AI-Chatbot fuer eine Krankenversicherung, der Versicherten bei Gesundheitsfragen hilft. Der ML-Lead schlaegt vor, alle Chat-Verlaeufe zu loggen, um Hallucinations besser zu erkennen und Guardrails zu verbessern. Die Compliance-Abteilung ist begeistert — mehr Daten, bessere Qualitaet. Was ist Deine Position als PM?
+Dein Team baut einen AI-Chatbot fÃ¼r eine Krankenversicherung, der Versicherten bei Gesundheitsfragen hilft. Der ML-Lead schlÃ¤gt vor, alle Chat-Verlaeufe zu loggen, um Hallucinations besser zu erkennen und Guardrails zu verbessern. Die Compliance-Abteilung ist begeistert — mehr Daten, bessere QualitÃ¤t. Was ist Deine Position als PM?
 
 <details>
 <summary>Aufloesung</summary>
 
-Hier kollidieren Privacy (Lektion 3) und Guardrails/Hallucination Management (Lektionen 2+4). Gesundheitsdaten sind hochsensibel — vollstaendiges Logging widerspricht dem Prinzip der Datenminimierung. Die richtige Loesung: Input-Filtering und Hallucination-Detection muessen VOR dem Logging passieren. Du kannst aggregierte Metriken (Hallucination Rate, Block Rate) tracken, ohne individuelle Gespraeche zu speichern. Als Hochrisiko-System unter dem EU AI Act brauchst Du beides: robuste Qualitaetssicherung UND Privacy by Design.
+Hier kollidieren Privacy (Lektion 3) und Guardrails/Hallucination Management (Lektionen 2+4). Gesundheitsdaten sind hochsensibel — vollstaendiges Logging widerspricht dem Prinzip der Datenminimierung. Die richtige LÃ¶sung: Input-Filtering und Hallucination-Detection mÃ¼ssen VOR dem Logging passieren. Du kannst aggregierte Metriken (Hallucination Rate, Block Rate) tracken, ohne individuelle Gespraeche zu speichern. Als Hochrisiko-System unter dem EU AI Act brauchst Du beides: robuste Qualitaetssicherung UND Privacy by Design.
 
 </details>
 
 ### Szenario 2: Clearview AI im Recruiting
 
-Ein Startup pitcht Deinem Unternehmen ein AI-Tool, das oeffentlich verfuegbare Social-Media-Daten analysiert, um Persoenlichkeitsprofile von Bewerbern zu erstellen. Das Tool hat beeindruckende Accuracy-Metriken und der CEO ist begeistert. Du sollst als PM die Integration verantworten. Wie bewertest Du das?
+Ein Startup pitcht Deinem Unternehmen ein AI-Tool, das Ã¶ffentlich verfÃ¼gbare Social-Media-Daten analysiert, um Persoenlichkeitsprofile von Bewerbern zu erstellen. Das Tool hat beeindruckende Accuracy-Metriken und der CEO ist begeistert. Du sollst als PM die Integration verantworten. Wie bewertest Du das?
 
 <details>
 <summary>Aufloesung</summary>
 
-Dieses Szenario verbindet Responsible AI (Lektion 1) mit Bias/Fairness und Privacy (Lektion 3). Erstens: Recruiting faellt unter Hochrisiko im EU AI Act — strenge Anforderungen. Zweitens: Die Datenerhebung ohne explizite Einwilligung ist das Clearview-AI-Muster aus Lektion 1 — technisch moeglich, aber ethisch und rechtlich problematisch. Drittens: Social-Media-Daten korrelieren mit Alter, Ethnie und sozioekonomischem Status, was systematische Bias erzeugt. Als PM solltest Du das Projekt ablehnen und dokumentieren warum — ein Rahmen ohne Responsible-AI-Prinzipien fuehrt hier zu Reputations- und Rechtsrisiken.
+Dieses Szenario verbindet Responsible AI (Lektion 1) mit Bias/Fairness und Privacy (Lektion 3). Erstens: Recruiting faellt unter Hochrisiko im EU AI Act — strenge Anforderungen. Zweitens: Die Datenerhebung ohne explizite Einwilligung ist das Clearview-AI-Muster aus Lektion 1 — technisch mÃ¶glich, aber ethisch und rechtlich problematisch. Drittens: Social-Media-Daten korrelieren mit Alter, Ethnie und sozioekonomischem Status, was systematische Bias erzeugt. Als PM solltest Du das Projekt ablehnen und dokumentieren warum — ein Rahmen ohne Responsible-AI-Prinzipien fuehrt hier zu Reputations- und Rechtsrisiken.
 
 </details>
 
 ### Szenario 3: Guardrails vs. User Experience
 
-Dein AI-Schreibassistent fuer Juristen blockiert 15% aller Anfragen — dreimal mehr als der Branchendurchschnitt. Die Guardrails wurden konservativ eingestellt, weil juristische Inhalte sensibel sind. Nutzer beschweren sich massiv, die Retention sinkt. Dein Engineering-Lead will die Guardrails lockern, Dein Legal-Team will sie beibehalten. Was tust Du?
+Dein AI-Schreibassistent fÃ¼r Juristen blockiert 15% aller Anfragen — dreimal mehr als der Branchendurchschnitt. Die Guardrails wurden konservativ eingestellt, weil juristische Inhalte sensibel sind. Nutzer beschweren sich massiv, die Retention sinkt. Dein Engineering-Lead will die Guardrails lockern, Dein Legal-Team will sie beibehalten. Was tust Du?
 
 <details>
 <summary>Aufloesung</summary>

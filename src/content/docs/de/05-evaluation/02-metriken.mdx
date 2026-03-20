@@ -13,7 +13,7 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 Dein Data-Science-Team praesentiert Ergebnisse: "Das neue Modell hat einen F1-Score von 0,88, ROUGE-L liegt bei 0,45, und der AUC ist 0,94." Der VP Product schaut Dich an und fragt: "Ist das gut?" Deine Antwort entscheidet, ob das Feature shipped wird.
 
-Als PM musst Du nicht jede Formel verstehen. Aber Du musst wissen, welche Metrik fuer welchen Produkttyp relevant ist, was die Zahlen fuer User und Business bedeuten, und wann eine Zahl truegerisch gut aussieht. Die Metrik-Auswahl ist eine Produktentscheidung — nicht eine technische.
+Als PM musst Du nicht jede Formel verstehen. Aber Du musst wissen, welche Metrik fÃ¼r welchen Produkttyp relevant ist, was die Zahlen fÃ¼r User und Business bedeuten, und wann eine Zahl truegerisch gut aussieht. Die Metrik-Auswahl ist eine Produktentscheidung — nicht eine technische.
 
 ## Concept
 
@@ -38,20 +38,20 @@ Die meisten AI-Produkte enthalten Klassifikationskomponenten — Spam-Erkennung,
 | Content Moderation | 0.85+ |
 | Medizinische Diagnoseunterstuetzung | 0.90+ |
 
-**Die Accuracy-Falle:** Accuracy ist bei unbalancierten Datensaetzen truegerisch. Ein Spam-Filter mit 99% Accuracy klingt grossartig — bis Du realisierst, dass 99% der E-Mails kein Spam sind. Das Modell koennte einfach alles als "kein Spam" labeln und 99% erreichen.
+**Die Accuracy-Falle:** Accuracy ist bei unbalancierten Datensaetzen truegerisch. Ein Spam-Filter mit 99% Accuracy klingt grossartig — bis Du realisierst, dass 99% der E-Mails kein Spam sind. Das Modell kÃ¶nnte einfach alles als "kein Spam" labeln und 99% erreichen.
 
 ### Generation Metrics
 
-Fuer Produkte, die Text generieren (Zusammenfassungen, Uebersetzungen, Content):
+FÃ¼r Produkte, die Text generieren (Zusammenfassungen, Uebersetzungen, Content):
 
-| Metrik | Staerke | Limitation |
+| Metrik | StÃ¤rke | Limitation |
 |--------|---------|-----------|
 | BLEU | Uebersetzungsqualitaet mit Referenz | Nur Wort-Overlap, keine Semantik |
 | ROUGE | Zusammenfassungsqualitaet mit Referenz | Nur Wort-Overlap, keine Semantik |
 | BERTScore | Semantische Aehnlichkeit (erkennt Paraphrasen) | Braucht Embedding-Modell |
-| LLM-as-Judge | Offene Qualitaet, Ton, Hilfsbereitschaft | Kosten, Latenz, Judge Bias |
+| LLM-as-Judge | Offene QualitÃ¤t, Ton, Hilfsbereitschaft | Kosten, Latenz, Judge Bias |
 
-**Aktueller Konsens:** LLM-as-Judge hat sich als bevorzugte Metrik fuer finale Qualitaetsbewertung bei generativer AI etabliert. BLEU und ROUGE bleiben nuetzlich fuer schnelle Regressions-Checks in CI/CD-Pipelines.
+**Aktueller Konsens:** LLM-as-Judge hat sich als bevorzugte Metrik fÃ¼r finale Qualitaetsbewertung bei generativer AI etabliert. BLEU und ROUGE bleiben nuetzlich fÃ¼r schnelle Regressions-Checks in CI/CD-Pipelines.
 
 ### Task-Specific Metrics
 
@@ -70,7 +70,7 @@ Die wertvollsten Evaluationen sind aufgabenspezifisch:
 | Precision = 0.92 | "Von 100 Flags sind 92 korrekt" |
 | Recall = 0.85 | "Die AI findet 85 von 100 echten Faellen" |
 | F1 = 0.88 | "Balance zwischen Finden (85%) und Richtigliegen (92%)" |
-| AUC = 0.94 | "Das Modell rankt einen positiven Fall ueber einen negativen in 94% der Faelle korrekt" |
+| AUC = 0.94 | "Das Modell rankt einen positiven Fall Ã¼ber einen negativen in 94% der Faelle korrekt" |
 
 ## Framework
 
@@ -79,15 +79,15 @@ Die wertvollsten Evaluationen sind aufgabenspezifisch:
 | Produkttyp | Primaere Metriken | Sekundaere Metriken |
 |------------|-------------------|---------------------|
 | Content Moderation | Precision, Recall (pro Kategorie) | Latenz, False Positive Rate nach Content-Typ |
-| Search / Retrieval | NDCG (Normalized Discounted Cumulative Gain — Ranking-Qualitaet), MRR (Mean Reciprocal Rank — Position des ersten relevanten Ergebnisses), Context Relevance | Retrieval-Latenz, Zero-Result-Rate |
+| Search / Retrieval | NDCG (Normalized Discounted Cumulative Gain — Ranking-QualitÃ¤t), MRR (Mean Reciprocal Rank — Position des ersten relevanten Ergebnisses), Context Relevance | Retrieval-Latenz, Zero-Result-Rate |
 | Zusammenfassung | LLM-as-Judge (Faithfulness, Coverage) | User Satisfaction, gesparte Zeit |
 | Chatbot / Assistent | Task Completion Rate, User Satisfaction | Escalation Rate, Antwortzeit |
 | Klassifikation | F1, AUC, per-Class Precision/Recall | Threshold Sensitivity Analysis |
 | Code-Generierung | Funktionale Korrektheit (Tests bestehen) | User Acceptance Rate |
 
-**Regeln fuer Stakeholder-Kommunikation:**
+**Regeln fÃ¼r Stakeholder-Kommunikation:**
 1. Immer in Business Impact uebersetzen: "92% Precision bedeutet 8 Fehlalarme pro 100 Flags — ca. 2 Stunden Analysten-Zeit taeglich"
-2. Tradeoffs zeigen, nicht Einzelzahlen: "Wir koennen die Trefferquote von 85% auf 95% erhoehen, aber Fehlalarme verdreifachen sich"
+2. Tradeoffs zeigen, nicht Einzelzahlen: "Wir kÃ¶nnen die Trefferquote von 85% auf 95% erhÃ¶hen, aber Fehlalarme verdreifachen sich"
 3. Gegen den aktuellen Prozess benchmarken, nicht gegen Perfektion
 
 ## Scenario
@@ -108,25 +108,25 @@ Du bist PM bei einem E-Commerce-Unternehmen. Euer AI-Feature klassifiziert Produ
 <details>
 <summary>Wie wuerdest Du entscheiden?</summary>
 
-**Die beste Entscheidung:** Modell A mit Human Review fuer nicht erfasste Faelle.
+**Die beste Entscheidung:** Modell A mit Human Review fÃ¼r nicht erfasste Faelle.
 
 **Warum (die Rechnung):**
 - **Modell B — Kosten der False Positives:** Bei 46.000 echten Reviews werden 22% faelschlich geloescht = 10.120 Reviews. Bei 15 EUR pro Fall = 151.800 EUR/Monat. Untragbar.
 - **Modell A — Kosten der False Negatives:** Bei 4.000 Fake Reviews werden 30% verpasst = 1.200 Reviews. Bei 45 EUR pro Fall = 54.000 EUR/Monat.
-- **Modell A + Human Review:** Die 1.200 verpassten Fakes plus Borderline-Faelle einem Moderator zuweisen. Kosten: ca. 4.000 EUR/Monat fuer einen Teilzeit-Moderator.
+- **Modell A + Human Review:** Die 1.200 verpassten Fakes plus Borderline-Faelle einem Moderator zuweisen. Kosten: ca. 4.000 EUR/Monat fÃ¼r einen Teilzeit-Moderator.
 - **Gesamtkosten Modell A + Human Review:** deutlich unter den 12.000 EUR des rein manuellen Prozesses — und massiv unter den 151.800 EUR von Modell B.
 
 **Haeufige Fehler:**
 - "Hoeherer Recall ist immer besser" — Nicht wenn False Positives echte User treffen. Die Kostenasymmetrie entscheidet.
 - "Optimiere auf eine Metrik" — Reale Produkte brauchen Balance. Der PM definiert den akzeptablen Tradeoff.
-- "Accuracy reicht als Metrik" — Bei 8% Fake Rate wuerde ein Modell, das alles als "echt" labelt, 92% Accuracy erreichen.
+- "Accuracy reicht als Metrik" — Bei 8% Fake Rate wÃ¼rde ein Modell, das alles als "echt" labelt, 92% Accuracy erreichen.
 </details>
 
 ## Reflect
 
-**Die Metrik-Auswahl ist eine Produktentscheidung, keine technische. Denn jede Metrik codiert einen Tradeoff — und der PM muss entscheiden, welchen Tradeoff die User akzeptieren koennen.**
+**Die Metrik-Auswahl ist eine Produktentscheidung, keine technische. Denn jede Metrik codiert einen Tradeoff — und der PM muss entscheiden, welchen Tradeoff die User akzeptieren kÃ¶nnen.**
 
-- Precision vs. Recall ist kein technisches Detail — es ist die Frage, ob False Positives oder False Negatives fuer Dein Produkt schaedlicher sind.
+- Precision vs. Recall ist kein technisches Detail — es ist die Frage, ob False Positives oder False Negatives fÃ¼r Dein Produkt schaedlicher sind.
 - Accuracy ist bei unbalancierten Datensaetzen truegerisch. Nutze F1, Precision und Recall — aufgeschluesselt nach Kategorien.
 - Uebersetze jede Metrik in Business Impact. "F1 = 0.88" sagt Stakeholdern nichts. "8 Fehlalarme pro 100 Flags" schon.
 

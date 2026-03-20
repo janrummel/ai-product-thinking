@@ -11,15 +11,15 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Dein Engineering-Team schlaegt vor, ein Recommendation-Feature mit "unueberwachtem Lernen" zu bauen. Im naechsten Satz faellt "Reinforcement Learning". In der Slack-Diskussion steht ploetzlich "Self-Supervised Pre-Training".
+Dein Engineering-Team schlÃ¤gt vor, ein Recommendation-Feature mit "unueberwachtem Lernen" zu bauen. Im nÃ¤chsten Satz faellt "Reinforcement Learning". In der Slack-Diskussion steht ploetzlich "Self-Supervised Pre-Training".
 
-Du musst kein Modell trainieren koennen. Aber Du musst verstehen, *welche Art von ML welches Problem loest* — sonst kannst Du weder den Vorschlag bewerten noch die richtige Frage stellen.
+Du musst kein Modell trainieren kÃ¶nnen. Aber Du musst verstehen, *welche Art von ML welches Problem loest* — sonst kannst Du weder den Vorschlag bewerten noch die richtige Frage stellen.
 
 ## Concept
 
 ### Drei Paradigmen der Programmierung
 
-Andrej Karpathy unterscheidet Software 1.0 und 2.0. Fuer PMs ist das die wichtigste Grundunterscheidung:
+Andrej Karpathy unterscheidet Software 1.0 und 2.0. FÃ¼r PMs ist das die wichtigste Grundunterscheidung:
 
 - **Traditionelle Programmierung (Software 1.0):** Ein Mensch schreibt Regeln. `if order_status == "shipped": show_tracking()`
 - **Machine Learning:** Die Maschine lernt Regeln aus gelabelten Beispielen. Du gibst 10.000 Support-Tickets mit Kategorien, das Modell lernt die Zuordnung.
@@ -27,7 +27,7 @@ Andrej Karpathy unterscheidet Software 1.0 und 2.0. Fuer PMs ist das die wichtig
 
 ### Neuronale Netze — PM-Level
 
-Ein Neural Network hat Input-Layer, Hidden Layers und Output-Layer. "Deep" bedeutet: viele Hidden Layers. Jede Verbindung hat ein Gewicht (Weight), das beim Training gelernt wird. Grosse Frontier-Modelle haben hunderte Milliarden bis ueber eine Billion Parameter — genaue Zahlen werden selten offiziell bestaetigt (OpenAI, Google und Anthropic veroeffentlichen keine Parameterzahlen).
+Ein Neural Network hat Input-Layer, Hidden Layers und Output-Layer. "Deep" bedeutet: viele Hidden Layers. Jede Verbindung hat ein Gewicht (Weight), das beim Training gelernt wird. Grosse Frontier-Modelle haben hunderte Milliarden bis Ã¼ber eine Billion Parameter — genaue Zahlen werden selten offiziell bestaetigt (OpenAI, Google und Anthropic veroeffentlichen keine Parameterzahlen).
 
 Du musst die Mathematik nicht kennen. Aber Du musst wissen: **Mehr Parameter = mehr Kapazitaet, aber auch mehr Kosten und mehr Daten zum Trainieren.**
 
@@ -39,7 +39,7 @@ Du musst die Mathematik nicht kennen. Aber Du musst wissen: **Mehr Parameter = m
 | **Unsupervised** | Muster in ungelabelten Daten | Kundensegmentierung, Anomalie-Erkennung |
 | **Semi-Supervised** | Wenig gelabelt + viel ungelabelt | Wenn Labeling teuer ist, aber Rohdaten reichlich vorhanden |
 | **Self-Supervised** | Modell erzeugt eigene Labels aus Daten | LLM Pre-Training (naechstes Wort vorhersagen) |
-| **Reinforcement Learning** | Trial-and-Error mit Belohnung | RLHF fuer Chatbots, Prozessoptimierung |
+| **Reinforcement Learning** | Trial-and-Error mit Belohnung | RLHF fÃ¼r Chatbots, Prozessoptimierung |
 
 ### Classification vs. Generation
 
@@ -57,7 +57,7 @@ Du musst die Mathematik nicht kennen. Aber Du musst wissen: **Mehr Parameter = m
 
 ## Framework
 
-Die **Data-Task Matrix** — Dein Entscheidungsraster fuer ML-Ansaetze:
+Die **Data-Task Matrix** — Dein Entscheidungsraster fÃ¼r ML-Ansaetze:
 
 | | Gelabelte Daten vorhanden | Nur ungelabelte Daten |
 |---|---|---|
@@ -92,14 +92,14 @@ Du bist PM bei einem Streaming-Dienst. Das Ziel: bessere Empfehlungen. Euer Data
 - Unsupervised Clustering liefert zusaetzliche Signale (Nutzer mit aehnlichem Sehverhalten), die das Supervised Model verbessern.
 - Option C (LLM mit Prompting) klingt modern, hat aber keine Personalisierung auf Basis eurer Nutzerdaten — und ist pro Anfrage deutlich teurer als ein spezialisiertes Recommendation Model.
 
-**Was viele falsch machen:** Ein LLM fuer alles nehmen, obwohl ein spezialisiertes ML-Modell guenstiger, schneller und fuer den Use Case besser ist.
+**Was viele falsch machen:** Ein LLM fÃ¼r alles nehmen, obwohl ein spezialisiertes ML-Modell guenstiger, schneller und fÃ¼r den Use Case besser ist.
 </details>
 
 ## Reflect
 
 - **ML ist kein Monolith.** Supervised, Unsupervised, Self-Supervised und RL loesen fundamental verschiedene Probleme. Die falsche Wahl kostet Monate.
-- **Die Datenlage bestimmt den Ansatz.** Nicht die Technologie waehlen und dann Daten suchen — sondern die vorhandenen Daten bestimmen lassen, was moeglich ist.
-- **Generative ≠ immer besser.** Discriminative Modelle sind fuer Klassifikation oft guenstiger, schneller und zuverlaessiger. Nicht jedes Problem braucht ein LLM.
+- **Die Datenlage bestimmt den Ansatz.** Nicht die Technologie waehlen und dann Daten suchen — sondern die vorhandenen Daten bestimmen lassen, was mÃ¶glich ist.
+- **Generative ≠ immer besser.** Discriminative Modelle sind fÃ¼r Klassifikation oft guenstiger, schneller und zuverlaessiger. Nicht jedes Problem braucht ein LLM.
 - **Hybrid ist oft die Antwort.** Die besten Produktsysteme kombinieren mehrere ML-Typen in einer Pipeline.
 
 ---

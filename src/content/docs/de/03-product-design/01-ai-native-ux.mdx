@@ -11,9 +11,9 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Dein Design-Team hat einen Prototyp gebaut: Ein Chat-Interface fuer Euer neues AI-Feature. Der CEO findet es "sehr ChatGPT". Das Problem: 80% Eurer User wollen gar nicht chatten. Sie wollen Ergebnisse.
+Dein Design-Team hat einen Prototyp gebaut: Ein Chat-Interface fÃ¼r Euer neues AI-Feature. Der CEO findet es "sehr ChatGPT". Das Problem: 80% Eurer User wollen gar nicht chatten. Sie wollen Ergebnisse.
 
-Als PM musst Du verstehen, dass AI-Interfaces nicht einfach "normale UI plus Chat" sind. AI-Output ist nicht-deterministisch — und das veraendert alles: Wie Du Ergebnisse anzeigst, wie Du Vertrauen aufbaust und welche Interaktionsmuster funktionieren.
+Als PM musst Du verstehen, dass AI-Interfaces nicht einfach "normale UI plus Chat" sind. AI-Output ist nicht-deterministisch — und das verÃ¤ndert alles: Wie Du Ergebnisse anzeigst, wie Du Vertrauen aufbaust und welche Interaktionsmuster funktionieren.
 
 ## Concept
 
@@ -21,11 +21,11 @@ Als PM musst Du verstehen, dass AI-Interfaces nicht einfach "normale UI plus Cha
 
 Traditionelle UX ist deterministisch: Input X ergibt immer Output Y. Ein Button tut immer dasselbe. AI-UX ist probabilistisch: Input X ergibt eine *Verteilung* moeglicher Outputs.
 
-Das hat direkte Konsequenzen fuer Dein Interface:
+Das hat direkte Konsequenzen fÃ¼r Dein Interface:
 - Jeder AI-Output muss als **Vorschlag kommuniziert werden**, nicht als Fakt
-- Interfaces muessen **Variabilitaet zeigen**, nicht verstecken
-- User brauchen Moeglichkeiten zur **Regeneration** ("Generate Again"-Buttons)
-- **Confidence Indicators** gehoeren zum Output, nicht in eine Debug-Ansicht
+- Interfaces mÃ¼ssen **Variabilitaet zeigen**, nicht verstecken
+- User brauchen MÃ¶glichkeiten zur **Regeneration** ("Generate Again"-Buttons)
+- **Confidence Indicators** gehÃ¶ren zum Output, nicht in eine Debug-Ansicht
 
 ### Chat vs. Structured Output
 
@@ -33,17 +33,17 @@ Nicht jede AI-Interaktion braucht ein Chat-Fenster. Die Unterscheidung ist entsc
 
 | | Chat-Interface | Structured Output |
 |---|---|---|
-| Staerke | Explorativ, mehrdeutig, Reasoning | Bekannte Inputs, Validierung, Volumen |
-| Schwaeche | Ineffizient fuer repetitive Tasks | Unflexibel bei offenen Fragen |
+| StÃ¤rke | Explorativ, mehrdeutig, Reasoning | Bekannte Inputs, Validierung, Volumen |
+| SchwÃ¤che | Ineffizient fÃ¼r repetitive Tasks | Unflexibel bei offenen Fragen |
 | Beispiel | "Analysiere diesen Vertrag" | Rechnungsklassifikation mit Dropdown |
 
 **Die Regel:** "If it's a form, it should stay a form" (gaengige UX-Design-Empfehlung). Ein Formular in ein Chat-Interface zu zwingen macht es schlechter, nicht besser.
 
-**Best Practice:** Jedes Formular sollte conversational triggerbar sein, jeder Agent sollte an ein Formular uebergeben koennen. Das reine Chat-Paradigma ist fuer komplexe Workflows bereits ueberholt.
+**Best Practice:** Jedes Formular sollte conversational triggerbar sein, jeder Agent sollte an ein Formular uebergeben kÃ¶nnen. Das reine Chat-Paradigma ist fÃ¼r komplexe Workflows bereits ueberholt.
 
-### Progressive Disclosure fuer AI
+### Progressive Disclosure fÃ¼r AI
 
-AI-Outputs enthalten viel Information. Nicht alles gehoert auf den ersten Blick:
+AI-Outputs enthalten viel Information. Nicht alles gehÃ¶rt auf den ersten Blick:
 
 - **Level 1:** Kernergebnis — die Antwort, die der User braucht
 - **Level 2:** Confidence Scores, Quellen, Reasoning-Zusammenfassung
@@ -51,16 +51,16 @@ AI-Outputs enthalten viel Information. Nicht alles gehoert auf den ersten Blick:
 
 Microsofts Copilot passt das Interface dynamisch an Nutzerverhalten an: Power-User sehen mehr Optionen und Details, Gelegenheitsnutzer weniger.
 
-### User Onboarding fuer AI Features
+### User Onboarding fÃ¼r AI Features
 
-Die groesste UX-Gefahr bei AI-Features: Die Demo wirkt magisch, die Realitaet enttaeuscht. Dieser "Magic Demo Gap" ist der haeufigste Grund, warum AI-Features nach dem Launch an Nutzung verlieren.
+Die grÃ¶Ãte UX-Gefahr bei AI-Features: Die Demo wirkt magisch, die RealitÃ¤t enttaeuscht. Dieser "Magic Demo Gap" ist der haeufigste Grund, warum AI-Features nach dem Launch an Nutzung verlieren.
 
 - **Erwartungsmanagement:** Kommuniziere klar, was die AI kann und was nicht — bevor der User das erste Ergebnis sieht
 - **Progressive Trust:** Starte mit einfachen, zuverlaessigen AI-Funktionen. Erst wenn Vertrauen aufgebaut ist, komplexere anbieten
-- **Bestehende Patterns nutzen:** Notion fuehrte AI ueber Slash Commands ein — ein Pattern, das User bereits kannten. Neue Interaktionsmuster erfordern mehr Onboarding-Aufwand
-- **Kein Feature-Dump:** Schrittweise Einfuehrung schlaegt "hier sind alle 12 AI-Features auf einmal"
+- **Bestehende Patterns nutzen:** Notion fuehrte AI Ã¼ber Slash Commands ein — ein Pattern, das User bereits kannten. Neue Interaktionsmuster erfordern mehr Onboarding-Aufwand
+- **Kein Feature-Dump:** Schrittweise EinfÃ¼hrung schlÃ¤gt "hier sind alle 12 AI-Features auf einmal"
 
-**Fuer Dich als PM:** Plane das Onboarding als Teil des AI-Features, nicht als Nachgedanken. Der erste AI-Kontakt bestimmt, ob User dem Feature vertrauen oder es ignorieren.
+**FÃ¼r Dich als PM:** Plane das Onboarding als Teil des AI-Features, nicht als Nachgedanken. Der erste AI-Kontakt bestimmt, ob User dem Feature vertrauen oder es ignorieren.
 
 ### Loading und Streaming UX
 
@@ -68,7 +68,7 @@ AI-Operationen sind inhaerent langsamer als CRUD. Streaming ist nicht optional:
 
 - User nehmen Streaming-Responses als **40-60% schneller** wahr als identische Non-Streaming-Responses
 - Streaming zeigt: "AI arbeitet" — nicht einfach nur "laedt"
-- **Accessibility-Problem:** Streaming ist fuer Screen Reader problematisch. Barrierefreie Alternativen einplanen.
+- **Accessibility-Problem:** Streaming ist fÃ¼r Screen Reader problematisch. Barrierefreie Alternativen einplanen.
 
 ## Framework
 
@@ -84,7 +84,7 @@ AI-Operationen sind inhaerent langsamer als CRUD. Streaming ist nicht optional:
 | Visuelle Generierung | Grid + Variations | Midjourney (4-Bild-Grid) |
 | Code-Generierung + Preview | Chat-to-Output + Live-Vorschau | v0 by Vercel |
 
-**Design-Prinzipien fuer die Auswahl:**
+**Design-Prinzipien fÃ¼r die Auswahl:**
 
 1. **Modalitaet an Aufgabe matchen** — nicht jede AI braucht Chat
 2. **Zeigen dass AI arbeitet** — Streaming, Skeleton Screens, Progress
@@ -94,48 +94,48 @@ AI-Operationen sind inhaerent langsamer als CRUD. Streaming ist nicht optional:
 
 ## Scenario: Notion AI — Inline statt Chat
 
-Ende 2022. Notion hat ueber 30 Millionen User und ist eines der meistgenutzten Produktivitaets-Tools weltweit. Der AI-Hype explodiert — ChatGPT ist gerade gelauncht, jedes SaaS-Produkt kuendigt "AI Features" an. Notion steht unter Druck: Die Waitlist fuer Notion AI hat bereits ueber 2 Millionen Eintraege. Die User erwarten etwas.
+Ende 2022. Notion hat Ã¼ber 30 Millionen User und ist eines der meistgenutzten Produktivitaets-Tools weltweit. Der AI-Hype explodiert — ChatGPT ist gerade gelauncht, jedes SaaS-Produkt kuendigt "AI Features" an. Notion steht unter Druck: Die Waitlist fÃ¼r Notion AI hat bereits Ã¼ber 2 Millionen Eintraege. Die User erwarten etwas.
 
-Die zentrale Frage fuer das Produkt-Team: *Wie* soll AI in Notion erscheinen?
+Die zentrale Frage fÃ¼r das Produkt-Team: *Wie* soll AI in Notion erscheinen?
 
 **Die Fakten:**
-- 2M+ Waitlist-Signups fuer Notion AI vor dem Launch
+- 2M+ Waitlist-Signups fÃ¼r Notion AI vor dem Launch
 - Notion ist ein Editor-zentriertes Produkt — User verbringen ihre Zeit in Dokumenten
 - Der Marktstandard 2022/2023: Standalone-Chatbot als separates Feature
 - User-Insight aus der Forschung: "Ich will mein Dokument nicht verlassen, um mit einer AI zu reden"
 
 **Die Entscheidung — drei Optionen:**
-1. **Standalone AI Chat:** Ein separates Chat-Fenster neben dem Editor. User stellen Fragen, kopieren Ergebnisse zurueck ins Dokument
-2. **Inline AI:** AI direkt im Editor — ueber Slash-Commands (`/ai`), lila hervorgehoben, im bestehenden Dokument-Workflow. Kein neues Interface
-3. **Hybrid:** Chat-Sidebar fuer komplexe Fragen, Inline fuer schnelle Aktionen
+1. **Standalone AI Chat:** Ein separates Chat-Fenster neben dem Editor. User stellen Fragen, kopieren Ergebnisse zurÃ¼ck ins Dokument
+2. **Inline AI:** AI direkt im Editor — Ã¼ber Slash-Commands (`/ai`), lila hervorgehoben, im bestehenden Dokument-Workflow. Kein neues Interface
+3. **Hybrid:** Chat-Sidebar fÃ¼r komplexe Fragen, Inline fÃ¼r schnelle Aktionen
 
 ## Decide
 
 <details>
 <summary>Was hat Notion entschieden — und warum?</summary>
 
-**Die Entscheidung:** Option 2 — Inline AI, vollstaendig integriert in den Editor.
+**Die Entscheidung:** Option 2 — Inline AI, vollstÃ¤ndig integriert in den Editor.
 
 Notion hat den "Chatbot draufschrauben"-Ansatz explizit abgelehnt. Stattdessen: "Write with AI" und "Edit with AI" als native Funktionen im Dokument. Der Slash-Command `/ai` fuegt sich nahtlos in das bestehende Slash-Command-System ein, das Notion-User bereits kennen. AI-generierter Content erscheint lila hervorgehoben — direkt dort, wo der User arbeitet.
 
 **Warum es funktioniert hat — durch die Linse der AI-UX Pattern-Matrix:**
 
-- **Modalitaet an Aufgabe gematcht:** Notion ist ein Schreib-Tool. Die Aufgabe ist "Text erstellen und bearbeiten" — nicht "mit einer AI explorativ diskutieren". Inline-AI passt zur Aufgabe, ein Chatbot haette ein neues Interaktionsmuster erzwungen
-- **Bestehende Workflows respektiert:** User kannten Slash-Commands bereits. Kein neues Interaktionsmodell noetig. Default-on fuer alle User, kein separates Onboarding
+- **Modalitaet an Aufgabe gematcht:** Notion ist ein Schreib-Tool. Die Aufgabe ist "Text erstellen und bearbeiten" — nicht "mit einer AI explorativ diskutieren". Inline-AI passt zur Aufgabe, ein Chatbot hÃ¤tte ein neues Interaktionsmuster erzwungen
+- **Bestehende Workflows respektiert:** User kannten Slash-Commands bereits. Kein neues Interaktionsmodell noetig. Default-on fÃ¼r alle User, kein separates Onboarding
 - **Progressive Disclosure umgesetzt:** Level 1 ist das Kernergebnis direkt im Dokument (lila markiert). Level 2 erscheint bei Hover oder Klick — Optionen zum Verfeinern, Kuerzen, Umformulieren. Kein Information Overload
-- **Variabilitaet eingebaut:** "Try Again", Tone-Anpassungen und Laengen-Optionen geben dem User Kontrolle ueber den nicht-deterministischen Output
+- **Variabilitaet eingebaut:** "Try Again", Tone-Anpassungen und Laengen-Optionen geben dem User Kontrolle Ã¼ber den nicht-deterministischen Output
 
-**Das Ergebnis:** Launch im Februar 2023. Rund 50% der aktiven User haben AI-Features innerhalb von sechs Monaten adoptiert — eine aussergewoehnlich hohe Adoptionsrate fuer ein neues Feature.
+**Das Ergebnis:** Launch im Februar 2023. Rund 50% der aktiven User haben AI-Features innerhalb von sechs Monaten adoptiert — eine aussergewoehnlich hohe Adoptionsrate fÃ¼r ein neues Feature.
 
-**Das entscheidende Insight:** User wollen ihr Dokument nicht verlassen, um mit einer AI zu sprechen. Die Integration in den bestehenden Workflow hat die Huerde eliminiert, die ein separates Chat-Interface aufgebaut haette.
+**Das entscheidende Insight:** User wollen ihr Dokument nicht verlassen, um mit einer AI zu sprechen. Die Integration in den bestehenden Workflow hat die Huerde eliminiert, die ein separates Chat-Interface aufgebaut hÃ¤tte.
 
 </details>
 
 ## Reflect
 
-- **Das Interface muss zur Aufgabe passen, nicht zur Technologie.** Notion hat nicht gefragt "Wie bauen wir einen Chatbot?" sondern "Wie wird Schreiben besser?". Chat ist ein Interaktionsmuster — nicht der Default. Die Slash-Command-Integration war moeglich, weil das Team die bestehende Aufgabe verstanden hat, nicht die Technologie in den Vordergrund gestellt hat.
-- **"Bolt on a chatbot" ist das Anti-Pattern dieser Generation.** Notion hat es explizit abgelehnt. Ein separates Chat-Fenster haette den Workflow gebrochen und eine Copy-Paste-Schleife erzeugt. Die hohe Adoptionsrate (ca. 50% in sechs Monaten) zeigt: Geringe Friktionskosten schlagen Feature-Reichtum.
-- **Progressive Disclosure entscheidet ueber Adoption.** Lila Highlight als Level 1, Optionen bei Hover als Level 2 — Notion hat AI-Output geschichtet, statt alles auf einmal zu zeigen. Das reduziert Ueberforderung bei Gelegenheitsnutzern und gibt Power-Usern trotzdem Kontrolle.
+- **Das Interface muss zur Aufgabe passen, nicht zur Technologie.** Notion hat nicht gefragt "Wie bauen wir einen Chatbot?" sondern "Wie wird Schreiben besser?". Chat ist ein Interaktionsmuster — nicht der Default. Die Slash-Command-Integration war mÃ¶glich, weil das Team die bestehende Aufgabe verstanden hat, nicht die Technologie in den Vordergrund gestellt hat.
+- **"Bolt on a chatbot" ist das Anti-Pattern dieser Generation.** Notion hat es explizit abgelehnt. Ein separates Chat-Fenster hÃ¤tte den Workflow gebrochen und eine Copy-Paste-Schleife erzeugt. Die hohe Adoptionsrate (ca. 50% in sechs Monaten) zeigt: Geringe Friktionskosten schlagen Feature-Reichtum.
+- **Progressive Disclosure entscheidet Ã¼ber Adoption.** Lila Highlight als Level 1, Optionen bei Hover als Level 2 — Notion hat AI-Output geschichtet, statt alles auf einmal zu zeigen. Das reduziert Ueberforderung bei Gelegenheitsnutzern und gibt Power-Usern trotzdem Kontrolle.
 - **Default-on senkt die Aktivierungsenergie.** Kein separates Onboarding, kein Feature-Toggle, kein "AI aktivieren"-Button. Die AI war einfach da — im gleichen Slash-Command-Menue, das User schon kannten. Die beste AI-UX ist die, die kein neues mentales Modell erfordert.
 
 ---
