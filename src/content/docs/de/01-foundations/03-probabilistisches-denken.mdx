@@ -26,14 +26,14 @@ Willkommen im Paradigmenwechsel. Traditionelle Software ist deterministisch — 
 | Testing | Pass/Fail | Verteilungen und Schwellenwerte |
 | Kosten | Deterministisch | Deterministisch — aber Outputs stochastisch |
 
-Das ist der fundamentale Mismatch: **Du zahlst deterministische Kosten fÃ¼r stochastische Ergebnisse.** Jeder API-Call kostet Geld. Ob das Ergebnis brauchbar ist, weisst Du vorher nicht.
+Das ist der fundamentale Mismatch: **Du zahlst deterministische Kosten fuer stochastische Ergebnisse.** Jeder API-Call kostet Geld. Ob das Ergebnis brauchbar ist, weisst Du vorher nicht.
 
 ### Zwei Arten von Unsicherheit
 
-- **Epistemisch** (Wissensluecke): Kann mit mehr Daten reduziert werden. Beispiel: Dein Modell kennt Dein Produktsortiment nicht → LÃ¶sung: RAG mit Produktdatenbank.
+- **Epistemisch** (Wissensluecke): Kann mit mehr Daten reduziert werden. Beispiel: Dein Modell kennt Dein Produktsortiment nicht → Loesung: RAG mit Produktdatenbank.
 - **Aleatorisch** (inhaerent): Kann *nicht* reduziert werden, egal wie viele Daten Du hast. Beispiel: Natuerliche Sprachvarianz — Menschen formulieren dieselbe Frage auf hundert Arten.
 
-**PM-Implikation:** Verschwende kein Budget darauf, irreduzible Unsicherheit zu eliminieren. Investiere stattdessen in Systeme, die damit umgehen kÃ¶nnen.
+**PM-Implikation:** Verschwende kein Budget darauf, irreduzible Unsicherheit zu eliminieren. Investiere stattdessen in Systeme, die damit umgehen koennen.
 
 ### Compound Uncertainty
 
@@ -64,11 +64,11 @@ Wenn Du mehrere AI-Agenten in Reihe schaltest, multipliziert sich die Unsicherhe
 | Content Moderation | 85-90% | 10-15% |
 | Customer Service | 80-85% | 10-15% |
 
-Eine Eskalationsrate von ~60% ist ein klares Signal fÃ¼r Fehlkalibrierung.
+Eine Eskalationsrate von ~60% ist ein klares Signal fuer Fehlkalibrierung.
 
 ## Scenario
 
-Du baust ein AI-gestuetztes Triage-System fÃ¼r eine Versicherung. Eingehende Schadensmeldungen sollen automatisch kategorisiert und priorisiert werden.
+Du baust ein AI-gestuetztes Triage-System fuer eine Versicherung. Eingehende Schadensmeldungen sollen automatisch kategorisiert und priorisiert werden.
 
 **Die Situation:**
 - 8.000 Schadensmeldungen pro Monat
@@ -90,9 +90,9 @@ Du baust ein AI-gestuetztes Triage-System fÃ¼r eine Versicherung. Eingehende S
 **Die beste Entscheidung:** Option 3 — Hybrid mit Confidence-Schwellenwert.
 
 **Warum:**
-- 71% bei "Komplex" ist zu niedrig fÃ¼r irreversible Entscheidungen mit 2.400 EUR Fehlerkosten
+- 71% bei "Komplex" ist zu niedrig fuer irreversible Entscheidungen mit 2.400 EUR Fehlerkosten
 - "Einfach" bei 92% ist vertretbar — Glasbruch falsch kategorisiert verursacht Verzoegerung, keinen Schaden
-- Der 88%-Schwellenwert fÃ¼r "Mittel" funkt als Sicherheitsnetz: unsichere Faelle gehen an Menschen
+- Der 88%-Schwellenwert fuer "Mittel" funkt als Sicherheitsnetz: unsichere Faelle gehen an Menschen
 - Du sparst ~60% der manuellen Arbeit, statt alles oder nichts zu automatisieren
 
 **Evals als PM-Skill:** Baue 50-100 Golden Examples pro Kategorie — Schadensmeldungen mit verifizierten idealen Klassifizierungen. Miss nicht nur Accuracy, sondern auch die Verteilung der Confidence-Scores. Tools wie Promptfoo oder DeepEval machen das operationalisierbar.

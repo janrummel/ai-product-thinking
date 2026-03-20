@@ -1,6 +1,6 @@
 ---
 title: "Prompt Engineering"
-description: "Warum der Prompt die Produktspezifikation Deines AI-Features ist — und wie Du mit der richtigen Technik QualitÃ¤t steuerst, ohne Code zu schreiben."
+description: "Warum der Prompt die Produktspezifikation Deines AI-Features ist — und wie Du mit der richtigen Technik Qualitaet steuerst, ohne Code zu schreiben."
 sidebar:
   order: 1
 ---
@@ -11,9 +11,9 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Dein AI-Feature liefert inkonsistente Ergebnisse. Mal ist die Zusammenfassung perfekt, mal voellig daneben. Das Engineering-Team schlÃ¤gt Fine-Tuning vor — drei Wochen Aufwand, 15.000 Euro Budget. Dein Tech Lead fragt: "Habt ihr den Prompt schon optimiert?"
+Dein AI-Feature liefert inkonsistente Ergebnisse. Mal ist die Zusammenfassung perfekt, mal voellig daneben. Das Engineering-Team schlaegt Fine-Tuning vor — drei Wochen Aufwand, 15.000 Euro Budget. Dein Tech Lead fragt: "Habt ihr den Prompt schon optimiert?"
 
-Prompt Engineering ist der schnellste, guenstigste Hebel, um AI-Output-QualitÃ¤t zu verbessern. FÃ¼r PMs ist es mehr als ein technisches Detail: Der Prompt *ist* die Produktspezifikation. Er definiert Verhalten, Ton, Format und Grenzen Deines AI-Features. Wer den Prompt versteht, versteht das Produkt.
+Prompt Engineering ist der schnellste, guenstigste Hebel, um AI-Output-Qualitaet zu verbessern. Fuer PMs ist es mehr als ein technisches Detail: Der Prompt *ist* die Produktspezifikation. Er definiert Verhalten, Ton, Format und Grenzen Deines AI-Features. Wer den Prompt versteht, versteht das Produkt.
 
 ## Concept
 
@@ -21,37 +21,37 @@ Prompt Engineering ist der schnellste, guenstigste Hebel, um AI-Output-QualitÃ�
 
 Nicht jede Aufgabe braucht die gleiche Technik. Die Kunst liegt darin, mit der einfachsten Methode zu starten und nur bei Bedarf zu eskalieren.
 
-**Zero-Shot:** Nur die Aufgabe beschreiben, keine Beispiele. Funktioniert fÃ¼r gut verstandene Tasks wie Zusammenfassungen oder Uebersetzungen. Starte immer hier — minimale Tokens, schnellste Iteration.
+**Zero-Shot:** Nur die Aufgabe beschreiben, keine Beispiele. Funktioniert fuer gut verstandene Tasks wie Zusammenfassungen oder Uebersetzungen. Starte immer hier — minimale Tokens, schnellste Iteration.
 
-**Few-Shot:** 1-5 Beispiele von gewuenschten Input-Output-Paaren mitgeben. Forschung zeigt starke Verbesserungen ab 1-2 Beispielen, mit abnehmenden Ertraegen ab 4-5. PM-Falle: 10+ Beispiele "zur Sicherheit" verschwenden Tokens und kÃ¶nnen das Modell verwirren.
+**Few-Shot:** 1-5 Beispiele von gewuenschten Input-Output-Paaren mitgeben. Forschung zeigt starke Verbesserungen ab 1-2 Beispielen, mit abnehmenden Ertraegen ab 4-5. PM-Falle: 10+ Beispiele "zur Sicherheit" verschwenden Tokens und koennen das Modell verwirren.
 
-**Chain-of-Thought (CoT):** Das Modell anweisen, Schritt fÃ¼r Schritt zu denken. Bringt laut der urspruenglichen Benchmark-Studie bis zu 19 Punkte Verbesserung bei komplexen Reasoning-Aufgaben (MMLU-Pro Benchmark). Aber Vorsicht: Bei Reasoning-Modellen (o-Serie, Claude Extended Thinking) ist explizites CoT redundant — sie machen es intern bereits.
+**Chain-of-Thought (CoT):** Das Modell anweisen, Schritt fuer Schritt zu denken. Bringt laut der urspruenglichen Benchmark-Studie bis zu 19 Punkte Verbesserung bei komplexen Reasoning-Aufgaben (MMLU-Pro Benchmark). Aber Vorsicht: Bei Reasoning-Modellen (o-Serie, Claude Extended Thinking) ist explizites CoT redundant — sie machen es intern bereits.
 
-**System Prompts:** Der unsichtbare Rahmen, der Rolle, Einschraenkungen und Verhalten definiert. System Prompts werden typischerweise gecacht (Anthropic berechnet 0,1x des Basispreises fÃ¼r gecachte Reads) — kosteneffizient bei wiederholter Nutzung.
+**System Prompts:** Der unsichtbare Rahmen, der Rolle, Einschraenkungen und Verhalten definiert. System Prompts werden typischerweise gecacht (Anthropic berechnet 0,1x des Basispreises fuer gecachte Reads) — kosteneffizient bei wiederholter Nutzung.
 
 ### Fortgeschrittene Techniken
 
 **Structured Output:** JSON, XML oder YAML als Antwortformat erzwingen. Alle grossen Anbieter unterstuetzen das nativ. Unverzichtbar, wenn AI-Output in nachgelagerte Systeme fliesst (APIs, Datenbanken, UI-Rendering).
 
-**Self-Consistency:** Denselben Prompt mehrfach ausfÃ¼hren, Mehrheitsantwort nehmen. Erhoeht Genauigkeit bei 3-5x Kosten — nur fÃ¼r High-Stakes-Entscheidungen.
+**Self-Consistency:** Denselben Prompt mehrfach ausfuehren, Mehrheitsantwort nehmen. Erhoeht Genauigkeit bei 3-5x Kosten — nur fuer High-Stakes-Entscheidungen.
 
 **Blended Prompting (aktuelles Best Practice):** Few-Shot + Role Instruction + Format Constraints + CoT in einem Prompt kombiniert. Die meisten Production-Prompts nutzen diesen Ansatz.
 
-### Prompt Security — was PMs wissen mÃ¼ssen
+### Prompt Security — was PMs wissen muessen
 
-Prompts sind keine geschuetzten Befehle — sie sind angreifbar. PMs mÃ¼ssen die wichtigsten Risiken kennen:
+Prompts sind keine geschuetzten Befehle — sie sind angreifbar. PMs muessen die wichtigsten Risiken kennen:
 
 - **Prompt Injection:** Nutzer-Input ueberschreibt die System-Anweisung ("Ignoriere alle vorherigen Anweisungen und..."). Verteidigung: Input Sanitization, klar getrennte System-/User-Prompts, Output-Validierung
 - **Jailbreaking:** Kreative Umgehung von Sicherheits-Guardrails. Kein Prompt allein schuetzt dagegen — mehrere Defense-Layer noetig (Input-Filter, Output-Filter, Monitoring)
-- **Data Exfiltration:** Das Modell gibt Informationen aus dem System Prompt oder Kontext preis, die nicht fÃ¼r den Nutzer bestimmt sind
+- **Data Exfiltration:** Das Modell gibt Informationen aus dem System Prompt oder Kontext preis, die nicht fuer den Nutzer bestimmt sind
 
-**PM-Entscheidung:** Welche Aktionen darf das AI-Feature ausfÃ¼hren? Je mehr Autonomie (E-Mails senden, Daten Ã¤ndern), desto kritischer wird Prompt Security. Bei High-Stakes-Features gehÃ¶rt Security-Testing (Red Teaming, s. Kapitel 5) in den Launch-Prozess.
+**PM-Entscheidung:** Welche Aktionen darf das AI-Feature ausfuehren? Je mehr Autonomie (E-Mails senden, Daten aendern), desto kritischer wird Prompt Security. Bei High-Stakes-Features gehoert Security-Testing (Red Teaming, s. Kapitel 5) in den Launch-Prozess.
 
 ### Was PMs falsch verstehen
 
 1. **"Laengere Prompts = bessere Ergebnisse."** Falsch. Uebermaessig lange Prompts verduennen das Signal. Praezise Anweisungen schlagen langatmige.
 2. **"Prompt Engineering ist eine Engineering-Aufgabe."** Teilweise falsch. Der Prompt definiert Produktverhalten — PMs sollten Prompt-Design besitzen (Verhalten, Constraints, Ton), Engineers die Integration.
-3. **"Ein perfekter Prompt funktioniert ewig."** Falsch. Model-Updates Ã¤ndern Verhalten. Prompts brauchen Versionierung und Monitoring wie jedes Feature.
+3. **"Ein perfekter Prompt funktioniert ewig."** Falsch. Model-Updates aendern Verhalten. Prompts brauchen Versionierung und Monitoring wie jedes Feature.
 
 ## Framework
 
@@ -69,7 +69,7 @@ Prompts sind keine geschuetzten Befehle — sie sind angreifbar. PMs mÃ¼ssen d
 | Zero-Shot | Minimal | Niedrigste | Immer zuerst |
 | Few-Shot (3 Beispiele) | +200-500 Tokens | Niedrig | Bei spezifischen Zero-Shot-Fehlern |
 | Chain-of-Thought | +100-2000 Tokens Output | Mittel | Komplexe Reasoning-Aufgaben |
-| System Prompt (gecacht) | Erster Call: volle Kosten; danach: 0.1x | Keiner nach dem ersten | Immer fÃ¼r Product Features |
+| System Prompt (gecacht) | Erster Call: volle Kosten; danach: 0.1x | Keiner nach dem ersten | Immer fuer Product Features |
 | Self-Consistency (5 Runs) | 5x Gesamtkosten | 5x Latenz | Nur bei High-Stakes-Entscheidungen |
 
 ## Scenario
@@ -78,14 +78,14 @@ Du bist PM bei einem Legal-Tech SaaS (B2B, 2.000 Kanzleien). Euer naechstes Feat
 
 **Die Situation:**
 - Zielgenauigkeit: 90%+ (juristische Nutzung erfordert hohe Praezision)
-- Budget: 8.000 Euro fÃ¼r die erste Iteration
+- Budget: 8.000 Euro fuer die erste Iteration
 - Volumen: 25.000 Klauseln/Monat
 - Zeitdruck: Feature-Launch in 4 Wochen
-- Engineering-Team schlÃ¤gt Fine-Tuning vor (3 Wochen, 15.000 Euro)
+- Engineering-Team schlaegt Fine-Tuning vor (3 Wochen, 15.000 Euro)
 
 **Optionen:**
 1. **Fine-Tuning:** 3 Wochen Entwicklung, 15.000 Euro, 500+ gelabelte Beispiele noetig
-2. **Few-Shot + CoT:** 3-5 Beispiele von Experten-Analysen als Vorlage, Schritt-fÃ¼r-Schritt-Reasoning erzwingen. 2-3 Tage Arbeit, unter 500 Euro Prompt-Kosten
+2. **Few-Shot + CoT:** 3-5 Beispiele von Experten-Analysen als Vorlage, Schritt-fuer-Schritt-Reasoning erzwingen. 2-3 Tage Arbeit, unter 500 Euro Prompt-Kosten
 3. **Blended Prompt:** System Prompt (Rolle: Senior-Jurist) + 3 Few-Shot-Beispiele + CoT + Structured Output (JSON mit Risikolevel und Begruendung). 1 Woche inkl. Testing
 
 ## Decide
@@ -97,18 +97,18 @@ Du bist PM bei einem Legal-Tech SaaS (B2B, 2.000 Kanzleien). Euer naechstes Feat
 
 **Warum:**
 - **Eskalationspfad einhalten:** Zero-Shot liefert 60%. Bevor Du Fine-Tuning anfaengst, musst Du die Prompt-Optionen ausschoepfen. Das ist nicht optional, sondern Best Practice
-- **Kosten-Risiko:** Fine-Tuning fÃ¼r 15.000 Euro bei einem Feature, das mit besserem Prompting mÃ¶glicherweise 90%+ erreicht, ist voreilig. Die Praxis-Erfahrung vieler Teams zeigt: Fine-Tuning eines schwachen Modells verliert oft gegen gutes Prompting eines starken Modells
+- **Kosten-Risiko:** Fine-Tuning fuer 15.000 Euro bei einem Feature, das mit besserem Prompting moeglicherweise 90%+ erreicht, ist voreilig. Die Praxis-Erfahrung vieler Teams zeigt: Fine-Tuning eines schwachen Modells verliert oft gegen gutes Prompting eines starken Modells
 - **Structured Output ist entscheidend:** JSON mit Risikolevel + Begruendung macht den Output downstream-faehig (UI-Rendering, Datenbank) und erzwingt konsistente Formatierung
 - **Zeitplan:** 1 Woche statt 3 Wochen. Wenn der Blended Prompt 85% erreicht, kannst Du mit Few-Shot-Beispielen nachsteuern. Wenn er 90%+ erreicht, ist Fine-Tuning unnoetig
-- **Erwarteter Impact:** Praxis-Erfahrungswerte (nicht einzelne Studien) zeigen, dass Few-Shot + CoT zusammen 15-25 Prozentpunkte Verbesserung gegenueber Zero-Shot bringen kÃ¶nnen — variiert stark je nach Task
+- **Erwarteter Impact:** Praxis-Erfahrungswerte (nicht einzelne Studien) zeigen, dass Few-Shot + CoT zusammen 15-25 Prozentpunkte Verbesserung gegenueber Zero-Shot bringen koennen — variiert stark je nach Task
 
 **Haeufiger Fehler:** Direkt zu Fine-Tuning springen, ohne Prompting auszureizen. Das kostet Wochen und Tausende Euro — und der Fine-Tuned-Output ist weniger flexibel als ein gut designter Prompt.
 </details>
 
 ## Reflect
 
-- **Der Prompt ist die Produktspezifikation.** Wer den Prompt nicht versteht, versteht nicht, was das AI-Feature tut. PMs mÃ¼ssen Prompt-Design besitzen — nicht delegieren.
-- Starte immer bei Zero-Shot und eskaliere nur bei messbaren Fehlern. Jede Stufe kostet mehr Tokens und KomplexitÃ¤t.
+- **Der Prompt ist die Produktspezifikation.** Wer den Prompt nicht versteht, versteht nicht, was das AI-Feature tut. PMs muessen Prompt-Design besitzen — nicht delegieren.
+- Starte immer bei Zero-Shot und eskaliere nur bei messbaren Fehlern. Jede Stufe kostet mehr Tokens und Komplexitaet.
 - Blended Prompting (Few-Shot + Role + CoT + Structured Output) ist der aktuelle Production-Standard — nicht eine einzelne Technik isoliert.
 - Prompts brauchen Versionierung und Monitoring. Ein Prompt, der auf GPT-4 funktioniert, kann auf GPT-5 versagen.
 

@@ -11,76 +11,76 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## The Big Picture
 
-Du hast fuenf Lektionen durchgearbeitet: wie Du Eval Frameworks aufbaust (Lektion 1), welche Metriken fÃ¼r welche Produkttypen gelten (Lektion 2), wie Du Dein Produkt adversariell testest (Lektion 3), wie Du Ship/No-Ship-Entscheidungen triffst (Lektion 4), und wie Du Bias erkennst und Fairness sicherstellst (Lektion 5).
+Du hast fuenf Lektionen durchgearbeitet: wie Du Eval Frameworks aufbaust (Lektion 1), welche Metriken fuer welche Produkttypen gelten (Lektion 2), wie Du Dein Produkt adversariell testest (Lektion 3), wie Du Ship/No-Ship-Entscheidungen triffst (Lektion 4), und wie Du Bias erkennst und Fairness sicherstellst (Lektion 5).
 
-Einzeln sind das Qualitaetswerkzeuge. Zusammen bilden sie ein Qualitaetssystem, in dem jede Lektion auf den anderen aufbaut und sie verstaerkt: Lektion 1 fragt **WIE** Du QualitÃ¤t misst. Lektion 2 fragt **WAS** Du misst. Lektion 3 fragt **WOGEGEN** Du testest. Lektion 4 fragt **WANN** Du shippst. Lektion 5 fragt **FUER WEN** Dein Produkt funktioniert — und fÃ¼r wen nicht.
+Einzeln sind das Qualitaetswerkzeuge. Zusammen bilden sie ein Qualitaetssystem, in dem jede Lektion auf den anderen aufbaut und sie verstaerkt: Lektion 1 fragt **WIE** Du Qualitaet misst. Lektion 2 fragt **WAS** Du misst. Lektion 3 fragt **WOGEGEN** Du testest. Lektion 4 fragt **WANN** Du shippst. Lektion 5 fragt **FUER WEN** Dein Produkt funktioniert — und fuer wen nicht.
 
 ## Connections
 
 ### 1. Evals brauchen Metriken — und umgekehrt
 
-Ein Eval Framework (Lektion 1) ohne die richtigen Metriken (Lektion 2) ist eine Test Suite, die das Falsche misst. Die Eval Pipeline operationalisiert die Metriken, die fÃ¼r Deinen Produkttyp zaehlen. Umgekehrt: Metriken ohne Eval-Infrastruktur sind Zahlen ohne Konsequenzen — sie erzeugen keine Entscheidungen.
+Ein Eval Framework (Lektion 1) ohne die richtigen Metriken (Lektion 2) ist eine Test Suite, die das Falsche misst. Die Eval Pipeline operationalisiert die Metriken, die fuer Deinen Produkttyp zaehlen. Umgekehrt: Metriken ohne Eval-Infrastruktur sind Zahlen ohne Konsequenzen — sie erzeugen keine Entscheidungen.
 
-**FÃ¼r Dich als PM:** Starte bei der Metrik-Auswahl (welche Tradeoffs kann Dein Produkt tolerieren?) und baue dann die Pipeline, die sie durchsetzt.
+**Fuer Dich als PM:** Starte bei der Metrik-Auswahl (welche Tradeoffs kann Dein Produkt tolerieren?) und baue dann die Pipeline, die sie durchsetzt.
 
 ### 2. Red Teaming fuettert die Eval Pipeline
 
 Jedes Red-Team-Finding (Lektion 3) wird ein Regression Test im Golden Dataset (Lektion 1). Red Teaming entdeckt Failure Modes; Evals verhindern, dass sie sich wiederholen. Ohne diesen Feedback Loop sind Red-Team-Ergebnisse einmalige Erkenntnisse statt systematischer Verbesserungen.
 
-**FÃ¼r Dich als PM:** Baue den Prozess so, dass jedes Red-Team-Finding automatisch als Test Case in der Eval Suite landet. Ein Finding ohne Regression Test ist ein Finding, das Du vergessen wirst.
+**Fuer Dich als PM:** Baue den Prozess so, dass jedes Red-Team-Finding automatisch als Test Case in der Eval Suite landet. Ein Finding ohne Regression Test ist ein Finding, das Du vergessen wirst.
 
 ### 3. Ship/No-Ship steht auf dem Fundament der ersten drei Lektionen
 
 Quality Gates (Lektion 4) werden durch Metriken definiert (Lektion 2), durch Eval Pipelines durchgesetzt (Lektion 1), und durch Red Teaming validiert (Lektion 3). Ohne dieses Fundament sind Ship-Entscheidungen subjektiv und inkonsistent — "Es fuehlt sich gut an" statt "Es hat alle Gates bestanden."
 
-**FÃ¼r Dich als PM:** Die Ship/No-Ship Checklist ist nur so stark wie die Systeme dahinter. Wenn Deine Eval Suite schwach ist, sind Deine Quality Gates Illusion.
+**Fuer Dich als PM:** Die Ship/No-Ship Checklist ist nur so stark wie die Systeme dahinter. Wenn Deine Eval Suite schwach ist, sind Deine Quality Gates Illusion.
 
 ### 4. Fairness ist eine Linse, kein separater Workstream
 
-Bias & Fairness (Lektion 5) ist keine eigene Aktivitaet — es ist eine Dimension jeder anderen Evaluation. Metriken mÃ¼ssen nach Gruppen disaggregiert werden (Lektion 2). Red Teaming muss Bias-spezifische Szenarien enthalten (Lektion 3). Ship-Entscheidungen mÃ¼ssen Fairness Gates einschliessen (Lektion 4). Fairness nachtraeglich als Add-on zu behandeln ist der sicherste Weg, sie zu verpassen.
+Bias & Fairness (Lektion 5) ist keine eigene Aktivitaet — es ist eine Dimension jeder anderen Evaluation. Metriken muessen nach Gruppen disaggregiert werden (Lektion 2). Red Teaming muss Bias-spezifische Szenarien enthalten (Lektion 3). Ship-Entscheidungen muessen Fairness Gates einschliessen (Lektion 4). Fairness nachtraeglich als Add-on zu behandeln ist der sicherste Weg, sie zu verpassen.
 
-**FÃ¼r Dich als PM:** Integriere Fairness von Anfang an in Eval Pipeline, Metriken und Quality Gates — nicht als separaten Audit-Schritt nach dem Bau.
+**Fuer Dich als PM:** Integriere Fairness von Anfang an in Eval Pipeline, Metriken und Quality Gates — nicht als separaten Audit-Schritt nach dem Bau.
 
 ### 5. Das Eval Flywheel
 
-Production Failures, die durch Monitoring entdeckt werden (Lektion 4), fliessen zurÃ¼ck in das Golden Dataset (Lektion 1), verbessern die Metriken (Lektion 2), und erhÃ¶hen den Qualitaetsstandard fÃ¼r zukuenftige Ship-Entscheidungen (Lektion 4). Das ist kein linearer Prozess — es ist ein kontinuierlicher Verbesserungskreislauf. Jede Production-Interaktion generiert Daten, die das System besser machen.
+Production Failures, die durch Monitoring entdeckt werden (Lektion 4), fliessen zurueck in das Golden Dataset (Lektion 1), verbessern die Metriken (Lektion 2), und erhoehen den Qualitaetsstandard fuer zukuenftige Ship-Entscheidungen (Lektion 4). Das ist kein linearer Prozess — es ist ein kontinuierlicher Verbesserungskreislauf. Jede Production-Interaktion generiert Daten, die das System besser machen.
 
-**FÃ¼r Dich als PM:** Baue den Kreislauf von Tag 1. Nicht das perfekte Eval-System. Sondern eines, das sich selbst verbessert.
+**Fuer Dich als PM:** Baue den Kreislauf von Tag 1. Nicht das perfekte Eval-System. Sondern eines, das sich selbst verbessert.
 
 ### 6. Bruecke zu Agentic Evaluation
 
-Alles, was Du in diesem Kapitel gelernt hast, wird bei Agentic AI schwieriger. Agentische Systeme sind nicht-deterministisch, multi-step und nutzen Tool Calls — das macht klassische Eval-Ansaetze unzureichend. Ein Golden Dataset fÃ¼r Agenten evaluiert nicht einzelne Outputs, sondern End-to-End Task Completion: Hat der Agent die Aufgabe geloest, nicht nur einen guten Text generiert?
+Alles, was Du in diesem Kapitel gelernt hast, wird bei Agentic AI schwieriger. Agentische Systeme sind nicht-deterministisch, multi-step und nutzen Tool Calls — das macht klassische Eval-Ansaetze unzureichend. Ein Golden Dataset fuer Agenten evaluiert nicht einzelne Outputs, sondern End-to-End Task Completion: Hat der Agent die Aufgabe geloest, nicht nur einen guten Text generiert?
 
 Drei Metriken werden zentral: **Task Completion Rate** (hat der Agent das Ziel erreicht?), **Step Efficiency** (wie viele Schritte hat er gebraucht?) und **Tool Call Accuracy** (hat er die richtigen Tools mit den richtigen Parametern aufgerufen?).
 
 Dazu kommt ein mathematisches Problem: Wenn jeder Schritt eines 5-Step-Agent-Workflows 95% Zuverlaessigkeit hat, liegt die End-to-End-Zuverlaessigkeit bei 0.95^5 = 77%. Zuverlaessigkeit degradiert multiplikativ — das ist der Grund, warum Agentic AI neue Architektur-Patterns braucht.
 
-**FÃ¼r Dich als PM:** Die Eval-Infrastruktur, die Du in diesem Kapitel gelernt hast, ist die Grundlage — aber fÃ¼r Agenten brauchst Du sie erweitert. Der Engpass ist nicht das Modell, sondern die Eval-Infrastruktur fÃ¼r Multi-Step-Workflows. Kapitel 6 behandelt agentic Architekturen im Detail.
+**Fuer Dich als PM:** Die Eval-Infrastruktur, die Du in diesem Kapitel gelernt hast, ist die Grundlage — aber fuer Agenten brauchst Du sie erweitert. Der Engpass ist nicht das Modell, sondern die Eval-Infrastruktur fuer Multi-Step-Workflows. Kapitel 6 behandelt agentic Architekturen im Detail.
 
 ## The Meta-Insight
 
 > Evaluation ist der Punkt, an dem AI Product Management sich am staerksten von traditionellem PM unterscheidet. Bei traditioneller Software beweist Testing, dass das Produkt funktioniert. Bei AI-Produkten **definiert** Evaluation, was "funktioniert" bedeutet — und diese Definition ist gleichzeitig eine Produktentscheidung, eine ethische Entscheidung und eine Business-Entscheidung.
 
-Der PM, der Evaluation meistert, shipped nicht nur bessere AI-Produkte. Er baut die organisatorische Faehigkeit auf, AI-Produkte systematisch Ã¼ber Zeit zu verbessern — weil jede Production-Interaktion durch das Eval Flywheel fliesst.
+Der PM, der Evaluation meistert, shipped nicht nur bessere AI-Produkte. Er baut die organisatorische Faehigkeit auf, AI-Produkte systematisch ueber Zeit zu verbessern — weil jede Production-Interaktion durch das Eval Flywheel fliesst.
 
 ## Your Evaluation Checklist
 
-Was Du jetzt kÃ¶nnen solltest:
+Was Du jetzt koennen solltest:
 
 - [ ] Ein Golden Dataset mit Domain Experts aufbauen und als lebendes Artefakt pflegen — Lektion 1
 - [ ] LLM-as-Judge implementieren und gegen Human Labels validieren — Lektion 1
-- [ ] Die richtigen Metriken fÃ¼r Deinen Produkttyp waehlen (Classification vs. Generation vs. Task-Specific) — Lektion 2
+- [ ] Die richtigen Metriken fuer Deinen Produkttyp waehlen (Classification vs. Generation vs. Task-Specific) — Lektion 2
 - [ ] Metriken in Business Impact uebersetzen, die Stakeholder verstehen — Lektion 2
-- [ ] Ein Threat Model fÃ¼r Dein AI-Produkt definieren und Red Teaming organisieren — Lektion 3
-- [ ] Quality Gates vor dem Bau definieren und Staged Rollouts durchfÃ¼hren — Lektion 4
-- [ ] Fairness-Metriken waehlen, Bias Audits durchfÃ¼hren und die Wahl begruenden — Lektion 5
-- [ ] Das Eval Flywheel aufbauen: Production Failures zurÃ¼ck ins Golden Dataset, kontinuierliche Verbesserung — Lektionen 1-5
+- [ ] Ein Threat Model fuer Dein AI-Produkt definieren und Red Teaming organisieren — Lektion 3
+- [ ] Quality Gates vor dem Bau definieren und Staged Rollouts durchfuehren — Lektion 4
+- [ ] Fairness-Metriken waehlen, Bias Audits durchfuehren und die Wahl begruenden — Lektion 5
+- [ ] Das Eval Flywheel aufbauen: Production Failures zurueck ins Golden Dataset, kontinuierliche Verbesserung — Lektionen 1-5
 
-Wenn Du bei einem Punkt unsicher bist, geh zurÃ¼ck zur entsprechenden Lektion. Diese Evaluation-Grundlagen entscheiden, ob Dein AI-Produkt systematisch besser wird — oder systematisch Vertrauen verspielt.
+Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. Diese Evaluation-Grundlagen entscheiden, ob Dein AI-Produkt systematisch besser wird — oder systematisch Vertrauen verspielt.
 
 ## Weiter mit: Agentic AI
 
-Du misst AI-QualitÃ¤t. [Kapitel 6](../../06-agentic-ai/) zeigt die nÃ¤chste Stufe: autonome AI-Systeme, die selbststaendig handeln.
+Du misst AI-Qualitaet. [Kapitel 6](../../06-agentic-ai/) zeigt die naechste Stufe: autonome AI-Systeme, die selbststaendig handeln.
 
 ## Self-Assessment
 
@@ -88,29 +88,29 @@ Drei Szenarien, die mehrere Konzepte aus diesem Kapitel kombinieren. Ueberleg Di
 
 ### Szenario 1: Der ueberraschende Launch-Erfolg
 
-Euer AI-Feature fÃ¼r automatische Vertragsanalyse hat alle Quality Gates bestanden: Precision liegt bei 94%, das Red Team hat keine kritischen Failure Modes gefunden, und die Stakeholder sind begeistert. Zwei Wochen nach Launch berichten Nutzer aus dem Gesundheitssektor, dass medizinische Vertragsklauseln systematisch falsch klassifiziert werden. Was ist schiefgelaufen, und wie reparierst Du es?
+Euer AI-Feature fuer automatische Vertragsanalyse hat alle Quality Gates bestanden: Precision liegt bei 94%, das Red Team hat keine kritischen Failure Modes gefunden, und die Stakeholder sind begeistert. Zwei Wochen nach Launch berichten Nutzer aus dem Gesundheitssektor, dass medizinische Vertragsklauseln systematisch falsch klassifiziert werden. Was ist schiefgelaufen, und wie reparierst Du es?
 
 <details>
 <summary>Aufloesung</summary>
 
-Zwei Probleme: Erstens wurden die Metriken nicht nach Nutzergruppen disaggregiert (Lektion 2 + Lektion 5) — die 94% Precision war ein Durchschnitt, der die schlechte Performance fÃ¼r den Gesundheitssektor verdeckt hat. Zweitens hat das Red Teaming (Lektion 3) keine domaenenspezifischen Szenarien abgedeckt. Die Reparatur: medizinische Vertragsklauseln als Segment ins Golden Dataset aufnehmen (Lektion 1), Precision nach Branche disaggregieren (Lektion 2), und branchenspezifische Quality Gates einrichten (Lektion 4). Das ist das Eval Flywheel in Aktion — Production Failures zurÃ¼ck ins System speisen.
+Zwei Probleme: Erstens wurden die Metriken nicht nach Nutzergruppen disaggregiert (Lektion 2 + Lektion 5) — die 94% Precision war ein Durchschnitt, der die schlechte Performance fuer den Gesundheitssektor verdeckt hat. Zweitens hat das Red Teaming (Lektion 3) keine domaenenspezifischen Szenarien abgedeckt. Die Reparatur: medizinische Vertragsklauseln als Segment ins Golden Dataset aufnehmen (Lektion 1), Precision nach Branche disaggregieren (Lektion 2), und branchenspezifische Quality Gates einrichten (Lektion 4). Das ist das Eval Flywheel in Aktion — Production Failures zurueck ins System speisen.
 
 </details>
 
 ### Szenario 2: Die Red-Team-Flut
 
-Dein Red Team hat nach zwei Tagen Testing 47 Findings dokumentiert. Dein Engineering-Team sagt: "Wir kÃ¶nnen nicht alle fixen und trotzdem den Launch-Termin halten." Wie priorisierst Du?
+Dein Red Team hat nach zwei Tagen Testing 47 Findings dokumentiert. Dein Engineering-Team sagt: "Wir koennen nicht alle fixen und trotzdem den Launch-Termin halten." Wie priorisierst Du?
 
 <details>
 <summary>Aufloesung</summary>
 
-Nutze die Ship/No-Ship-Logik (Lektion 4): Kategorisiere die Findings nach Severity — Safety-kritische Findings (z.B. das Modell gibt medizinische Ratschlaege bei einem Finanzprodukt) sind Ship-Blocker und mÃ¼ssen vor Launch gefixt werden. Findings, die durch Quality Gates abgefangen werden kÃ¶nnen (z.B. Edge Cases mit geringer Auftrittswahrscheinlichkeit), kÃ¶nnen per Staged Rollout gemanagt werden. Entscheidend: Jedes Finding wird als Regression Test ins Golden Dataset aufgenommen (Lektion 3 + Lektion 1), damit es nach dem Fix nicht zurueckkommt. Die 47 Findings sind kein Problem — sie sind 47 neue Test Cases fÃ¼r Dein Eval-System.
+Nutze die Ship/No-Ship-Logik (Lektion 4): Kategorisiere die Findings nach Severity — Safety-kritische Findings (z.B. das Modell gibt medizinische Ratschlaege bei einem Finanzprodukt) sind Ship-Blocker und muessen vor Launch gefixt werden. Findings, die durch Quality Gates abgefangen werden koennen (z.B. Edge Cases mit geringer Auftrittswahrscheinlichkeit), koennen per Staged Rollout gemanagt werden. Entscheidend: Jedes Finding wird als Regression Test ins Golden Dataset aufgenommen (Lektion 3 + Lektion 1), damit es nach dem Fix nicht zurueckkommt. Die 47 Findings sind kein Problem — sie sind 47 neue Test Cases fuer Dein Eval-System.
 
 </details>
 
 ### Szenario 3: LLM-as-Judge unter Druck
 
-Dein Team nutzt GPT-4o als LLM-as-Judge fÃ¼r die Eval Pipeline eines Summarization-Features. Ein Stakeholder fragt: "Wie wissen wir, dass der Judge richtig bewertet?" Dann zeigt eine Stichprobe, dass der Judge bei laengeren Summaries systematisch hoehere Scores vergibt — unabhÃ¤ngig von der QualitÃ¤t. Was tust Du?
+Dein Team nutzt GPT-4o als LLM-as-Judge fuer die Eval Pipeline eines Summarization-Features. Ein Stakeholder fragt: "Wie wissen wir, dass der Judge richtig bewertet?" Dann zeigt eine Stichprobe, dass der Judge bei laengeren Summaries systematisch hoehere Scores vergibt — unabhaengig von der Qualitaet. Was tust Du?
 
 <details>
 <summary>Aufloesung</summary>

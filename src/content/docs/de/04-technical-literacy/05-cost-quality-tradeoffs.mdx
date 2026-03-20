@@ -11,9 +11,9 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Euer AI-Feature laeuft seit zwei Monaten. Die Nutzung steigt — aber die API-Rechnung auch. Letzten Monat: 14.000 Euro. Prognose fÃ¼r nÃ¤chsten Monat: 21.000 Euro. Euer CFO fragt: "Jede andere Software-Funktion kostet uns praktisch nichts pro Nutzer-Interaktion. Warum kostet AI so viel?"
+Euer AI-Feature laeuft seit zwei Monaten. Die Nutzung steigt — aber die API-Rechnung auch. Letzten Monat: 14.000 Euro. Prognose fuer naechsten Monat: 21.000 Euro. Euer CFO fragt: "Jede andere Software-Funktion kostet uns praktisch nichts pro Nutzer-Interaktion. Warum kostet AI so viel?"
 
-Die Antwort: AI-Features haben Grenzkosten pro Nutzung. Jeder API-Call kostet Geld. Das ist fundamental anders als traditionelle SaaS, wo die marginalen Kosten pro Nutzer-Interaktion nahe null liegen. Diese "AI-Tax" verÃ¤ndert Unit Economics, Pricing und Margenberechnungen — und PMs mÃ¼ssen sie vom ersten Tag an verstehen.
+Die Antwort: AI-Features haben Grenzkosten pro Nutzung. Jeder API-Call kostet Geld. Das ist fundamental anders als traditionelle SaaS, wo die marginalen Kosten pro Nutzer-Interaktion nahe null liegen. Diese "AI-Tax" veraendert Unit Economics, Pricing und Margenberechnungen — und PMs muessen sie vom ersten Tag an verstehen.
 
 ## Concept
 
@@ -24,12 +24,12 @@ Die Antwort: AI-Features haben Grenzkosten pro Nutzung. Jeder API-Call kostet Ge
 **Wichtige Preisdynamiken (2026):**
 - Output-Tokens kosten 2-5x mehr als Input-Tokens bei allen grossen Anbietern (Generierung braucht mehr Compute als Input-Verarbeitung)
 - Gecachte Input-Tokens kosten 0,1x des Basispreises (Anthropic) oder sind gratis (einige Anbieter)
-- Reasoning-Tokens (internes Chain-of-Thought bei o-Serie-Modellen) werden als Output-Tokens abgerechnet, sind aber fÃ¼r den Nutzer unsichtbar — ein versteckter Kostenmultiplikator
+- Reasoning-Tokens (internes Chain-of-Thought bei o-Serie-Modellen) werden als Output-Tokens abgerechnet, sind aber fuer den Nutzer unsichtbar — ein versteckter Kostenmultiplikator
 
 **LLMflation — der Preistrend:**
 Laut a16z-Research (a16z "LLMflation" Analyse, 2024 — basierend auf Token-Preisen der grossen Anbieter 2023-2024. Der Trend haelt an, variiert aber je nach Provider und Modellklasse.) sind LLM-Inferenzkosten um ca. 10x pro Jahr gefallen:
 - GPT-4-aequivalente Performance: $20/1M Tokens (Ende 2022) auf $0,40/1M Tokens (2025)
-- PM-Implikation: Features, die heute unwirtschaftlich sind, kÃ¶nnen in 6-12 Monaten tragfaehig sein
+- PM-Implikation: Features, die heute unwirtschaftlich sind, koennen in 6-12 Monaten tragfaehig sein
 
 ### Echte Kostenrechnungen
 
@@ -37,7 +37,7 @@ Laut a16z-Research (a16z "LLMflation" Analyse, 2024 — basierend auf Token-Prei
 - 100.000 Gespraeche/Monat, durchschnittlich 2.000 Input-Tokens + 500 Output-Tokens
 - Mit Claude Sonnet 4.6: Input $600 + Output $750 = **$1.350/Monat**
 - Mit Gemini 2.5 Flash: Input $30 + Output $30 = **$60/Monat**
-- **Faktor 22,5x** fÃ¼r das Premium-Modell
+- **Faktor 22,5x** fuer das Premium-Modell
 
 **Beispiel 2: AI-Suche (RAG)**
 - 500.000 Anfragen/Monat, je 500 Token Query + 2.000 Token Kontext + 300 Token Antwort
@@ -51,13 +51,13 @@ Laut a16z-Research (a16z "LLMflation" Analyse, 2024 — basierend auf Token-Prei
 
 **3. Output-Laenge kontrollieren:** max_tokens auf das Minimum setzen. Structured Output (JSON) statt wortreicher Prosa. Output-Tokens kosten 2-5x mehr als Input — jeder unnoetige Output-Token ist teuer.
 
-**4. Batching:** Mehrere Anfragen in Batch-API-Calls buendeln (OpenAI und Anthropic). Typisch 50% Kostenreduktion fÃ¼r Non-Realtime-Workloads. Trade-off: hoehere Latenz.
+**4. Batching:** Mehrere Anfragen in Batch-API-Calls buendeln (OpenAI und Anthropic). Typisch 50% Kostenreduktion fuer Non-Realtime-Workloads. Trade-off: hoehere Latenz.
 
-**5. Token-Reduktion:** Prompts komprimieren, Konversationshistorie zusammenfassen statt vollstÃ¤ndig senden, Embeddings fÃ¼r Retrieval statt alles in den Context stopfen.
+**5. Token-Reduktion:** Prompts komprimieren, Konversationshistorie zusammenfassen statt vollstaendig senden, Embeddings fuer Retrieval statt alles in den Context stopfen.
 
 **6. Self-Hosting Open Models:** Break-Even vs. API typisch bei 40+ GPU-Stunden/Woche Dauerauslastung. Midjourney-Fallstudie: Von NVIDIA A100/H100 auf TPU v6e migriert, monatliche Inferenz von $2,1M auf unter $700K reduziert. Nur bei signifikantem Volumen mit dedizierter MLOps-Kapazitaet sinnvoll.
 
-### Unit Economics fÃ¼r AI-Features
+### Unit Economics fuer AI-Features
 
 | Position | Berechnung | Beispiel |
 |----------|-----------|---------|
@@ -65,39 +65,39 @@ Laut a16z-Research (a16z "LLMflation" Analyse, 2024 — basierend auf Token-Prei
 | AI-Kosten pro Nutzer/Monat | (Avg. Anfragen x Tokens pro Anfrage x Preis pro Token) | $0,50-$5,00/Nutzer/Monat |
 | AI-Kosten als % vom Umsatz | AI-Kosten / Umsatz | 2,5-25% |
 
-**Gesunde Benchmarks:** AI-Inferenzkosten sollten unter 10% des Feature-Umsatzbeitrags liegen. Ãber 20%: optimieren (Routing, Caching) oder Preismodell anpassen. Bei Freemium: Free-Tier-AI-Kosten mÃ¼ssen durch Conversion zu Paid gedeckt sein.
+**Gesunde Benchmarks:** AI-Inferenzkosten sollten unter 10% des Feature-Umsatzbeitrags liegen. Ueber 20%: optimieren (Routing, Caching) oder Preismodell anpassen. Bei Freemium: Free-Tier-AI-Kosten muessen durch Conversion zu Paid gedeckt sein.
 
 ### Die Qualitaets-Kosten-Grenze
 
 | Qualitaetslevel | Typischer Ansatz | Use Case |
 |----------------|-----------------|----------|
 | "Gut genug" (80%) | Kleines Modell, Zero-Shot | Autocomplete, Klassifikation, einfache Extraktion |
-| "Hohe QualitÃ¤t" (90%) | Mid-Tier-Modell, Few-Shot + RAG | Kundensupport, Dokumentenanalyse |
+| "Hohe Qualitaet" (90%) | Mid-Tier-Modell, Few-Shot + RAG | Kundensupport, Dokumentenanalyse |
 | "Nahezu perfekt" (95%+) | Frontier-Modell, CoT + RAG + Human Review | Medizin, Recht, Finanzen — High Stakes |
 
-**Die Kurve der abnehmenden Ertraege:** Von 80% auf 90% QualitÃ¤t kostet ca. 3x. Von 90% auf 95% ca. 10x. Von 95% auf 99% ca. 50x. PMs mÃ¼ssen "gut genug" definieren, *bevor* Engineering anfaengt zu optimieren.
+**Die Kurve der abnehmenden Ertraege:** Von 80% auf 90% Qualitaet kostet ca. 3x. Von 90% auf 95% ca. 10x. Von 95% auf 99% ca. 50x. PMs muessen "gut genug" definieren, *bevor* Engineering anfaengt zu optimieren.
 
 ## Framework
 
 **Kostenoptimierung — in dieser Reihenfolge (hoechster ROI zuerst):**
 
-| PrioritÃ¤t | Hebel | Erwartete Ersparnis | Aufwand |
+| Prioritaet | Hebel | Erwartete Ersparnis | Aufwand |
 |------------|-------|-------------------|---------|
 | 1 | Model Routing | 5-10x | Mittel (Routing-Logik + Testing) |
 | 2 | Prompt Caching | 50-90% auf gecachte Teile | Niedrig (Konfiguration) |
 | 3 | Output-Laenge kontrollieren | 20-50% | Niedrig (max_tokens + Structured Output) |
-| 4 | Batching | 50% fÃ¼r Non-Realtime | Niedrig (API-Umstellung) |
+| 4 | Batching | 50% fuer Non-Realtime | Niedrig (API-Umstellung) |
 | 5 | Prompt-Kompression | 10-30% | Niedrig (Prompt-Optimierung) |
 | 6 | Self-Hosting | Variabel, nur bei Volumen | Hoch (Infrastruktur + MLOps) |
 
 **AI-Feature P&L-Check:**
 - AI-Kosten unter 10% des Feature-Umsatzes: Gesund
 - AI-Kosten 10-20%: Optimierungsbedarf, noch tragfaehig
-- AI-Kosten Ã¼ber 20%: Sofort optimieren oder Pricing anpassen
+- AI-Kosten ueber 20%: Sofort optimieren oder Pricing anpassen
 
 ## Scenario
 
-Du bist PM bei einem Content-Marketing SaaS (B2B, 3.000 Kunden). Euer AI-Feature: Automatische Blog-Post-Generierung. Aktuell nutzt Ihr Claude Sonnet 4.6 fÃ¼r alle Anfragen.
+Du bist PM bei einem Content-Marketing SaaS (B2B, 3.000 Kunden). Euer AI-Feature: Automatische Blog-Post-Generierung. Aktuell nutzt Ihr Claude Sonnet 4.6 fuer alle Anfragen.
 
 **Die Situation:**
 - 60.000 Blog-Posts/Monat generiert
@@ -109,9 +109,9 @@ Du bist PM bei einem Content-Marketing SaaS (B2B, 3.000 Kunden). Euer AI-Feature
 - 15% sind "Deep Dives" (2.000+ Woerter, research-intensiv)
 
 **Optionen:**
-1. **Status Quo beibehalten:** $2.970/Monat, gleiches Modell fÃ¼r alles
+1. **Status Quo beibehalten:** $2.970/Monat, gleiches Modell fuer alles
 2. **Model Routing:** Quick Drafts auf Gemini 2.5 Flash, Standard auf Claude Sonnet, Deep Dives auf Claude Sonnet mit Extended Thinking
-3. **Model Routing + Caching:** Wie Option 2, plus Prompt Caching fÃ¼r System Prompts und wiederkehrende Briefing-Templates
+3. **Model Routing + Caching:** Wie Option 2, plus Prompt Caching fuer System Prompts und wiederkehrende Briefing-Templates
 
 ## Decide
 
@@ -121,9 +121,9 @@ Du bist PM bei einem Content-Marketing SaaS (B2B, 3.000 Kunden). Euer AI-Feature
 **Die beste Entscheidung:** Option 3 — Model Routing + Caching.
 
 **Warum:**
-- **Quick Drafts auf Flash (45% des Volumens):** 27.000 Posts x (1.500 x $0,15/1M + 800 x $0,60/1M) = ca. $19/Monat. Vs. aktuell ca. $1.335 fÃ¼r denselben Anteil mit Sonnet. QualitÃ¤t fÃ¼r Bullet Points ist bei Flash ausreichend
-- **Standard auf Sonnet (40%):** 24.000 Posts bleiben auf Sonnet = ca. $1.188/Monat. Hier ist Sonnet-QualitÃ¤t gerechtfertigt
-- **Deep Dives mit Extended Thinking (15%):** 9.000 Posts x hoehere Kosten = ca. $670/Monat. Bessere QualitÃ¤t fÃ¼r Premium-Content
+- **Quick Drafts auf Flash (45% des Volumens):** 27.000 Posts x (1.500 x $0,15/1M + 800 x $0,60/1M) = ca. $19/Monat. Vs. aktuell ca. $1.335 fuer denselben Anteil mit Sonnet. Qualitaet fuer Bullet Points ist bei Flash ausreichend
+- **Standard auf Sonnet (40%):** 24.000 Posts bleiben auf Sonnet = ca. $1.188/Monat. Hier ist Sonnet-Qualitaet gerechtfertigt
+- **Deep Dives mit Extended Thinking (15%):** 9.000 Posts x hoehere Kosten = ca. $670/Monat. Bessere Qualitaet fuer Premium-Content
 - **Gesamtkosten Option 2:** ca. $1.877/Monat — **37% Ersparnis**
 - **Prompt Caching on top:** System Prompts (SEO-Regeln, Stilguide, Brand Voice) werden bei jeder Anfrage mitgesendet. Caching reduziert diese Kosten um 90%. Bei 60.000 Anfragen mit 800-Token-System-Prompts spart das nochmal ca. $200/Monat
 - **Gesamtkosten Option 3:** ca. $1.650/Monat — **44% Ersparnis** vs. Status Quo
@@ -135,8 +135,8 @@ Du bist PM bei einem Content-Marketing SaaS (B2B, 3.000 Kunden). Euer AI-Feature
 ## Reflect
 
 - **AI-Features haben Grenzkosten pro Nutzung — das unterscheidet sie fundamental von traditioneller Software.** Diese "AI-Tax" muss von Tag 1 in die Unit Economics einfliessen, nicht erst wenn die Rechnung kommt.
-- Model Routing ist der grÃ¶Ãte Einzelhebel. 70-80% der Anfragen brauchen kein Frontier-Modell. 5-10x Ersparnis sind realistisch, ohne dass Nutzer einen Qualitaetsverlust bemerken.
-- Definiere "gut genug" *bevor* Du optimierst. Von 80% auf 90% QualitÃ¤t kostet 3x, von 90% auf 95% kostet 10x. Die PM-Aufgabe ist, die Grenze zu definieren — nicht, maximale QualitÃ¤t zu fordern.
+- Model Routing ist der groesste Einzelhebel. 70-80% der Anfragen brauchen kein Frontier-Modell. 5-10x Ersparnis sind realistisch, ohne dass Nutzer einen Qualitaetsverlust bemerken.
+- Definiere "gut genug" *bevor* Du optimierst. Von 80% auf 90% Qualitaet kostet 3x, von 90% auf 95% kostet 10x. Die PM-Aufgabe ist, die Grenze zu definieren — nicht, maximale Qualitaet zu fordern.
 - LLMflation (10x jaehrlicher Preisverfall) ist real, aber kein Grund, nicht zu optimieren. Nutzung waechst typischerweise schneller als Preise fallen.
 
 ---

@@ -11,15 +11,15 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Euer Customer-Success-Team beschwert sich: Der AI-Assistent klingt "zu generisch". Er nutzt nicht die Fachsprache Eurer Branche, antwortet zu foermlich und formatiert Antworten anders als Euer Styleguide vorgibt. Der CTO schlÃ¤gt Fine-Tuning vor. Dein VP Engineering fragt: "Wieviel kostet das, und wann sehen wir Ergebnisse?"
+Euer Customer-Success-Team beschwert sich: Der AI-Assistent klingt "zu generisch". Er nutzt nicht die Fachsprache Eurer Branche, antwortet zu foermlich und formatiert Antworten anders als Euer Styleguide vorgibt. Der CTO schlaegt Fine-Tuning vor. Dein VP Engineering fragt: "Wieviel kostet das, und wann sehen wir Ergebnisse?"
 
-Fine-Tuning ist der dritte Hebel in der AI-Optimierungshierarchie — nach Prompt Engineering und RAG. Es Ã¤ndert die Gewichte des Modells, also sein internes Verhalten. Das ist maechtig, aber teuer und unflexibel. PMs mÃ¼ssen verstehen, wann Fine-Tuning gerechtfertigt ist und wann es eine teure Abkuerzung fÃ¼r besseres Prompting ist.
+Fine-Tuning ist der dritte Hebel in der AI-Optimierungshierarchie — nach Prompt Engineering und RAG. Es aendert die Gewichte des Modells, also sein internes Verhalten. Das ist maechtig, aber teuer und unflexibel. PMs muessen verstehen, wann Fine-Tuning gerechtfertigt ist und wann es eine teure Abkuerzung fuer besseres Prompting ist.
 
 ## Concept
 
 ### Was Fine-Tuning tatsaechlich tut
 
-Fine-Tuning nimmt ein vortrainiertes LLM und trainiert es auf einem domainspezifischen Datensatz weiter. Es Ã¤ndert die Gewichte — das interne Verhalten — statt nur Kontext zur Laufzeit bereitzustellen.
+Fine-Tuning nimmt ein vortrainiertes LLM und trainiert es auf einem domainspezifischen Datensatz weiter. Es aendert die Gewichte — das interne Verhalten — statt nur Kontext zur Laufzeit bereitzustellen.
 
 **Wofuer Fine-Tuning gut ist:**
 - Konsistente Aenderung von Ton, Stil oder Format
@@ -30,17 +30,17 @@ Fine-Tuning nimmt ein vortrainiertes LLM und trainiert es auf einem domainspezif
 **Wofuer Fine-Tuning NICHT gut ist:**
 - Neues Faktenwissen hinzufuegen (dafuer RAG — fine-tuned Wissen veraltet)
 - Einmalige Anpassungen (dafuer Prompting)
-- Tasks, deren Anforderungen sich hÃ¤ufig Ã¤ndern (Re-Training ist teuer)
+- Tasks, deren Anforderungen sich haeufig aendern (Re-Training ist teuer)
 
 ### Fine-Tuning-Methoden
 
-**LoRA (Low-Rank Adaptation):** Die dominante Methode seit 2025. Friert die Originalgewichte ein und trainiert kleine Adapter-Matrizen. Erreicht 95% der Full-Fine-Tuning-Performance bei 10% der Kosten. Adapter sind klein (10-100 MB) und kÃ¶nnen getauscht werden — mehrere Spezialisierungen aus einem Basismodell. Kosten: 500-5.000 Euro pro Run.
+**LoRA (Low-Rank Adaptation):** Die dominante Methode seit 2025. Friert die Originalgewichte ein und trainiert kleine Adapter-Matrizen. Erreicht 95% der Full-Fine-Tuning-Performance bei 10% der Kosten. Adapter sind klein (10-100 MB) und koennen getauscht werden — mehrere Spezialisierungen aus einem Basismodell. Kosten: 500-5.000 Euro pro Run.
 
-**QLoRA:** Kombiniert LoRA mit Quantisierung (16-Bit auf 4-Bit). Ermoeglicht Fine-Tuning eines 7B-Modells auf einer Consumer-GPU (RTX 4090, ca. 1.500 Euro). Leichter Qualitaetsverlust vs. Standard-LoRA. Ideal fÃ¼r Experimente und Proof of Concept.
+**QLoRA:** Kombiniert LoRA mit Quantisierung (16-Bit auf 4-Bit). Ermoeglicht Fine-Tuning eines 7B-Modells auf einer Consumer-GPU (RTX 4090, ca. 1.500 Euro). Leichter Qualitaetsverlust vs. Standard-LoRA. Ideal fuer Experimente und Proof of Concept.
 
-**Full Fine-Tuning:** Alle Parameter aktualisieren. Hoechste QualitÃ¤t, aber prohibitiv teuer: 10.000-30.000+ Euro pro Run fÃ¼r 7B+ Modelle. Nur wenn Budget keine Rolle spielt.
+**Full Fine-Tuning:** Alle Parameter aktualisieren. Hoechste Qualitaet, aber prohibitiv teuer: 10.000-30.000+ Euro pro Run fuer 7B+ Modelle. Nur wenn Budget keine Rolle spielt.
 
-**Managed Services (2026):** OpenAI bietet Fine-Tuning-API fÃ¼r GPT-4o und GPT-4o-mini. Anthropic fÃ¼r Claude (Enterprise Tier). Google Vertex AI fÃ¼r Gemini. Upload JSONL, zahle pro Training-Token — kein Infrastruktur-Management noetig.
+**Managed Services (2026):** OpenAI bietet Fine-Tuning-API fuer GPT-4o und GPT-4o-mini. Anthropic fuer Claude (Enterprise Tier). Google Vertex AI fuer Gemini. Upload JSONL, zahle pro Training-Token — kein Infrastruktur-Management noetig.
 
 ### Datenqualitaet entscheidet
 
@@ -66,11 +66,11 @@ Das IBM-Framework (breit adoptiert):
 | Frage | Ja | Nein |
 |-------|-----|------|
 | Kann Prompt Engineering das loesen? | Stopp. Kein Fine-Tuning noetig | Weiter |
-| Braucht das Modell aktuelle/eigene Daten? | RAG hinzufuegen, dann prÃ¼fen | Weiter |
-| Brauchst Du konsistente Verhaltensaenderung? | Weiter prÃ¼fen | Kein Fine-Tuning noetig |
-| Hast Du 500+ hochwertige gelabelte Beispiele? | Weiter prÃ¼fen | Erst in Daten investieren |
-| Verarbeitest Du 50.000+ Anfragen/Monat? | Weiter prÃ¼fen | ROI unwahrscheinlich |
-| Kannst Du das Modell langfristig warten? | Fine-Tuning starten | Budget fÃ¼r Re-Training einplanen |
+| Braucht das Modell aktuelle/eigene Daten? | RAG hinzufuegen, dann pruefen | Weiter |
+| Brauchst Du konsistente Verhaltensaenderung? | Weiter pruefen | Kein Fine-Tuning noetig |
+| Hast Du 500+ hochwertige gelabelte Beispiele? | Weiter pruefen | Erst in Daten investieren |
+| Verarbeitest Du 50.000+ Anfragen/Monat? | Weiter pruefen | ROI unwahrscheinlich |
+| Kannst Du das Modell langfristig warten? | Fine-Tuning starten | Budget fuer Re-Training einplanen |
 
 **Kosten und Timeline (2026):**
 
@@ -88,7 +88,7 @@ Das IBM-Framework (breit adoptiert):
 Du bist PM bei einem FinTech-Startup (B2C, 150.000 MAU). Euer AI-Feature: automatische Kategorisierung von Banktransaktionen. Das aktuelle System nutzt GPT-4o-mini mit Few-Shot Prompting und erreicht 82% Genauigkeit.
 
 **Die Situation:**
-- Zielgenauigkeit: 92%+ (Nutzer beschweren sich Ã¼ber falsche Kategorien)
+- Zielgenauigkeit: 92%+ (Nutzer beschweren sich ueber falsche Kategorien)
 - Volumen: 3 Millionen Transaktionen/Monat
 - Aktuelle Kosten: 4.200 Euro/Monat (GPT-4o-mini API)
 - Euer Data-Team hat 12.000 manuell kategorisierte Transaktionen gesammelt
@@ -107,10 +107,10 @@ Du bist PM bei einem FinTech-Startup (B2C, 150.000 MAU). Euer AI-Feature: automa
 **Die beste Entscheidung:** Option 1 zuerst, dann Option 2.
 
 **Warum:**
-- **Hierarchie einhalten:** Prompt-Optimierung zuerst (1 Woche). Wenn 87% nicht reichen, hast Du die Baseline fÃ¼r Fine-Tuning
+- **Hierarchie einhalten:** Prompt-Optimierung zuerst (1 Woche). Wenn 87% nicht reichen, hast Du die Baseline fuer Fine-Tuning
 - **Fine-Tuning ist hier gerechtfertigt:** 3 Millionen Transaktionen/Monat ueberschreiten den ROI-Schwellenwert (50.000+) bei weitem. 12.000 gelabelte Beispiele sind ausreichend. Die Aufgabe (Kategorisierung) ist eng definiert — genau das, wofuer Fine-Tuning designt ist
 - **LoRA auf GPT-4o-mini ist kostenoptimal:** Fine-Tuned-Modelle brauchen kuerzere Prompts (Verhalten eintrainiert statt per Prompt angewiesen), was die laufenden API-Kosten senken kann
-- **Option 3 ist ein Kostenproblem:** 18.000 statt 4.200 Euro/Monat fÃ¼r 6 Prozentpunkte Verbesserung. Fine-Tuning kostet einmalig 6.000 Euro und spart langfristig
+- **Option 3 ist ein Kostenproblem:** 18.000 statt 4.200 Euro/Monat fuer 6 Prozentpunkte Verbesserung. Fine-Tuning kostet einmalig 6.000 Euro und spart langfristig
 - **Erwarteter Pfad:** Woche 1: Prompt auf 87% optimieren. Woche 2-4: Fine-Tuning auf 92%+. Fine-Tuning-Kosten amortisieren sich in unter 2 Monaten durch kuerzere Prompts
 
 **Haeufiger Fehler:** Fine-Tuning eines schwachen Modells statt besseres Prompting eines staerkeren. In diesem Fall ist GPT-4o-mini mit Fine-Tuning die richtige Wahl, weil das Volumen den ROI rechtfertigt und die Aufgabe eng genug ist.
@@ -118,10 +118,10 @@ Du bist PM bei einem FinTech-Startup (B2C, 150.000 MAU). Euer AI-Feature: automa
 
 ## Reflect
 
-- **Fine-Tuning Ã¤ndert Verhalten, nicht Wissen.** Es macht das Modell nicht "schlauer" — es passt Stil, Format und domainspezifische Muster an. FÃ¼r neues Wissen brauchst Du RAG.
+- **Fine-Tuning aendert Verhalten, nicht Wissen.** Es macht das Modell nicht "schlauer" — es passt Stil, Format und domainspezifische Muster an. Fuer neues Wissen brauchst Du RAG.
 - Die Hierarchie Prompt, dann RAG, dann Fine-Tune ist keine Empfehlung — sie ist ein Kostenschutz. Jeder Schritt ist eine Groessenordnung teurer und weniger flexibel.
-- Datenqualitaet schlÃ¤gt Datenquantitaet. 500 Experten-Beispiele sind mehr wert als 50.000 verrauschte.
-- Fine-Tuning ist kein einmaliger Aufwand. Modelle mÃ¼ssen neu trainiert werden, wenn sich Daten Ã¤ndern oder Base Models aktualisiert werden. Budget fÃ¼r laufende Wartung einplanen.
+- Datenqualitaet schlaegt Datenquantitaet. 500 Experten-Beispiele sind mehr wert als 50.000 verrauschte.
+- Fine-Tuning ist kein einmaliger Aufwand. Modelle muessen neu trainiert werden, wenn sich Daten aendern oder Base Models aktualisiert werden. Budget fuer laufende Wartung einplanen.
 
 ---
 

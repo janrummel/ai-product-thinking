@@ -40,19 +40,19 @@ In traditioneller Software beeinflusst Datenqualitaet Reports und Analytics. Bei
 
 Jede Schicht haengt von den darunterliegenden ab:
 
-| Schicht | Frage | PrioritÃ¤t |
+| Schicht | Frage | Prioritaet |
 |---------|-------|------------|
 | **Verfuegbarkeit** | Kann die AI zur Inference-Zeit auf die Daten zugreifen? | Grundvoraussetzung |
 | **Accuracy** | Sind die Daten faktisch korrekt? | Hoch — Fehler propagieren in jeden Output |
 | **Consistency** | Gibt es Widersprueche zwischen Quellen? | Hoch — AI kann nicht entscheiden, welche Quelle stimmt |
 | **Completeness** | Decken die Daten alle relevanten Faelle ab? | Mittel — fehlende Abdeckung fuehrt zu Hallucinations |
-| **Freshness** | Sind die Daten aktuell? | Mittel — veraltete Daten degradieren Ã¼ber Zeit |
+| **Freshness** | Sind die Daten aktuell? | Mittel — veraltete Daten degradieren ueber Zeit |
 
 Es bringt nichts, Freshness zu optimieren, wenn die Daten inaccurate sind.
 
-### Data Governance fÃ¼r AI-Produkte
+### Data Governance fuer AI-Produkte
 
-Data Governance definiert, wer welche Daten wie und unter welchen Constraints nutzen darf. FÃ¼r AI-Produkte ist das kritisch:
+Data Governance definiert, wer welche Daten wie und unter welchen Constraints nutzen darf. Fuer AI-Produkte ist das kritisch:
 
 | Frage | Warum sie wichtig ist |
 |-------|----------------------|
@@ -62,20 +62,20 @@ Data Governance definiert, wer welche Daten wie und unter welchen Constraints nu
 | Wie gehen wir mit PII in AI-Kontexten um? | GDPR, CCPA Compliance |
 | Wer genehmigt Aenderungen an Trainingsdaten? | Qualitaetskontrolle, Accountability |
 
-### Praktische Massnahmen fÃ¼r RAG-Produkte
+### Praktische Massnahmen fuer RAG-Produkte
 
-1. **Document Freshness Policy:** Definiere wie oft Knowledge-Base-Dokumente reviewed und aktualisiert werden. Veraltete Dokumente sind die #1 Ursache fÃ¼r falsche RAG-Antworten.
+1. **Document Freshness Policy:** Definiere wie oft Knowledge-Base-Dokumente reviewed und aktualisiert werden. Veraltete Dokumente sind die #1 Ursache fuer falsche RAG-Antworten.
 2. **Chunking-Strategie:** Wie Dokumente in Chunks aufgeteilt werden, beeinflusst direkt die Antwortqualitaet. Schlechtes Chunking fuehrt zu schlechtem Retrieval fuehrt zu Hallucinations.
-3. **Metadata Enrichment:** Datum, Autor, Thema und Zuverlaessigkeitsbewertung zu Dokumenten hinzufuegen verbessert Retrieval-QualitÃ¤t und Source Attribution.
+3. **Metadata Enrichment:** Datum, Autor, Thema und Zuverlaessigkeitsbewertung zu Dokumenten hinzufuegen verbessert Retrieval-Qualitaet und Source Attribution.
 4. **Widerspruchserkennung:** Wenn mehrere Dokumente widerspruechliche Informationen liefern, braucht das Produkt eine Policy welche Quelle Vorrang hat.
 
 ### GIGO im AI-Kontext
 
 Das "Garbage In, Garbage Out"-Problem wird bei AI-Produkten verstaerkt:
 - AI laesst Fehler autoritativ aussehen (selbstsichere falsche Antworten)
-- Nutzer prÃ¼fen AI-Outputs oft nicht, Fehler propagieren downstream
+- Nutzer pruefen AI-Outputs oft nicht, Fehler propagieren downstream
 - Scale bedeutet: ein kleines Datenqualitaetsproblem betrifft Tausende Nutzer
-- Feedback Loops: Wenn Nutzer falsche AI-Antworten akzeptieren und diese zurÃ¼ck ins System fliessen, degradiert QualitÃ¤t Ã¼ber Zeit
+- Feedback Loops: Wenn Nutzer falsche AI-Antworten akzeptieren und diese zurueck ins System fliessen, degradiert Qualitaet ueber Zeit
 
 ## Framework
 
@@ -91,14 +91,14 @@ Das "Garbage In, Garbage Out"-Problem wird bei AI-Produkten verstaerkt:
 
 ## Scenario
 
-Du bist PM eines internen AI-Assistenten fÃ¼r eine Versicherung. Der Bot beantwortet Mitarbeiterfragen zu Policen und Prozessen. 2.000 Anfragen pro Woche. RAG-basiert mit 5.000 Dokumenten in der Knowledge Base.
+Du bist PM eines internen AI-Assistenten fuer eine Versicherung. Der Bot beantwortet Mitarbeiterfragen zu Policen und Prozessen. 2.000 Anfragen pro Woche. RAG-basiert mit 5.000 Dokumenten in der Knowledge Base.
 
 **Aktuelle Situation:**
 - 60% der "schlechten Antworten" (User Thumbs Down) betreffen Informationen aus Dokumenten, die aelter als 6 Monate sind
 - 15% der Fehler kommen von widerspruechlichen Dokumenten (alte Policy vs. neue Policy, beide im Index)
 - Das Compliance-Team fragt: "Werden Mitarbeiterfragen zu Kundendaten an OpenAI gesendet?"
-- Budget fÃ¼r Datenqualitaet: 2 Personentage pro Monat
-- Der Engineering Lead schlÃ¤gt vor: "Wir brauchen ein besseres Modell"
+- Budget fuer Datenqualitaet: 2 Personentage pro Monat
+- Der Engineering Lead schlaegt vor: "Wir brauchen ein besseres Modell"
 
 ## Decide
 
@@ -111,11 +111,11 @@ Du bist PM eines internen AI-Assistenten fÃ¼r eine Versicherung. Der Bot beant
 1. **Sofort:** Document Freshness Policy einfuehren — alle Dokumente aelter als 6 Monate reviewen, veraltete entfernen oder aktualisieren
 2. **Sofort:** Widerspruchserkennung — wenn zwei Dokumente zum gleichen Thema existieren, das neuere priorisieren und das alte archivieren
 3. **Compliance klären:** Pruefen ob PII in Anfragen an die API gesendet wird. DPA mit dem Model Provider bestaetigen. Ggf. PII-Filter vor dem API-Call einbauen
-4. **Monatlich:** 2 Personentage fÃ¼r Knowledge-Base-Hygiene nutzen — Review, Dedup, Freshness Check
+4. **Monatlich:** 2 Personentage fuer Knowledge-Base-Hygiene nutzen — Review, Dedup, Freshness Check
 
 **Warum nicht das Modell upgraden:**
 - 75% der Fehler sind Datenprobleme — ein besseres Modell loest die nicht
-- Erfahrungsberichte aus der LangChain- und LlamaIndex-Community (2024-2025) deuten darauf hin, dass 60-80% der RAG-Qualitaetsprobleme Knowledge-Base-Probleme sind — nicht Modell-Probleme. Diese SchÃ¤tzung basiert auf Erfahrungsberichten aus der Practitioner-Community, nicht auf einer formalen Studie.
+- Erfahrungsberichte aus der LangChain- und LlamaIndex-Community (2024-2025) deuten darauf hin, dass 60-80% der RAG-Qualitaetsprobleme Knowledge-Base-Probleme sind — nicht Modell-Probleme. Diese Schaetzung basiert auf Erfahrungsberichten aus der Practitioner-Community, nicht auf einer formalen Studie.
 - Ein Modell-Upgrade ohne Datenbereinigung verbessert die Metriken minimal
 
 **Was viele falsch machen:** Datenqualitaet als Engineering-Problem abtun und auf ein besseres Modell hoffen.
@@ -125,9 +125,9 @@ Du bist PM eines internen AI-Assistenten fÃ¼r eine Versicherung. Der Bot beant
 
 **Bei RAG-Produkten ist Data Quality gleich Product Quality — das Modell ist nur so gut wie die Daten, die es abrufen kann.**
 
-- Laut Erfahrungsberichten aus der LangChain- und LlamaIndex-Community gehen 60-80% der Qualitaetsprobleme bei RAG-Produkten auf die Knowledge Base zurÃ¼ck, nicht auf das Modell. Diese SchÃ¤tzung basiert auf Practitioner-Erfahrungen, nicht auf einer formalen Studie.
+- Laut Erfahrungsberichten aus der LangChain- und LlamaIndex-Community gehen 60-80% der Qualitaetsprobleme bei RAG-Produkten auf die Knowledge Base zurueck, nicht auf das Modell. Diese Schaetzung basiert auf Practitioner-Erfahrungen, nicht auf einer formalen Studie.
 - Data Governance ist kein Nice-to-have: PII in API-Calls, Trainingsdaten-Nutzung und Datenloeschungsrechte sind reale Compliance-Risiken
-- Document Freshness ist die einfachste und wirkungsvollste Massnahme fÃ¼r RAG-QualitÃ¤t
+- Document Freshness ist die einfachste und wirkungsvollste Massnahme fuer RAG-Qualitaet
 
 ---
 

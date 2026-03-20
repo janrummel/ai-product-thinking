@@ -11,9 +11,9 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Dein AI-Feature ist live. Die Zusammenfassungs-Funktion funktioniert, die Metriken sehen gut aus, das Team feiert den Launch. Drei Monate spÃ¤ter: Die QualitÃ¤t sinkt. Nutzer beschweren sich Ã¼ber schlechte Zusammenfassungen. Was ist passiert?
+Dein AI-Feature ist live. Die Zusammenfassungs-Funktion funktioniert, die Metriken sehen gut aus, das Team feiert den Launch. Drei Monate spaeter: Die Qualitaet sinkt. Nutzer beschweren sich ueber schlechte Zusammenfassungen. Was ist passiert?
 
-Niemand hat etwas geaendert — und genau das ist das Problem. Der Model Provider hat ein Update ausgerollt. Die Kundenanfragen haben sich verÃ¤ndert (neues Produktrelease). Die Wissensdatenbank ist veraltet. In der traditionellen Softwareentwicklung heisst "nichts Ã¤ndern" StabilitÃ¤t. Bei AI-Produkten heisst "nichts Ã¤ndern" Qualitaetsverlust.
+Niemand hat etwas geaendert — und genau das ist das Problem. Der Model Provider hat ein Update ausgerollt. Die Kundenanfragen haben sich veraendert (neues Produktrelease). Die Wissensdatenbank ist veraltet. In der traditionellen Softwareentwicklung heisst "nichts aendern" Stabilitaet. Bei AI-Produkten heisst "nichts aendern" Qualitaetsverlust.
 
 ## Concept
 
@@ -24,12 +24,12 @@ Niemand hat etwas geaendert — und genau das ist das Problem. Der Model Provide
 **Traditionell:** Discovery, Design, Build, Launch, Maintain
 **AI:** Discovery, Prototype, Evaluate, Build, Launch, Monitor, Re-evaluate, Improve, (Repeat)
 
-Der entscheidende Unterschied: **AI-Produkte erreichen nie eine stabile Maintenance-Phase.** Modelle driften, Nutzerverhalten Ã¤ndert sich, die Welt Ã¤ndert sich, Wettbewerber verbessern sich. Ein AI-Produkt, das nicht aktiv verbessert wird, degradiert aktiv.
+Der entscheidende Unterschied: **AI-Produkte erreichen nie eine stabile Maintenance-Phase.** Modelle driften, Nutzerverhalten aendert sich, die Welt aendert sich, Wettbewerber verbessern sich. Ein AI-Produkt, das nicht aktiv verbessert wird, degradiert aktiv.
 
 ### Die vier Phasen
 
 **Phase 1: Exploration & Prototyping (Wochen)**
-- Ziel: Validieren, dass AI das Problem in akzeptabler QualitÃ¤t loesen kann
+- Ziel: Validieren, dass AI das Problem in akzeptabler Qualitaet loesen kann
 - Aktivitaeten: Prompt-Experimente, Modellvergleiche, Quick Prototypes
 - PM-Rolle: Problem klar genug definieren, um einen Prototyp bewertbar zu machen
 - Haeufiger Fehler: Diese Phase ueberspringen und sich nach einer Demo zum Full Build commiten
@@ -37,8 +37,8 @@ Der entscheidende Unterschied: **AI-Produkte erreichen nie eine stabile Maintena
 **Phase 2: Evaluation & Hardening (Wochen bis Monate)**
 - Ziel: Robuste Eval-Infrastruktur aufbauen und Quality Baselines setzen
 - Aktivitaeten: Eval Datasets erstellen, automatisierte Eval Pipelines, Human Evaluations
-- PM-Rolle: Definieren was "gut genug" fÃ¼r Nutzer bedeutet
-- Haeufiger Fehler: Ohne Eval-Infrastruktur launchen — "wir messen QualitÃ¤t spÃ¤ter"
+- PM-Rolle: Definieren was "gut genug" fuer Nutzer bedeutet
+- Haeufiger Fehler: Ohne Eval-Infrastruktur launchen — "wir messen Qualitaet spaeter"
 
 **Phase 3: Production & Scaling (Monate)**
 - Ziel: An Nutzer ausliefern und realen Traffic verarbeiten
@@ -46,19 +46,19 @@ Der entscheidende Unterschied: **AI-Produkte erreichen nie eine stabile Maintena
 - Haeufiger Fehler: Launch als Ziellinie behandeln statt als Startlinie
 
 **Phase 4: Continuous Improvement (fortlaufend)**
-- Ziel: QualitÃ¤t aufrechterhalten und verbessern
+- Ziel: Qualitaet aufrechterhalten und verbessern
 - Aktivitaeten: Model Updates, Prompt Refinement, Eval Dataset-Erweiterung
 - PM-Rolle: Improvement-Arbeit gegen neue Features priorisieren
-- Haeufiger Fehler: Nach Launch nicht mehr investieren und QualitÃ¤t degradieren lassen
+- Haeufiger Fehler: Nach Launch nicht mehr investieren und Qualitaet degradieren lassen
 
 ### Model Versioning & Migration
 
-Wenn Anthropic Claude aktualisiert, wenn OpenAI ein neues GPT veroeffentlicht — Ã¤ndert sich das Verhalten Deines Produkts. Manchmal dramatisch.
+Wenn Anthropic Claude aktualisiert, wenn OpenAI ein neues GPT veroeffentlicht — aendert sich das Verhalten Deines Produkts. Manchmal dramatisch.
 
 **Best Practices:**
 1. Produktionsmodelle nie automatisch upgraden — immer auf spezifische Versionen pinnen
 2. Eval Suite auf neuem Modell laufen lassen, bevor migriert wird
-3. Prompt-Anpassungen einplanen — optimierte Prompts fÃ¼r Modell A funktionieren anders auf Modell B
+3. Prompt-Anpassungen einplanen — optimierte Prompts fuer Modell A funktionieren anders auf Modell B
 4. Rollback ermoeglichen — alte Konfiguration mindestens 2 Wochen nach Migration deploybar halten
 
 **Die Upgrade-Falle:** Ein neues Modell kann auf allgemeinen Benchmarks besser abschneiden, aber auf Deinem spezifischen Use Case schlechter performen. Immer auf DEINEM Eval-Dataset evaluieren.
@@ -68,21 +68,21 @@ Wenn Anthropic Claude aktualisiert, wenn OpenAI ein neues GPT veroeffentlicht �
 | Ebene | Was wird gemessen | Beispiele |
 |-------|-------------------|-----------|
 | Infrastructure | Standard-Betrieb | Uptime, Error Rates, Latency, Throughput |
-| Quality (AI-spezifisch) | Output-QualitÃ¤t | Sample Evaluations, Thumbs up/down Rate, Edit Distance, Drift Detection |
+| Quality (AI-spezifisch) | Output-Qualitaet | Sample Evaluations, Thumbs up/down Rate, Edit Distance, Drift Detection |
 | Business Impact | Geschaeftswirkung | Adoption Trends, Task Completion, Cost-per-Query, Revenue Attribution |
 
 Ein Modell kann online und innerhalb der SLA sein, waehrend es schreckliche Outputs produziert. Quality Monitoring ist nicht optional.
 
 ## Framework
 
-**Prioritaeten fÃ¼r Post-Launch Arbeit:**
+**Prioritaeten fuer Post-Launch Arbeit:**
 
-| PrioritÃ¤t | Trigger | Aktion |
+| Prioritaet | Trigger | Aktion |
 |------------|---------|--------|
 | URGENT | Quality Regression (Metriken unter Launch-Schwellenwerten) | Sofort fixen |
 | HIGH | Model Provider Deprecation Notice | Migration mit Eval-Zyklus planen |
 | MEDIUM | Graduelle Qualitaetsdrift (Metriken sinken langsam) | Improvement Sprint einplanen |
-| LOW | Neues Modell mit besseren Benchmarks verfÃ¼gbar | Evaluieren wenn aktuelle Performance nicht reicht |
+| LOW | Neues Modell mit besseren Benchmarks verfuegbar | Evaluieren wenn aktuelle Performance nicht reicht |
 
 **Immer:** Eval-Infrastruktur als erstklassiges Produkt-Concern behandeln.
 
@@ -90,7 +90,7 @@ Ein Modell kann online und innerhalb der SLA sein, waehrend es schreckliche Outp
 
 Du bist PM eines AI-Schreibassistenten. Vor 4 Monaten habt ihr gelauncht. Die Situation heute:
 
-- **Acceptance Rate** (Nutzer Ã¼bernehmen AI-Vorschlag): von 68% bei Launch auf 54% gefallen
+- **Acceptance Rate** (Nutzer uebernehmen AI-Vorschlag): von 68% bei Launch auf 54% gefallen
 - **Regeneration Rate** (Nutzer klicken "Neu generieren"): von 12% auf 23% gestiegen
 - **Latency:** unveraendert bei P95 von 2,1 Sekunden
 - **Kosten:** $2.800/Monat, im Budget
@@ -98,7 +98,7 @@ Du bist PM eines AI-Schreibassistenten. Vor 4 Monaten habt ihr gelauncht. Die Si
 - **Wissens-Update:** Die interne Style-Guide-Datenbank wurde seit Launch nicht aktualisiert
 - Euer CEO fragt: "Sollen wir auf das neueste Modell upgraden? Das ist doch bestimmt besser."
 
-Die Infrastruktur-Metriken sind alle gruen. Aber die QualitÃ¤t degradiert offensichtlich.
+Die Infrastruktur-Metriken sind alle gruen. Aber die Qualitaet degradiert offensichtlich.
 
 ## Decide
 
@@ -113,7 +113,7 @@ Die Infrastruktur-Metriken sind alle gruen. Aber die QualitÃ¤t degradiert offe
 3. **Erst dann Modell-Upgrade evaluieren** — auf dem eigenen Eval-Dataset, nicht auf allgemeinen Benchmarks
 
 **Warum nicht sofort upgraden:**
-- Ein Modell-Upgrade Ã¤ndert das Verhalten Ã¼berall — auch dort, wo es gut funktioniert
+- Ein Modell-Upgrade aendert das Verhalten ueberall — auch dort, wo es gut funktioniert
 - Wenn die Ursache veralteter Context ist, hilft ein neues Modell nicht
 - Upgrade ohne Diagnose ist Symptombehandlung
 

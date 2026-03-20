@@ -1,6 +1,6 @@
 ---
 title: "Generative Features"
-description: "Wie Du generative AI-Features designst, die Erwartungen managen, Edit-Workflows ermoeglichen und QualitÃ¤t sichern — statt User mit unberechenbaren Outputs allein zu lassen."
+description: "Wie Du generative AI-Features designst, die Erwartungen managen, Edit-Workflows ermoeglichen und Qualitaet sichern — statt User mit unberechenbaren Outputs allein zu lassen."
 sidebar:
   order: 4
 ---
@@ -19,7 +19,7 @@ Das Problem ist nicht das Modell. Das Problem ist, dass generative Features eine
 
 ### Das Grundproblem: Non-Deterministic Output
 
-Generative Features haben eine einzigartige Herausforderung: Die QualitÃ¤t variiert. Jeder Output ist ein Entwurf, kein Endergebnis. Das erzeugt drei Spannungsfelder:
+Generative Features haben eine einzigartige Herausforderung: Die Qualitaet variiert. Jeder Output ist ein Entwurf, kein Endergebnis. Das erzeugt drei Spannungsfelder:
 
 - **Bewertungslast:** Der User muss jeden Output selbst bewerten — das kostet kognitive Energie
 - **Expectation Gap:** AI ist probabilistisch, Stakeholder erwarten deterministisch. Figma 2025: 78% sagen AI steigert Effizienz, aber unter 50% sagen, sie macht sie *besser*
@@ -31,12 +31,12 @@ Generative Features haben eine einzigartige Herausforderung: Die QualitÃ¤t var
 - **Inline Generation** (Notion AI): Slash-Command, Output erscheint direkt im Dokument. Geringste Friction, aber limitierte Kontrolle
 - **Side-Panel** (ChatGPT Canvas, Claude Artifacts): Separates Panel mit direkter Editiermoeglichkeit. Mehr Kontext, mehr Kontrolle
 - **Highlight-and-Instruct** (Canvas): Text markieren, gezielte Aenderung anweisen. Praeziseste Methode
-- **Visual Diff** (Notion): Loeschungen grau, Ergaenzungen blau. User sieht sofort was sich Ã¤ndert
+- **Visual Diff** (Notion): Loeschungen grau, Ergaenzungen blau. User sieht sofort was sich aendert
 
 **Image Generation** (Midjourney-Paradigma):
 - 4-Bild-Grid, auswaehlen, Variationen (subtle/strong), Upscale, Refine, Export
 - Nie Commitment zu einer einzelnen Generation erzwingen
-- Vary Region fÃ¼r partielle Regeneration — nur den Teil Ã¤ndern, der nicht passt
+- Vary Region fuer partielle Regeneration — nur den Teil aendern, der nicht passt
 
 **Code Generation:**
 - **Inline Completion** (Copilot): Ghost Text, Tab zum Akzeptieren. Minimale Unterbrechung
@@ -54,7 +54,7 @@ Der Output ist selten beim ersten Mal perfekt. Dein Produkt braucht mindestens z
 ### Quality Guardrails
 
 - **Input Guardrails:** Filtern bevor das Modell den Prompt sieht
-- **Output Guardrails:** Ergebnis prÃ¼fen bevor der User es sieht
+- **Output Guardrails:** Ergebnis pruefen bevor der User es sieht
 - **Fallback UX:** Wenn ein Output geblockt wird — nicht nur Fehlermeldung, sondern Alternative anbieten
 - **False-Positive-Spannung:** Legitime Prompts werden geblockt. Zu streng = frustrierend, zu locker = riskant
 - **Latenz-Impact:** Jeder Guardrail kostet Zeit. Kommuniziere Wartezeit, nicht nur Ergebnis
@@ -67,7 +67,7 @@ Der Output ist selten beim ersten Mal perfekt. Dein Produkt braucht mindestens z
 |-----------|-------|-------------|---------------|
 | Output-Kontrolle | Kann der User den Output anpassen? | Nur Regenerate-Button | Edit, Refine, Variationen |
 | Erwartungsmanagement | Weiss der User was er bekommt? | Keine Guidance | Onboarding, Beispiele, Limitations |
-| Guardrails | Wie wird QualitÃ¤t gesichert? | Nur Output-Filter | Input + Output + Fallback UX |
+| Guardrails | Wie wird Qualitaet gesichert? | Nur Output-Filter | Input + Output + Fallback UX |
 | Iteration | Wie verfeinert der User? | Copy-Paste in neuen Prompt | Conversational Refinement + Direct Edit |
 | Feedback-Loop | Lernt das System vom User? | Kein Feedback | Thumbs, Edits als Signal, Behavioral Contracts |
 
@@ -96,20 +96,20 @@ Du bist PM bei einem Content-Marketing-SaaS. Euer neues Feature: AI-generierte B
 **Die beste Entscheidung:** Option 2 — Refine-Workflow.
 
 **Warum:**
-- Das Problem ist nicht die Erstqualitaet (68% Weiterbearbeitung ist solide) — das Problem ist, dass User den Output nicht gezielt anpassen kÃ¶nnen
+- Das Problem ist nicht die Erstqualitaet (68% Weiterbearbeitung ist solide) — das Problem ist, dass User den Output nicht gezielt anpassen koennen
 - 4,2 Regenerations pro Draft zeigt: User wissen was sie wollen, haben aber kein Werkzeug um es dem System mitzuteilen
 - Highlight-and-Instruct loest die Top-Beschwerde "Aenderungen betreffen immer den ganzen Text" direkt
 - Tonfalleinstellungen als Behavioral Contract: User definiert *vorher* was die AI soll
 
 **Warum nicht die anderen:**
 - **Option 1:** Ein besseres Modell reduziert vielleicht von 4,2 auf 3 Regenerations — aber ohne Edit-Workflow bleiben User trotzdem in der Regeneration-Schleife
-- **Option 3:** Variationen helfen bei der Auswahl, nicht beim Verfeinern. Der Kern-Pain ist "Ich kann nichts gezielt Ã¤ndern"
+- **Option 3:** Variationen helfen bei der Auswahl, nicht beim Verfeinern. Der Kern-Pain ist "Ich kann nichts gezielt aendern"
 </details>
 
 ## Reflect
 
 - **Generative Features sind keine Outputs — sie sind Workflows.** Der Generate-Button ist der Anfang, nicht das Ende. Ohne Edit/Refine-Mechanismen lieferst Du einen Slot Machine statt ein Werkzeug.
-- **Erwartungsmanagement ist Product Design.** Wer nicht kommuniziert, dass AI probabilistisch arbeitet, erzeugt Enttaeuschung. Onboarding-Ehrlichkeit ("Ich lerne noch") ist kein SchwÃ¤che-Eingestaendnis — es ist UX.
+- **Erwartungsmanagement ist Product Design.** Wer nicht kommuniziert, dass AI probabilistisch arbeitet, erzeugt Enttaeuschung. Onboarding-Ehrlichkeit ("Ich lerne noch") ist kein Schwaeche-Eingestaendnis — es ist UX.
 - **Guardrails kosten Latenz, keine Guardrails kosten Vertrauen.** Finde die Balance und kommuniziere Wartezeiten transparent.
 - **User-Segmente unterscheiden sich radikal.** Embracers wollen Power-Features, Skeptiker brauchen Safety Nets. Segmentiere nach AI-Attitude, nicht nur nach Rolle.
 
