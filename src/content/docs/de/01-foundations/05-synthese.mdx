@@ -1,6 +1,6 @@
 ---
 title: "Synthese: AI Foundations"
-description: "Wie die vier Foundations-Lektionen zusammenhaengen — und was sie gemeinsam ueber AI Product Management verraten."
+description: "Wie die vier Foundations-Lektionen zusammenhaengen — und was sie gemeinsam über AI Product Management verraten."
 sidebar:
   order: 5
 ---
@@ -11,9 +11,9 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## The Big Picture
 
-Du hast vier Lektionen durchgearbeitet: wie LLMs Token fuer Token generieren, welche ML-Paradigmen es gibt, warum AI-Outputs unsicher sind, und was Foundation Models von klassischem ML unterscheidet.
+Du hast vier Lektionen durchgearbeitet: wie LLMs Token für Token generieren, welche ML-Paradigmen es gibt, warum AI-Outputs unsicher sind, und was Foundation Models von klassischem ML unterscheidet.
 
-Einzeln sind das nuetzliche Konzepte. Zusammen ergeben sie ein Denkmodell fuer AI Product Management.
+Einzeln sind das nuetzliche Konzepte. Zusammen ergeben sie ein Denkmodell für AI Product Management.
 
 ## Connections
 
@@ -21,54 +21,54 @@ Einzeln sind das nuetzliche Konzepte. Zusammen ergeben sie ein Denkmodell fuer A
 
 LLMs denken in Tokens und Wahrscheinlichkeiten (Lektion 1). Das macht sie fundamental **non-deterministic** (Lektion 3). Gleicher Input, anderer Output — das ist kein Bug, sondern die Architektur.
 
-**Fuer Dich als PM:** Jedes AI-Feature braucht ein Design, das mit variierenden Outputs umgehen kann. Deterministisches UX-Denken funktioniert hier nicht.
+**Für Dich als PM:** Jedes AI-Feature braucht ein Design, das mit variierenden Outputs umgehen kann. Deterministisches UX-Denken funktioniert hier nicht.
 
 ### 2. Von ML-Paradigmen zu Foundation Models
 
 ML hat viele Paradigmen — Supervised, Unsupervised, Reinforcement Learning (Lektion 2). Foundation Models nutzen **Self-Supervised Learning** auf massiven Datensaetzen (Lektion 4) und sind dadurch ohne taskspezifisches Training auf viele Aufgaben anwendbar.
 
-**Fuer Dich als PM:** Du musst nicht fuer jedes Feature ein eigenes Modell trainieren. Aber Du musst wissen, wann ein spezialisiertes Modell trotzdem besser ist.
+**Für Dich als PM:** Du musst nicht für jedes Feature ein eigenes Modell trainieren. Aber Du musst wissen, wann ein spezialisiertes Modell trotzdem besser ist.
 
 ### 3. Von Aufgabentypen zu Produktarchitekturen
 
 Classification und Generation sind unterschiedliche Aufgaben (Lektion 2), die auf **discriminative vs. generative** Modelle mappen. Die meisten AI-Produkte kombinieren beides in Pipelines — z.B. erst klassifizieren, dann generieren.
 
-**Fuer Dich als PM:** Denke nicht in "einem Modell", sondern in Pipelines. Ein Support-Bot klassifiziert erst die Anfrage und generiert dann die Antwort.
+**Für Dich als PM:** Denke nicht in "einem Modell", sondern in Pipelines. Ein Support-Bot klassifiziert erst die Anfrage und generiert dann die Antwort.
 
 ### 4. Von Hallucinations zu RAG
 
 Hallucinations (Lektion 1) sind eine strukturelle Konsequenz von **probabilistischer Vorhersage** (Lektion 3). Sie lassen sich nicht wegtrainieren, aber durch **RAG-Grounding auf Foundation Models** (Lektion 4) reduzieren.
 
-**Fuer Dich als PM:** Die wichtigste Mitigation fuer Hallucinations ist nicht ein besseres Modell, sondern besserer Context. RAG ist dein wirksamstes Werkzeug — aber kein Allheilmittel. Auch mit RAG muss der Output validiert werden.
+**Für Dich als PM:** Die wichtigste Mitigation für Hallucinations ist nicht ein besseres Modell, sondern besserer Context. RAG ist dein wirksamstes Werkzeug — aber kein Allheilmittel. Auch mit RAG muss der Output validiert werden.
 
 ### 5. Von Temperature zu API-Parametern
 
-Temperature und Sampling (Lektion 1) sind Deine direkten Stellschrauben fuer den **Creativity-Accuracy-Tradeoff** (Lektion 3). Du wendest sie auf **Foundation Model APIs** an (Lektion 4).
+Temperature und Sampling (Lektion 1) sind Deine direkten Stellschrauben für den **Creativity-Accuracy-Tradeoff** (Lektion 3). Du wendest sie auf **Foundation Model APIs** an (Lektion 4).
 
-**Fuer Dich als PM:** Du brauchst keinen ML-Engineer, um die Output-Qualitaet zu steuern. Temperature, Top-P und System-Prompts sind PM-Werkzeuge.
+**Für Dich als PM:** Du brauchst keinen ML-Engineer, um die Output-Qualität zu steuern. Temperature, Top-P und System-Prompts sind PM-Werkzeuge.
 
 ## The Meta-Insight
 
-> AI Product Management ist fundamental **Uncertainty Management** — in Model Outputs, in User-Erwartungen, in der sich schnell veraendernden Modelllandschaft und im organisationalen Verstaendnis davon, was AI kann und was nicht.
+> AI Product Management ist fundamental **Uncertainty Management** — in Model Outputs, in User-Erwartungen, in der sich schnell veraendernden Modelllandschaft und im organisationalen Verständnis davon, was AI kann und was nicht.
 
-Das ist der Unterschied zu klassischem Produktmanagement. Du designst nicht fuer deterministische Systeme. Du designst fuer Wahrscheinlichkeiten.
+Das ist der Unterschied zu klassischem Produktmanagement. Du designst nicht für deterministische Systeme. Du designst für Wahrscheinlichkeiten.
 
 ## Your Foundations Checklist
 
-Was Du jetzt koennen solltest:
+Was Du jetzt können solltest:
 
-- [ ] Stakeholdern erklaeren, was ein LLM tut (und was nicht) — Lektion 1
-- [ ] Den richtigen ML-Ansatz fuer ein Produktproblem waehlen — Lektion 2
+- [ ] Stakeholdern erklären, was ein LLM tut (und was nicht) — Lektion 1
+- [ ] Den richtigen ML-Ansatz für ein Produktproblem waehlen — Lektion 2
 - [ ] Produkte designen, die mit Unsicherheit umgehen — Lektion 3
-- [ ] Foundation Models fuer einen Use Case auswaehlen und vergleichen — Lektion 4
+- [ ] Foundation Models für einen Use Case auswaehlen und vergleichen — Lektion 4
 - [ ] Die Build vs Buy vs Blend-Entscheidung treffen — Lektion 4
 - [ ] Ein Evaluation Framework aufsetzen — Lektion 3
 
-Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. Diese Grundlagen tragen alles, was folgt.
+Wenn Du bei einem Punkt unsicher bist, geh zurück zur entsprechenden Lektion. Diese Grundlagen tragen alles, was folgt.
 
 ## Weiter mit: AI Strategy
 
-Du weisst jetzt WIE AI funktioniert. [Kapitel 2](../../02-strategy/) beantwortet WANN AI die richtige Loesung ist — und wann nicht.
+Du weisst jetzt WIE AI funktioniert. [Kapitel 2](../../02-strategy/) beantwortet WANN AI die richtige Lösung ist — und wann nicht.
 
 ## Self-Assessment
 
@@ -81,29 +81,29 @@ Dein Team hat einen internen Bot gebaut, der lange Kundenservice-Tickets zusamme
 <details>
 <summary>Aufloesung</summary>
 
-Ein "besseres Modell" loest das Problem nicht, weil Hallucinations eine strukturelle Konsequenz probabilistischer Vorhersage sind (Lektion 3) — sie lassen sich nicht wegtrainieren. Der wirksamere Hebel ist RAG-Grounding (Lektion 4): Du gibst dem Modell das Original-Ticket als Context mit, sodass es sich darauf stuetzt statt frei zu generieren. Zusaetzlich solltest Du die Temperature senken (Lektion 1), um den Output naeher an den wahrscheinlichsten Tokens zu halten. Und das UX-Design muss mit variierenden Outputs rechnen — z.B. durch eine Verlinkung zum Original-Ticket zur Verifikation (Lektion 3).
+Ein "besseres Modell" loest das Problem nicht, weil Hallucinations eine strukturelle Konsequenz probabilistischer Vorhersage sind (Lektion 3) — sie lassen sich nicht wegtrainieren. Der wirksamere Hebel ist RAG-Grounding (Lektion 4): Du gibst dem Modell das Original-Ticket als Context mit, sodass es sich darauf stuetzt statt frei zu generieren. Zusätzlich solltest Du die Temperature senken (Lektion 1), um den Output naeher an den wahrscheinlichsten Tokens zu halten. Und das UX-Design muss mit variierenden Outputs rechnen — z.B. durch eine Verlinkung zum Original-Ticket zur Verifikation (Lektion 3).
 
 </details>
 
 ### Szenario 2: Klassifizieren oder generieren?
 
-Euer Support-Team erhaelt taeglich 500 Tickets. Bisher werden sie manuell in 12 Kategorien sortiert und dann an spezialisierte Teams weitergeleitet. Dein CEO schlaegt vor: "Lass doch ChatGPT die Tickets gleich beantworten." Wie strukturierst Du das Problem?
+Euer Support-Team erhaelt taeglich 500 Tickets. Bisher werden sie manuell in 12 Kategorien sortiert und dann an spezialisierte Teams weitergeleitet. Dein CEO schlägt vor: "Lass doch ChatGPT die Tickets gleich beantworten." Wie strukturierst Du das Problem?
 
 <details>
 <summary>Aufloesung</summary>
 
-Hier werden zwei fundamental verschiedene ML-Aufgaben vermischt (Lektion 2): Classification (Ticket einer Kategorie zuordnen) und Generation (eine Antwort formulieren). Die sinnvolle Architektur ist eine Pipeline (Lektion 2, Synthese-Connection 3): Erst ein discriminatives Modell zur Klassifikation, dann — nur fuer geeignete Kategorien — ein generatives Modell fuer die Antwort. Fuer die Klassifikation koennte ein spezialisiertes, kleineres Modell besser sein als ein Foundation Model (Lektion 4), waehrend fuer die Generierung ein Foundation Model via API mit niedriger Temperature sinnvoll ist (Lektion 1).
+Hier werden zwei fundamental verschiedene ML-Aufgaben vermischt (Lektion 2): Classification (Ticket einer Kategorie zuordnen) und Generation (eine Antwort formulieren). Die sinnvolle Architektur ist eine Pipeline (Lektion 2, Synthese-Connection 3): Erst ein discriminatives Modell zur Klassifikation, dann — nur für geeignete Kategorien — ein generatives Modell für die Antwort. Für die Klassifikation könnte ein spezialisiertes, kleineres Modell besser sein als ein Foundation Model (Lektion 4), waehrend für die Generierung ein Foundation Model via API mit niedriger Temperature sinnvoll ist (Lektion 1).
 
 </details>
 
 ### Szenario 3: Foundation Model oder Custom Training?
 
-Du baust ein Feature, das juristische Vertraege auf problematische Klauseln prueft. Euer CTO will ein eigenes Modell trainieren, weil "die Genauigkeit bei Rechtsdokumenten maximal sein muss." Ein anderer Kollege sagt: "Nimm einfach GPT-4 mit einem guten Prompt." Wie entscheidest Du?
+Du baust ein Feature, das juristische Vertraege auf problematische Klauseln prüft. Euer CTO will ein eigenes Modell trainieren, weil "die Genauigkeit bei Rechtsdokumenten maximal sein muss." Ein anderer Kollege sagt: "Nimm einfach GPT-4 mit einem guten Prompt." Wie entscheidest Du?
 
 <details>
 <summary>Aufloesung</summary>
 
-Die Entscheidung haengt von der Build-vs-Buy-vs-Blend-Logik ab (Lektion 4). Ein Foundation Model mit RAG (Blend-Ansatz) ist der sinnvolle Startpunkt: Du nutzt ein Foundation Model via API und grounded es mit eurer spezifischen Vertragsdatenbank. Custom Training ist erst sinnvoll, wenn ihr genuegend gelabelte juristische Daten habt UND die Foundation-Model-Performance nachweislich nicht reicht — beides ist anfangs unwahrscheinlich. Gleichzeitig muss das Design beruecksichtigen, dass der Output probabilistisch ist (Lektion 3): Bei juristischen Dokumenten darf der Output nie als definitiv dargestellt werden, sondern als Vorschlag, den ein Jurist prueft. Ein Evaluation Framework (Lektion 3) mit juristischen Experten ist hier unverzichtbar.
+Die Entscheidung haengt von der Build-vs-Buy-vs-Blend-Logik ab (Lektion 4). Ein Foundation Model mit RAG (Blend-Ansatz) ist der sinnvolle Startpunkt: Du nutzt ein Foundation Model via API und grounded es mit eurer spezifischen Vertragsdatenbank. Custom Training ist erst sinnvoll, wenn ihr genuegend gelabelte juristische Daten habt UND die Foundation-Model-Performance nachweislich nicht reicht — beides ist anfangs unwahrscheinlich. Gleichzeitig muss das Design beruecksichtigen, dass der Output probabilistisch ist (Lektion 3): Bei juristischen Dokumenten darf der Output nie als definitiv dargestellt werden, sondern als Vorschlag, den ein Jurist prüft. Ein Evaluation Framework (Lektion 3) mit juristischen Experten ist hier unverzichtbar.
 
 </details>
 

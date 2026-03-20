@@ -13,7 +13,7 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 Du hast vier Lektionen durchgearbeitet: wie Multi-Agent Systeme Aufgaben auf Spezialisten verteilen (Lektion 1), wie Tool Use und MCP Agents handlungsfaehig machen (Lektion 2), welche Autonomie-Level es gibt und wie man sie waehlt (Lektion 3), und wie Human-in-the-Loop menschliche Kontrolle als Architektur-Pattern integriert (Lektion 4).
 
-Einzeln sind das technische Konzepte und Design Patterns. Zusammen bilden sie ein Modell fuer die zentrale Frage im Agentic AI Product Management: **Wie viel soll unsere AI tun, bevor sie einen Menschen fragt — und wie verdienen wir das Recht, mehr zu tun?**
+Einzeln sind das technische Konzepte und Design Patterns. Zusammen bilden sie ein Modell für die zentrale Frage im Agentic AI Product Management: **Wie viel soll unsere AI tun, bevor sie einen Menschen fragt — und wie verdienen wir das Recht, mehr zu tun?**
 
 ## Connections
 
@@ -21,45 +21,45 @@ Einzeln sind das technische Konzepte und Design Patterns. Zusammen bilden sie ei
 
 Tool Use (Lektion 2) macht einzelne Agents handlungsfaehig. Multi-Agent Systeme (Lektion 1) entstehen, wenn ein einzelner Agent mit seinen Tools an Grenzen stoesst. Die Entscheidung "neues Tool hinzufuegen vs. neuen Agent erstellen" ist eine der wichtigsten Architekturentscheidungen — zu viele Tools ueberfordern einen Agent, zu viele Agents erzeugen Koordinations-Overhead.
 
-**Fuer Dich als PM:** Beginne mit einem Agent und guten Tools. Erst wenn der Agent nachweislich an einem Tool-Set mit mehr als 15 Tools scheitert oder Aufgaben klar verschiedene Trust Boundaries brauchen, splitten.
+**Für Dich als PM:** Beginne mit einem Agent und guten Tools. Erst wenn der Agent nachweislich an einem Tool-Set mit mehr als 15 Tools scheitert oder Aufgaben klar verschiedene Trust Boundaries brauchen, splitten.
 
 ### 2. Von Autonomie-Leveln zu HITL-Patterns
 
 Autonomie-Level (Lektion 3) definieren, WIE VIEL der Agent tun darf. HITL-Patterns (Lektion 4) definieren, WIE die menschliche Kontrolle implementiert wird. L3 (Consultant) mappt typischerweise auf Approval Gates, L4 (Approver) auf Escalation Triggers, L5 (Observer) auf Checkpoint Audits.
 
-**Fuer Dich als PM:** Das Autonomie-Level bestimmen, das HITL-Pattern geht daraus hervor. Nicht umgekehrt.
+**Für Dich als PM:** Das Autonomie-Level bestimmen, das HITL-Pattern geht daraus hervor. Nicht umgekehrt.
 
 ### 3. Von Multi-Agent zu Human-in-the-Loop
 
-Multi-Agent Systeme (Lektion 1) multiplizieren die HITL-Komplexitaet (Lektion 4). Bei einem einzelnen Agent ist die Frage "wann fragt er den Menschen?" einfach. Bei 4 Agents, die parallel arbeiten, braucht jeder eigene Eskalationskriterien, und der Orchestrator muss entscheiden, ob eine Eskalation die gesamte Pipeline pausiert oder nur einen Branch.
+Multi-Agent Systeme (Lektion 1) multiplizieren die HITL-Komplexität (Lektion 4). Bei einem einzelnen Agent ist die Frage "wann fragt er den Menschen?" einfach. Bei 4 Agents, die parallel arbeiten, braucht jeder eigene Eskalationskriterien, und der Orchestrator muss entscheiden, ob eine Eskalation die gesamte Pipeline pausiert oder nur einen Branch.
 
-**Fuer Dich als PM:** Mehr Agents bedeuten exponentiell mehr HITL-Designentscheidungen. Das ist ein versteckter Kostentreiber von Multi-Agent Architekturen.
+**Für Dich als PM:** Mehr Agents bedeuten exponentiell mehr HITL-Designentscheidungen. Das ist ein versteckter Kostentreiber von Multi-Agent Architekturen.
 
 ### 4. Von MCP-Standards zu Autonomie-Scaling
 
-MCP (Lektion 2) standardisiert, WELCHE Tools verfuegbar sind. Autonomie-Level (Lektion 3) bestimmen, WIE FREI der Agent diese Tools nutzt. Ein Agent mit MCP-Zugang zu einer Datenbank auf L2 zeigt Query-Ergebnisse. Derselbe Agent auf L4 fuehrt Writes aus und informiert den User nachtraeglich.
+MCP (Lektion 2) standardisiert, WELCHE Tools verfügbar sind. Autonomie-Level (Lektion 3) bestimmen, WIE FREI der Agent diese Tools nutzt. Ein Agent mit MCP-Zugang zu einer Datenbank auf L2 zeigt Query-Ergebnisse. Derselbe Agent auf L4 fuehrt Writes aus und informiert den User nachtraeglich.
 
-**Fuer Dich als PM:** Tool-Zugang und Autonomie-Level sind zwei unabhaengige Dimensionen, die zusammen die Faehigkeiten und Risiken eines Agents definieren.
+**Für Dich als PM:** Tool-Zugang und Autonomie-Level sind zwei unabhängige Dimensionen, die zusammen die Faehigkeiten und Risiken eines Agents definieren.
 
 ### Kostenfaktor Agentic AI
 
-Ein oft uebersehener Aspekt: Agentic Workflows verbrauchen 10-100x mehr Tokens pro Task als Single-Call-Inference. Ein 5-Schritt-Agent mit Tool Calls kann 50.000+ Tokens pro Aufgabe verbrauchen. Die Token-Oekonomie aus Kapitel 4 muss fuer Agents neu gerechnet werden — Multi-Agent-Systeme multiplizieren diesen Effekt weiter.
+Ein oft uebersehener Aspekt: Agentic Workflows verbrauchen 10-100x mehr Tokens pro Task als Single-Call-Inference. Ein 5-Schritt-Agent mit Tool Calls kann 50.000+ Tokens pro Aufgabe verbrauchen. Die Token-Oekonomie aus Kapitel 4 muss für Agents neu gerechnet werden — Multi-Agent-Systeme multiplizieren diesen Effekt weiter.
 
 ## The Meta-Insight
 
-> Vertrauen ist die zentrale Produktvariable in Agentic AI. Jede Stufe auf dem Vertrauens-Gradienten — vom Tool-Aufruf ueber Multi-Agent-Koordination bis zur vollen Autonomie — erfordert Evidenz, Reversibilitaet, Transparenz und Kontrolle. Produkte, die auf der richtigen Vertrauensstufe fuer ihre Domain starten und Mechanismen bieten, sich hoch- und runterzubewegen, werden gewinnen.
+> Vertrauen ist die zentrale Produktvariable in Agentic AI. Jede Stufe auf dem Vertrauens-Gradienten — vom Tool-Aufruf über Multi-Agent-Koordination bis zur vollen Autonomie — erfordert Evidenz, Reversibilitaet, Transparenz und Kontrolle. Produkte, die auf der richtigen Vertrauensstufe für ihre Domain starten und Mechanismen bieten, sich hoch- und runterzubewegen, werden gewinnen.
 
 ## Your Agentic AI Checklist
 
-Was Du jetzt koennen solltest:
+Was Du jetzt können solltest:
 
 - [ ] Entscheiden, wann Multi-Agent Architektur gerechtfertigt ist und das richtige Orchestrierungs-Pattern waehlen — Lektion 1
-- [ ] Ein Tool-Set fuer einen AI Agent kuratieren und MCP als Integrationsstandard einsetzen — Lektion 2
+- [ ] Ein Tool-Set für einen AI Agent kuratieren und MCP als Integrationsstandard einsetzen — Lektion 2
 - [ ] Das richtige Autonomie-Level pro User-Segment und Task-Typ bestimmen — Lektion 3
-- [ ] Das passende HITL-Pattern waehlen und mit Metriken ueber Zeit optimieren — Lektion 4
+- [ ] Das passende HITL-Pattern waehlen und mit Metriken über Zeit optimieren — Lektion 4
 - [ ] Die Trust-Gradient-Frage beantworten: "Wie viel darf die AI tun, bevor sie fragt?" — Alle Lektionen
 
-Wenn Du bei einem Punkt unsicher bist, geh zurueck zur entsprechenden Lektion. Diese Konzepte bilden das Fundament fuer jedes AI-Produkt, das ueber reine Textgenerierung hinausgeht.
+Wenn Du bei einem Punkt unsicher bist, geh zurück zur entsprechenden Lektion. Diese Konzepte bilden das Fundament für jedes AI-Produkt, das über reine Textgenerierung hinausgeht.
 
 ## Weiter mit: Ethics & Governance
 
@@ -76,29 +76,29 @@ Euer Recruiting-Agent soll Bewerbungen vorsortieren und Hiring Managern eine Sho
 <details>
 <summary>Aufloesung</summary>
 
-Das Autonomie-Level ist falsch gewaehlt (Lektion 3). Recruiting-Entscheidungen haben hohe Konsequenzen und sind schwer reversibel — das erfordert maximal L3 (Consultant), nicht L4 oder L5. Der Agent sollte eine Shortlist praesentieren und auf Approval warten, nicht selbststaendig Interviews einladen. Das passende HITL-Pattern (Lektion 4) waere ein Approval Gate: Der Agent bereitet die Entscheidung vor, der Mensch trifft sie. Dass der Agent per MCP Schreibzugriff auf das ATS hat (Lektion 2), macht die Sache schlimmer — Tool-Zugang und Autonomie-Level sind zwei unabhaengige Dimensionen, und hier sind beide zu hoch.
+Das Autonomie-Level ist falsch gewaehlt (Lektion 3). Recruiting-Entscheidungen haben hohe Konsequenzen und sind schwer reversibel — das erfordert maximal L3 (Consultant), nicht L4 oder L5. Der Agent sollte eine Shortlist praesentieren und auf Approval warten, nicht selbststaendig Interviews einladen. Das passende HITL-Pattern (Lektion 4) wäre ein Approval Gate: Der Agent bereitet die Entscheidung vor, der Mensch trifft sie. Dass der Agent per MCP Schreibzugriff auf das ATS hat (Lektion 2), macht die Sache schlimmer — Tool-Zugang und Autonomie-Level sind zwei unabhängige Dimensionen, und hier sind beide zu hoch.
 
 </details>
 
 ### Szenario 2: Die Tool-Explosion
 
-Euer Customer-Success-Agent hat inzwischen 22 Tools: CRM, Ticketing, Billing, Knowledge Base, E-Mail, Kalender, Slack, und mehr. Die Fehlerrate steigt — der Agent waehlt zunehmend das falsche Tool fuer die Aufgabe. Dein Engineering-Team schlaegt vor, auf ein Multi-Agent System umzubauen. Ist das die richtige Loesung?
+Euer Customer-Success-Agent hat inzwischen 22 Tools: CRM, Ticketing, Billing, Knowledge Base, E-Mail, Kalender, Slack, und mehr. Die Fehlerrate steigt — der Agent waehlt zunehmend das falsche Tool für die Aufgabe. Dein Engineering-Team schlägt vor, auf ein Multi-Agent System umzubauen. Ist das die richtige Lösung?
 
 <details>
 <summary>Aufloesung</summary>
 
-Die Diagnose ist richtig: 22 Tools ueberfordern einen einzelnen Agent (Lektion 1 nennt 15 Tools als Grenze). Aber bevor Du auf Multi-Agent umstellst, pruefe zuerst, ob alle 22 Tools wirklich noetig sind — oft reicht eine Reduktion auf die Kern-Tools plus bessere Prompts fuer die Tool-Auswahl. Wenn Multi-Agent gerechtfertigt ist, gruppiere Tools nach Trust Boundaries (Lektion 1): z.B. ein Agent fuer Read-Only-Abfragen (CRM, Knowledge Base), ein Agent fuer Aktionen mit Kundenimpact (Ticketing, Billing). Bedenke dabei den HITL-Multiplikator (Lektion 4): Jeder Agent braucht eigene Eskalationskriterien, und Du musst definieren, ob eine Eskalation die gesamte Pipeline pausiert oder nur einen Branch.
+Die Diagnose ist richtig: 22 Tools ueberfordern einen einzelnen Agent (Lektion 1 nennt 15 Tools als Grenze). Aber bevor Du auf Multi-Agent umstellst, pruefe zuerst, ob alle 22 Tools wirklich noetig sind — oft reicht eine Reduktion auf die Kern-Tools plus bessere Prompts für die Tool-Auswahl. Wenn Multi-Agent gerechtfertigt ist, gruppiere Tools nach Trust Boundaries (Lektion 1): z.B. ein Agent für Read-Only-Abfragen (CRM, Knowledge Base), ein Agent für Aktionen mit Kundenimpact (Ticketing, Billing). Bedenke dabei den HITL-Multiplikator (Lektion 4): Jeder Agent braucht eigene Eskalationskriterien, und Du musst definieren, ob eine Eskalation die gesamte Pipeline pausiert oder nur einen Branch.
 
 </details>
 
 ### Szenario 3: Der Autonomie-Gradient
 
-Euer AI-Produkt ist ein Coding Assistant, der per MCP auf das Repository, die CI-Pipeline und das Issue-Tracking zugreift. Fuer erfahrene Senior-Entwickler funktioniert das gut auf L4 (Approver) — sie pruefen die Aenderungen kurz und mergen. Aber Junior-Entwickler beschweren sich, dass der Agent zu viel aendert und sie den Ueberblick verlieren. Wie loest Du das?
+Euer AI-Produkt ist ein Coding Assistant, der per MCP auf das Repository, die CI-Pipeline und das Issue-Tracking zugreift. Für erfahrene Senior-Entwickler funktioniert das gut auf L4 (Approver) — sie prüfen die Aenderungen kurz und mergen. Aber Junior-Entwickler beschweren sich, dass der Agent zu viel ändert und sie den Überblick verlieren. Wie loest Du das?
 
 <details>
 <summary>Aufloesung</summary>
 
-Das ist ein Fall fuer unterschiedliche Autonomie-Level pro User-Segment (Lektion 3). Statt eines einheitlichen Levels brauchst Du einen Autonomie-Gradienten: Seniors bleiben auf L4 (Approver), Juniors starten auf L2 (Collaborator) — der Agent schlaegt Aenderungen vor und erklaert sie, statt sie direkt umzusetzen. Die HITL-Patterns (Lektion 4) aendern sich entsprechend: Fuer Seniors reichen Checkpoint Audits, fuer Juniors braucht es Approval Gates bei jedem Schritt. Entscheidend: Baue einen Mechanismus ein, mit dem Juniors ueber Zeit zu hoeheren Leveln aufsteigen koennen, basierend auf Nutzungsdaten — das ist der Trust Gradient in der Praxis.
+Das ist ein Fall für unterschiedliche Autonomie-Level pro User-Segment (Lektion 3). Statt eines einheitlichen Levels brauchst Du einen Autonomie-Gradienten: Seniors bleiben auf L4 (Approver), Juniors starten auf L2 (Collaborator) — der Agent schlägt Aenderungen vor und erklärt sie, statt sie direkt umzusetzen. Die HITL-Patterns (Lektion 4) ändern sich entsprechend: Für Seniors reichen Checkpoint Audits, für Juniors braucht es Approval Gates bei jedem Schritt. Entscheidend: Baue einen Mechanismus ein, mit dem Juniors über Zeit zu hoeheren Leveln aufsteigen können, basierend auf Nutzungsdaten — das ist der Trust Gradient in der Praxis.
 
 </details>
 

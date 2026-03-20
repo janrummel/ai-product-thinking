@@ -11,7 +11,7 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Dein Team hat einen AI Coding Agent gebaut, der gut funktioniert: Er liest Code, schlaegt Aenderungen vor, schreibt Tests. Aber jetzt will das Management mehr — der Agent soll auch Deployment machen, Dokumentation schreiben und Code Reviews durchfuehren. Das Engineering-Team schlaegt vor: "Wir brauchen mehrere spezialisierte Agents."
+Dein Team hat einen AI Coding Agent gebaut, der gut funktioniert: Er liest Code, schlägt Aenderungen vor, schreibt Tests. Aber jetzt will das Management mehr — der Agent soll auch Deployment machen, Dokumentation schreiben und Code Reviews durchführen. Das Engineering-Team schlägt vor: "Wir brauchen mehrere spezialisierte Agents."
 
 Klingt logisch. Aber Multi-Agent Systeme sind kein Upgrade, das man einfach drauflegt. Sie sind eine Architekturentscheidung mit echten Tradeoffs. Eine 5-Agent-Pipeline, bei der jeder Agent 95% Zuverlaessigkeit hat, liefert nur noch ~77% End-to-End-Zuverlaessigkeit (0.95^5). Mehr Agents bedeuten nicht automatisch bessere Ergebnisse.
 
@@ -25,13 +25,13 @@ Ein Multi-Agent System (MAS) besteht aus mehreren AI Agents — jeder mit einer 
 
 Drei Hauptmuster bestimmen, wie Agents zusammenarbeiten:
 
-| Pattern | Wie es funktioniert | Gut fuer | Risiko |
+| Pattern | Wie es funktioniert | Gut für | Risiko |
 |---------|-------------------|----------|--------|
 | **Sequential (Pipeline)** | Agent A gibt Output an Agent B, dann an Agent C | Lineare Workflows (Research, Draft, Review) | Bottleneck: Ein Fehler blockiert alles |
 | **Parallel (Fan-out/Fan-in)** | Mehrere Agents arbeiten gleichzeitig, Ergebnisse werden zusammengefuehrt | Unabhaengige Teilaufgaben (5 Wettbewerber gleichzeitig analysieren) | Inkonsistente Outputs beim Mergen |
 | **Hierarchisch (Manager-Worker)** | Orchestrator-Agent delegiert an Spezialisten | Komplexe Aufgaben mit dynamischer Planung | Single Point of Failure beim Orchestrator |
 
-**Graph-basierte Orchestrierung** (z.B. via LangGraph) ist kein separates viertes Pattern, sondern eine Implementierungsmethode fuer die drei Patterns oben: Agents bilden einen gerichteten Graphen mit Bedingungen, Schleifen und dynamischem Routing.
+**Graph-basierte Orchestrierung** (z.B. via LangGraph) ist kein separates viertes Pattern, sondern eine Implementierungsmethode für die drei Patterns oben: Agents bilden einen gerichteten Graphen mit Bedingungen, Schleifen und dynamischem Routing.
 
 ### Framework-Landschaft (ab 2025)
 
@@ -47,7 +47,7 @@ Drei Hauptmuster bestimmen, wie Agents zusammenarbeiten:
 
 Multi-Agent lohnt sich wenn: Teilaufgaben natuerlich trennbar sind, unterschiedliche Tools/Permissions brauchen, Parallelisierung Zeitvorteile bringt, oder verschiedene Trust Boundaries existieren.
 
-Single-Agent ist besser wenn: die Aufgabe linear ist, Context-Sharing zwischen Schritten kritisch ist, Latenz wichtiger ist als Gruendlichkeit, oder Debugging-Einfachheit Prioritaet hat.
+Single-Agent ist besser wenn: die Aufgabe linear ist, Context-Sharing zwischen Schritten kritisch ist, Latenz wichtiger ist als Gruendlichkeit, oder Debugging-Einfachheit Priorität hat.
 
 ## Framework
 
@@ -56,11 +56,11 @@ Die **Multi-Agent Entscheidungsleiter** — von oben nach unten durchgehen:
 | Schritt | Frage | Ergebnis |
 |---------|-------|----------|
 | 1 | Kann ein einzelner Agent mit guten Tools das loesen? | Ja: Single Agent nutzen |
-| 2 | Sind Teilaufgaben natuerlich unabhaengig? | Ja: Parallel Multi-Agent erwaegen |
+| 2 | Sind Teilaufgaben natuerlich unabhängig? | Ja: Parallel Multi-Agent erwaegen |
 | 3 | Brauchen Teilaufgaben unterschiedliche Tools/Permissions? | Ja: Spezialisierte Agents erwaegen |
 | 4 | Ist der Workflow linear mit klaren Phasen? | Ja: Sequential Pipeline |
 | 5 | Braucht die Aufgabe dynamische Planung? | Ja: Hierarchisch mit Orchestrator |
-| 6 | Immer: Mit 2-3 Agents starten | Komplexitaet nur mit Evidenz erhoehen |
+| 6 | Immer: Mit 2-3 Agents starten | Komplexität nur mit Evidenz erhöhen |
 
 ## Scenario
 
@@ -68,11 +68,11 @@ Du bist PM bei einem B2B-SaaS-Unternehmen. Euer Produkt ist eine Content-Marketi
 
 1. **Research Agent** — analysiert Trends und Wettbewerber-Content (braucht Web-Zugang)
 2. **Writer Agent** — erstellt Artikel basierend auf Research (braucht Brand Guidelines)
-3. **SEO Agent** — optimiert fuer Suchmaschinen (braucht SEO-Tools)
-4. **Editor Agent** — prueft Qualitaet und Fakten (braucht Fact-Checking-Tools)
+3. **SEO Agent** — optimiert für Suchmaschinen (braucht SEO-Tools)
+4. **Editor Agent** — prüft Qualität und Fakten (braucht Fact-Checking-Tools)
 5. **Publisher Agent** — formatiert und veroeffentlicht (braucht CMS-Zugang)
 
-Das Engineering-Team schaetzt 8 Wochen Entwicklung fuer die 5-Agent-Pipeline. Ein einzelner Agent mit allen Tools wuerde 3 Wochen dauern. Eure aktuelle manuelle Pipeline braucht 4 Stunden pro Artikel mit 3 Personen.
+Das Engineering-Team schaetzt 8 Wochen Entwicklung für die 5-Agent-Pipeline. Ein einzelner Agent mit allen Tools würde 3 Wochen dauern. Eure aktuelle manuelle Pipeline braucht 4 Stunden pro Artikel mit 3 Personen.
 
 **Die Frage:** 5 Agents, 1 Agent, oder ein Kompromiss?
 
@@ -85,11 +85,11 @@ Das Engineering-Team schaetzt 8 Wochen Entwicklung fuer die 5-Agent-Pipeline. Ei
 
 **Warum:**
 - Research und Writing brauchen maximalen Context-Transfer — ein Agent-Boundary dazwischen verliert Nuancen
-- SEO ist ein Tool-Call (Keyword-Dichte pruefen, Meta-Tags generieren), kein eigener Reasoning-Loop
-- 3 Wochen fuer 1 Agent vs. 8 fuer 5 — starte mit 2-3 in ~5 Wochen und validiere
+- SEO ist ein Tool-Call (Keyword-Dichte prüfen, Meta-Tags generieren), kein eigener Reasoning-Loop
+- 3 Wochen für 1 Agent vs. 8 für 5 — starte mit 2-3 in ~5 Wochen und validiere
 - End-to-End-Zuverlaessigkeit bei 2 Agents (95% je): 90%. Bei 5 Agents: 77%
 
-**Was viele falsch machen:** Fuer jeden Schritt im manuellen Prozess einen eigenen Agent erstellen. Menschliche Arbeitsteilung mappt nicht 1:1 auf Agent-Architektur — Agents koennen mehrere Rollen uebernehmen, brauchen aber geteilten Context.
+**Was viele falsch machen:** Für jeden Schritt im manuellen Prozess einen eigenen Agent erstellen. Menschliche Arbeitsteilung mappt nicht 1:1 auf Agent-Architektur — Agents können mehrere Rollen übernehmen, brauchen aber geteilten Context.
 </details>
 
 ## Reflect
@@ -98,7 +98,7 @@ Das Engineering-Team schaetzt 8 Wochen Entwicklung fuer die 5-Agent-Pipeline. Ei
 
 - Jede Agent-Boundary ist ein Ort, an dem Context verloren geht und Fehler sich multiplizieren
 - Die Framework-Wahl (LangGraph, CrewAI, etc.) ist selten der Differenziator — Prompts, Tools und Daten sind es
-- Start small: 2-3 Agents maximal, Komplexitaet nur mit Evidenz erhoehen
+- Start small: 2-3 Agents maximal, Komplexität nur mit Evidenz erhöhen
 
 ---
 

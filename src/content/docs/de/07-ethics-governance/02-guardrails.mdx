@@ -1,6 +1,6 @@
 ---
 title: "Guardrails"
-description: "Wie Du AI-Systeme innerhalb akzeptabler Grenzen haeltst — ohne die Nuetzlichkeit zu zerstoeren."
+description: "Wie Du AI-Systeme innerhalb akzeptabler Grenzen haeltst — ohne die Nuetzlichkeit zu zerstören."
 sidebar:
   order: 2
 ---
@@ -11,9 +11,9 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Euer AI-Assistent fuer Kundenberater ist seit drei Wochen live. Dann passiert es: Ein Kunde fragt nach Informationen zu einem sensiblen medizinischen Thema, und der Assistent gibt detaillierte medizinische Ratschlaege — ohne Verweis auf einen Arzt.
+Euer AI-Assistent für Kundenberater ist seit drei Wochen live. Dann passiert es: Ein Kunde fragt nach Informationen zu einem sensiblen medizinischen Thema, und der Assistent gibt detaillierte medizinische Ratschlaege — ohne Verweis auf einen Arzt.
 
-Am naechsten Tag eskaliert ein anderer Fall: Ein Berater wollte eine voellig legitime Frage zu Versicherungsleistungen bei Schwangerschaft beantworten lassen, aber der Content-Filter blockiert alles, was "Schwangerschaft" enthaelt. Der Berater tippt die Antwort manuell — und nutzt den AI-Assistenten fuer dieses Thema nie wieder.
+Am nächsten Tag eskaliert ein anderer Fall: Ein Berater wollte eine voellig legitime Frage zu Versicherungsleistungen bei Schwangerschaft beantworten lassen, aber der Content-Filter blockiert alles, was "Schwangerschaft" enthaelt. Der Berater tippt die Antwort manuell — und nutzt den AI-Assistenten für dieses Thema nie wieder.
 
 Zwei Failure Modes. Ein System. Willkommen im Guardrails-Dilemma.
 
@@ -21,7 +21,7 @@ Zwei Failure Modes. Ein System. Willkommen im Guardrails-Dilemma.
 
 ### Was Guardrails sind (und was nicht)
 
-Guardrails sind technische und produktseitige Mechanismen, die AI-Verhalten innerhalb akzeptabler Grenzen halten. Sie sind keine Zensur — sie sind Produktanforderungen als Constraints. Ein Taschenrechner laesst keine Division durch Null zu. Eine Banking-App laesst keine negativen Ueberweisungen zu. AI-Guardrails sind dasselbe Prinzip fuer probabilistische Systeme.
+Guardrails sind technische und produktseitige Mechanismen, die AI-Verhalten innerhalb akzeptabler Grenzen halten. Sie sind keine Zensur — sie sind Produktanforderungen als Constraints. Ein Taschenrechner laesst keine Division durch Null zu. Eine Banking-App laesst keine negativen Ueberweisungen zu. AI-Guardrails sind dasselbe Prinzip für probabilistische Systeme.
 
 ### Drei Kategorien
 
@@ -37,7 +37,7 @@ Guardrails sind technische und produktseitige Mechanismen, die AI-Verhalten inne
 
 | Tool | Ansatz | Besonderheit |
 |------|--------|-------------|
-| **NVIDIA NeMo Guardrails** | Open-Source Toolkit | Colang DSL fuer Rails-Definition; "Adopt"-Status im ThoughtWorks Radar |
+| **NVIDIA NeMo Guardrails** | Open-Source Toolkit | Colang DSL für Rails-Definition; "Adopt"-Status im ThoughtWorks Radar |
 | **Guardrails AI** | Open-Source Framework | Validator-basiert; 100+ fertige Validatoren |
 | **Llama Guard** | Safety Classifier | Metas Content-Safety-Modell; offene Weights |
 | **Azure AI Content Safety** | Cloud Service | Enterprise-Grade; integriert mit Azure OpenAI |
@@ -47,7 +47,7 @@ Guardrails sind technische und produktseitige Mechanismen, die AI-Verhalten inne
 Der haeufigste Failure Mode ist nicht zu wenig Filterung — sondern zu viel. Over-Blocking:
 - Frustriert User, die dann auf unueberwachte Alternativen ausweichen (Shadow AI)
 - Blockiert legitime Use Cases (akademische Forschung, medizinische Fachbegriffe, Security Research)
-- Erodiert Vertrauen ("Dieses Tool ist nutzlos fuer meine echte Arbeit")
+- Erodiert Vertrauen ("Dieses Tool ist nutzlos für meine echte Arbeit")
 - Trainiert User, unehrlich zu formulieren, um an Filtern vorbeizukommen
 
 ## Framework
@@ -66,7 +66,7 @@ Der **Guardrails Calibration Guide** — Safety und Utility in Balance bringen:
 
 ## Scenario
 
-Du bist PM eines AI-Schreibassistenten fuer Versicherungsberater. Der Assistent hilft beim Verfassen von Kundenbriefen. Nach dem Launch kommen folgende Daten rein:
+Du bist PM eines AI-Schreibassistenten für Versicherungsberater. Der Assistent hilft beim Verfassen von Kundenbriefen. Nach dem Launch kommen folgende Daten rein:
 
 **Woche 1-4 Metriken:**
 - 12.000 generierte Briefe pro Woche
@@ -89,7 +89,7 @@ Der Head of Compliance sagt: "Die Block Rate muss hoch bleiben — lieber zu vie
 - 89% False Positives bedeuten: Der Filter ist kaputt, nicht zu streng. Er trifft die Falschen
 - Eine 23% Block Rate bei 0.3% tatsaechlichen Problemen ist ein Verhaeltnis von ~77:1 (False Positives zu True Positives) — das ist kein Safety-Feature, das ist ein kaputter Filter
 - Frustrierte User weichen auf unueberwachte Tools aus, was das Risiko ERHOEHT statt senkt
-- Die Loesung ist ein Layered Approach: Grober Filter fuer klar problematische Inhalte + kontextbezogener Filter fuer Fachbegriffe + User-Feedback-Loop fuer Edge Cases
+- Die Lösung ist ein Layered Approach: Grober Filter für klar problematische Inhalte + kontextbezogener Filter für Fachbegriffe + User-Feedback-Loop für Edge Cases
 
 **Was viele falsch machen:** Dem Compliance-Team nachgeben und die hohe Block Rate beibehalten — ohne zu verstehen, dass Over-Blocking selbst ein Sicherheitsrisiko ist (Shadow AI).
 </details>
@@ -100,7 +100,7 @@ Der Head of Compliance sagt: "Die Block Rate muss hoch bleiben — lieber zu vie
 
 - Guardrails sind keine einmalige Implementierung — adversarische User finden staendig neue Bypass-Techniken
 - Provider-Guardrails sind generisch; Dein Produkt hat domainspezifische Risiken, die produktspezifische Guardrails brauchen
-- Mehr Guardrails bedeutet nicht automatisch mehr Sicherheit — Praezision schlaegt Aggressivitaet
+- Mehr Guardrails bedeutet nicht automatisch mehr Sicherheit — Praezision schlägt Aggressivitaet
 
 ---
 

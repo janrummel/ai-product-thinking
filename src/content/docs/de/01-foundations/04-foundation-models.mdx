@@ -1,6 +1,6 @@
 ---
 title: "Foundation Models"
-description: "Was Foundation Models sind, warum sie alles veraendert haben — und wie Du als PM das richtige Modell fuer Dein Produkt waehlst."
+description: "Was Foundation Models sind, warum sie alles verändert haben — und wie Du als PM das richtige Modell für Dein Produkt waehlst."
 sidebar:
   order: 4
 ---
@@ -11,27 +11,27 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Dein CTO sagt: "Wir nehmen GPT-5.2." Dein ML-Engineer widerspricht: "Llama 4 reicht und kostet ein Zehntel." Der Berater schlaegt vor, ein eigenes Modell zu trainieren. Alle haben gute Argumente.
+Dein CTO sagt: "Wir nehmen GPT-5.2." Dein ML-Engineer widerspricht: "Llama 4 reicht und kostet ein Zehntel." Der Berater schlägt vor, ein eigenes Modell zu trainieren. Alle haben gute Argumente.
 
-Du bist der Product Manager. Du musst nicht wissen, welche Architektur besser ist. Aber Du musst verstehen, was Foundation Models sind, welche Optionen existieren, und wie Du die richtige Entscheidung fuer Dein Produkt triffst.
+Du bist der Product Manager. Du musst nicht wissen, welche Architektur besser ist. Aber Du musst verstehen, was Foundation Models sind, welche Optionen existieren, und wie Du die richtige Entscheidung für Dein Produkt triffst.
 
 ## Concept
 
-Foundation Models sind Modelle, die auf breiten Daten in grossem Massstab trainiert und auf eine Vielzahl nachgelagerter Aufgaben anpassbar sind (Stanford HAI, 2021). Vor Foundation Models brauchtest Du ein separates Modell fuer jede Aufgabe. Heute nimmst Du ein Basismodell und passt es an.
+Foundation Models sind Modelle, die auf breiten Daten in grossem Massstab trainiert und auf eine Vielzahl nachgelagerter Aufgaben anpassbar sind (Stanford HAI, 2021). Vor Foundation Models brauchtest Du ein separates Modell für jede Aufgabe. Heute nimmst Du ein Basismodell und passt es an.
 
-### Warum sie alles veraendert haben
+### Warum sie alles verändert haben
 
-**Emergent Capabilities:** Ab einer bestimmten Groesse zeigen Foundation Models Faehigkeiten, fuer die sie nie explizit trainiert wurden. Ein Sprachmodell kann ploetzlich Code schreiben oder logisch schlussfolgern. Vorsicht: Aktuelle Forschung (arXiv:2503.05788, 2025) zeigt, dass manche dieser "ploetzlichen" Faehigkeiten Messartefakte sein koennten.
+**Emergent Capabilities:** Ab einer bestimmten Groesse zeigen Foundation Models Faehigkeiten, für die sie nie explizit trainiert wurden. Ein Sprachmodell kann ploetzlich Code schreiben oder logisch schlussfolgern. Vorsicht: Aktuelle Forschung (arXiv:2503.05788, 2025) zeigt, dass manche dieser "ploetzlichen" Faehigkeiten Messartefakte sein koennten.
 
 **Homogenisierung:** Dasselbe Modell liegt unter vielen verschiedenen Apps. Das ist effizient — aber auch ein Konzentrationsrisiko. Wenn das Basismodell einen systematischen Bias hat, erben ihn alle Anwendungen.
 
-**Demokratisierung:** Frueher brauchtest Du ein ML-Team, um ein Modell zu bauen. Heute: Prompt schreiben → Fine-tuning → RAG. Die Einstiegshuerde fuer AI-Produkte ist drastisch gesunken.
+**Demokratisierung:** Frueher brauchtest Du ein ML-Team, um ein Modell zu bauen. Heute: Prompt schreiben → Fine-tuning → RAG. Die Einstiegshuerde für AI-Produkte ist drastisch gesunken.
 
 ### Die aktuelle Landschaft (Maerz 2026)
 
-**Closed-Source:** OpenAI (GPT-5.2, o3), Anthropic (Claude Opus 4.6, Sonnet 4.6), Google (Gemini 3 Pro/Flash). Hoechste Qualitaet, einfachste Integration, aber Vendor Lock-in.
+**Closed-Source:** OpenAI (GPT-5.2, o3), Anthropic (Claude Opus 4.6, Sonnet 4.6), Google (Gemini 3 Pro/Flash). Hoechste Qualität, einfachste Integration, aber Vendor Lock-in.
 
-**Open-Source:** Meta (Llama 4), DeepSeek (V3.2), Alibaba (Qwen 3), Mistral. Volle Kontrolle, keine Abhaengigkeit, aber Du brauchst eigene Infrastruktur. DeepSeek zeigt, dass Open-Source Frontier-Qualitaet erreichen kann — mit MIT-Lizenz und Performance auf IMO- und IOI-Benchmark-Niveau.
+**Open-Source:** Meta (Llama 4), DeepSeek (V3.2), Alibaba (Qwen 3), Mistral. Volle Kontrolle, keine Abhängigkeit, aber Du brauchst eigene Infrastruktur. DeepSeek zeigt, dass Open-Source Frontier-Qualität erreichen kann — mit MIT-Lizenz und Performance auf IMO- und IOI-Benchmark-Niveau.
 
 Alle Modelle werden zunehmend multimodal: Text, Bild, Audio, Video in einem Modell.
 
@@ -44,7 +44,7 @@ Alle Modelle werden zunehmend multimodal: Text, Bild, Audio, Video in einem Mode
 | **Fine-tuning** | Modellgewichte auf Domaene anpassen | Hoch | Spezialisierte Domaene, konsistenter Stil |
 | **Von Grund auf trainieren** | Eigenes Modell bauen | Sehr hoch | Einzigartige Daten, strategischer Vorteil |
 
-Die Faustregel: So weit rechts wie noetig, so weit links wie moeglich.
+Die Faustregel: So weit rechts wie noetig, so weit links wie möglich.
 
 ## Framework
 
@@ -57,8 +57,8 @@ Die Faustregel: So weit rechts wie noetig, so weit links wie moeglich.
 | Anforderung | Ansatz |
 |-------------|--------|
 | Schnell, guenstig, gut genug | Open-Source oder Gemini Flash |
-| Maximale Qualitaet | Claude Opus, GPT-5.2, Gemini Pro |
-| Daten muessen lokal bleiben | Open-Source, Self-hosted |
+| Maximale Qualität | Claude Opus, GPT-5.2, Gemini Pro |
+| Daten müssen lokal bleiben | Open-Source, Self-hosted |
 | Multimodal | Gemini (nativ), GPT-5 (Vision), Claude (Vision) |
 | Langer Context | Gemini (1M+), Llama 4 Scout (10M), Claude (200K) |
 
@@ -68,15 +68,15 @@ Die Faustregel: So weit rechts wie noetig, so weit links wie moeglich.
 
 | Strategie | Wann | Beispiel |
 |-----------|------|---------|
-| **Buy** | Commoditized Use Case, Speed, Compliance | Duolingo: GPT-4 API fuer Sprachuebungen |
+| **Buy** | Commoditized Use Case, Speed, Compliance | Duolingo: GPT-4 API für Sprachuebungen |
 | **Build** | Wettbewerbsvorteil, sensible Daten | Harvey: eigenes Legal-LLM auf proprietaeren Rechtsdaten |
-| **Blend** | Der Normalfall 2026 | Shopify Sidekick: API + proprietaere Commerce-Daten |
+| **Blend** | Der Normalfall 2026 | Shopify Sidekick: API + proprietäre Commerce-Daten |
 
-Das dominante Pattern 2026: Blend. Plattform kaufen, letzte Meile selbst bauen. Hybrid Routing — 80% guenstiges Open-Source, 20% Frontier Closed fuer die schwierigen Faelle.
+Das dominante Pattern 2026: Blend. Plattform kaufen, letzte Meile selbst bauen. Hybrid Routing — 80% guenstiges Open-Source, 20% Frontier Closed für die schwierigen Faelle.
 
 ## Scenario
 
-Du baust einen internen Wissensassistenten fuer ein Unternehmen mit 2.000 Mitarbeitern. Er soll interne Dokumente durchsuchen und Fragen beantworten. Die Dokumente enthalten vertrauliche HR- und Finanzdaten.
+Du baust einen internen Wissensassistenten für ein Unternehmen mit 2.000 Mitarbeitern. Er soll interne Dokumente durchsuchen und Fragen beantworten. Die Dokumente enthalten vertrauliche HR- und Finanzdaten.
 
 **Die Optionen:**
 
@@ -84,7 +84,7 @@ Du baust einen internen Wissensassistenten fuer ein Unternehmen mit 2.000 Mitarb
 |--------|-------------|----------------------|-------------|----------------|
 | **A: Claude API + RAG** | $15.000 | $3.200 | Daten verlassen das Unternehmen | 6 Wochen |
 | **B: Llama 4 Self-hosted + RAG** | $80.000 | $1.800 | Volle Kontrolle | 14 Wochen |
-| **C: Blend — Llama 4 fuer Standard, Claude fuer Komplexes** | $55.000 | $2.100 | Nur nicht-sensible Daten extern | 10 Wochen |
+| **C: Blend — Llama 4 für Standard, Claude für Komplexes** | $55.000 | $2.100 | Nur nicht-sensible Daten extern | 10 Wochen |
 
 Closed-Source-Modelle kosten im Betrieb ca. 87% mehr als Open-Source-Alternativen (MIT Sloan), werden aber in 80% der Faelle gewaehlt — wegen einfacherer Integration und schnellerem Start.
 
@@ -96,19 +96,19 @@ Closed-Source-Modelle kosten im Betrieb ca. 87% mehr als Open-Source-Alternative
 **Die beste Entscheidung in diesem Szenario:** Option C — Blend mit Hybrid Routing.
 
 **Warum:**
-- Vertrauliche HR-/Finanzdaten bleiben auf dem eigenen Llama-4-Server. Nur nicht-sensible Anfragen gehen an die Claude API fuer hoehere Qualitaet bei komplexem Reasoning.
-- Die laufenden Kosten liegen 34% unter der reinen API-Loesung.
+- Vertrauliche HR-/Finanzdaten bleiben auf dem eigenen Llama-4-Server. Nur nicht-sensible Anfragen gehen an die Claude API für hoehere Qualität bei komplexem Reasoning.
+- Die laufenden Kosten liegen 34% unter der reinen API-Lösung.
 - 10 Wochen Time-to-Market ist ein akzeptabler Kompromiss — nicht so schnell wie reine API, aber mit deutlich besserem Datenschutz.
 - Du vermeidest vollstaendigen Vendor Lock-in und kannst den Closed-Source-Anteil jederzeit ersetzen.
 
-**Was viele falsch machen:** Entweder alles auf eine API setzen ("einfach und schnell") ohne die Datenschutz-Implikationen zu bedenken, oder alles selbst hosten wollen und an der Komplexitaet scheitern.
+**Was viele falsch machen:** Entweder alles auf eine API setzen ("einfach und schnell") ohne die Datenschutz-Implikationen zu bedenken, oder alles selbst hosten wollen und an der Komplexität scheitern.
 </details>
 
 ## Reflect
 
 - **Foundation Models sind die Plattformschicht von AI.** Versteh sie als Infrastruktur-Entscheidung, nicht als Feature-Entscheidung — sie bestimmt, was Du bauen kannst und was nicht.
-- **Open vs Closed ist kein Entweder-Oder.** Das dominante Pattern 2026 ist Hybrid Routing: guenstiges Open-Source fuer den Grossteil, Frontier Closed fuer die schwierigen Faelle.
-- **Die Anpassungstechnik ist wichtiger als das Modell.** RAG mit einem guten Modell schlaegt Fine-tuning mit dem besten Modell — wenn der Use Case passt.
+- **Open vs Closed ist kein Entweder-Oder.** Das dominante Pattern 2026 ist Hybrid Routing: guenstiges Open-Source für den Grossteil, Frontier Closed für die schwierigen Faelle.
+- **Die Anpassungstechnik ist wichtiger als das Modell.** RAG mit einem guten Modell schlägt Fine-tuning mit dem besten Modell — wenn der Use Case passt.
 - **Evals schlagen Benchmarks.** Kein Benchmark ersetzt den Test mit Deinen echten Daten und Deinen echten Nutzern.
 
 ---
