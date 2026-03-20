@@ -13,44 +13,44 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 2018 scrappte Amazon ein AI-Recruiting-Tool, das Bias gegen Frauen zeigte. Das Modell war auf historischen Bewerbungen trainiert, die ueberwiegend von Maennern kamen. Es lernte, Lebenslaeufe abzuwerten, die das Wort "women's" enthielten — wie in "women's chess club." Die Daten waren technisch korrekt. Das gelernte Muster war es nicht.
 
-2019 wurde Goldman Sachs' Kreditalgorithmus fuer die Apple Card untersucht, weil er Frauen signifikant niedrigere Kreditlimits als Maennern mit vergleichbarem Finanzprofil anbot. Obwohl Geschlecht kein expliziter Input war, erzeugten Proxy-Features unterschiedliche Ergebnisse.
+2019 wurde Goldman Sachs' Kreditalgorithmus fÃ¼r die Apple Card untersucht, weil er Frauen signifikant niedrigere Kreditlimits als Maennern mit vergleichbarem Finanzprofil anbot. Obwohl Geschlecht kein expliziter Input war, erzeugten Proxy-Features unterschiedliche Ergebnisse.
 
-Bias in AI ist kein Einzelproblem — es ist eine Familie verwandter Probleme, die in jeder Phase des Produkt-Lebenszyklus auftreten koennen. Und die Wahl, welche Definition von "Fairness" Du anwendest, ist eine Produkt- und Werteentscheidung — keine technische.
+Bias in AI ist kein Einzelproblem — es ist eine Familie verwandter Probleme, die in jeder Phase des Produkt-Lebenszyklus auftreten kÃ¶nnen. Und die Wahl, welche Definition von "Fairness" Du anwendest, ist eine Produkt- und Werteentscheidung — keine technische.
 
 ## Concept
 
-### Bias-Typen die PMs kennen muessen
+### Bias-Typen die PMs kennen mÃ¼ssen
 
 **Training Data Bias:**
 - **Representation Bias:** Trainingsdaten spiegeln nicht die echte Population wider. Buolamwini & Gebru ("Gender Shades", 2018): Gesichtserkennung trainiert auf ueberwiegend hellen Hauttoenen performt schlechter auf dunkleren.
 - **Historical Bias:** Trainingsdaten bilden historische Ungleichheiten ab. Ein Hiring-Modell lernt Diskriminierung, weil historische Einstellungen diskriminierend waren.
 - **Labeling Bias:** Menschliche Annotatoren bringen eigene Verzerrungen ein.
 
-**Measurement Bias:** Features oder Proxies benachteiligen systematisch bestimmte Gruppen. Postleitzahl als Feature ist in vielen Kontexten ein Proxy fuer Ethnie. "Jahre Berufserfahrung" als Qualitaetssignal benachteiligt Karrierewechsler und Menschen mit Care-Pausen.
+**Measurement Bias:** Features oder Proxies benachteiligen systematisch bestimmte Gruppen. Postleitzahl als Feature ist in vielen Kontexten ein Proxy fÃ¼r Ethnie. "Jahre Berufserfahrung" als Qualitaetssignal benachteiligt Karrierewechsler und Menschen mit Care-Pausen.
 
-**Selection Bias:** Der Datenerhebungsprozess schliesst bestimmte Populationen systematisch aus. AI trainiert auf App-Nutzungsdaten verpasst User ohne Smartphone. Feedback Loops: Das Modell sieht nur Ergebnisse fuer Menschen, die es zuvor genehmigt hat.
+**Selection Bias:** Der Datenerhebungsprozess schliesst bestimmte Populationen systematisch aus. AI trainiert auf App-Nutzungsdaten verpasst User ohne Smartphone. Feedback Loops: Das Modell sieht nur Ergebnisse fÃ¼r Menschen, die es zuvor genehmigt hat.
 
 **Evaluation Bias:** Aggregierte Metriken verstecken Disparitaeten. Ein Modell mit hoher Gesamt-Accuracy kann bei einer spezifischen Minderheit schlecht performen. Disaggregierte Evaluation ist unverzichtbar.
 
 ### Fairness-Metriken — und warum sie inkompatibel sind
 
-**Demographic Parity:** Die positive Vorhersagerate soll ueber alle demografischen Gruppen gleich sein. Limitation: Beruecksichtigt keine legitimen Unterschiede in Basisraten.
+**Demographic Parity:** Die positive Vorhersagerate soll Ã¼ber alle demografischen Gruppen gleich sein. Limitation: Beruecksichtigt keine legitimen Unterschiede in Basisraten.
 
-**Equalized Odds:** True Positive Rate und False Positive Rate sollen ueber Gruppen gleich sein. Strenger als Demographic Parity — beruecksichtigt tatsaechliche Qualifikation.
+**Equalized Odds:** True Positive Rate und False Positive Rate sollen Ã¼ber Gruppen gleich sein. Strenger als Demographic Parity — beruecksichtigt tatsaechliche Qualifikation.
 
 **Equal Opportunity:** Nur die True Positive Rate muss gruppenuebergreifend gleich sein. Stellt sicher, dass qualifizierte Mitglieder aller Gruppen gleiche Chancen haben.
 
-**Predictive Parity:** Precision soll ueber Gruppen gleich sein. Stellt sicher, dass positive Vorhersagen gruppenunabhaengig gleichermassen vertrauenswuerdig sind.
+**Predictive Parity:** Precision soll Ã¼ber Gruppen gleich sein. Stellt sicher, dass positive Vorhersagen gruppenunabhaengig gleichermassen vertrauenswuerdig sind.
 
 **Das Impossibility Theorem:** Mehrere Fairness-Definitionen sind mathematisch inkompatibel, wenn Basisraten zwischen Gruppen unterschiedlich sind (Chouldechova 2017, Kleinberg et al. 2016). Eine zu erfuellen kann bedeuten, eine andere zu verletzen. **Der PM muss waehlen und die Wahl begruenden.**
 
 ### Bias Auditing in der Praxis
 
-1. **Geschuetzte Attribute identifizieren** — relevant fuer Produkt und Jurisdiktion
+1. **Geschuetzte Attribute identifizieren** — relevant fÃ¼r Produkt und Jurisdiktion
 2. **Metriken disaggregieren** — Eval Suite aufgeschluesselt nach Gruppen laufen lassen
 3. **Proxy-Diskriminierung testen** — Korrelieren nicht-geschuetzte Features (Postleitzahl, Name) mit geschuetzten Attributen?
 4. **Fairness-Metriken berechnen** — Demographic Parity, Equalized Odds oder die gewaehlte Definition
-5. **Red Team fuer Bias** — Inputs testen, die biased Outputs ausloesen (stereotypische Prompts, unterrepraesentierte Gruppen)
+5. **Red Team fÃ¼r Bias** — Inputs testen, die biased Outputs ausloesen (stereotypische Prompts, unterrepraesentierte Gruppen)
 6. **Findings und Entscheidungen dokumentieren** — Welche Disparitaeten gefunden, welche akzeptiert (mit Begruendung), welche mitigiert
 
 ## Framework
@@ -59,39 +59,39 @@ Bias in AI ist kein Einzelproblem — es ist eine Familie verwandter Probleme, d
 
 | Schritt | Aktion | Verantwortlich |
 |---------|--------|----------------|
-| 1 | Geschuetzte Attribute fuer Produkt und Jurisdiktion identifizieren | PM + Legal |
+| 1 | Geschuetzte Attribute fÃ¼r Produkt und Jurisdiktion identifizieren | PM + Legal |
 | 2 | Fairness-Metriken waehlen mit expliziter Begruendung | PM + Ethics/Legal |
 | 3 | Eval-Metriken nach geschuetzten Gruppen disaggregieren | Engineering |
 | 4 | Proxy-Diskriminierung testen (Feature-Korrelationsanalyse) | Data Science |
-| 5 | Red Teaming spezifisch fuer biased Outputs | PM + Diverse Tester |
+| 5 | Red Teaming spezifisch fÃ¼r biased Outputs | PM + Diverse Tester |
 | 6 | Akzeptable Disparitaets-Schwellenwerte definieren | PM + Leadership |
 | 7 | Mitigationen implementieren (Daten-, Modell-, Produkt-Ebene) | Engineering |
 | 8 | Entscheidungen, Findings und Rationale dokumentieren | PM |
 | 9 | Regelmaessige Re-Audits planen (mindestens vierteljaehrlich) | PM |
-| 10 | Einspruchsmechanismen fuer betroffene User bauen | PM + Design |
+| 10 | Einspruchsmechanismen fÃ¼r betroffene User bauen | PM + Design |
 
 **Mitigations-Strategien:**
 - **Pre-processing:** Daten reparieren — Re-sampling, Re-weighting, Augmentierung unterrepraesentierter Gruppen
 - **In-processing:** Fairness-Constraints waehrend des Trainings (Adversarial Debiasing)
 - **Post-processing:** Modell-Outputs anpassen (Threshold Adjustment pro Gruppe)
-- **Produkt-Level:** Human Review fuer High-Stakes-Entscheidungen, Einspruchsmechanismen, Transparenz ueber Limitierungen
+- **Produkt-Level:** Human Review fÃ¼r High-Stakes-Entscheidungen, Einspruchsmechanismen, Transparenz Ã¼ber Limitierungen
 
 ## Scenario
 
-Du bist PM bei einer Immobilienplattform. Euer AI-Feature bewertet Mietantraege und erstellt ein Scoring fuer Vermieter. Das Modell wurde auf historischen Mietdaten der letzten 10 Jahre trainiert.
+Du bist PM bei einer Immobilienplattform. Euer AI-Feature bewertet Mietantraege und erstellt ein Scoring fÃ¼r Vermieter. Das Modell wurde auf historischen Mietdaten der letzten 10 Jahre trainiert.
 
 **Die Situation:**
 - 30.000 Mietantraege/Monat
-- Gesamt-Accuracy: 89% (korrekte Vorhersage, ob Mieter zuverlaessig zahlt)
-- Disaggregierte Analyse zeigt: Accuracy fuer Antragsteller mit deutsch klingendem Namen: 91%. Accuracy fuer Antragsteller mit tuerkisch oder arabisch klingendem Namen: 79%. Diese Disparitaet verschwindet in der Gesamtmetrik, weil die Mehrheitsgruppe die Stichprobe dominiert — ein klassisches Aggregationsproblem.
+- Gesamt-Accuracy: 89% (korrekte Vorhersage, ob Mieter zuverlÃ¤ssig zahlt)
+- Disaggregierte Analyse zeigt: Accuracy fÃ¼r Antragsteller mit deutsch klingendem Namen: 91%. Accuracy fÃ¼r Antragsteller mit tuerkisch oder arabisch klingendem Namen: 79%. Diese Disparitaet verschwindet in der Gesamtmetrik, weil die Mehrheitsgruppe die Stichprobe dominiert — ein klassisches Aggregationsproblem.
 - Feature-Analyse: "Vorname" ist kein direkter Input, aber "Stadtteil" und "bisherige Vermieter" korrelieren stark mit ethnischem Hintergrund
-- Der VP Product sagt: "Die Gesamt-Accuracy ist gut. Wir koennen launchen."
+- Der VP Product sagt: "Die Gesamt-Accuracy ist gut. Wir kÃ¶nnen launchen."
 - EU AI Act Compliance ist ab August 2026 erforderlich
 
 **Optionen:**
 1. **Launchen:** 89% Gesamt-Accuracy ist hoch genug, individuelle Fairness-Unterschiede sind akzeptabel
 2. **Proxy-Features entfernen:** "Stadtteil" und "bisherige Vermieter" aus dem Modell nehmen, neu trainieren
-3. **Disaggregiert optimieren:** Fairness-Metrik waehlen (z.B. Equalized Odds), Modell mit Fairness-Constraints neu trainieren, Accuracy-Verlust fuer die Mehrheitsgruppe in Kauf nehmen
+3. **Disaggregiert optimieren:** Fairness-Metrik waehlen (z.B. Equalized Odds), Modell mit Fairness-Constraints neu trainieren, Accuracy-Verlust fÃ¼r die Mehrheitsgruppe in Kauf nehmen
 
 ## Decide
 
@@ -101,10 +101,10 @@ Du bist PM bei einer Immobilienplattform. Euer AI-Feature bewertet Mietantraege 
 **Die beste Entscheidung:** Option 3 — Disaggregiert optimieren mit Equalized Odds.
 
 **Warum:**
-- **Option 1 ist rechtlich und ethisch untragbar:** 12 Prozentpunkte Accuracy-Differenz nach ethnischem Hintergrund ist keine Randnotiz — es ist systematische Diskriminierung. Der EU AI Act verlangt explizit Bias-Erkennung und -Mitigation fuer Hochrisiko-Systeme (Artikel 10). Strafen fuer Verstoesse gegen Hochrisiko-Anforderungen: bis zu 15 Mio. EUR oder 3% des weltweiten Jahresumsatzes (die hoehere Schwelle von 35 Mio. EUR / 7% gilt nur fuer verbotene AI-Praktiken nach Artikel 5).
-- **Option 2 ist noetig, aber nicht hinreichend:** Proxy-Features zu entfernen reduziert direkte Korrelation, aber andere Features koennten denselben Bias kodieren. Und "Stadtteil" hat echten Informationswert fuer die Vorhersage — ihn blind zu entfernen senkt die Accuracy fuer alle.
+- **Option 1 ist rechtlich und ethisch untragbar:** 12 Prozentpunkte Accuracy-Differenz nach ethnischem Hintergrund ist keine Randnotiz — es ist systematische Diskriminierung. Der EU AI Act verlangt explizit Bias-Erkennung und -Mitigation fÃ¼r Hochrisiko-Systeme (Artikel 10). Strafen fÃ¼r Verstoesse gegen Hochrisiko-Anforderungen: bis zu 15 Mio. EUR oder 3% des weltweiten Jahresumsatzes (die hoehere Schwelle von 35 Mio. EUR / 7% gilt nur fÃ¼r verbotene AI-Praktiken nach Artikel 5).
+- **Option 2 ist noetig, aber nicht hinreichend:** Proxy-Features zu entfernen reduziert direkte Korrelation, aber andere Features koennten denselben Bias kodieren. Und "Stadtteil" hat echten Informationswert fÃ¼r die Vorhersage — ihn blind zu entfernen senkt die Accuracy fÃ¼r alle.
 - **Option 3 adressiert die Wurzel:** Equalized Odds stellt sicher, dass zuverlaessige Mieter aller Gruppen gleiche Chancen auf korrekte Bewertung haben. Ja, die Gesamt-Accuracy sinkt vermutlich von 89% auf 85-87%. Aber ein faires Modell bei 86% ist einem diskriminierenden bei 89% vorzuziehen.
-- **Zusaetzlich:** Einspruchsmechanismus fuer Antragsteller einbauen. Transparenz ueber den Score schaffen. Regelmaessige Re-Audits einplanen.
+- **Zusaetzlich:** Einspruchsmechanismus fÃ¼r Antragsteller einbauen. Transparenz Ã¼ber den Score schaffen. Regelmaessige Re-Audits einplanen.
 
 **Haeufige Fehler:**
 - "Wir nutzen keine geschuetzten Attribute, also sind wir fair" — Proxy-Diskriminierung ist real. Postleitzahl, Name und viele andere Features korrelieren mit geschuetzten Attributen.
@@ -118,7 +118,7 @@ Du bist PM bei einer Immobilienplattform. Euer AI-Feature bewertet Mietantraege 
 
 - Aggregierte Metriken verstecken Disparitaeten. Disaggregierte Evaluation nach geschuetzten Gruppen ist Pflicht — nicht optional.
 - Mehrere Fairness-Definitionen sind mathematisch inkompatibel (Impossibility Theorem). Der PM muss eine waehlen und die Wahl dokumentiert begruenden.
-- Der EU AI Act macht Bias-Testing fuer Hochrisiko-Systeme zur gesetzlichen Pflicht (Deadline: August 2026). Aber auch ohne Regulierung: Biased AI beschaedigt User-Vertrauen und erzeugt reale Schaeden.
+- Der EU AI Act macht Bias-Testing fÃ¼r Hochrisiko-Systeme zur gesetzlichen Pflicht (Deadline: August 2026). Aber auch ohne Regulierung: Biased AI beschaedigt User-Vertrauen und erzeugt reale Schaeden.
 
 ---
 

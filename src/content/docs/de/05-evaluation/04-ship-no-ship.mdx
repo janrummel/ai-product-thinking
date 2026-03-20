@@ -13,22 +13,22 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 Dein AI-Feature ist "fertig". Das Engineering-Team sagt: "Es funktioniert." Das Design-Team sagt: "Sieht gut aus." Aber als PM weisst Du: Bei AI bedeutet "funktioniert" nicht dasselbe wie bei traditioneller Software. Der Chatbot liefert mal brillante, mal peinliche Antworten — und niemand kann vorhersagen, wann welcher Fall eintritt.
 
-Traditionelle Software shipped, wenn sie korrekt funktioniert. AI-Features shippen, wenn sie *gut genug* funktionieren. Das ist eine fundamental andere Entscheidung, weil AI-Output-Qualitaet auf einem Spektrum existiert — nicht binaer. Verschiedene User erleben verschiedene Qualitaetslevel fuer dasselbe Feature. Edge Cases sind unendlich. Und Qualitaet kann ueber Zeit degradieren, wenn sich Datenverteilungen verschieben.
+Traditionelle Software shipped, wenn sie korrekt funktioniert. AI-Features shippen, wenn sie *gut genug* funktionieren. Das ist eine fundamental andere Entscheidung, weil AI-Output-QualitÃ¤t auf einem Spektrum existiert — nicht binaer. Verschiedene User erleben verschiedene Qualitaetslevel fÃ¼r dasselbe Feature. Edge Cases sind unendlich. Und QualitÃ¤t kann Ã¼ber Zeit degradieren, wenn sich Datenverteilungen verschieben.
 
 Der PM muss "gut genug" *vor* dem Bau definieren, nicht danach. Ohne vordefinierten Qualitaetsstandard shippen Teams entweder zu frueh (User-Schaden) oder nie (Business-Schaden).
 
 ## Concept
 
-### Quality Gates fuer AI Features
+### Quality Gates fÃ¼r AI Features
 
-Ein Quality Gate ist ein vordefinierter Schwellenwert, der erfuellt sein muss, bevor ein AI-Feature in die naechste Deployment-Stufe kommt. Gates werden waehrend der Planung definiert, nicht beim Launch Review entdeckt.
+Ein Quality Gate ist ein vordefinierter Schwellenwert, der erfuellt sein muss, bevor ein AI-Feature in die nÃ¤chste Deployment-Stufe kommt. Gates werden waehrend der Planung definiert, nicht beim Launch Review entdeckt.
 
 **Empfohlene Quality Gates:**
 1. **Golden Dataset Performance:** Modell besteht die Eval Suite, keine Regression bei kritischen Tasks
 2. **Safety Checks:** Keine sensitiven Daten in Prompts oder Logs; Red-Team-Findings adressiert
-3. **Latency Budget:** P50 und P95 Latenz innerhalb akzeptabler Grenzen, Fallbacks fuer Tool-Fehler
+3. **Latency Budget:** P50 und P95 Latenz innerhalb akzeptabler Grenzen, Fallbacks fÃ¼r Tool-Fehler
 4. **Cost Ceiling:** Kosten pro erfolgreicher Interaktion unter Zielwert
-5. **Fairness Audit:** Performance konsistent ueber demografische Gruppen (siehe Lektion 5)
+5. **Fairness Audit:** Performance konsistent Ã¼ber demografische Gruppen (siehe Lektion 5)
 6. **Fallback Behavior:** Graceful Degradation wenn das Modell versagt, timeoutet oder Low-Confidence-Ergebnisse liefert
 
 ### Staged Rollout Strategien
@@ -39,7 +39,7 @@ AI-Features brauchen vorsichtigere Rollouts als deterministische Software, weil 
 
 **Canary Release:** 1-5% des Production Traffic auf das neue AI-Feature routen. Key Metrics monitoren: Error Rate, Latenz, User Satisfaction, Escalation Rate. Bei guten Metriken schrittweise hochfahren. Jede Expansionsphase hat klare Exit-Kriterien.
 
-**A/B Testing:** User zwischen AI-Feature-Varianten aufteilen, um kausalen Impact zu messen. Kritisch fuer die Frage: Verbessert AI tatsaechlich User Outcomes? Laufen lassen bis statistische Signifikanz erreicht ist (typisch 2-4 Wochen).
+**A/B Testing:** User zwischen AI-Feature-Varianten aufteilen, um kausalen Impact zu messen. Kritisch fÃ¼r die Frage: Verbessert AI tatsaechlich User Outcomes? Laufen lassen bis statistische Signifikanz erreicht ist (typisch 2-4 Wochen).
 
 **Feature Flags:** Canary + A/B kombinieren. Exposure nach User Segment, Geografie oder Account Tier steuern. Sofortiger Rollback wenn Probleme auftauchen.
 
@@ -48,7 +48,7 @@ AI-Features brauchen vorsichtigere Rollouts als deterministische Software, weil 
 1. **Baseline zuerst:** Aktuelle Experience messen (menschliche Performance, bestehendes regelbasiertes System)
 2. **Non-Inferiority:** AI muss mindestens so gut sein wie der aktuelle Prozess
 3. **User-akzeptables Minimum:** Durch User Research bestimmen, unter welchem Qualitaetslevel User das Feature ablehnen
-4. **Business-viables Minimum:** Unter welcher Qualitaet kostet das Feature mehr als es spart?
+4. **Business-viables Minimum:** Unter welcher QualitÃ¤t kostet das Feature mehr als es spart?
 5. **Die hoechste dieser drei Grenzen ist Dein Schwellenwert**
 
 ## Framework
@@ -63,20 +63,20 @@ AI-Features brauchen vorsichtigere Rollouts als deterministische Software, weil 
 | Cost | Ist es wirtschaftlich tragbar? | Kosten pro Erfolg unter Zielwert | Kosten pro Erfolg uebersteigen gelieferten Wert |
 | Fairness | Ist Performance equitable? | Varianz zwischen Gruppen innerhalb Grenzen | Signifikante Disparitaet bei geschuetzten Gruppen |
 | Fallback | Was passiert bei Versagen? | Graceful Degradation definiert und getestet | Kein Fallback — Fehler = kaputte Experience |
-| Rollback | Koennen wir zurueck? | Sofortiger Rollback via Feature Flag | Kein Rollback-Mechanismus |
+| Rollback | KÃ¶nnen wir zurÃ¼ck? | Sofortiger Rollback via Feature Flag | Kein Rollback-Mechanismus |
 
 ## Scenario: GitHub Copilot — Von der Preview zur GA
 
-Es ist Sommer 2021. GitHub hat gemeinsam mit OpenAI ein AI-Feature entwickelt, das Code-Vorschlaege direkt im Editor generiert: Copilot. Die internen Demos sind beeindruckend — das Modell vervollstaendigt Funktionen, schreibt Boilerplate und schlaegt sogar Tests vor. Das Engineering-Team ist ueberzeugt: Das Produkt funktioniert.
+Es ist Sommer 2021. GitHub hat gemeinsam mit OpenAI ein AI-Feature entwickelt, das Code-Vorschlaege direkt im Editor generiert: Copilot. Die internen Demos sind beeindruckend — das Modell vervollstaendigt Funktionen, schreibt Boilerplate und schlÃ¤gt sogar Tests vor. Das Engineering-Team ist ueberzeugt: Das Produkt funktioniert.
 
-Aber GitHub steht vor einer schwierigen Ship/No-Ship-Entscheidung. Copilot ist nicht fuer ein paar hundert Power User gedacht — es soll Millionen von Entwicklern erreichen. Code Suggestions, die in 70% der Faelle falsch sind, wuerden nicht nur nerven, sondern aktiv Bugs in Production-Codebasen einfuehren. Und: Jeder Vorschlag, den ein Developer uebernimmt, wird Teil von Software, die andere Menschen nutzen.
+Aber GitHub steht vor einer schwierigen Ship/No-Ship-Entscheidung. Copilot ist nicht fÃ¼r ein paar hundert Power User gedacht — es soll Millionen von Entwicklern erreichen. Code Suggestions, die in 70% der Faelle falsch sind, wÃ¼rden nicht nur nerven, sondern aktiv Bugs in Production-Codebasen einfuehren. Und: Jeder Vorschlag, den ein Developer uebernimmt, wird Teil von Software, die andere Menschen nutzen.
 
 **Die Fakten:**
 
 - Suggestion Acceptance Rate lag anfangs bei ca. 30% — sieben von zehn Vorschlaegen wurden verworfen
-- Interne Dogfooding-Phase zeigte: Entwickler waren produktiver, aber die Qualitaet der Vorschlaege variierte stark je nach Programmiersprache und Kontext
-- GitHub implementierte Feature Flags pro User und Organisation fuer sofortigen Rollback
-- Das SPACE Framework (Satisfaction, Performance, Activity, Communication, Efficiency) wurde als Messsystem fuer Developer Productivity aufgesetzt
+- Interne Dogfooding-Phase zeigte: Entwickler waren produktiver, aber die QualitÃ¤t der Vorschlaege variierte stark je nach Programmiersprache und Kontext
+- GitHub implementierte Feature Flags pro User und Organisation fÃ¼r sofortigen Rollback
+- Das SPACE Framework (Satisfaction, Performance, Activity, Communication, Efficiency) wurde als Messsystem fÃ¼r Developer Productivity aufgesetzt
 - Copilot lief im Hintergrund und generierte Vorschlaege — GitHub mass, welche akzeptiert und welche verworfen wurden (ein Shadow-Mode-Aequivalent auf Suggestion-Ebene)
 - Eine kontrollierte Studie zeigte: Entwickler erledigten Aufgaben 55% schneller mit Copilot
 - In aktivierten Repos stammten ca. 46% des Codes von Copilot-Vorschlaegen
@@ -88,16 +88,16 @@ Nach drei Monaten Technical Preview sehen die Metriken vielversprechend aus. Die
 ## Decide
 
 <details>
-<summary>Wie hat GitHub entschieden — und was koennen wir daraus lernen?</summary>
+<summary>Wie hat GitHub entschieden — und was kÃ¶nnen wir daraus lernen?</summary>
 
 **GitHubs Entscheidung:** 12 Monate Staged Rollout — von Juni 2021 (Technical Preview) bis Juni 2022 (General Availability). Trotz vielversprechender Frueh-Metriken hat GitHub nicht beschleunigt.
 
 **Der Rollout in Stufen:**
 
-1. **Internes Dogfooding:** GitHub-Entwickler nutzten Copilot im Alltag. Erste Quality Gates: Funktioniert es fuer die eigenen Engineers? Wo bricht es?
+1. **Internes Dogfooding:** GitHub-Entwickler nutzten Copilot im Alltag. Erste Quality Gates: Funktioniert es fÃ¼r die eigenen Engineers? Wo bricht es?
 2. **Eingeladene Tester:** Ausgewaehlte externe Developer mit Feedback-Kanael. Quality Gate: Stimmt die Acceptance Rate auch ausserhalb von GitHubs eigenem Codebase-Stil?
 3. **Public Technical Preview:** Offener Zugang mit Warteliste. Quality Gate: Skaliert die Infrastruktur? Bleiben die Metriken bei heterogenem Traffic stabil?
-4. **General Availability:** Bezahltes Produkt fuer alle. Quality Gate: Ist die Acceptance Rate hoch genug, dass Developer fuer den Service zahlen wuerden?
+4. **General Availability:** Bezahltes Produkt fÃ¼r alle. Quality Gate: Ist die Acceptance Rate hoch genug, dass Developer fÃ¼r den Service zahlen wÃ¼rden?
 
 **Warum 12 Monate statt 3:**
 
@@ -106,20 +106,20 @@ Durch die Ship/No-Ship-Brille betrachtet, hat GitHub bei jedem Gate systematisch
 | Gate | GitHubs Massnahme |
 |------|-------------------|
 | Eval Suite | SPACE Framework mit fuenf Dimensionen — nicht nur "funktioniert der Code", sondern "sind Entwickler zufriedener und produktiver?" |
-| Safety | Security Scans fuer generierten Code, Pruefung auf Secrets und Lizenzverletzungen in Vorschlaegen |
+| Safety | Security Scans fÃ¼r generierten Code, Pruefung auf Secrets und Lizenzverletzungen in Vorschlaegen |
 | Latency | Suggestion-Latenz optimiert, damit Copilot den Flow nicht unterbricht |
-| Cost | Kosten pro Suggestion auf tragfaehiges Niveau fuer ein Abo-Modell gebracht |
-| Fairness | Performance ueber Programmiersprachen und Experience Levels hinweg gemessen |
+| Cost | Kosten pro Suggestion auf tragfaehiges Niveau fÃ¼r ein Abo-Modell gebracht |
+| Fairness | Performance Ã¼ber Programmiersprachen und Experience Levels hinweg gemessen |
 | Fallback | Vorschlag ablehnen = kein Schaden. Feature Flag = sofortiger Rollback pro User/Org |
 
 Die Acceptance Rate wurde von ~30% auf ~34% optimiert. Das klingt nach einem kleinen Sprung — aber bei Millionen von Suggestions pro Tag ist jeder Prozentpunkt weniger Noise ein signifikanter Qualitaetsgewinn.
 
 **Warum "gut genug" nach 3 Monaten nicht reichte:**
 
-- Die Early-Adopter-Kohorte war nicht repraesentativ fuer die GA-Zielgruppe. Power User akzeptieren mehr Reibung als Mainstream-Developer
+- Die Early-Adopter-Kohorte war nicht repraesentativ fÃ¼r die GA-Zielgruppe. Power User akzeptieren mehr Reibung als Mainstream-Developer
 - Sicherheitsrelevante Edge Cases (generierter Code mit Vulnerabilities, kopierte Lizenz-Fragmente) brauchten Zeit zum Identifizieren und Adressieren
 - Das Pricing-Modell musste validiert werden — Developer Satisfaction allein reicht nicht, wenn die Unit Economics nicht stimmen
-- GitHub brauchte Evidenz, die ueber Demos hinausgeht: Die 55%-schneller-Studie wurde waehrend des Extended Preview durchgefuehrt, nicht davor
+- GitHub brauchte Evidenz, die Ã¼ber Demos hinausgeht: Die 55%-schneller-Studie wurde waehrend des Extended Preview durchgefuehrt, nicht davor
 
 **Das Ergebnis:** Copilot wurde zum am schnellsten adoptierten Developer Tool in GitHubs Geschichte. Die zusaetzlichen 9 Monate waren kein verlorener Marktanteil — sie waren die Investition in ein Produkt, dem Millionen von Entwicklern genug vertrauten, um dafuer zu zahlen.
 
@@ -128,9 +128,9 @@ Die Acceptance Rate wurde von ~30% auf ~34% optimiert. Das klingt nach einem kle
 ## Reflect
 
 - **Quality Gates vor dem Bau definieren, nicht beim Launch Review entdecken.** GitHub hat das SPACE Framework nicht erfunden, als Copilot "fertig" war — es war von Anfang an das Messsystem. Fuenf Dimensionen statt einer einzigen Metrik, weil Developer Productivity nicht auf Acceptance Rate reduzierbar ist.
-- **Staged Rollouts sind bei AI nicht optional.** GitHubs vierstufiger Rollout (intern → eingeladen → Preview → GA) hat systematisch verschiedene Risiken adressiert: erst Funktionalitaet, dann externe Validierung, dann Skalierung, dann Monetarisierung. Jede Stufe hatte eigene Exit-Kriterien.
+- **Staged Rollouts sind bei AI nicht optional.** GitHubs vierstufiger Rollout (intern → eingeladen → Preview → GA) hat systematisch verschiedene Risiken adressiert: erst FunktionalitÃ¤t, dann externe Validierung, dann Skalierung, dann Monetarisierung. Jede Stufe hatte eigene Exit-Kriterien.
 - **Shadow Mode faengt Fehler bei null User-Risiko.** Copilots Suggest-and-Measure-Ansatz war ein elegantes Shadow-Mode-Aequivalent: Das Modell generierte, aber der Developer entschied. Jede verworfene Suggestion war ein Datenpunkt ohne User-Schaden.
-- **"Gut genug" fuer Early Adopter ist nicht "gut genug" fuer GA.** Die haerteste Lektion aus Copilots Rollout: Drei Monate Preview-Daten mit technikaffinen Early Adoptern sagen Dir wenig ueber das Verhalten von Millionen Mainstream-Usern. GitHubs Geduld war keine Zaghaftigkeit — sie war eine bewusste Ship/No-Ship-Entscheidung.
+- **"Gut genug" fÃ¼r Early Adopter ist nicht "gut genug" fÃ¼r GA.** Die haerteste Lektion aus Copilots Rollout: Drei Monate Preview-Daten mit technikaffinen Early Adoptern sagen Dir wenig Ã¼ber das Verhalten von Millionen Mainstream-Usern. GitHubs Geduld war keine Zaghaftigkeit — sie war eine bewusste Ship/No-Ship-Entscheidung.
 
 ---
 
