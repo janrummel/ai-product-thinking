@@ -21,9 +21,9 @@ Das Problem ist nicht die AI. Das Problem ist das Interaktionsdesign. Als PM ent
 
 Nicht jede AI-Interaktion braucht dieselbe menschliche Kontrolle. Es gibt drei Stufen:
 
-- **Human-in-the-Loop:** AI schlaegt vor, Mensch muss explizit genehmigen bevor etwas passiert. Hoechste Sicherheit, niedrigste Geschwindigkeit. Beispiel: Arzt bestaetigt AI-Diagnose.
-- **Human-on-the-Loop:** AI handelt, Mensch ueberwacht und kann eingreifen. Moderater Trade-off. Beispiel: AI kategorisiert Tickets, Team prueft Dashboard.
-- **Human-out-of-the-Loop:** AI handelt vollstaendig autonom. Nur fuer niedrig-riskante, validierte Tasks. Beispiel: Spam-Filter.
+- **Human-in-the-Loop:** AI schlägt vor, Mensch muss explizit genehmigen bevor etwas passiert. Hoechste Sicherheit, niedrigste Geschwindigkeit. Beispiel: Arzt bestaetigt AI-Diagnose.
+- **Human-on-the-Loop:** AI handelt, Mensch ueberwacht und kann eingreifen. Moderater Trade-off. Beispiel: AI kategorisiert Tickets, Team prüft Dashboard.
+- **Human-out-of-the-Loop:** AI handelt vollständig autonom. Nur für niedrig-riskante, validierte Tasks. Beispiel: Spam-Filter.
 
 ### AI Suggestions vs. AI Actions
 
@@ -53,17 +53,17 @@ Wenn die AI an ihre Grenzen stoesst, braucht sie klare Eskalationswege:
 
 - **Confidence-basiert:** Unter einem Schwellenwert → automatisch an Menschen uebergeben
 - **Risiko-basiert:** High-Stakes-Entscheidungen immer menschlich
-- **Expertise-Routing:** AI lernt, welche Menschen fuer welche Fragen am besten sind
+- **Expertise-Routing:** AI lernt, welche Menschen für welche Fragen am besten sind
 - **Channel-basiert:** Slack/E-Mail/Dashboard je nach Dringlichkeit
 
 ### Feedback Loops
 
-Nutzer muessen der AI Feedback geben koennen — aber richtig:
+Nutzer müssen der AI Feedback geben können — aber richtig:
 
-- **Blocking Feedback:** AI pausiert und wartet auf Input. Gut fuer kritische Entscheidungen.
-- **Parallel Feedback:** AI arbeitet weiter, Feedback kommt asynchron. Gut fuer Volumen-Tasks.
+- **Blocking Feedback:** AI pausiert und wartet auf Input. Gut für kritische Entscheidungen.
+- **Parallel Feedback:** AI arbeitet weiter, Feedback kommt asynchron. Gut für Volumen-Tasks.
 
-Apple unterscheidet drei Feedback-Typen: *Implizit* (Verhalten), *Explizit* (Daumen hoch/runter), *Korrekturen* (Fehler beheben). Wichtig: Korrekturen sind kein Ersatz fuer schlechte Ergebnisse. Gefuehrte Korrekturen (Auswahl aus Optionen) schlagen freie Korrekturen (Freitextfeld).
+Apple unterscheidet drei Feedback-Typen: *Implizit* (Verhalten), *Explizit* (Daumen hoch/runter), *Korrekturen* (Fehler beheben). Wichtig: Korrekturen sind kein Ersatz für schlechte Ergebnisse. Gefuehrte Korrekturen (Auswahl aus Optionen) schlagen freie Korrekturen (Freitextfeld).
 
 ### Service Recovery Paradox
 
@@ -78,25 +78,25 @@ Erfolgreiche Fehlerbehebung erzeugt *mehr* Loyalitaet als fehlerfreie Performanc
 | **Hohes Risiko** | Human-in-the-Loop + Action mit Preview | Human-on-the-Loop + Confidence-Eskalation |
 | **Niedriges Risiko** | Suggestion oder Auto-complete | Autonome Action mit Undo |
 
-**Checkliste fuer jede AI-Interaktion:**
+**Checkliste für jede AI-Interaktion:**
 
 | Phase | Muss vorhanden sein | Beispiel |
 |-------|---------------------|----------|
 | Pre | Intent Preview | "Ich werde 3 Absaetze zusammenfassen" |
 | Pre | Autonomy Dial | Nutzer kann Autonomie-Level einstellen |
 | In | Confidence Signal | Farbcodierung, Prozentanzeige |
-| In | Erklaerung | "Basierend auf den letzten 5 Tickets" |
+| In | Erklärung | "Basierend auf den letzten 5 Tickets" |
 | Post | Undo | Ein-Klick-Rueckgaengig |
 | Post | Escalation Pathway | "An Mensch uebergeben"-Button |
 
 ## Scenario
 
-Du bist PM bei einem B2B-Tool fuer Vertragsmanagement. Eure AI soll Vertraege automatisch pruefen und Risiken markieren. 3.000 Vertraege pro Monat, 40% Standard-NDAs, 35% Dienstleistungsvertraege, 25% komplexe individuelle Vertraege.
+Du bist PM bei einem B2B-Tool für Vertragsmanagement. Eure AI soll Vertraege automatisch prüfen und Risiken markieren. 3.000 Vertraege pro Monat, 40% Standard-NDAs, 35% Dienstleistungsvertraege, 25% komplexe individuelle Vertraege.
 
 **Eure Optionen:**
-1. **Suggestion-only:** AI markiert Risiken, Jurist prueft jeden Vertrag manuell
+1. **Suggestion-only:** AI markiert Risiken, Jurist prüft jeden Vertrag manuell
 2. **Gestaffelt:** Standard-NDAs autonom mit Undo, Dienstleistungsvertraege mit Preview, komplexe Vertraege Suggestion-only
-3. **Voll autonom:** AI prueft alle Vertraege, Juristen pruefen nur Eskalationen
+3. **Voll autonom:** AI prüft alle Vertraege, Juristen prüfen nur Eskalationen
 
 **Die Zahlen:**
 - AI Accuracy: 96% bei NDAs, 88% bei Dienstleistungsvertraegen, 74% bei komplexen Vertraegen
@@ -114,7 +114,7 @@ Du bist PM bei einem B2B-Tool fuer Vertragsmanagement. Eure AI soll Vertraege au
 - NDAs bei 96% Accuracy und €800 Fehlerkosten: Autonome Action mit Undo ist vertretbar. Das spart ~45 Min x 1.200 Vertraege = 900 Stunden/Monat.
 - Dienstleistungsvertraege bei 88% und €4.200 Fehlerkosten: Action mit Preview — AI markiert Risiken, zeigt Diff, Jurist bestaetigt. Human-on-the-Loop.
 - Komplexe Vertraege bei 74% und €18.000 Fehlerkosten: Suggestion-only. AI liefert Analyse, Jurist entscheidet. Human-in-the-Loop.
-- Investiere in Post-Action: Undo fuer NDAs, Audit Trail fuer alles, Escalation Pathway wenn Confidence unter 85%.
+- Investiere in Post-Action: Undo für NDAs, Audit Trail für alles, Escalation Pathway wenn Confidence unter 85%.
 
 **Service Recovery:** Baue exzellente Error States. Wenn die AI eine Klausel uebersieht und der Jurist es korrigiert — zeige was passiert ist, lerne daraus, melde es transparent. Das baut mehr Vertrauen auf als fehlerfreie Demos.
 </details>
@@ -123,7 +123,7 @@ Du bist PM bei einem B2B-Tool fuer Vertragsmanagement. Eure AI soll Vertraege au
 
 - **Autonomie ist kein Schalter, sondern ein Regler.** Verschiedene Tasks im selben Produkt brauchen verschiedene Interaktionsmuster. Risiko und Fehlerkosten bestimmen die Stufe.
 - **Gestalte alle drei Phasen.** Pre-Action (was wird passieren?), In-Action (warum?), Post-Action (wie rueckgaengig?). Die meisten Produkte investieren nur in die Mitte.
-- **Undo schlaegt Genehmigung.** Fuer niedrig-riskante, hoch-frequente Tasks ist Undo effizienter als Approval Flows — und Nutzer vertrauen dem System mehr, weil sie die Kontrolle behalten.
+- **Undo schlägt Genehmigung.** Für niedrig-riskante, hoch-frequente Tasks ist Undo effizienter als Approval Flows — und Nutzer vertrauen dem System mehr, weil sie die Kontrolle behalten.
 - **Investiere in Fehler, nicht nur in Erfolge.** Der Service Recovery Paradox zeigt: Gute Fehlerbehandlung erzeugt mehr Loyalitaet als perfekte Performance.
 
 ---

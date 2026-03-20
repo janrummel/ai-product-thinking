@@ -11,11 +11,11 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Euer AI-Feature ist in der Entwicklung. Der ML-Engineer sagt: "Die F1-Score ist 0.87." Der Designer fragt: "Was bedeutet das fuer die User Experience?" Du als PM stehst dazwischen und musst uebersetzen.
+Euer AI-Feature ist in der Entwicklung. Der ML-Engineer sagt: "Die F1-Score ist 0.87." Der Designer fragt: "Was bedeutet das für die User Experience?" Du als PM stehst dazwischen und musst uebersetzen.
 
-Traditionelle Produktentwicklung hat klare Handoffs: PM definiert, Designer designt, Engineer baut, QA testet. Bei AI-Produkten verwischen diese Grenzen. Der PM muss Eval-Kriterien mit-definieren. Der Designer muss fuer Unsicherheit designen. Der Engineer muss Eval-Pipelines bauen. Und der Data Scientist, der frueher in einem separaten Team sass, ist jetzt Teil des Squads.
+Traditionelle Produktentwicklung hat klare Handoffs: PM definiert, Designer designt, Engineer baut, QA testet. Bei AI-Produkten verwischen diese Grenzen. Der PM muss Eval-Kriterien mit-definieren. Der Designer muss für Unsicherheit designen. Der Engineer muss Eval-Pipelines bauen. Und der Data Scientist, der frueher in einem separaten Team sass, ist jetzt Teil des Squads.
 
-Die groesste Herausforderung ist nicht die Technologie — es ist die Kommunikation zwischen Rollen mit fundamental unterschiedlichen Denkmodellen.
+Die größte Herausforderung ist nicht die Technologie — es ist die Kommunikation zwischen Rollen mit fundamental unterschiedlichen Denkmodellen.
 
 ## Concept
 
@@ -25,14 +25,14 @@ Die groesste Herausforderung ist nicht die Technologie — es ist die Kommunikat
 |-------|----------------------|---------------------------|
 | Product Manager | Definiert was gebaut wird | Definiert Eval-Kriterien, Quality Thresholds, co-owned Prompts |
 | Engineer | Baut das Feature | Integriert AI APIs, baut Eval Pipelines, implementiert Guardrails |
-| Designer | Designt die Oberflaeche | Designt fuer Unsicherheit, Feedback-Mechanismen, Trust Indicators |
+| Designer | Designt die Oberflaeche | Designt für Unsicherheit, Feedback-Mechanismen, Trust Indicators |
 | Data Scientist / ML Engineer | (oft nicht im Squad) | Model Selection, Fine-Tuning, Eval-Methodik |
 | QA / Test Engineer | Testet auf Korrektheit | Baut Eval Datasets, Adversarial Testing |
 
 ### Die drei Kommunikationsfallen
 
 **Falle 1: "Mach es besser"**
-PM sagt: "Die AI-Antworten muessen besser werden."
+PM sagt: "Die AI-Antworten müssen besser werden."
 ML-Engineer hoert: bedeutungsloses Feedback.
 **Fix:** Spezifische, messbare Kriterien liefern. Nicht "besser", sondern: "Die Zusammenfassung soll alle Named Entities aus dem Quelltext bewahren. Aktuell verliert sie 23% der Erwaehnungen."
 
@@ -47,7 +47,7 @@ PM schreibt vage Qualitaetserwartungen. Engineering baut ohne klare Eval-Kriteri
 
 ### Das Eval Review Ritual
 
-Die effektivste cross-funktionale Praxis fuer AI-Teams:
+Die effektivste cross-funktionale Praxis für AI-Teams:
 
 **Kadenz:** Woechentlich in aktiver Entwicklung, zweiwochentlich nach Launch
 **Teilnehmer:** PM, Engineering Lead, ML/AI Engineer, Designer (optional), QA
@@ -55,7 +55,7 @@ Die effektivste cross-funktionale Praxis fuer AI-Teams:
 1. Aktuelle Eval-Metriken vs. Schwellenwerte reviewen (5 min)
 2. Sample von Failures durchgehen — was ging schief und warum (15 min)
 3. User Feedback Signals diskutieren — Regeneration Rate, Thumbs-Down-Muster (5 min)
-4. Improvement Actions fuer naechsten Sprint priorisieren (5 min)
+4. Improvement Actions für nächsten Sprint priorisieren (5 min)
 
 **Warum das funktioniert:** Es schafft ein gemeinsames Qualitaetsverstaendnis. PMs sehen die technischen Constraints. Engineers sehen den User Impact. Das Team alignt sich darauf, was "gut genug" bedeutet.
 
@@ -63,7 +63,7 @@ Die effektivste cross-funktionale Praxis fuer AI-Teams:
 
 | Researcher (Data Scientist) | Product Builder (PM/Engineer) |
 |------------------------------|-------------------------------|
-| Optimiert fuer Accuracy auf Benchmarks | Optimiert fuer User Experience |
+| Optimiert für Accuracy auf Benchmarks | Optimiert für User Experience |
 | Schaetzt Neuheit und State-of-the-Art | Schaetzt Zuverlaessigkeit und Ship Speed |
 | Misst in F1-Scores und Perplexity | Misst in Adoption und Revenue |
 | Will mehr Ansaetze explorieren | Will shippen was funktioniert |
@@ -88,10 +88,10 @@ Keines der beiden Mindsets ist falsch. Die PM-Aufgabe ist zu uebersetzen:
 
 ## Scenario
 
-Du bist PM eines AI-Features fuer automatische E-Mail-Antwortvorschlaege. Woche 3 der Entwicklung. Die Situation:
+Du bist PM eines AI-Features für automatische E-Mail-Antwortvorschlaege. Woche 3 der Entwicklung. Die Situation:
 
 - **ML-Engineer:** "Ich habe drei Modelle verglichen. Modell A hat F1 0.89, Modell B hat F1 0.84 aber 3x schnellere Latency. Ich empfehle Modell A."
-- **Designer:** "Die Nutzer muessen sofort sehen, ob der Vorschlag gut ist. Wir brauchen maximal 1,5 Sekunden Antwortzeit, sonst brechen sie ab."
+- **Designer:** "Die Nutzer müssen sofort sehen, ob der Vorschlag gut ist. Wir brauchen maximal 1,5 Sekunden Antwortzeit, sonst brechen sie ab."
 - **Engineering Lead:** "Modell A hat P95 Latency von 4,2 Sekunden. Modell B liegt bei 1,1 Sekunden."
 - Euer Eval-Dataset hat 300 Beispiele. Auf beiden Modellen ist die User-perceived Quality aehnlich — die F1-Differenz kommt von subtilen Unterschieden, die Endnutzer kaum bemerken.
 
@@ -106,7 +106,7 @@ Der ML-Engineer besteht auf Modell A wegen der besseren Metriken. Der Designer b
 
 **Begruendung:**
 - 4,2 Sekunden Wartezeit bei einer E-Mail-Antwort ist zu lang — Nutzer brechen ab
-- Die F1-Differenz (0.89 vs. 0.84) ist fuer Endnutzer kaum wahrnehmbar
+- Die F1-Differenz (0.89 vs. 0.84) ist für Endnutzer kaum wahrnehmbar
 - Der Designer hat den richtigen User-Kontext: Bei E-Mail-Antworten zaehlt Geschwindigkeit
 - Task Completion Rate (User uebernimmt Vorschlag) wird mit Modell B wahrscheinlich hoeher sein trotz niedrigerer F1
 
@@ -114,17 +114,17 @@ Der ML-Engineer besteht auf Modell A wegen der besseren Metriken. Der Designer b
 - Zum ML-Engineer: "Die F1-Differenz ist real, aber die User-perceived Quality ist aehnlich. Lass uns Task Completion Rate als primaere Metrik tracken."
 - Zum Designer: "Modell B erfuellt die Latency-Anforderung. Lass uns die Feedback-UI priorisieren, um Quality Signals zu sammeln."
 
-**Was viele falsch machen:** Die Entscheidung der Rolle ueberlassen, die am lautesten argumentiert, statt auf die Metrik zu schauen, die fuer Nutzer am meisten zaehlt.
+**Was viele falsch machen:** Die Entscheidung der Rolle ueberlassen, die am lautesten argumentiert, statt auf die Metrik zu schauen, die für Nutzer am meisten zaehlt.
 </details>
 
 ## Reflect
 
 **Die PM-Aufgabe bei AI-Produkten ist nicht zu entscheiden wer Recht hat — sondern zwischen unterschiedlichen Denkmodellen zu uebersetzen.**
 
-- Cross-funktionale Konflikte sind oft Uebersetzungsprobleme — Researcher und Product Builder optimieren fuer verschiedene Metriken
+- Cross-funktionale Konflikte sind oft Uebersetzungsprobleme — Researcher und Product Builder optimieren für verschiedene Metriken
 - Das Eval Review Ritual ersetzt Ad-hoc-Abstimmungen durch strukturierten Austausch
 - Geteilte Metriken (Task Completion Rate, Adoption) verbinden technische und Produkt-Perspektive
 
 ---
 
-*Quellen: Spotify Engineering Blog — Squad Model fuer ML Features, Microsoft Copilot Team Structure (Build/Ignite Talks), Anthropic Documentation (2025)*
+*Quellen: Spotify Engineering Blog — Squad Model für ML Features, Microsoft Copilot Team Structure (Build/Ignite Talks), Anthropic Documentation (2025)*

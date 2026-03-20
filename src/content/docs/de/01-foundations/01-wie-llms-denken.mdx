@@ -1,6 +1,6 @@
 ---
 title: "Wie LLMs denken"
-description: "Was in einem Large Language Model passiert — erklaert fuer Produktentscheidungen, nicht fuer Forschungspapiere."
+description: "Was in einem Large Language Model passiert — erklärt für Produktentscheidungen, nicht für Forschungspapiere."
 sidebar:
   order: 1
 ---
@@ -11,26 +11,26 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Dein CEO kommt aus einem Meeting und sagt: "Wir muessen AI in unser Produkt einbauen." Dein Engineering-Team redet ueber Tokens, Temperature und Hallucinations. Dein Designer fragt, ob der Chatbot eine Persoenlichkeit braucht.
+Dein CEO kommt aus einem Meeting und sagt: "Wir müssen AI in unser Produkt einbauen." Dein Engineering-Team redet über Tokens, Temperature und Hallucinations. Dein Designer fragt, ob der Chatbot eine Persoenlichkeit braucht.
 
 Du bist der Product Manager. Du musst nicht wissen, wie man ein LLM trainiert. Aber Du musst verstehen, *was es tut* — gut genug, um die richtigen Fragen zu stellen und die falschen Versprechungen zu erkennen.
 
 ## Concept
 
-Ein Large Language Model ist eine Wahrscheinlichkeitsmaschine fuer Text. Gegeben eine Eingabe (Prompt), berechnet es die wahrscheinlichste Fortsetzung — Token fuer Token.
+Ein Large Language Model ist eine Wahrscheinlichkeitsmaschine für Text. Gegeben eine Eingabe (Prompt), berechnet es die wahrscheinlichste Fortsetzung — Token für Token.
 
 ### Was ein Token ist
 
-Ein Token ist nicht ein Wort. Es ist ein Textstueck, das das Modell als Einheit verarbeitet. "Produktmanagement" koennte 2-3 Tokens sein. "AI" ist einer. Die Tokenisierung bestimmt, wie das Modell Sprache "sieht".
+Ein Token ist nicht ein Wort. Es ist ein Textstueck, das das Modell als Einheit verarbeitet. "Produktmanagement" könnte 2-3 Tokens sein. "AI" ist einer. Die Tokenisierung bestimmt, wie das Modell Sprache "sieht".
 
-**Warum das fuer Dich relevant ist:**
+**Warum das für Dich relevant ist:**
 - Tokens bestimmen die Kosten (Du zahlst pro Token)
 - Tokens bestimmen das Limit (Context Window = max. Tokens pro Anfrage)
 - Tokens bestimmen die Geschwindigkeit (mehr Tokens = laengere Antwortzeit)
 
 ### Wie ein LLM "antwortet"
 
-Das Modell sieht Deinen Prompt und berechnet: Welches Token kommt am wahrscheinlichsten als naechstes? Dann nimmt es dieses Token, fuegt es an, und berechnet das naechste. Und so weiter.
+Das Modell sieht Deinen Prompt und berechnet: Welches Token kommt am wahrscheinlichsten als naechstes? Dann nimmt es dieses Token, fuegt es an, und berechnet das nächste. Und so weiter.
 
 Das bedeutet:
 - Das Modell *plant* nicht. Es generiert sequenziell.
@@ -55,19 +55,19 @@ Wenn ein LLM etwas "erfindet", ist das keine Fehlfunktion — es ist das Modell,
 
 ## Framework
 
-Das **Token-Kosten-Qualitaet-Dreieck** — drei Variablen, die Du bei jeder AI-Produktentscheidung abwaegen musst:
+Das **Token-Kosten-Qualität-Dreieck** — drei Variablen, die Du bei jeder AI-Produktentscheidung abwaegen musst:
 
 | Variable | Stellschraube | Tradeoff |
 |----------|--------------|----------|
-| **Qualitaet** | Groesseres Modell, mehr Context | Hohere Kosten, langsamere Antwort |
-| **Kosten** | Kleineres Modell, weniger Tokens | Geringere Qualitaet |
-| **Geschwindigkeit** | Streaming, kleineres Modell | Potentiell geringere Qualitaet |
+| **Qualität** | Groesseres Modell, mehr Context | Hohere Kosten, langsamere Antwort |
+| **Kosten** | Kleineres Modell, weniger Tokens | Geringere Qualität |
+| **Geschwindigkeit** | Streaming, kleineres Modell | Potentiell geringere Qualität |
 
-Du kannst nicht alle drei gleichzeitig maximieren. Deine Aufgabe als PM: Entscheiden, welche Variable fuer Dein Produkt am wichtigsten ist.
+Du kannst nicht alle drei gleichzeitig maximieren. Deine Aufgabe als PM: Entscheiden, welche Variable für Dein Produkt am wichtigsten ist.
 
 ## Scenario
 
-Du baust ein Kunden-Support-Tool. Der Bot soll haeufige Fragen beantworten — Retouren, Lieferstatus, Produktinfos. Dein Engineering-Team schlaegt GPT-4 vor. Dein CFO will die Kosten niedrig halten.
+Du baust ein Kunden-Support-Tool. Der Bot soll haeufige Fragen beantworten — Retouren, Lieferstatus, Produktinfos. Dein Engineering-Team schlägt GPT-4 vor. Dein CFO will die Kosten niedrig halten.
 
 **Die Situation:**
 - 50.000 Kundenanfragen pro Monat
@@ -78,29 +78,29 @@ Du baust ein Kunden-Support-Tool. Der Bot soll haeufige Fragen beantworten — R
 **Berechnung GPT-4o:** ~$175/Monat
 **Berechnung GPT-4o-mini:** ~$10/Monat
 
-Die Qualitaetsdifferenz fuer strukturierte Support-Antworten? Oft minimal — weil der Context (FAQ-Datenbank) die schwere Arbeit macht, nicht das Modell.
+Die Qualitaetsdifferenz für strukturierte Support-Antworten? Oft minimal — weil der Context (FAQ-Datenbank) die schwere Arbeit macht, nicht das Modell.
 
 ## Decide
 
 <details>
 <summary>Wie wuerdest Du entscheiden?</summary>
 
-**Die beste Entscheidung in diesem Szenario:** Starte mit GPT-4o-mini + guter FAQ-Datenbank (RAG). Miss die Antwortqualitaet. Eskaliere nur die Faelle zu einem groesseren Modell, wo die Qualitaet nicht reicht.
+**Die beste Entscheidung in diesem Szenario:** Starte mit GPT-4o-mini + guter FAQ-Datenbank (RAG). Miss die Antwortqualitaet. Eskaliere nur die Faelle zu einem groesseren Modell, wo die Qualität nicht reicht.
 
 **Warum:**
-- 55x guenstiger bei oft vergleichbarer Qualitaet fuer strukturierte Antworten
-- Du kannst spaeter upgraden — Du kannst schwer zurueck
-- Die FAQ-Datenbank (Context) hat mehr Einfluss auf die Qualitaet als die Modellgroesse
+- 55x guenstiger bei oft vergleichbarer Qualität für strukturierte Antworten
+- Du kannst später upgraden — Du kannst schwer zurück
+- Die FAQ-Datenbank (Context) hat mehr Einfluss auf die Qualität als die Modellgroesse
 - Routing (einfache Fragen → kleines Modell, komplexe → grosses) ist ein etabliertes Pattern
 
-**Was viele falsch machen:** Das groesste Modell nehmen "um sicherzugehen" und dann ueberrascht sein, wenn die Kosten bei Scale explodieren.
+**Was viele falsch machen:** Das größte Modell nehmen "um sicherzugehen" und dann ueberrascht sein, wenn die Kosten bei Scale explodieren.
 </details>
 
 ## Reflect
 
 Die wichtigste Erkenntnis aus dieser Lektion: **LLMs sind Wahrscheinlichkeitsmaschinen, keine Wissensmaschinen.** Diese Unterscheidung bestimmt, wie Du AI-Features designst:
 
-- Erwarte keine perfekte Genauigkeit — designe fuer Ungenauigkeit
+- Erwarte keine perfekte Genauigkeit — designe für Ungenauigkeit
 - Gib dem Modell guten Context statt auf ein besseres Modell zu hoffen
 - Rechne in Tokens, nicht in Woertern
 

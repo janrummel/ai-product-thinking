@@ -13,7 +13,7 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 Dein Konkurrent hat gerade einen "vollautonomen AI-Agent" gelauncht. Dein CEO fragt: "Warum ist unser Agent nicht auch autonom?" Die ehrliche Antwort: Weil Autonomie kein Feature ist, das man einschaltet. Es ist ein Spektrum — und die richtige Stufe haengt vom Risiko, der Domain und dem Vertrauen ab, das Du aufgebaut hast.
 
-Die Analogie zum autonomen Fahren hilft: Niemand wuerde einen Level-5-Autopiloten ohne jahrelange Validierung auf die Strasse lassen. Bei AI Agents gelten aehnliche Prinzipien — mit einem wichtigen Unterschied: *Manche* AI-Fehler sind reversibel (git revert, Undo), Autounfaelle nicht. Aber nicht alle AI-Aktionen lassen sich zuruecknehmen — versendete E-Mails, ausgefuehrte Transaktionen oder veroeffentlichte Inhalte koennen irreversiblen Schaden anrichten.
+Die Analogie zum autonomen Fahren hilft: Niemand würde einen Level-5-Autopiloten ohne jahrelange Validierung auf die Strasse lassen. Bei AI Agents gelten aehnliche Prinzipien — mit einem wichtigen Unterschied: *Manche* AI-Fehler sind reversibel (git revert, Undo), Autounfaelle nicht. Aber nicht alle AI-Aktionen lassen sich zuruecknehmen — versendete E-Mails, ausgefuehrte Transaktionen oder veroeffentlichte Inhalte können irreversiblen Schaden anrichten.
 
 ## Concept
 
@@ -27,9 +27,9 @@ AI-Agent-Autonomie existiert auf einem Spektrum, definiert durch den Grad mensch
 |-------|-------------------|-----------------|------------------|
 | **L1: Operator** | Mensch arbeitet, AI assistiert | Vorschlaege, Autocomplete | GitHub Copilot Inline-Suggestions |
 | **L2: Collaborator** | Mensch und AI arbeiten interaktiv zusammen | AI entwirft, Mensch editiert | ChatGPT, Claude Chat |
-| **L3: Consultant** | Mensch setzt Ziel, prueft Ergebnis | Agent plant und fuehrt aus, Mensch reviewed | Claude Code (Default), Cursor |
+| **L3: Consultant** | Mensch setzt Ziel, prüft Ergebnis | Agent plant und fuehrt aus, Mensch reviewed | Claude Code (Default), Cursor |
 | **L4: Approver** | AI fuehrt aus, Mensch gibt an Checkpoints frei | Autonome Arbeit mit Approval Gates | Devin, CI/CD mit AI-generierten PRs |
-| **L5: Observer** | AI fuehrt vollstaendig aus, Mensch ueberwacht | Vollautonomer Betrieb mit Dashboard | Replit Agent, automatische Trading Bots |
+| **L5: Observer** | AI fuehrt vollständig aus, Mensch ueberwacht | Vollautonomer Betrieb mit Dashboard | Replit Agent, automatische Trading Bots |
 
 ### Autonomie ist eine Design-Entscheidung
 
@@ -39,16 +39,16 @@ Autonomie ist keine inhaerent technische Eigenschaft des Modells. Sie wird gesta
 - **Guardrails** — Content Filter, Budget-Caps, Rate Limits
 - **Escalation Triggers** — Confidence-Schwellenwerte, Error-Counts, Sensitive-Topic-Detection
 
-### Wann Autonomie erhoehen
+### Wann Autonomie erhöhen
 
-Autonomie erhoehen sollte auf Evidenz basieren, nicht auf Ambition:
+Autonomie erhöhen sollte auf Evidenz basieren, nicht auf Ambition:
 
 | Signal | Aktion |
 |--------|--------|
-| Approval Rate ueber 95% ueber 30 Tage | Auto-Approval fuer diese Action-Klasse erwaegen |
-| Error Rate unter 1% fuer eine Task-Kategorie | Kandidat fuer reduzierte Aufsicht |
-| User ueberspringt konsistent den Review-Schritt | Review-Schritt ist moeglicherweise unnoetige Friction |
-| Regulatorische Anforderung existiert | Autonomie NICHT erhoehen, egal wie gut die Metriken sind |
+| Approval Rate über 95% über 30 Tage | Auto-Approval für diese Action-Klasse erwaegen |
+| Error Rate unter 1% für eine Task-Kategorie | Kandidat für reduzierte Aufsicht |
+| User ueberspringt konsistent den Review-Schritt | Review-Schritt ist möglicherweise unnoetige Friction |
+| Regulatorische Anforderung existiert | Autonomie NICHT erhöhen, egal wie gut die Metriken sind |
 | Hohe Output-Varianz beobachtet | Autonomie senken, Human Checkpoints hinzufuegen |
 
 ### Risiko-Profil nach Level
@@ -61,20 +61,20 @@ Autonomie erhoehen sollte auf Evidenz basieren, nicht auf Ambition:
 
 ## Framework
 
-Die **Autonomie-Entscheidungsleiter** — fuer jedes neue AI-Feature durchgehen:
+Die **Autonomie-Entscheidungsleiter** — für jedes neue AI-Feature durchgehen:
 
 | Frage | Antwort | Empfehlung |
 |-------|---------|------------|
 | Wie hoch sind die Kosten eines Fehlers? | Hoch (finanziell, Sicherheit, legal) | L1-L2 |
-| Ist die Aktion reversibel? | Ja | L3-L4 moeglich |
+| Ist die Aktion reversibel? | Ja | L3-L4 möglich |
 | Verlangt Regulierung menschliche Freigabe? | Ja | Maximal L2-L3 |
-| Ist die Aufgabe klar definiert und repetitiv? | Ja | Kandidat fuer hoehere Autonomie |
+| Ist die Aufgabe klar definiert und repetitiv? | Ja | Kandidat für hoehere Autonomie |
 | Haben wir genug Validierungsdaten? | Nein | Start bei L1-L2 |
-| Koennen wir schrittweise eskalieren? | Ja | Niedrig starten, mit Evidenz erhoehen |
+| Können wir schrittweise eskalieren? | Ja | Niedrig starten, mit Evidenz erhöhen |
 
 ## Scenario
 
-Du bist PM fuer ein Fintech-Startup. Euer Produkt ist ein AI-Bookkeeping-Agent, der Rechnungen verarbeitet, kategorisiert und Zahlungen vorbereitet. Drei User-Segmente:
+Du bist PM für ein Fintech-Startup. Euer Produkt ist ein AI-Bookkeeping-Agent, der Rechnungen verarbeitet, kategorisiert und Zahlungen vorbereitet. Drei User-Segmente:
 
 **Freelancer (5.000 User):** Durchschnittlich 20 Rechnungen/Monat, Betraege unter 500 Euro, einfache Kategorisierung. Approval Rate im Beta: 97%.
 
@@ -82,7 +82,7 @@ Du bist PM fuer ein Fintech-Startup. Euer Produkt ist ein AI-Bookkeeping-Agent, 
 
 **Enterprise (50 User):** Durchschnittlich 2.000 Rechnungen/Monat, regulatorische Anforderungen (HGB/IFRS), Vier-Augen-Prinzip vorgeschrieben. Approval Rate im Beta: 91%.
 
-**Die Frage:** Welches Autonomie-Level fuer welches Segment?
+**Die Frage:** Welches Autonomie-Level für welches Segment?
 
 ## Decide
 
@@ -93,23 +93,23 @@ Du bist PM fuer ein Fintech-Startup. Euer Produkt ist ein AI-Bookkeeping-Agent, 
 
 - **Freelancer → L4 (Approver):** 97% Approval Rate, niedrige Betraege, einfache Struktur. Agent kategorisiert und bereitet Zahlung vor, User gibt per Batch-Approval frei. Hohe Zeitersparnis bei niedrigem Risiko.
 
-- **KMU → L3 (Consultant):** 89% Approval Rate ist zu niedrig fuer L4. Agent kategorisiert und schlaegt vor, User reviewed jede Buchung einzeln. Bei steigender Approval Rate auf L4 hochstufen.
+- **KMU → L3 (Consultant):** 89% Approval Rate ist zu niedrig für L4. Agent kategorisiert und schlägt vor, User reviewed jede Buchung einzeln. Bei steigender Approval Rate auf L4 hochstufen.
 
-- **Enterprise → L2-L3 (Collaborator/Consultant):** Vier-Augen-Prinzip ist regulatorisch vorgeschrieben. Auch bei 99% Approval Rate darf der Agent nicht autonom buchen. Agent bereitet vor, erster Mensch prueft, zweiter gibt frei. L3 fuer die Vorbereitung, L2 fuer die Freigabe.
+- **Enterprise → L2-L3 (Collaborator/Consultant):** Vier-Augen-Prinzip ist regulatorisch vorgeschrieben. Auch bei 99% Approval Rate darf der Agent nicht autonom buchen. Agent bereitet vor, erster Mensch prüft, zweiter gibt frei. L3 für die Vorbereitung, L2 für die Freigabe.
 
 **Warum:**
 - Freelancer bei L2 zu halten verschwendet den Product-Market Fit — sie wollen Zeitersparnis
 - KMU bei L4 zu setzen bei 89% Approval Rate bedeutet 11% Fehlerquote bei Betraegen bis 50.000 Euro
-- Enterprise kann NICHT hoeher als L3 gehen, unabhaengig von der Modellqualitaet — Regulierung ist der Constraint
+- Enterprise kann NICHT hoeher als L3 gehen, unabhängig von der Modellqualitaet — Regulierung ist der Constraint
 
-**Was viele falsch machen:** Ein Autonomie-Level fuer alle User. Power User werden frustriert, risikosensitive User verlieren Vertrauen.
+**Was viele falsch machen:** Ein Autonomie-Level für alle User. Power User werden frustriert, risikosensitive User verlieren Vertrauen.
 </details>
 
 ## Reflect
 
-**Autonomie ist kein Ziel, sondern ein Designparameter. Die richtige Frage ist nicht "Wie autonom koennen wir werden?" sondern "Wie autonom sollten wir fuer diesen User in diesem Kontext sein?"**
+**Autonomie ist kein Ziel, sondern ein Designparameter. Die richtige Frage ist nicht "Wie autonom können wir werden?" sondern "Wie autonom sollten wir für diesen User in diesem Kontext sein?"**
 
-- L3 ist der Sweet Spot fuer die meisten B2B-Produkte 2026 — schnell genug, kontrolliert genug
+- L3 ist der Sweet Spot für die meisten B2B-Produkte 2026 — schnell genug, kontrolliert genug
 - Autonomie muss pro User-Segment, Task-Typ und Domain einstellbar sein
 - Der Weg zu L5 fuehrt durch Monate an L3-L4-Evidenz — es gibt keine Abkuerzung
 

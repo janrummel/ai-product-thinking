@@ -11,9 +11,9 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Ein Samsung-Ingenieur kopiert vertraulichen Quellcode in ChatGPT, um einen Bug zu finden. Innerhalb von Stunden wird der Fall intern eskaliert. Innerhalb von Tagen verbietet Samsung externe AI-Tools fuer alle Mitarbeiter.
+Ein Samsung-Ingenieur kopiert vertraulichen Quellcode in ChatGPT, um einen Bug zu finden. Innerhalb von Stunden wird der Fall intern eskaliert. Innerhalb von Tagen verbietet Samsung externe AI-Tools für alle Mitarbeiter.
 
-Wenige Monate spaeter blockiert Italien ChatGPT wegen GDPR-Bedenken zur Trainingsdatenerhebung. Microsofts Recall-Feature — das alle paar Sekunden Screenshots macht — wird von Sicherheitsforschern zerlegt: Die Daten lagen im Klartext vor.
+Wenige Monate später blockiert Italien ChatGPT wegen GDPR-Bedenken zur Trainingsdatenerhebung. Microsofts Recall-Feature — das alle paar Sekunden Screenshots macht — wird von Sicherheitsforschern zerlegt: Die Daten lagen im Klartext vor.
 
 Laut dem Stanford AI Index Report 2025 stiegen AI-bezogene Privacy- und Sicherheitsvorfaelle um **56,4% in einem Jahr** auf 233 dokumentierte Faelle. Das ist kein Trend — das ist eine Welle.
 
@@ -25,18 +25,18 @@ AI-Produkte haben Privacy-Implikationen, die klassische Software nicht hat:
 
 **1. Training Data Privacy** — Welche Daten wurden zum Training genutzt? Wurden sie mit Consent erhoben? Kann das Modell Trainingsdaten reproduzieren? Das liegt in der Verantwortung des Modellanbieters, aber als PM erbst Du das Risiko.
 
-**2. Inference Data Privacy** — Was passiert mit User-Inputs und AI-Outputs? Werden Konversationen geloggt? Wer hat Zugriff? Werden sie fuer weiteres Training genutzt? Hier liegen die meisten PM-Entscheidungen.
+**2. Inference Data Privacy** — Was passiert mit User-Inputs und AI-Outputs? Werden Konversationen geloggt? Wer hat Zugriff? Werden sie für weiteres Training genutzt? Hier liegen die meisten PM-Entscheidungen.
 
 **3. Emergent Privacy Risks** — AI kann sensitive Informationen aus nicht-sensitiven Inputs ableiten. Ein Modell kann Gesundheitszustaende aus Einkaufsmustern erkennen oder Individuen aus "anonymen" Daten identifizieren. Das ist die schwierigste Kategorie.
 
-### GDPR-Anforderungen fuer AI-Produkte
+### GDPR-Anforderungen für AI-Produkte
 
-| Anforderung | Bedeutung fuer AI | PM-Implikation |
+| Anforderung | Bedeutung für AI | PM-Implikation |
 |-------------|-------------------|----------------|
 | **Rechtsgrundlage** | AI-Training braucht Consent oder Legitimate Interest | Klaere frueh, auf welcher Basis Du Daten verarbeitest |
-| **Recht auf Erklaerung** | Art. 22: Kein rein automatisiertes Decision-Making mit signifikanter Wirkung | Human-in-the-Loop bei Entscheidungen, die Menschen betreffen |
-| **Recht auf Loeschung** | User koennen Datenloesung verlangen — aber Modelle "vergessen" nicht | Technische Loesung fuer Machine Unlearning noetig |
-| **Datenminimierung** | Nur erheben, was noetig ist | AI-Systeme, die alle verfuegbaren Daten absaugen, widersprechen diesem Prinzip |
+| **Recht auf Erklärung** | Art. 22: Kein rein automatisiertes Decision-Making mit signifikanter Wirkung | Human-in-the-Loop bei Entscheidungen, die Menschen betreffen |
+| **Recht auf Loeschung** | User können Datenloesung verlangen — aber Modelle "vergessen" nicht | Technische Lösung für Machine Unlearning noetig |
+| **Datenminimierung** | Nur erheben, was noetig ist | AI-Systeme, die alle verfügbaren Daten absaugen, widersprechen diesem Prinzip |
 | **DPIA** | Datenschutz-Folgenabschaetzung bei Hochrisiko-Verarbeitung | Die meisten AI-Anwendungen qualifizieren sich |
 
 ### Privacy-Preserving Techniken
@@ -44,20 +44,20 @@ AI-Produkte haben Privacy-Implikationen, die klassische Software nicht hat:
 | Technik | Wie es funktioniert | Trade-off | Reife |
 |---------|--------------------|-----------| ------|
 | **Differential Privacy** | Kontrolliertes statistisches Rauschen; schuetzt Einzelbeitraege | 2-10% Genauigkeitsverlust | Produktionsreif (Apple, Google) |
-| **Federated Learning** | Training auf dezentralen Daten; nur Modell-Updates verlassen das Geraet | Langsamere Konvergenz | Produktionsreif fuer bestimmte Use Cases |
+| **Federated Learning** | Training auf dezentralen Daten; nur Modell-Updates verlassen das Geraet | Langsamere Konvergenz | Produktionsreif für bestimmte Use Cases |
 | **Secure Multi-Party Computation** | Mehrere Parteien rechnen gemeinsam, ohne ihre Daten zu offenbaren | Rechenintensiv | Fruehe Produktion |
-| **Homomorphic Encryption** | Rechnen auf verschluesselten Daten ohne Entschluesselung | Extremer Overhead (1000x+ langsamer) | Forschungsphase fuer ML |
+| **Homomorphic Encryption** | Rechnen auf verschluesselten Daten ohne Entschluesselung | Extremer Overhead (1000x+ langsamer) | Forschungsphase für ML |
 
 ## Framework
 
-Der **Privacy Tier Decision Guide** — waehle das richtige Privacy-Niveau fuer Dein Produkt:
+Der **Privacy Tier Decision Guide** — waehle das richtige Privacy-Niveau für Dein Produkt:
 
 | Tier | Architektur | Wann verwenden | Beispiel |
 |------|------------|----------------|----------|
 | **Tier 1** | On-Device Processing | Hoechste Sensibilitaet; Gesundheit, Finanzen | Apple Intelligence |
 | **Tier 2** | Private Cloud mit kryptografischer Verifikation | Hohe Sensibilitaet; Enterprise | Apple Private Cloud Compute |
 | **Tier 3** | API mit Data Isolation | Mittlere Sensibilitaet; Business-Daten | ChatGPT Enterprise, Claude Teams |
-| **Tier 4** | Shared API | Geringe Sensibilitaet; oeffentliche Daten | Standard-API-Zugriffe |
+| **Tier 4** | Shared API | Geringe Sensibilitaet; öffentliche Daten | Standard-API-Zugriffe |
 
 **Faustregel:** Starte mit dem hoechsten Tier, das Dein Use Case erfordert, und gehe nur runter, wenn technische oder wirtschaftliche Gruende zwingend sind.
 
@@ -69,21 +69,21 @@ Du bist PM bei einem Health-Tech-Startup. Euer Produkt: Ein AI-Assistent, der Ae
 - 200 Aerzte in der Beta, 500 Diktate pro Tag
 - Jedes Diktat enthaelt Patientennamen, Diagnosen, Medikation — alles geschuetzte Gesundheitsdaten (PHI)
 - Euer aktuelles Setup: Audio wird an eine Cloud-API gesendet, transkribiert, dann an ein LLM zur Strukturierung
-- Der API-Anbieter speichert Daten 30 Tage "fuer Qualitaetssicherung"
+- Der API-Anbieter speichert Daten 30 Tage "für Qualitaetssicherung"
 - Ein Krankenhaus-Kunde fordert eine DPIA vor dem Rollout
-- Euer CTO sagt: "On-Device ist zu langsam und die Qualitaet reicht nicht"
+- Euer CTO sagt: "On-Device ist zu langsam und die Qualität reicht nicht"
 
-Die Kosten fuer eine Private-Cloud-Loesung (Tier 2) waeren ~3x hoeher als die aktuelle Cloud-API (Tier 4).
+Die Kosten für eine Private-Cloud-Lösung (Tier 2) waeren ~3x hoeher als die aktuelle Cloud-API (Tier 4).
 
 ## Decide
 
 <details>
 <summary>Wie wuerdest Du entscheiden?</summary>
 
-**Die beste Entscheidung:** Auf Tier 2 oder mindestens Tier 3 migrieren. Konkret: Einen API-Anbieter mit Zero-Retention-Policy waehlen oder eine Private-Cloud-Loesung aufbauen. Die DPIA durchfuehren — sie ist bei Gesundheitsdaten ohnehin Pflicht.
+**Die beste Entscheidung:** Auf Tier 2 oder mindestens Tier 3 migrieren. Konkret: Einen API-Anbieter mit Zero-Retention-Policy waehlen oder eine Private-Cloud-Lösung aufbauen. Die DPIA durchführen — sie ist bei Gesundheitsdaten ohnehin Pflicht.
 
 **Warum:**
-- Patientendaten (PHI) ueber eine Shared API zu schicken, die 30 Tage speichert, ist ein GDPR/DSGVO-Verstoss, der auf eine Katastrophe wartet
+- Patientendaten (PHI) über eine Shared API zu schicken, die 30 Tage speichert, ist ein GDPR/DSGVO-Verstoss, der auf eine Katastrophe wartet
 - Gesundheitsdaten sind die sensibelste Datenkategorie — Tier 4 ist hier inakzeptabel
 - Die 3x hoeheren Kosten sind irrelevant im Vergleich zu einer GDPR-Strafe (bis zu 20 Mio. EUR oder 4% des Umsatzes) oder dem Verlust der Krankenhaus-Kunden
 - Die DPIA ist kein Blocker — sie ist eine Chance, das System sauber aufzubauen, bevor es skaliert
@@ -95,9 +95,9 @@ Die Kosten fuer eine Private-Cloud-Loesung (Tier 2) waeren ~3x hoeher als die ak
 
 **Privacy ist kein Compliance-Thema — es ist ein Produktthema.** User treffen Adoptionsentscheidungen basierend auf Privacy-Vertrauen, und Enterprise-Kunden verlangen Data Isolation als Kaufvoraussetzung.
 
-- Anonymisierung allein reicht nicht — AI-Modelle koennen Individuen aus "anonymen" Daten re-identifizieren
+- Anonymisierung allein reicht nicht — AI-Modelle können Individuen aus "anonymen" Daten re-identifizieren
 - "Wir nutzen nur die API" heisst nicht, dass keine Daten das System verlassen — lies die Retention Policies des Anbieters
-- Der Samsung-Vorfall hat ueber Nacht Enterprise-AI-Policies veraendert; Privacy ist ein latentes Anliegen, das bei Vorfaellen akut wird
+- Der Samsung-Vorfall hat über Nacht Enterprise-AI-Policies verändert; Privacy ist ein latentes Anliegen, das bei Vorfaellen akut wird
 
 ---
 

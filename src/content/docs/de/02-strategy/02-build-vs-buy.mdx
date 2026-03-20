@@ -11,9 +11,9 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 ## Context
 
-Dein CTO will ein eigenes LLM fine-tunen. Dein CEO hat gehoert, dass Cursor mit einem "API Wrapper" Milliarden wert ist. Dein ML-Lead sagt, RAG sei "die Zukunft". Alle reden ueber unterschiedliche Dinge, alle haben irgendwie recht.
+Dein CTO will ein eigenes LLM fine-tunen. Dein CEO hat gehört, dass Cursor mit einem "API Wrapper" Milliarden wert ist. Dein ML-Lead sagt, RAG sei "die Zukunft". Alle reden über unterschiedliche Dinge, alle haben irgendwie recht.
 
-Du bist der Product Manager. Du musst nicht entscheiden *wie* gebaut wird — aber *wo auf dem Spektrum* ihr startet. Und diese Entscheidung bestimmt Budget, Timeline und Vendor-Abhaengigkeit fuer die naechsten Jahre.
+Du bist der Product Manager. Du musst nicht entscheiden *wie* gebaut wird — aber *wo auf dem Spektrum* ihr startet. Und diese Entscheidung bestimmt Budget, Timeline und Vendor-Abhängigkeit für die nächsten Jahre.
 
 ## Concept
 
@@ -47,13 +47,13 @@ Diese Entscheidung trifft fast jedes AI-Produktteam irgendwann:
 
 ### Vendor Lock-in — das unterschaetzte Risiko
 
-67% der Organisationen wollen Abhaengigkeit von einem einzigen AI-Provider vermeiden. Trotzdem bauen die meisten Teams direkt auf einer API auf — ohne Abstraktionsschicht.
+67% der Organisationen wollen Abhängigkeit von einem einzigen AI-Provider vermeiden. Trotzdem bauen die meisten Teams direkt auf einer API auf — ohne Abstraktionsschicht.
 
-Die Folgen: 57% der IT-Entscheider haben im letzten Jahr ueber $1M fuer Plattformmigrationen ausgegeben. Als OpenAI im Juni 2025 global ausfiel, waren Zendesk-Features stundenlang nicht verfuegbar.
+Die Folgen: 57% der IT-Entscheider haben im letzten Jahr über $1M für Plattformmigrationen ausgegeben. Als OpenAI im Juni 2025 global ausfiel, waren Zendesk-Features stundenlang nicht verfügbar.
 
 **Schutzstrategien:**
 - AI Gateway als Abstraktionsschicht (Gartner: bis 2028 nutzen 70% der Multi-LLM-Apps ein Gateway, vs. unter 5% in 2024)
-- Multi-Provider-Strategie fuer kritische Features
+- Multi-Provider-Strategie für kritische Features
 - Modulare Architektur mit austauschbaren LLM-Modulen
 - Vertragliche Exit-Klauseln und Datenportabilitaet
 
@@ -65,14 +65,14 @@ Die **Eskalationsmatrix** — starte unten, gehe nur hoch wenn noetig:
 |-------|------|--------|
 | Reicht ein guter Prompt? | Bleib bei Level 1 | Weiter |
 | Braucht es eigene Daten im Context? | RAG (Level 3) | API reicht (Level 2) |
-| Muss das Output-Format exakt konsistent sein? | Fine-Tuning pruefen (Level 4) | RAG reicht |
-| Gibt es regulatorische Gruende fuer volle Kontrolle? | Custom Model pruefen (Level 5) | Fine-Tuning reicht |
+| Muss das Output-Format exakt konsistent sein? | Fine-Tuning prüfen (Level 4) | RAG reicht |
+| Gibt es regulatorische Gruende für volle Kontrolle? | Custom Model prüfen (Level 5) | Fine-Tuning reicht |
 
-**Vor jedem Level-Up fragen:** Habe ich die aktuelle Stufe wirklich ausgereizt — oder hoffe ich, dass mehr Komplexitaet mein eigentliches Problem loest?
+**Vor jedem Level-Up fragen:** Habe ich die aktuelle Stufe wirklich ausgereizt — oder hoffe ich, dass mehr Komplexität mein eigentliches Problem loest?
 
 ## Scenario
 
-Du bist PM bei einem B2B-SaaS fuer Vertragsverwaltung. Feature-Anfrage: AI soll Vertraege zusammenfassen und Risiko-Klauseln markieren. 2.000 Kunden, 50.000 Vertraege/Monat.
+Du bist PM bei einem B2B-SaaS für Vertragsverwaltung. Feature-Anfrage: AI soll Vertraege zusammenfassen und Risiko-Klauseln markieren. 2.000 Kunden, 50.000 Vertraege/Monat.
 
 **Drei Optionen auf dem Tisch:**
 
@@ -96,7 +96,7 @@ Du bist PM bei einem B2B-SaaS fuer Vertragsverwaltung. Feature-Anfrage: AI soll 
 - Option A zuerst: In 2 Wochen live, echtes Nutzerfeedback. Prompt Engineering auf Vertraege ist ueberraschend leistungsfaehig
 - Dann Option B: Die eigene Vertragsdatenbank als RAG-Context verbessert die Erkennung kundenspezifischer Klausel-Muster erheblich
 - Option C ist zu frueh: Ohne 6+ Monate Nutzungsdaten weisst Du nicht, *worauf* Du fine-tunen solltest. Die 42% gescheiterten AI-Initiativen haben genau diesen Fehler gemacht
-- Baue eine Abstraktionsschicht ein — wenn Claude morgen ausfaellt oder teurer wird, musst Du den Provider wechseln koennen
+- Baue eine Abstraktionsschicht ein — wenn Claude morgen ausfaellt oder teurer wird, musst Du den Provider wechseln können
 
 **Was viele falsch machen:** Fine-Tuning als ersten Schritt planen, bevor Prompt Engineering und RAG ausgereizt sind. Oder variable LLM-Kosten in ein Fixed-Pricing-Modell einkalkulieren, ohne Nutzungsvolumen-Szenarien durchzurechnen.
 </details>
@@ -105,8 +105,8 @@ Du bist PM bei einem B2B-SaaS fuer Vertragsverwaltung. Feature-Anfrage: AI soll 
 
 - **Build vs. Buy ist ein Spektrum, keine binaere Entscheidung.** Die fuenf Level erfordern radikal unterschiedliche Budgets, Timelines und Team-Skills. Starte niedrig, eskaliere mit Daten.
 - **RAG vor Fine-Tuning.** RAG ist 10–50x guenstiger, liefert transparente Quellen und braucht kein ML-Team. Fine-Tuning lohnt sich erst, wenn RAG nachweislich nicht reicht.
-- **Vendor Lock-in ist ein Produkt-Risiko, kein Infra-Detail.** Ein AI Gateway und Multi-Provider-Faehigkeit gehoeren in die Architektur ab Tag 1 — nicht als "spaetere Optimierung".
-- **Cursor zeigt den Sweet Spot:** API-Wrapper + proprietaere UX-Innovation = Multi-Milliarden-Bewertung. Du musst kein eigenes Modell bauen, um gewaltigen Wert zu schaffen.
+- **Vendor Lock-in ist ein Produkt-Risiko, kein Infra-Detail.** Ein AI Gateway und Multi-Provider-Faehigkeit gehören in die Architektur ab Tag 1 — nicht als "spaetere Optimierung".
+- **Cursor zeigt den Sweet Spot:** API-Wrapper + proprietäre UX-Innovation = Multi-Milliarden-Bewertung. Du musst kein eigenes Modell bauen, um gewaltigen Wert zu schaffen.
 
 ---
 

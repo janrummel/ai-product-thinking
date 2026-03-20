@@ -1,5 +1,5 @@
 ---
-title: "KPIs fuer AI-Produkte"
+title: "KPIs für AI-Produkte"
 description: "Welche Metriken AI-Produkte wirklich brauchen — jenseits von DAU/MAU und Conversion."
 sidebar:
   order: 3
@@ -13,29 +13,29 @@ import LessonProgress from '../../../../components/LessonProgress.astro';
 
 Dein AI-Feature ist seit drei Monaten live. Die DAU/MAU-Zahlen sehen gut aus. Dein CEO ist zufrieden. Dann zeigt ein Tweet eines verargerten Kunden: Der AI-Output hat falsche Informationen enthalten und wurde ungeprueft weitergeleitet.
 
-Du schaust in Dein Dashboard und merkst: Du misst Nutzung, aber nicht Qualitaet. Du weisst wie viele User das Feature nutzen, aber nicht ob die Outputs korrekt sind. Hohe Nutzung eines halluzinierenden Produkts ist schlimmer als niedrige Nutzung eines akkuraten.
+Du schaust in Dein Dashboard und merkst: Du misst Nutzung, aber nicht Qualität. Du weisst wie viele User das Feature nutzen, aber nicht ob die Outputs korrekt sind. Hohe Nutzung eines halluzinierenden Produkts ist schlimmer als niedrige Nutzung eines akkuraten.
 
 ## Concept
 
 ### Das Drei-Schichten AI Metrics Framework
 
-Traditionelle Produktmetriken (DAU/MAU, Conversion, Retention, NPS) reichen fuer AI-Produkte nicht aus. Du brauchst drei zusaetzliche Schichten.
+Traditionelle Produktmetriken (DAU/MAU, Conversion, Retention, NPS) reichen für AI-Produkte nicht aus. Du brauchst drei zusaetzliche Schichten.
 
 ### Layer 1: Model Quality Metrics
 
 | Metrik | Was sie misst | Zielbereich |
 |--------|---------------|-------------|
 | Accuracy / Correctness | Anteil faktisch korrekter Outputs | Domain-abhaengig |
-| Hallucination Rate | Anteil erfundener Informationen | Unter 5% allgemein; unter 1% + Human Review fuer regulierte Domaenen (Recht, Medizin, Finanzen) |
-| Groundedness | Sind Antworten durch Quellmaterial belegt? | Ueber 90% bei RAG-Anwendungen |
+| Hallucination Rate | Anteil erfundener Informationen | Unter 5% allgemein; unter 1% + Human Review für regulierte Domaenen (Recht, Medizin, Finanzen) |
+| Groundedness | Sind Antworten durch Quellmaterial belegt? | Über 90% bei RAG-Anwendungen |
 | Task Completion Rate | Anteil erfolgreich erledigter Aufgaben | Use-Case-abhaengig |
 
 ### Layer 2: System Performance Metrics
 
 | Metrik | Was sie misst | Zielbereich |
 |--------|---------------|-------------|
-| Latency (P50) | Mediane Antwortzeit | Unter 2s fuer Chat, unter 500ms fuer Inline |
-| Latency (P95) | 95. Perzentil Antwortzeit | Unter 5s fuer Chat |
+| Latency (P50) | Mediane Antwortzeit | Unter 2s für Chat, unter 500ms für Inline |
+| Latency (P95) | 95. Perzentil Antwortzeit | Unter 5s für Chat |
 | Cost per Query | Durchschnittliche Inferenz-Kosten pro Anfrage | Trend beobachten |
 | Error Rate | Anteil komplett fehlgeschlagener Requests | Unter 0,1% |
 
@@ -45,7 +45,7 @@ Traditionelle Produktmetriken (DAU/MAU, Conversion, Retention, NPS) reichen fuer
 |--------|---------------|---------------|
 | AI Feature Adoption Rate | Anteil der User, die AI-Features nutzen | Misst Product-Market Fit |
 | Escalation Rate | Anteil der AI-Interaktionen mit Human Handoff | Misst AI-Zuverlaessigkeit in der Praxis |
-| Regeneration Rate | Wie oft User "Nochmal generieren" klicken | Fruehwarnsystem fuer Qualitaetsprobleme |
+| Regeneration Rate | Wie oft User "Nochmal generieren" klicken | Fruehwarnsystem für Qualitaetsprobleme |
 | Cost per Resolution | Gesamtkosten pro geloestem User-Need | Wahre Unit Economics |
 | Revenue Attribution | Umsatz direkt durch AI-Features | Business Case Validation |
 
@@ -103,7 +103,7 @@ Du sollst dem Board eine Einschaetzung geben: Ist das Feature auf dem richtigen 
 **Die Warnsignale:**
 - 28% Regeneration Rate ist zu hoch — fast ein Drittel der Outputs ist beim ersten Versuch nicht brauchbar
 - Keine Hallucination-Rate gemessen bei einem Legal-Produkt ist ein kritisches Risiko — falsche Vertrags-Zusammenfassungen koennten Kunden erheblich schaden
-- P95 Latency von 8,1s ist zu langsam — Anwaelte, die Vertraege pruefen, erwarten schnelle Ergebnisse
+- P95 Latency von 8,1s ist zu langsam — Anwaelte, die Vertraege prüfen, erwarten schnelle Ergebnisse
 
 **Empfehlung ans Board:**
 1. Sofort Hallucination-Messung aufsetzen (Eval Dataset mit Anwaelten bauen)
@@ -111,7 +111,7 @@ Du sollst dem Board eine Einschaetzung geben: Ist das Feature auf dem richtigen 
 3. Latency-Optimierung (Modell-Routing: einfache Zusammenfassungen an schnelleres Modell)
 4. Scaling erst bei Regeneration Rate unter 15% und Hallucination Rate unter 3%
 
-**Was viele falsch machen:** 40% Adoption feiern und sofort skalieren, ohne die Qualitaetsmetriken zu pruefen. Hohe Nutzung bei niedriger Qualitaet ist ein Churn-Problem, das noch nicht sichtbar ist.
+**Was viele falsch machen:** 40% Adoption feiern und sofort skalieren, ohne die Qualitaetsmetriken zu prüfen. Hohe Nutzung bei niedriger Qualität ist ein Churn-Problem, das noch nicht sichtbar ist.
 
 </details>
 
@@ -120,7 +120,7 @@ Du sollst dem Board eine Einschaetzung geben: Ist das Feature auf dem richtigen 
 **Die wichtigste Erkenntnis: Bei AI-Produkten sind Qualitaetsmetriken wichtiger als Nutzungsmetriken.** Hohe Adoption ohne Qualitaetsmessung ist ein blindes Risiko.
 
 - Miss Model Quality VOR dem Launch, nicht danach — Du brauchst Baselines
-- Die Regeneration Rate ist Dein bester Fruehindikator fuer Qualitaetsprobleme
+- Die Regeneration Rate ist Dein bester Fruehindikator für Qualitaetsprobleme
 - Verschiedene Stakeholder brauchen verschiedene Dashboards: Engineering (Latency/Errors), Product (Quality/Adoption), Leadership (Cost/ROI)
 
 ---
