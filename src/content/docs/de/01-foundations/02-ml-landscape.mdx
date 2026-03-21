@@ -19,7 +19,7 @@ Du musst kein Modell trainieren können. Aber Du musst verstehen, *welche Art vo
 
 ### Drei Paradigmen der Programmierung
 
-Andrej Karpathy unterscheidet Software 1.0 und 2.0. Für PMs ist das die wichtigste Grundunterscheidung:
+Andrej Karpathy unterscheidet [Software 1.0 und 2.0](https://karpathy.medium.com/software-2-0-a64152b37c35). Für PMs ist das die wichtigste Grundunterscheidung:
 
 - **Traditionelle Programmierung (Software 1.0):** Ein Mensch schreibt Regeln. `if order_status == "shipped": show_tracking()`
 - **Machine Learning:** Die Maschine lernt Regeln aus gelabelten Beispielen. Du gibst 10.000 Support-Tickets mit Kategorien, das Modell lernt die Zuordnung.
@@ -53,7 +53,7 @@ Du musst die Mathematik nicht kennen. Aber Du musst wissen: **Mehr Parameter = m
 > *"Pre-Training = jedes Kochbuch lesen. Fine-Tuning = einem Koch zuschauen. RLHF = eigenen Geschmack entwickeln."*
 
 - **RLHF** (Reinforcement Learning from Human Feedback): Pre-Training → Reward Model aus menschlichem Feedback → Fine-Tuning mit PPO oder DPO (Direct Preference Optimization — seit 2024 gleichwertig verbreitet).
-- **Constitutional AI** (Anthropic): Das Modell kritisiert sich selbst anhand definierter Prinzipien — skalierbar ohne tausende menschliche Bewerter.
+- **[Constitutional AI](https://arxiv.org/abs/2212.08073)** (Anthropic): Das Modell kritisiert sich selbst anhand definierter Prinzipien — skalierbar ohne tausende menschliche Bewerter.
 
 ## Framework
 
@@ -104,4 +104,4 @@ Du bist PM bei einem Streaming-Dienst. Das Ziel: bessere Empfehlungen. Euer Data
 
 ---
 
-*Quellen: Andrej Karpathy "Software 2.0" (2017), Chip Huyen "Designing Machine Learning Systems" (O'Reilly, 2022), Anthropic "Constitutional AI" (2023), OpenAI "Training language models to follow instructions with human feedback" (2022)*
+*Quellen: Andrej Karpathy ["Software 2.0"](https://karpathy.medium.com/software-2-0-a64152b37c35) (2017), Chip Huyen ["Designing Machine Learning Systems"](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) (O'Reilly, 2022), Anthropic ["Constitutional AI"](https://arxiv.org/abs/2212.08073) (2023), OpenAI ["Training language models to follow instructions with human feedback"](https://arxiv.org/abs/2203.02155) (2022)*

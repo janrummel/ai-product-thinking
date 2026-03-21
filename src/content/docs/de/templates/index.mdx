@@ -47,7 +47,7 @@ Autor: [Name]
   | [z.B. Cost/Query] | [z.B. <$0.05] | [z.B. <$0.02] | [z.B. Provider Dashboard] |
 
 4. MODEL & INFRASTRUCTURE
-- Modell: [z.B. Claude Sonnet 4.5 / GPT-4o-mini]
+- Modell: [z.B. Claude Sonnet 4.6 / GPT-4o-mini]
 - Begruendung: [Cost/Quality/Latency Tradeoff]
 - Erwartetes Volumen: [Queries/Tag]
 - Kostenprojektion: [$/Monat]
@@ -78,19 +78,19 @@ Autor: [Name]
 
 ## 2. RICE-A Scoring
 
-Basierend auf Kapitel 2: Opportunity Identification. RICE erweitert um AI-Readiness.
+Basierend auf Kapitel 2: Opportunity Identification. RICE erweitert um AI Complexity.
 
 ```
 RICE-A SCORING: [Projekt / Feature-Liste]
 Stand: [Datum]
 
-| Feature | Reach | Impact | Confidence | Effort | AI-Readiness | RICE-A Score |
-|---------|-------|--------|------------|--------|-------------|-------------|
+| Feature | Reach | Impact | Confidence | Effort | AI Complexity | RICE-A Score |
+|---------|-------|--------|------------|--------|--------------|-------------|
 | [Feature A] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [berechnet] |
 | [Feature B] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [berechnet] |
 | [Feature C] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [berechnet] |
 
-Formel: (Reach × Impact × Confidence × AI-Readiness) / Effort
+Formel: (Reach × Impact × Confidence) / (Effort + AI Complexity × 0.5)
 
 SKALEN:
 
@@ -117,12 +117,12 @@ Effort (1-10):
   4-6: 2-6 Wochen, kleines Team
   7-10: >6 Wochen, cross-funktional
 
-AI-Readiness (1-5):
-  1: Keine Daten, unklarer Use Case
-  2: Daten vorhanden, aber unstrukturiert
-  3: Strukturierte Daten, klarer Use Case
-  4: Eval-Daten vorhanden, Prototyp möglich
-  5: Proven — aehnlicher Use Case bereits validiert
+AI Complexity (1-5):
+  1: Niedrig — klarer Use Case, gute Daten, Standard-Modell
+  2: Maessig — Daten vorhanden, aber Aufbereitung noetig
+  3: Mittel — Custom Eval noetig, Datenqualitaet unklar
+  4: Hoch — Modell-Risiko, aufwaendige Evaluation
+  5: Sehr hoch — ungeloestes Problem, hoher Forschungsanteil
 ```
 
 ---
@@ -139,7 +139,7 @@ Verantwortlich: [Name/Team]
 
 SCOPE
 - System unter Test: [z.B. Support-Chatbot, Content-Generator]
-- Modell: [z.B. Claude Sonnet 4.5]
+- Modell: [z.B. Claude Sonnet 4.6]
 - Zugangsweg: [z.B. Web-UI, API, Mobile App]
 
 PRIORITAETS-MATRIX

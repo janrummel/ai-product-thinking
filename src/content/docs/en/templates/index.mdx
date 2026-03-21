@@ -47,7 +47,7 @@ Author: [Name]
   | [e.g. Cost/Query] | [e.g. <$0.05] | [e.g. <$0.02] | [e.g. Provider Dashboard] |
 
 4. MODEL & INFRASTRUCTURE
-- Model: [e.g. Claude Sonnet 4.5 / GPT-4o-mini]
+- Model: [e.g. Claude Sonnet 4.6 / GPT-4o-mini]
 - Rationale: [Cost/quality/latency tradeoff]
 - Expected volume: [Queries/day]
 - Cost projection: [$/month]
@@ -78,19 +78,19 @@ Author: [Name]
 
 ## 2. RICE-A Scoring
 
-Based on Chapter 2: Opportunity Identification. RICE extended with AI-Readiness.
+Based on Chapter 2: Opportunity Identification. RICE extended with AI Complexity.
 
 ```
 RICE-A SCORING: [Project / Feature List]
 Date: [Date]
 
-| Feature | Reach | Impact | Confidence | Effort | AI-Readiness | RICE-A Score |
-|---------|-------|--------|------------|--------|-------------|-------------|
+| Feature | Reach | Impact | Confidence | Effort | AI Complexity | RICE-A Score |
+|---------|-------|--------|------------|--------|--------------|-------------|
 | [Feature A] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [calculated] |
 | [Feature B] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [calculated] |
 | [Feature C] | [1-10] | [1-5] | [0.5-1.0] | [1-10] | [1-5] | [calculated] |
 
-Formula: (Reach x Impact x Confidence x AI-Readiness) / Effort
+Formula: (Reach x Impact x Confidence) / (Effort + AI Complexity x 0.5)
 
 SCALES:
 
@@ -117,12 +117,12 @@ Effort (1-10):
   4-6: 2-6 weeks, small team
   7-10: >6 weeks, cross-functional
 
-AI-Readiness (1-5):
-  1: No data, unclear use case
-  2: Data available but unstructured
-  3: Structured data, clear use case
-  4: Eval data available, prototype possible
-  5: Proven — similar use case already validated
+AI Complexity (1-5):
+  1: Low — clear use case, good data, standard model
+  2: Moderate — data available but needs preparation
+  3: Medium — custom eval needed, data quality unclear
+  4: High — model risk, extensive evaluation required
+  5: Very high — unsolved problem, significant research needed
 ```
 
 ---
@@ -139,7 +139,7 @@ Owner: [Name/Team]
 
 SCOPE
 - System under test: [e.g. Support chatbot, content generator]
-- Model: [e.g. Claude Sonnet 4.5]
+- Model: [e.g. Claude Sonnet 4.6]
 - Access path: [e.g. Web UI, API, Mobile App]
 
 PRIORITY MATRIX

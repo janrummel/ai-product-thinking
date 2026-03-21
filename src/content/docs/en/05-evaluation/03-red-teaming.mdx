@@ -26,7 +26,7 @@ Prompt injection sits at **#1 in OWASP's 2025 Top 10 for LLM Applications** for 
 - **Indirect injection:** Malicious instructions embedded in data the model retrieves (documents, web pages, emails)
 - **Delimiter attacks:** Using markers like `<|system|>` to confuse the model about instruction boundaries
 
-**Jailbreaking:** Techniques to bypass safety guardrails. Early research (Zou et al., 2023) showed that jailbreak prompts transfer between models — tests on GPT-4, Claude 2, and Vicuna showed transfer rates of 60-64%. Current models have significantly improved their defenses since, but the principle remains: an attack that works on one model should be tested on all.
+**Jailbreaking:** Techniques to bypass safety guardrails. Early research ([Zou et al., 2023](https://arxiv.org/abs/2307.15043)) showed that jailbreak prompts transfer between models — tests on GPT-4, Claude 2, and Vicuna showed transfer rates of 60-64%. Current models have significantly improved their defenses since, but the principle remains: an attack that works on one model should be tested on all.
 
 **Data Exfiltration:** Extracting system prompts, training data, or user data through carefully crafted queries.
 
@@ -110,9 +110,9 @@ You are a PM at an insurance company. Your new AI assistant helps customers fill
 **Red teaming is not a checklist — it is a mindset. The question is not "Does our product work?" but "How can it be misused?"**
 
 - Prompt injection is #1 on OWASP for LLMs — for the second year running. It is not a theoretical risk but an actively exploited attack vector.
-- Jailbreaks transfer across models (Zou et al., 2023: 60-64% in early tests). Switching models does not eliminate known vulnerabilities.
+- Jailbreaks transfer across models ([Zou et al., 2023](https://arxiv.org/abs/2307.15043): 60-64% in early tests). Switching models does not eliminate known vulnerabilities.
 - The EU AI Act makes adversarial testing mandatory for high-risk systems (deadline: August 2026). Red teaming is no longer optional — it is a regulatory requirement.
 
 ---
 
-*Sources: OWASP Top 10 for LLM Applications (2025), OpenAI — Approach to External Red Teaming (arXiv:2503.16431, 2025), Promptfoo — LLM Red Teaming Guide (2025), EU AI Act (Regulation 2024/1689), NIST AI RMF 1.0, Adversa AI Security Report (2025)*
+*Sources: [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) (2025), [OpenAI — Approach to External Red Teaming](https://arxiv.org/abs/2503.16431) (arXiv:2503.16431, 2025), [Promptfoo — LLM Red Teaming Guide](https://www.promptfoo.dev/) (2025), EU AI Act (Regulation 2024/1689), [NIST AI RMF 1.0](https://www.nist.gov/artificial-intelligence/executive-order-safe-secure-and-trustworthy-artificial-intelligence), Adversa AI Security Report (2025)*
