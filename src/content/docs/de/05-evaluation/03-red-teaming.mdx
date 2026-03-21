@@ -26,7 +26,7 @@ Prompt Injection steht auf **Platz 1 der OWASP Top 10 für LLM Applications (202
 - **Indirekte Injection:** Boesartige Anweisungen in Daten eingebettet, die das Modell abruft (Dokumente, Webseiten, E-Mails)
 - **Delimiter Attacks:** Marker wie `<|system|>` nutzen, um das Modell über Anweisungsgrenzen zu verwirren
 
-**Jailbreaking:** Techniken zum Umgehen von Safety Guardrails. Fruehe Forschung (Zou et al., 2023) zeigte, dass Jailbreak-Prompts zwischen Modellen transferierbar sind — damalige Tests auf GPT-4, Claude 2 und Vicuna zeigten Transfer-Raten von 60-64%. Aktuelle Modelle haben ihre Abwehr seitdem deutlich verbessert, aber das Prinzip bleibt: Ein Angriff, der auf einem Modell funktioniert, sollte auf allen getestet werden.
+**Jailbreaking:** Techniken zum Umgehen von Safety Guardrails. Fruehe Forschung ([Zou et al., 2023](https://arxiv.org/abs/2307.15043)) zeigte, dass Jailbreak-Prompts zwischen Modellen transferierbar sind — damalige Tests auf GPT-4, Claude 2 und Vicuna zeigten Transfer-Raten von 60-64%. Aktuelle Modelle haben ihre Abwehr seitdem deutlich verbessert, aber das Prinzip bleibt: Ein Angriff, der auf einem Modell funktioniert, sollte auf allen getestet werden.
 
 **Data Exfiltration:** System Prompts, Trainingsdaten oder User-Daten durch geschickte Anfragen extrahieren.
 
@@ -110,9 +110,9 @@ Du bist PM bei einer Versicherung. Euer neuer AI-Assistent hilft Kunden, Schaden
 **Red Teaming ist keine Checkliste — es ist eine Denkweise. Die Frage ist nicht "Funktioniert unser Produkt?" sondern "Wie kann es missbraucht werden?"**
 
 - Prompt Injection ist Platz 1 bei OWASP für LLMs — zum zweiten Jahr in Folge. Es ist kein theoretisches Risiko, sondern ein aktiv ausgenutzter Angriffsvektor.
-- Jailbreaks transferieren modelluebergreifend (Zou et al., 2023: 60-64% in fruehen Tests). Ein Modellwechsel beseitigt keine bekannten Schwachstellen.
+- Jailbreaks transferieren modelluebergreifend ([Zou et al., 2023](https://arxiv.org/abs/2307.15043): 60-64% in fruehen Tests). Ein Modellwechsel beseitigt keine bekannten Schwachstellen.
 - Der EU AI Act macht adversarielles Testen für Hochrisiko-Systeme zur Pflicht (Deadline: August 2026). Red Teaming ist nicht mehr optional — es ist regulatorische Anforderung.
 
 ---
 
-*Quellen: OWASP Top 10 for LLM Applications (2025), OpenAI — Approach to External Red Teaming (arXiv:2503.16431, 2025), Promptfoo — LLM Red Teaming Guide (2025), EU AI Act (Regulation 2024/1689), NIST AI RMF 1.0, Adversa AI Security Report (2025)*
+*Quellen: [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) (2025), [OpenAI — Approach to External Red Teaming](https://arxiv.org/abs/2503.16431) (arXiv:2503.16431, 2025), [Promptfoo — LLM Red Teaming Guide](https://www.promptfoo.dev/) (2025), EU AI Act (Regulation 2024/1689), [NIST AI RMF 1.0](https://www.nist.gov/artificial-intelligence/executive-order-safe-secure-and-trustworthy-artificial-intelligence), Adversa AI Security Report (2025)*
