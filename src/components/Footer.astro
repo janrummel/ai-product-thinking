@@ -1,0 +1,27 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+<Default {...Astro.props}><slot /></Default>
+<div class="ecosystem-banner">
+  <p>
+    <strong>Part of <a href="https://janrummel.github.io/ai-learning/">AI Learning</a></strong> — 
+    free courses from prompt to production.
+    <a href="https://linkedin.com/in/janrummel">Jan on LinkedIn</a>
+  </p>
+</div>
+<style>
+  .ecosystem-banner {
+    text-align: center;
+    padding: 1rem 2rem;
+    border-top: 1px solid var(--sl-color-gray-6);
+    font-size: 0.8rem;
+    color: var(--sl-color-gray-3);
+  }
+  .ecosystem-banner a {
+    color: var(--sl-color-accent);
+    text-decoration: none;
+  }
+  .ecosystem-banner a:hover {
+    text-decoration: underline;
+  }
+</style>
