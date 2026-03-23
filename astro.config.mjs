@@ -23,6 +23,9 @@ export default defineConfig({
 				de: { label: 'Deutsch', lang: 'de' },
 			},
 			customCss: ['./src/styles/custom.css'],
+			components: {
+				Footer: './src/components/Footer.astro',
+			},
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/janrummel/ai-product-thinking' }],
 			head: [
 				{ tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
