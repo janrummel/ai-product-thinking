@@ -22,6 +22,7 @@
   <img src="https://img.shields.io/badge/lessons-46-D4734A" alt="Lessons">
   <img src="https://img.shields.io/badge/languages-EN%20%2B%20DE-58a6ff" alt="Languages">
   <img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" alt="License">
+  <a href="https://janrummel.github.io/ai-learning/"><img src="https://img.shields.io/badge/part%20of-AI%20Learning-58a6ff" alt="Part of AI Learning"></a>
 </p>
 
 ---
