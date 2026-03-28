@@ -24,6 +24,7 @@ export default defineConfig({
 			},
 			customCss: ['./src/styles/custom.css'],
 			components: {
+				Head: './src/components/Head.astro',
 				Footer: './src/components/Footer.astro',
 			},
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/janrummel/ai-product-thinking' }],
