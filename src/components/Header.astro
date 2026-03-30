@@ -1,0 +1,23 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Header.astro';
+
+const pathname = Astro.url.pathname;
+const isEN = pathname.includes('/en/');
+const isDE = pathname.includes('/de/');
+
+function getAlternatePath(targetLang: string): string {
+  if (targetLang === 'en') {
+    return pathname.replace('/de/', '/en/');
+  }
+  return pathname.replace('/en/', '/de/');
+}
+
+const enPath = getAlternatePath('en');
+const dePath = getAlternatePath('de');
+---
+<Default {...Astro.props}><slot /></Default>
+<div class="mobile-lang-switch">
+  <a href={enPath} class:list={[{ active: isEN }]}>EN</a>
+  <a href={dePath} class:list={[{ active: isDE }]}>DE</a>
+</div>
