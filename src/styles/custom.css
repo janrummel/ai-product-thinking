@@ -396,3 +396,37 @@ nav.sidebar .top-level > li:nth-child(11) summary {
 @media (max-width: 480px) {
     .progress-label { display: none; }
 }
+
+/* --- Mobile Language Switcher (fixed, always visible on mobile) --- */
+.mobile-lang-switch {
+  display: none;
+  position: fixed;
+  top: 0.6rem;
+  right: 3.5rem;
+  z-index: 50;
+  gap: 0.2rem;
+  background: var(--sl-color-bg-nav, #1C1C1E);
+  border: 1px solid var(--sl-color-hairline-shade, #38383A);
+  border-radius: 8px;
+  padding: 0.15rem;
+}
+.mobile-lang-switch a {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--sl-color-gray-1, #98989D);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.mobile-lang-switch a.active {
+  background: var(--sl-color-accent, #2997FF);
+  color: var(--sl-color-bg, #121214);
+}
+.mobile-lang-switch a:hover:not(.active) {
+  color: var(--sl-color-text, #F5F5F7);
+  text-decoration: none;
+}
+@media (max-width: 50rem) {
+  .mobile-lang-switch { display: flex; }
+}
