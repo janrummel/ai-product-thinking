@@ -1,27 +1,31 @@
 ---
 import Default from '@astrojs/starlight/components/Footer.astro';
+const de = (Astro.locals.starlightRoute?.lang ?? '').startsWith('de');
+const ref = 'ai-product-thinking';
 ---
 <Default {...Astro.props}><slot /></Default>
 <div class="ecosystem-banner">
-  <p>
-    <strong>Part of <a href="https://janrummel.github.io/ai-learning/">AI Learning</a></strong> — 
-    free courses from prompt to production.
-    <a href="https://linkedin.com/in/janrummel">Jan on LinkedIn</a>
-  </p>
+  {de ? (
+    <p><strong>Teil von <a href="https://janrummel.github.io/ai-learning/">AI Learning</a></strong>: kostenlose Kurse vom ersten Prompt bis zum Einsatz. <a href="https://linkedin.com/in/janrummel">Jan auf LinkedIn</a></p>
+  ) : (
+    <p><strong>Part of <a href="https://janrummel.github.io/ai-learning/">AI Learning</a></strong>: free courses from prompt to production. <a href="https://linkedin.com/in/janrummel">Jan on LinkedIn</a></p>
+  )}
+</div>
+<div class="jr-fuss" role="contentinfo" aria-label={de ? 'Anbieter' : 'Provider'}>
+  {de ? 'Von' : 'By'} Jan Rummel · <a href={`https://janrummel.eu/?ref=${ref}`}>janrummel.eu</a> · <a href="https://janrummel.eu/impressum.html">{de ? 'Impressum' : 'Legal notice'}</a> · <a href="https://janrummel.eu/datenschutz.html">{de ? 'Datenschutz' : 'Privacy'}</a>
 </div>
 <style>
   .ecosystem-banner {
     text-align: center;
     padding: 1rem 2rem;
-    border-top: 1px solid var(--sl-color-gray-6);
+    border-top: 1px solid var(--sl-color-gray-5);
     font-size: 0.8rem;
-    color: var(--sl-color-gray-3);
+    color: color-mix(in srgb, var(--sl-color-white) 78%, var(--sl-color-black));
   }
   .ecosystem-banner a {
-    color: var(--sl-color-accent);
-    text-decoration: none;
-  }
-  .ecosystem-banner a:hover {
+    color: var(--sl-color-white);
+    text-decoration-color: var(--sl-color-text-accent);
     text-decoration: underline;
+    text-underline-offset: 2px;
   }
 </style>
