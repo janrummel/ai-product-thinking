@@ -27,6 +27,8 @@
 
 ---
 
+> **Status: frozen (content as of March 2026).** Lessons are no longer updated; model names and prices are worked examples from March 2026. Reported errors are still fixed.
+
 ## What is this?
 
 A complete, free curriculum for Product Managers, Tech Leads, and anyone who builds or decides about AI products. 9 chapters, 46 lessons, 4 real-world case studies, 27 decision scenarios — fully bilingual (EN + DE).
@@ -96,6 +98,10 @@ npm run dev
 ## Contributing
 
 Found an error? Have a suggestion? Issues and pull requests are welcome — whether it's a typo, a framework improvement, a translation fix, or a new decision scenario.
+
+## Publishing
+
+https://janrummel.github.io/ai-product-thinking/ is built by GitHub Actions (`.github/workflows/deploy.yml`, `npm run build` = `astro build`) on every push to `main` and served by GitHub Pages.
 
 ## License
 
