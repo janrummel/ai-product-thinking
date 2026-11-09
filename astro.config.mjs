@@ -30,6 +30,7 @@ export default defineConfig({
 			},
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/janrummel/ai-product-thinking' }],
 			head: [
+				{ tag: 'link', attrs: { rel: 'stylesheet', href: 'https://janrummel.github.io/ai-learning/jr.css' } },
 				{ tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
 				{ tag: 'meta', attrs: { property: 'og:site_name', content: 'AI Product Thinking' } },
 				{ tag: 'meta', attrs: { property: 'og:title', content: 'AI Product Thinking — Free AI Product Management Curriculum' } },
