@@ -6,9 +6,9 @@
 :root {
 	--apt-bg: #F5F3EE;
 	--apt-text: #2C2C2C;
-	--apt-text-secondary: #8A8680;
-	--apt-accent: #B85C38;
-	--apt-accent-hover: #A04E2F;
+	--apt-text-secondary: #67645F; /* vorher #8A8680: 3,26:1 (Inhaltsverzeichnis, Kartentext) */
+	--apt-accent: #9E4F30; /* vorher #B85C38: 4,09:1 auf --apt-bg */
+	--apt-accent-hover: #8A4127;
 	--apt-border: #E0DDD7;
 	--apt-code-bg: #EDEBE6;
 	--apt-surface: #ECEAE4;
@@ -45,6 +45,8 @@
 
 /* --- Dark Mode --- */
 :root[data-theme='dark'] {
+	--apt-accent: #D97A52; /* hell genug fuer Text auf dunklem Grund (5,4:1) */
+	--apt-accent-hover: #E08560;
 	--sl-color-bg-nav: #1A1A18;
 	--sl-color-bg-sidebar: #1A1A18;
 	--sl-color-bg: #1E1E1C;
@@ -54,11 +56,11 @@
 	--sl-color-hairline-light: #2A2A28;
 	--sl-color-accent-low: #2C2218;
 	--sl-color-accent: var(--apt-accent);
-	--sl-color-accent-high: #D4734A;
+	--sl-color-accent-high: var(--apt-accent-hover);
 	--sl-color-white: #E8E6E1;
 	--sl-color-gray-1: #D0CEC9;
 	--sl-color-gray-2: #A8A5A0;
-	--sl-color-gray-3: #7A7772;
+	--sl-color-gray-3: #96938E; /* vorher #7A7772: 3,74:1 */
 	--sl-color-gray-4: #4A4844;
 	--sl-color-gray-5: #333330;
 	--sl-color-gray-6: #252523;
@@ -228,14 +230,14 @@ nav.sidebar a {
 
 nav.sidebar a[aria-current='page'] {
 	font-weight: 600;
-	color: var(--apt-text);
+	color: var(--apt-bg); /* helle Schrift auf Akzentflaeche, vorher 3,08:1 */
 	border-left: 2px solid var(--apt-accent);
 	padding-left: 0.5rem;
 	margin-left: -0.5rem;
 }
 
 :root[data-theme='dark'] nav.sidebar a[aria-current='page'] {
-	color: #E8E6E1;
+	color: #1E1E1C; /* dunkle Schrift auf hellerem Akzent, vorher 3,64:1 */
 }
 
 /* Remove group icons/decorations */
